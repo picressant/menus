@@ -1,12 +1,18 @@
 package fr.choupiteam.menus.application.recipe.model;
 
+import fr.choupiteam.menus.application.ingredient.model.Ingredient;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.util.List;
 
 @Document(collection = "recipe")
 public class Recipe {
     /**
      * MongoID of the recipe
      */
+    @Id
     private Integer id;
 
     /**
@@ -30,6 +36,12 @@ public class Recipe {
      * Number of persons
      */
     private int persons;
+
+    /**
+     * List of recipe ingredients
+     */
+    @DBRef
+    private List<Ingredient> ingredients;
 
     public Integer getId() {
         return id;
@@ -69,5 +81,13 @@ public class Recipe {
 
     public void setPersons(int persons) {
         this.persons = persons;
+    }
+
+    public List<Ingredient> getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(List<Ingredient> ingredients) {
+        this.ingredients = ingredients;
     }
 }
