@@ -1,0 +1,23 @@
+<div class="week-menus">
+  <div class="box-list days">
+    <div class="box" *ngFor="let day of days">{{day}}</div>
+  </div>
+  <div cdkDropList class="box-list recettes" (cdkDropListDropped)="drop($event)">
+    <div class="box" *ngFor="let recette of recettes; let i = index" cdkDrag>
+      <span *ngIf="recette !== null">{{recette.nom}}</span>
+      <span *ngIf="recette === null">-</span>
+
+      <span>
+        <button mat-icon-button (click)="searchRecette(i)">
+          <mat-icon>search</mat-icon>
+        </button>
+        <button mat-icon-button (click)="clearRecette(i)">
+          <mat-icon>delete</mat-icon>
+        </button>
+        <button mat-icon-button (click)="showRecette(i)">
+          <mat-icon>visibility</mat-icon>
+        </button>
+      </span>
+    </div>
+  </div>
+</div>

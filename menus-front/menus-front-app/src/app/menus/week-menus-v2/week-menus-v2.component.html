@@ -1,0 +1,27 @@
+<div class="week-menus">
+
+  <div cdkDropList (cdkDropListDropped)="drop($event)">
+    <mat-card cdkDrag class="day-card" *ngFor="let day of days; let i = index">
+      <mat-card-header>
+        <mat-card-title class="day-title">{{day}} :</mat-card-title>        
+        <mat-icon cdkDragHandle class="drag-handle">open_with</mat-icon>         
+      </mat-card-header> 
+      <!-- <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"> -->
+      <mat-card-content class="recette-content">
+        <ng-container *ngIf="recettes[i] !== null">
+          <div class="recette-name">{{recettes[i].nom}}</div>
+          <div class="recette-times">
+            <span>Préparation: {{recettes[i].tempsPreparation}} min</span>
+            <span> / </span>
+            <span>Cuisson: {{recettes[i].tempsCuisson}} min</span>
+          </div>
+        </ng-container>
+        <div class="recette-name" *ngIf="recettes[i] === null">-</div>
+      </mat-card-content>
+      <mat-card-actions>
+        <button (click)="searchRecette(i)" mat-button>Changer</button>
+        <button (click)="clearRecette(i)" mat-button>Supprimer</button>        
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
