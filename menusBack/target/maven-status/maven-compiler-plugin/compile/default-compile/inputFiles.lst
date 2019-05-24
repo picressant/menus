@@ -1,0 +1,16 @@
+C:\work\menus\menusBack\src\com\choupiteam\menus\back\models\Ingredient.java
+C:\work\menus\menusBack\src\com\choupiteam\menus\back\application\Logger.java
+C:\work\menus\menusBack\src\com\choupiteam\menus\back\database\WeekDAO.java
+C:\work\menus\menusBack\src\com\choupiteam\menus\back\models\exceptions\TechnicalException.java
+C:\work\menus\menusBack\src\com\choupiteam\menus\back\models\TypeRecetteEnum.java
+C:\work\menus\menusBack\src\com\choupiteam\menus\back\services\WeekService.java
+C:\work\menus\menusBack\src\com\choupiteam\menus\back\models\Unite.java
+C:\work\menus\menusBack\src\com\choupiteam\menus\back\application\MenusApplication.java
+C:\work\menus\menusBack\src\com\choupiteam\menus\back\models\IngredientAvecQuantite.java
+C:\work\menus\menusBack\src\com\choupiteam\menus\back\database\DatabaseSQLiteConnection.java
+C:\work\menus\menusBack\src\com\choupiteam\menus\back\services\HelloWorldService.java
+C:\work\menus\menusBack\src\com\choupiteam\menus\back\models\Recette.java
+C:\work\menus\menusBack\src\com\choupiteam\menus\back\models\exceptions\AlreadyExistsException.java
+C:\work\menus\menusBack\src\com\choupiteam\menus\back\services\RecetteService.java
+C:\work\menus\menusBack\src\com\choupiteam\menus\back\database\IngredientDAO.java
+C:\work\menus\menusBack\src\com\choupiteam\menus\back\database\RecetteDAO.java
