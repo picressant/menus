@@ -1,8 +1,6 @@
 package fr.choupiteam.menus.application.week.model;
 
-import fr.choupiteam.menus.application.recipe.model.Recipe;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "week")
@@ -11,47 +9,33 @@ public class Week {
     @Id
     private String id;
 
-    @DBRef
-    private Recipe mondayLunch;
+    private WeekMeal mondayLunch;
 
-    @DBRef
-    private Recipe mondayDinner;
+    private WeekMeal mondayDinner;
 
-    @DBRef
-    private Recipe tuesdayLunch;
+    private WeekMeal tuesdayLunch;
 
-    @DBRef
-    private Recipe tuesdayDinner;
+    private WeekMeal tuesdayDinner;
 
-    @DBRef
-    private Recipe wednesdayLunch;
+    private WeekMeal wednesdayLunch;
 
-    @DBRef
-    private Recipe wednesdayDinner;
+    private WeekMeal wednesdayDinner;
 
-    @DBRef
-    private Recipe thursdayLunch;
+    private WeekMeal thursdayLunch;
 
-    @DBRef
-    private Recipe thursdayDinner;
+    private WeekMeal thursdayDinner;
 
-    @DBRef
-    private Recipe fridayLunch;
+    private WeekMeal fridayLunch;
 
-    @DBRef
-    private Recipe fridayDinner;
+    private WeekMeal fridayDinner;
 
-    @DBRef
-    private Recipe saturdayLunch;
+    private WeekMeal saturdayLunch;
 
-    @DBRef
-    private Recipe saturdayDinner;
+    private WeekMeal saturdayDinner;
 
-    @DBRef
-    private Recipe sundayLunch;
+    private WeekMeal sundayLunch;
 
-    @DBRef
-    private Recipe sundayDinner;
+    private WeekMeal sundayDinner;
 
     public String getId() {
         return id;
@@ -61,115 +45,115 @@ public class Week {
         this.id = id;
     }
 
-    public Recipe getMondayLunch() {
+    public WeekMeal getMondayLunch() {
         return mondayLunch;
     }
 
-    public void setMondayLunch(Recipe mondayLunch) {
+    public void setMondayLunch(WeekMeal mondayLunch) {
         this.mondayLunch = mondayLunch;
     }
 
-    public Recipe getMondayDinner() {
+    public WeekMeal getMondayDinner() {
         return mondayDinner;
     }
 
-    public void setMondayDinner(Recipe mondayDinner) {
+    public void setMondayDinner(WeekMeal mondayDinner) {
         this.mondayDinner = mondayDinner;
     }
 
-    public Recipe getTuesdayLunch() {
+    public WeekMeal getTuesdayLunch() {
         return tuesdayLunch;
     }
 
-    public void setTuesdayLunch(Recipe tuesdayLunch) {
+    public void setTuesdayLunch(WeekMeal tuesdayLunch) {
         this.tuesdayLunch = tuesdayLunch;
     }
 
-    public Recipe getTuesdayDinner() {
+    public WeekMeal getTuesdayDinner() {
         return tuesdayDinner;
     }
 
-    public void setTuesdayDinner(Recipe tuesdayDinner) {
+    public void setTuesdayDinner(WeekMeal tuesdayDinner) {
         this.tuesdayDinner = tuesdayDinner;
     }
 
-    public Recipe getWednesdayLunch() {
+    public WeekMeal getWednesdayLunch() {
         return wednesdayLunch;
     }
 
-    public void setWednesdayLunch(Recipe wednesdayLunch) {
+    public void setWednesdayLunch(WeekMeal wednesdayLunch) {
         this.wednesdayLunch = wednesdayLunch;
     }
 
-    public Recipe getWednesdayDinner() {
+    public WeekMeal getWednesdayDinner() {
         return wednesdayDinner;
     }
 
-    public void setWednesdayDinner(Recipe wednesdayDinner) {
+    public void setWednesdayDinner(WeekMeal wednesdayDinner) {
         this.wednesdayDinner = wednesdayDinner;
     }
 
-    public Recipe getThursdayLunch() {
+    public WeekMeal getThursdayLunch() {
         return thursdayLunch;
     }
 
-    public void setThursdayLunch(Recipe thursdayLunch) {
+    public void setThursdayLunch(WeekMeal thursdayLunch) {
         this.thursdayLunch = thursdayLunch;
     }
 
-    public Recipe getThursdayDinner() {
+    public WeekMeal getThursdayDinner() {
         return thursdayDinner;
     }
 
-    public void setThursdayDinner(Recipe thursdayDinner) {
+    public void setThursdayDinner(WeekMeal thursdayDinner) {
         this.thursdayDinner = thursdayDinner;
     }
 
-    public Recipe getFridayLunch() {
+    public WeekMeal getFridayLunch() {
         return fridayLunch;
     }
 
-    public void setFridayLunch(Recipe fridayLunch) {
+    public void setFridayLunch(WeekMeal fridayLunch) {
         this.fridayLunch = fridayLunch;
     }
 
-    public Recipe getFridayDinner() {
+    public WeekMeal getFridayDinner() {
         return fridayDinner;
     }
 
-    public void setFridayDinner(Recipe fridayDinner) {
+    public void setFridayDinner(WeekMeal fridayDinner) {
         this.fridayDinner = fridayDinner;
     }
 
-    public Recipe getSaturdayLunch() {
+    public WeekMeal getSaturdayLunch() {
         return saturdayLunch;
     }
 
-    public void setSaturdayLunch(Recipe saturdayLunch) {
+    public void setSaturdayLunch(WeekMeal saturdayLunch) {
         this.saturdayLunch = saturdayLunch;
     }
 
-    public Recipe getSaturdayDinner() {
+    public WeekMeal getSaturdayDinner() {
         return saturdayDinner;
     }
 
-    public void setSaturdayDinner(Recipe saturdayDinner) {
+    public void setSaturdayDinner(WeekMeal saturdayDinner) {
         this.saturdayDinner = saturdayDinner;
     }
 
-    public Recipe getSundayLunch() {
+    public WeekMeal getSundayLunch() {
         return sundayLunch;
     }
 
-    public void setSundayLunch(Recipe sundayLunch) {
+    public void setSundayLunch(WeekMeal sundayLunch) {
         this.sundayLunch = sundayLunch;
     }
 
-    public Recipe getSundayDinner() {
+    public WeekMeal getSundayDinner() {
         return sundayDinner;
     }
 
-    public void setSundayDinner(Recipe sundayDinner) {
+    public void setSundayDinner(WeekMeal sundayDinner) {
         this.sundayDinner = sundayDinner;
     }
 }

@@ -8,8 +8,8 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 @EnableMongoRepositories(basePackages = "fr.choupiteam.menus.infrastructure.repository")
 public class MenusApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(MenusApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(MenusApplication.class, args);
+    }
 
 }

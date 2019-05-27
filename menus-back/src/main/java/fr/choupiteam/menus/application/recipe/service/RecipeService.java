@@ -5,6 +5,8 @@ import fr.choupiteam.menus.infrastructure.repository.RecipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class RecipeService {
 
@@ -15,12 +17,15 @@ public class RecipeService {
         return this.recipeRepository.findById(id).orElse(null);
     }
 
-    public boolean addRecipe(Recipe recipe) {
-        recipe = this.recipeRepository.insert(recipe);
-        return (recipe != null);
+    public Recipe addRecipe(Recipe recipe) {
+        return this.recipeRepository.insert(recipe);
     }
 
-    public void saveRecipe(Recipe recipe) {
-        this.recipeRepository.save(recipe);
+    public Recipe saveRecipe(Recipe recipe) {
+        return this.recipeRepository.save(recipe);
+    }
+
+    public List<Recipe> search(String search) {
+        return this.recipeRepository.findAllByNameLike(search);
     }
 }

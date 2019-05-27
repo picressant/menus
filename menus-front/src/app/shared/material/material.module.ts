@@ -12,7 +12,9 @@ import {
     MatRadioModule,
     MatSnackBarModule,
     MatDialogModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatTabsModule,
+    MatTableModule
 } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -31,6 +33,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
         DragDropModule,
         MatDialogModule,
         MatProgressSpinnerModule,
+        MatTabsModule,
+        MatTableModule,
 
         // browser part
         BrowserModule,
@@ -49,6 +53,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
         DragDropModule,
         MatDialogModule,
         MatProgressSpinnerModule,
+        MatTabsModule,
+        MatTableModule,
 
         // browser part
         BrowserModule,

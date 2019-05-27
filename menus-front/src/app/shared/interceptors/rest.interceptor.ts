@@ -12,11 +12,14 @@ export class RestInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler):
     Observable<HttpEvent<any>> {
-        const lURL = (environment.production) ? location.origin + "/back/rest/" + req.urlWithParams : "http://localhost:8080/back/rest/" + req.urlWithParams;
-        req = req.clone({
-            url: lURL
-          });      
-                  
+    const lURL = (environment.production) ? location.origin + req.urlWithParams : "http://localhost:8080/" + req.urlWithParams;
+
+    console.log(lURL);
+
+    req = req.clone({
+      url: lURL
+    });
+
     return next.handle(req);
   }
 }

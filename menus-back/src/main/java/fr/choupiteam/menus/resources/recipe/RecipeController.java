@@ -2,12 +2,12 @@ package fr.choupiteam.menus.resources.recipe;
 
 import fr.choupiteam.menus.application.recipe.model.Recipe;
 import fr.choupiteam.menus.application.recipe.service.RecipeService;
+import fr.choupiteam.menus.infrastructure.rest.model.Search;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
@@ -24,15 +24,19 @@ public class RecipeController {
     }
 
     @RequestMapping(method = POST)
-    public HttpStatus addRecipe(@RequestParam() Recipe recipe) {
-        boolean isInserted = this.recipeService.addRecipe(recipe);
+    public Recipe addRecipe(@RequestBody Recipe recipe) {
+        recipe = this.recipeService.addRecipe(recipe);
 
-        return (isInserted) ? HttpStatus.OK : HttpStatus.NOT_ACCEPTABLE;
+        return (recipe != null) ? this.getRecipe(recipe.getId()) : null;
     }
 
     @RequestMapping(method = PUT)
-    public HttpStatus saveRecipe(@RequestParam() Recipe recipe) {
-        this.recipeService.saveRecipe(recipe);
-        return HttpStatus.OK;
+    public Recipe saveRecipe(@RequestBody Recipe recipe) {
+        return this.recipeService.saveRecipe(recipe);
+    }
+
+    @RequestMapping(value = "/search", method = POST)
+    public List<Recipe> searchRecipe(@RequestBody Search search) {
+        return this.recipeService.search(search.getTerm());
     }
 }

@@ -5,22 +5,28 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LayoutModule } from '@angular/cdk/layout';
-import { MaterialModule } from './material/material.module';
+import { MaterialModule } from './shared/material/material.module';
 import { RecetteModule } from './recette/recette.module';
 import { MenusModule } from './menus/menus.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { RestInterceptor } from './common/interceptors/rest.interceptor';
+import { RestInterceptor } from './shared/interceptors/rest.interceptor';
+import { SharedModule } from './shared/shared.module';
+import { CoreModule } from './core/core.module';
+import { MainModule } from './main/main.module';
 
 @NgModule({
   declarations: [
     AppComponent
   ],
-  imports: [    
-    AppRoutingModule,    
+  imports: [
+    AppRoutingModule,
     LayoutModule,
     MaterialModule,
     RecetteModule,
-    MenusModule
+    MenusModule,
+    SharedModule,
+    CoreModule,
+    MainModule
   ],
   providers: [
     {

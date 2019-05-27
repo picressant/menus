@@ -1,0 +1,29 @@
+@import 'variables.less';
+
+:host {
+    width: 100%;
+    background-color: @main-color;
+    display: flex;
+    height: 55px;
+
+    .header {
+        color: white;
+        height: 55px;
+        text-align: center;
+        line-height: 55px;
+
+        &:hover {
+            cursor: pointer;
+        }
+
+        &.home {
+            width: 140px;
+            font-size: 25px
+        }
+
+        &.nav {
+            font-size: 18px;
+            margin-right: 15px;
+        }
+    }
+}

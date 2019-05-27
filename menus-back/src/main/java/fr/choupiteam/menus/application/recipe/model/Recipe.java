@@ -13,7 +13,7 @@ public class Recipe {
      * MongoID of the recipe
      */
     @Id
-    private Integer id;
+    private String id;
 
     /**
      * Recipe name
@@ -43,11 +43,12 @@ public class Recipe {
     @DBRef
     private List<Ingredient> ingredients;
 
-    public Integer getId() {
+
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
