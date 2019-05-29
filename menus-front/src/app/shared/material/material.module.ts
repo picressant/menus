@@ -14,7 +14,8 @@ import {
     MatDialogModule,
     MatProgressSpinnerModule,
     MatTabsModule,
-    MatTableModule
+    MatTableModule,
+    MatSelectModule
 } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -35,6 +36,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
         MatProgressSpinnerModule,
         MatTabsModule,
         MatTableModule,
+        MatSelectModule,
 
         // browser part
         BrowserModule,
@@ -55,6 +57,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
         MatProgressSpinnerModule,
         MatTabsModule,
         MatTableModule,
+        MatSelectModule,
 
         // browser part
         BrowserModule,

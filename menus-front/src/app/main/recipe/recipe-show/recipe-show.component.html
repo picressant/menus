@@ -2,27 +2,27 @@
   <mat-tab label="Détails">
     <div [formGroup]="recipeForm" class="form-wrapper">
       <div class="form-field-wrapper">
-        <mat-form-field>
+        <mat-form-field class="responsive full-width">
           <input matInput type="text" placeholder="Nom de la recette" formControlName="name">
           <mat-error *ngIf="hasError('name', 'required')">Le nom est obligatoire</mat-error>
         </mat-form-field>
       </div>
 
       <div class="form-field-wrapper">
-        <mat-form-field>
+        <mat-form-field class="responsive full-width">
           <input matInput type="number" placeholder="Temps de préparation" formControlName="preparationTime">
           <mat-error *ngIf="hasError('preparationTime', 'required')">Le temps de préparation est obligatoire</mat-error>
         </mat-form-field>
       </div>
 
       <div class="form-field-wrapper">
-        <mat-form-field>
+        <mat-form-field class="responsive full-width">
           <input matInput type="number" placeholder="Temps de cuisson" formControlName="cookingTime">
         </mat-form-field>
       </div>
 
       <div class="form-field-wrapper">
-        <mat-form-field>
+        <mat-form-field class="responsive full-width">
           <input matInput type="number" placeholder="Nombre de personnes" formControlName="persons">
           <mat-error *ngIf="hasError('persons', 'required')">Le nombre de personnes est obligatoire</mat-error>
         </mat-form-field>
@@ -31,29 +31,35 @@
 
   </mat-tab>
   <mat-tab label="Ingrédients">
+    <div class="ingredient-wrapper">
+      <button mat-raised-button color="primary" (click)="addIngredient()">
+        <mat-icon>add</mat-icon>
+        <span class="responsive hide">Ajouter</span>
+      </button>
       <table mat-table [dataSource]="dataSource">
-        
-          <!-- Name Column -->
-          <ng-container matColumnDef="name">
-            <th mat-header-cell *matHeaderCellDef> Nom </th>
-            <td mat-cell *matCellDef="let ingredient"> {{ingredient.name}} </td>
-          </ng-container>
-        
-          <!-- Weight Column -->
-          <ng-container matColumnDef="quantity">
-            <th mat-header-cell *matHeaderCellDef> Quantité </th>
-            <td mat-cell *matCellDef="let ingredient"> {{ingredient.quantity}} </td>
-          </ng-container>
-        
-          <!-- Symbol Column -->
-          <ng-container matColumnDef="unit">
-            <th mat-header-cell *matHeaderCellDef> Unité </th>
-            <td mat-cell *matCellDef="let ingredient"> {{getUnit(ingredient)}} </td>
-          </ng-container>
-        
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </table>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef> Nom </th>
+          <td mat-cell *matCellDef="let ingredient"> {{ingredient.name}} </td>
+        </ng-container>
+
+        <!-- Weight Column -->
+        <ng-container matColumnDef="quantity">
+          <th mat-header-cell *matHeaderCellDef> Quantité </th>
+          <td mat-cell *matCellDef="let ingredient"> {{ingredient.quantity}} </td>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="unit">
+          <th mat-header-cell *matHeaderCellDef> Unité </th>
+          <td mat-cell *matCellDef="let ingredient"> {{ingredient.unit}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </div>
   </mat-tab>
 </mat-tab-group>
 <div class="submit-form">

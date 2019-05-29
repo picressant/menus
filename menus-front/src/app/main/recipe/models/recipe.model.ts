@@ -1,4 +1,5 @@
 import { Ingredient } from './ingredient.model';
+import { IngredientQuantity } from './ingredient-quantity.model';
 
 export class Recipe {
     
@@ -12,7 +13,7 @@ export class Recipe {
 
     persons: number;
 
-    ingredients: Ingredient[];
+    ingredients: IngredientQuantity[];
 
     constructor() {
         this.ingredients = [];

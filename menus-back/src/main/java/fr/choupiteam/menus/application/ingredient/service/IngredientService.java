@@ -14,4 +14,8 @@ public class IngredientService {
     public Ingredient saveIngredient(Ingredient ingredient) {
         return this.ingredientRepository.save(ingredient);
     }
+
+    public Ingredient getIngredient(String id) {
+        return this.ingredientRepository.findById(id).orElse(null);
+    }
 }

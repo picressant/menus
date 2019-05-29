@@ -1,9 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { SearchRecetteComponent } from './recette/search-recette/search-recette.component';
-import { ShowRecetteComponent } from './recette/show-recette/show-recette.component';
-import { WeekMenusComponent } from './menus/week-menus/week-menus.component';
-import { WeekMenusV2Component } from './menus/week-menus-v2/week-menus-v2.component';
+import { RouterModule, Routes } from '@angular/router';
 import { RecipeSearchComponent } from './main/recipe/recipe-search/recipe-search.component';
 import { RecipeShowComponent } from './main/recipe/recipe-show/recipe-show.component';
 

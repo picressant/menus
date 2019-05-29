@@ -1,0 +1,17 @@
+<div class="form-wrapper" [formGroup]="form">
+  <div class="form-field">
+    <label>Quoi</label>
+    <mat-select formControlName="name">
+      <mat-option value="test">test</mat-option>
+    </mat-select>
+  </div>
+  <div class="form-field">
+    <label>Combien</label>
+    <input type="number" formControlName="quantity">
+  </div>
+  <div class="form-field">
+    <label>Unité</label>
+    <mat-select formControlName="unit">
+    </mat-select>
+  </div>
+</div>

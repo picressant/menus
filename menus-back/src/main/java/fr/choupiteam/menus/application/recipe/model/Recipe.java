@@ -1,11 +1,17 @@
 package fr.choupiteam.menus.application.recipe.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import fr.choupiteam.menus.application.ingredient.model.Ingredient;
+import fr.choupiteam.menus.infrastructure.rest.jackson.IngredientMapSerializer;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.util.Pair;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Document(collection = "recipe")
 public class Recipe {
@@ -38,11 +44,14 @@ public class Recipe {
     private int persons;
 
     /**
-     * List of recipe ingredients
+     * List of recipe ingredients with quantity
      */
-    @DBRef
-    private List<Ingredient> ingredients;
+    @JsonSerialize(using = IngredientMapSerializer.class)
+    private Map<String, Integer> ingredients;
 
+    public Recipe() {
+        this.ingredients = new HashMap<>();
+    }
 
     public String getId() {
         return id;
@@ -84,11 +93,11 @@ public class Recipe {
         this.persons = persons;
     }
 
-    public List<Ingredient> getIngredients() {
+    public Map<String, Integer> getIngredients() {
         return ingredients;
     }
 
-    public void setIngredients(List<Ingredient> ingredients) {
+    public void setIngredients(Map<String, Integer> ingredients) {
         this.ingredients = ingredients;
     }
 }

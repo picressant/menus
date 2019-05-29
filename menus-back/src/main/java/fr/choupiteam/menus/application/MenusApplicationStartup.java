@@ -10,6 +10,7 @@ import fr.choupiteam.menus.application.week.service.WeekService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
+import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Component;
 
 import java.util.Collections;
@@ -34,14 +35,22 @@ public class MenusApplicationStartup implements ApplicationListener<ApplicationR
 
         Ingredient ingredient = new Ingredient();
         ingredient.setName("Pâtes");
-        ingredient.setQuantity(500);
         ingredient.setUnit(IngredientUnit.GRAMME);
 
-        this.ingredientService.saveIngredient(ingredient);
+        ingredient = this.ingredientService.saveIngredient(ingredient);
 
-        Recipe recipe = this.recipeService.getRecipe("5ceaa291d2bd884df0770670");
-        recipe.setIngredients(Collections.singletonList(ingredient));
+        Recipe recipe = new Recipe();
+        recipe.setName("test");
+        recipe.setPersons(2);
+        recipe.setCookingTime(10);
+        recipe.setPreparationTime(10);
+        recipe.getIngredients().put(ingredient.getId(), 200);
 
         this.recipeService.saveRecipe(recipe);
+
+//        Recipe recipe = this.recipeService.getRecipe("5ceaa291d2bd884df0770670");
+//        recipe.setIngredients(Collections.singletonList(ingredient));
+
+//        this.recipeService.saveRecipe(recipe);
     }
 }

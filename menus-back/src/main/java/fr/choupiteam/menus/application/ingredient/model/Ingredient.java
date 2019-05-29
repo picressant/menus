@@ -11,8 +11,6 @@ public class Ingredient {
 
     private String name;
 
-    private int quantity;
-
     private IngredientUnit unit;
 
     public String getId() {
@@ -29,14 +27,6 @@ public class Ingredient {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
     }
 
     public IngredientUnit getUnit() {

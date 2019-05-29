@@ -1,11 +1,12 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatSnackBar, MatTableDataSource } from '@angular/material';
+import { MatSnackBar, MatTableDataSource, MatDialog } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RecipeRestService } from '../../services/recipe-rest.service';
 import { Recipe } from '../models/recipe.model';
 import { Ingredient } from '../models/ingredient.model';
 import { ingredientUnitToString } from '../models/ingredient-unit.enum';
+import { AddIngredientDialogComponent } from './add-ingredient-dialog/add-ingredient-dialog.component';
 
 @Component({
   selector: 'menus-recipe-show',
@@ -22,6 +23,8 @@ export class RecipeShowComponent implements OnInit {
   _isEditable: boolean;
   _isRecipe = true;
 
+  // ingredients: Ingredient[];
+
   displayedColumns: string[] = ['name', 'quantity', 'unit'];
   dataSource = new MatTableDataSource<Ingredient>()  ;
 
@@ -30,6 +33,7 @@ export class RecipeShowComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private snackBar: MatSnackBar,
+    public dialog: MatDialog,
     private el:ElementRef) {
 
     this._isEditable = false;
@@ -132,7 +136,21 @@ export class RecipeShowComponent implements OnInit {
 
       this.dataSource.data = recipe.ingredients;
 
+      console.log(recipe);
+
       this._isEditable = false;
+    });
+  }
+
+  addIngredient() {
+    const dialogRef = this.dialog.open(AddIngredientDialogComponent, {
+      width: '90%',
+      height: '90%',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result !== undefined)
+        this.dataSource.data.push(result);
     });
   }
 
