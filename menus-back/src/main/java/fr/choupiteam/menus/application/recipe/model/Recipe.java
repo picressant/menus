@@ -1,9 +1,13 @@
 package fr.choupiteam.menus.application.recipe.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import fr.choupiteam.menus.application.ingredient.model.Ingredient;
+import fr.choupiteam.menus.infrastructure.rest.jackson.IngredientMapDeserializer;
 import fr.choupiteam.menus.infrastructure.rest.jackson.IngredientMapSerializer;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.util.Pair;
@@ -47,6 +51,7 @@ public class Recipe {
      * List of recipe ingredients with quantity
      */
     @JsonSerialize(using = IngredientMapSerializer.class)
+    @JsonDeserialize(using = IngredientMapDeserializer.class)
     private Map<String, Integer> ingredients;
 
     public Recipe() {

@@ -7,6 +7,7 @@ import { Recipe } from '../models/recipe.model';
 import { Ingredient } from '../models/ingredient.model';
 import { ingredientUnitToString } from '../models/ingredient-unit.enum';
 import { AddIngredientDialogComponent } from './add-ingredient-dialog/add-ingredient-dialog.component';
+import { IngredientQuantity } from '../models/ingredient-quantity.model';
 
 @Component({
   selector: 'menus-recipe-show',
@@ -123,6 +124,8 @@ export class RecipeShowComponent implements OnInit {
     recipe.cookingTime = this.recipeForm.controls.cookingTime.value;
     recipe.persons = this.recipeForm.controls.persons.value; 
 
+    recipe.ingredients = this.dataSource.data as IngredientQuantity[];
+
     recipe.id = this._id;
 
     return recipe;
@@ -135,8 +138,6 @@ export class RecipeShowComponent implements OnInit {
       this.recipeForm.disable(); 
 
       this.dataSource.data = recipe.ingredients;
-
-      console.log(recipe);
 
       this._isEditable = false;
     });
