@@ -8,6 +8,7 @@ import { MainModule } from './main/main.module';
 import { RestInterceptor } from './shared/interceptors/rest.interceptor';
 import { MaterialModule } from './shared/material/material.module';
 import { SharedModule } from './shared/shared.module';
+import { ParametersModule } from './main/parameters/parameters.module';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import { SharedModule } from './shared/shared.module';
     SharedModule,
     CoreModule,
     MainModule,
+    ParametersModule,
     HttpClientModule,
   ],
   providers: [

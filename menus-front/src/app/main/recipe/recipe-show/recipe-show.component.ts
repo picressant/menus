@@ -3,11 +3,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar, MatTableDataSource, MatDialog } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RecipeRestService } from '../../services/recipe-rest.service';
-import { Recipe } from '../models/recipe.model';
-import { Ingredient } from '../models/ingredient.model';
-import { ingredientUnitToString } from '../models/ingredient-unit.enum';
+import { Recipe } from '../../../shared/models/recipe.model';
+import { Ingredient } from '../../../shared/models/ingredient.model';
 import { AddIngredientDialogComponent } from './add-ingredient-dialog/add-ingredient-dialog.component';
-import { IngredientQuantity } from '../models/ingredient-quantity.model';
+import { IngredientQuantity } from '../../../shared/models/ingredient-quantity.model';
 
 @Component({
   selector: 'menus-recipe-show',
@@ -145,8 +144,7 @@ export class RecipeShowComponent implements OnInit {
 
   addIngredient() {
     const dialogRef = this.dialog.open(AddIngredientDialogComponent, {
-      width: '90%',
-      height: '90%',
+      
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -154,9 +152,4 @@ export class RecipeShowComponent implements OnInit {
         this.dataSource.data.push(result);
     });
   }
-
-  getUnit(ingredient: Ingredient) {
-    return ingredientUnitToString(ingredient.unit);
-  }
-
 }

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material';
-import { Ingredient } from '../../models/ingredient.model';
+import { Ingredient } from '../../../../shared/models/ingredient.model';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { IngredientQuantity } from '../../models/ingredient-quantity.model';
+import { IngredientQuantity } from '../../../../shared/models/ingredient-quantity.model';
 
 @Component({
   selector: 'menus-add-ingredient-dialog',
@@ -12,6 +12,8 @@ import { IngredientQuantity } from '../../models/ingredient-quantity.model';
 export class AddIngredientDialogComponent implements OnInit {
   
   form: FormGroup;
+
+  ingredients: Ingredient[];
   
   ngOnInit(): void {
   }
@@ -24,13 +26,15 @@ export class AddIngredientDialogComponent implements OnInit {
         quantity: ['', Validators.required],
         unit: ['', Validators.required]
       });
+
+
     }
 
   onNoClick(): void {
     this.dialogRef.close(null);
   }
 
-  onChooseEvent() {
+  onAdd() {
     const ingredient = new IngredientQuantity();
     ingredient.name = this.form.get('name').value;
     ingredient.quantity = this.form.get('quantity').value;

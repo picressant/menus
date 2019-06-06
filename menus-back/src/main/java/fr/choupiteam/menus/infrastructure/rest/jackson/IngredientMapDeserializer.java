@@ -31,16 +31,12 @@ public class IngredientMapDeserializer extends JsonDeserializer<Map<String, Inte
                             p.getIntValue();
                     }
                     p.nextToken();
-
-
                 }
 
                 if (!id.equals(""))
                     map.put(id, quantity);
 
                 p.nextToken();
-
-
             }
             else
                 p.nextToken();

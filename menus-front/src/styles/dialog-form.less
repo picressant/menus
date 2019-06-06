@@ -1,0 +1,47 @@
+:host {
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+
+    .header {
+        border-bottom: 2px solid @main-color;
+        padding-bottom: 20px;
+
+        span {
+            font-weight: bold;
+            font-size: 20px;
+        }
+    }
+
+    .form-wrapper {
+        .form-field {
+            display: flex;
+            line-height: 40px;
+            margin: 10px;
+            flex-flow: row wrap;
+
+            label {
+                min-width: 130px;
+            }
+
+            .form-field-value {
+                flex: 1;
+                min-width: 300px;
+                height: 40px;
+                font-size: 18px;
+                border: none;
+                border-bottom: 1px solid lightgray;
+
+                &:focus {
+                    outline: 0;
+                }
+            }
+        }
+    }
+
+    .submit-zone {
+        display: flex;
+        justify-content: flex-end;
+        margin: 25px 0 0 0;
+    }
+}

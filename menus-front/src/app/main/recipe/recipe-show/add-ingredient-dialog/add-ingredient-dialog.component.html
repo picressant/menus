@@ -1,17 +1,23 @@
+<div class="header">
+  <span>Ajouter un ingredient</span>
+</div>
 <div class="form-wrapper" [formGroup]="form">
   <div class="form-field">
     <label>Quoi</label>
-    <mat-select formControlName="name">
+    <mat-select formControlName="name" class="form-field-value">
       <mat-option value="test">test</mat-option>
     </mat-select>
   </div>
   <div class="form-field">
     <label>Combien</label>
-    <input type="number" formControlName="quantity">
+    <input type="number" formControlName="quantity" class="form-field-value"> 
   </div>
   <div class="form-field">
     <label>Unité</label>
-    <mat-select formControlName="unit">
+    <mat-select formControlName="unit" class="form-field-value">
     </mat-select>
   </div>
+</div>
+<div class="submit-zone">
+  <button mat-raised-button color="primary" (click)="onAdd()">Ajouter</button>
 </div>

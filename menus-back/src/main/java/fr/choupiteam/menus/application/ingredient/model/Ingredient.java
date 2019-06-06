@@ -1,5 +1,6 @@
 package fr.choupiteam.menus.application.ingredient.model;
 
+import fr.choupiteam.menus.application.unit.model.Unit;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -11,7 +12,7 @@ public class Ingredient {
 
     private String name;
 
-    private IngredientUnit unit;
+    private Unit unit;
 
     public String getId() {
         return id;
@@ -29,11 +30,11 @@ public class Ingredient {
         this.name = name;
     }
 
-    public IngredientUnit getUnit() {
+    public Unit getUnit() {
         return unit;
     }
 
-    public void setUnit(IngredientUnit unit) {
+    public void setUnit(Unit unit) {
         this.unit = unit;
     }
 }
