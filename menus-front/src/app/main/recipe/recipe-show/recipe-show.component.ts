@@ -7,6 +7,9 @@ import { Recipe } from '../../../shared/models/recipe.model';
 import { Ingredient } from '../../../shared/models/ingredient.model';
 import { AddIngredientDialogComponent } from './add-ingredient-dialog/add-ingredient-dialog.component';
 import { IngredientQuantity } from '../../../shared/models/ingredient-quantity.model';
+import { IngredientDialogData } from '../../parameters/add-ingredient-dialog/ingredient-dialog-data.model';
+import { IngredientQuantityDialog } from './add-ingredient-dialog/ingredient-quantity-dialog.model';
+import { IngredientRestService } from '../../services/ingredient-rest.service';
 
 @Component({
   selector: 'menus-recipe-show',
@@ -23,10 +26,12 @@ export class RecipeShowComponent implements OnInit {
   _isEditable: boolean;
   _isRecipe = true;
 
+  ingredients: Ingredient[] = [];
+
   // ingredients: Ingredient[];
 
   displayedColumns: string[] = ['name', 'quantity', 'unit'];
-  dataSource = new MatTableDataSource<Ingredient>()  ;
+  dataSource = new MatTableDataSource<IngredientQuantity>()  ;
 
   constructor(private formBuilder: FormBuilder,
     private recipeRest: RecipeRestService,
@@ -34,10 +39,10 @@ export class RecipeShowComponent implements OnInit {
     private router: Router,
     private snackBar: MatSnackBar,
     public dialog: MatDialog,
+    private ingredientService: IngredientRestService,
     private el:ElementRef) {
 
     this._isEditable = false;
-
     this._id = this.route.snapshot.paramMap.get("id");
 
     this.recipeForm = this.formBuilder.group({
@@ -57,6 +62,10 @@ export class RecipeShowComponent implements OnInit {
     else {
       this._isEditable = true;
     }
+
+    this.ingredientService.getIngredients().subscribe(
+      (ingredients) => this.ingredients = ingredients
+    )
   }
 
   public hasError(controlName: string, errorName: string) {
@@ -143,13 +152,17 @@ export class RecipeShowComponent implements OnInit {
   }
 
   addIngredient() {
+    const data = new IngredientQuantityDialog();
+    data.ingredients = this.ingredients;
+    data.ingredientQuantity = null;
+    
     const dialogRef = this.dialog.open(AddIngredientDialogComponent, {
-      
+      data: data
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result !== undefined)
         this.dataSource.data.push(result);
-    });
+      });
   }
 }

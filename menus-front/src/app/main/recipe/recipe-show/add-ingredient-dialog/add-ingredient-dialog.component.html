@@ -3,19 +3,15 @@
 </div>
 <div class="form-wrapper" [formGroup]="form">
   <div class="form-field">
-    <label>Quoi</label>
-    <mat-select formControlName="name" class="form-field-value">
-      <mat-option value="test">test</mat-option>
+    <label>Ingrédient</label>
+    <mat-select formControlName="ingredient" class="form-field-value">
+      <mat-option *ngFor="let ingredient of ingredients" [value]="ingredient">{{ingredient.name}}</mat-option>
     </mat-select>
   </div>
   <div class="form-field">
-    <label>Combien</label>
+    <label>Quantité</label>
     <input type="number" formControlName="quantity" class="form-field-value"> 
-  </div>
-  <div class="form-field">
-    <label>Unité</label>
-    <mat-select formControlName="unit" class="form-field-value">
-    </mat-select>
+    <label class="suffix">{{getSymbol}}</label>
   </div>
 </div>
 <div class="submit-zone">

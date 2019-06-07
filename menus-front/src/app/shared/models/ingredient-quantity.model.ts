@@ -1,5 +1,6 @@
 import { Ingredient } from './ingredient.model';
 
-export class IngredientQuantity extends Ingredient {
+export class IngredientQuantity {
+    ingredient: Ingredient;
     quantity: number;
 }
