@@ -2,6 +2,10 @@ import { Component } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { NavigationEnd, Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
+import { NavEnum } from './shared/models/nav.enum';
+import { NavService } from './shared/services/nav.service';
 
 @Component({
   selector: 'app-root',
@@ -11,6 +15,32 @@ import { map } from 'rxjs/operators';
 export class AppComponent {
   title = 'menus-front-app';
 
-  constructor() {}
+  constructor(
+    router: Router,
+    navService: NavService,
+    titleService: Title) {
+    router.events.forEach((event) => {
+      if (event instanceof NavigationEnd) {
+        let navChoice: NavEnum;
+
+        console.log(event.urlAfterRedirects);
+
+        if (event.urlAfterRedirects.startsWith('/recipe'))
+          navChoice = NavEnum.RECIPES;
+        else if (event.urlAfterRedirects.startsWith('/week'))
+          navChoice = NavEnum.MENUS;
+        else if (event.urlAfterRedirects.startsWith('/parameters'))
+          navChoice = NavEnum.PARAMETERS;
+        else if (event.urlAfterRedirects.startsWith("/home"))
+          navChoice = NavEnum.HOME
+
+        navService.changeNav(navChoice);
+      }
+    });
+
+    titleService.setTitle('Food organistator');
+  
+  }
+
 
 }

@@ -17,29 +17,46 @@ public class IngredientMapDeserializer extends JsonDeserializer<Map<String, Inte
         Map<String, Integer> map = new HashMap<>();
 
         while (!(p.getCurrentToken() == JsonToken.END_ARRAY)) {
-            if (p.getCurrentToken() == JsonToken.START_OBJECT) {
+
+            if (p.getCurrentToken() == JsonToken.START_OBJECT && p.getCurrentName() == null) {
+                //On est dans ingredients
                 String id = "";
                 int quantity = 0;
 
-                while (!(p.getCurrentToken() == JsonToken.END_OBJECT)) {
+                while (!(p.getCurrentName() == null && p.getCurrentToken() == JsonToken.END_OBJECT)) {
+                    if (p.getCurrentName() != null && p.getCurrentName().equals("ingredient") && p.getCurrentToken() == JsonToken.START_OBJECT) {
+                        while (!(p.getCurrentToken() == JsonToken.END_OBJECT && p.getCurrentName().equals("ingredient"))) {
+                            if (p.getCurrentToken() == JsonToken.START_OBJECT && p.getCurrentName().equals("unit")) {
+                                while(p.getCurrentToken() != JsonToken.END_OBJECT)
+                                    p.nextToken();
+                            }
+                            else if (p.getCurrentToken().isScalarValue()) {
+                                if (p.currentName().equals("id")) {
+                                    id = p.getValueAsString();
+                                }
+                            }
+
+                            p.nextToken();
+                        }
+                    }
 
                     if (p.getCurrentToken().isScalarValue()) {
-                        if (p.currentName().equals("id")) {
-                            id = p.getValueAsString();
+                        if (p.currentName().equals("quantity")) {
+                            quantity = p.getIntValue();
                         }
-                        if (p.currentName().equals("quantity"))
-                            p.getIntValue();
                     }
+
                     p.nextToken();
                 }
 
                 if (!id.equals(""))
                     map.put(id, quantity);
 
-                p.nextToken();
+
             }
-            else
-                p.nextToken();
+
+            p.nextToken();
+
         }
 
         return map;

@@ -1,11 +1,22 @@
+@import "variables.less";
+
 :host {
   display: flex;
   flex-direction: column;
   height: 100%;
 
   .main-content {
+    background-color: @background-color;
+    margin-top: 3px;
+    margin-left: @menu-width;
     flex: 1;
     overflow: hidden;
     overflow-y: auto;
+  }
+
+  @media @phone {
+    .main-content {
+      margin-left: 0;
+    }
   }
 }

@@ -1,15 +1,14 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatSnackBar, MatTableDataSource, MatDialog } from '@angular/material';
+import { MatDialog, MatSnackBar, MatTableDataSource } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
-import { RecipeRestService } from '../../services/recipe-rest.service';
-import { Recipe } from '../../../shared/models/recipe.model';
-import { Ingredient } from '../../../shared/models/ingredient.model';
-import { AddIngredientDialogComponent } from './add-ingredient-dialog/add-ingredient-dialog.component';
 import { IngredientQuantity } from '../../../shared/models/ingredient-quantity.model';
-import { IngredientDialogData } from '../../parameters/add-ingredient-dialog/ingredient-dialog-data.model';
-import { IngredientQuantityDialog } from './add-ingredient-dialog/ingredient-quantity-dialog.model';
+import { Ingredient } from '../../../shared/models/ingredient.model';
+import { Recipe } from '../../../shared/models/recipe.model';
 import { IngredientRestService } from '../../services/ingredient-rest.service';
+import { RecipeRestService } from '../../services/recipe-rest.service';
+import { AddIngredientDialogComponent } from './add-ingredient-dialog/add-ingredient-dialog.component';
+import { IngredientQuantityDialog } from './add-ingredient-dialog/ingredient-quantity-dialog.model';
 
 @Component({
   selector: 'menus-recipe-show',
@@ -18,7 +17,7 @@ import { IngredientRestService } from '../../services/ingredient-rest.service';
 })
 export class RecipeShowComponent implements OnInit {
 
-  @ViewChild('wrapper') container : ElementRef;
+  @ViewChild('wrapper') container: ElementRef;
 
   recipeForm: FormGroup;
   _id: string;
@@ -28,10 +27,8 @@ export class RecipeShowComponent implements OnInit {
 
   ingredients: Ingredient[] = [];
 
-  // ingredients: Ingredient[];
-
-  displayedColumns: string[] = ['name', 'quantity', 'unit'];
-  dataSource = new MatTableDataSource<IngredientQuantity>()  ;
+  displayedColumns: string[] = ['name', 'quantity', 'unit', 'actions'];
+  dataSource = new MatTableDataSource<IngredientQuantity>();
 
   constructor(private formBuilder: FormBuilder,
     private recipeRest: RecipeRestService,
@@ -39,8 +36,7 @@ export class RecipeShowComponent implements OnInit {
     private router: Router,
     private snackBar: MatSnackBar,
     public dialog: MatDialog,
-    private ingredientService: IngredientRestService,
-    private el:ElementRef) {
+    private ingredientService: IngredientRestService) {
 
     this._isEditable = false;
     this._id = this.route.snapshot.paramMap.get("id");
@@ -57,7 +53,7 @@ export class RecipeShowComponent implements OnInit {
     this._isCreationMode = (this._id === null);
 
     if (!this._isCreationMode) {
-      this._loadRecipe();           
+      this._loadRecipe();
     }
     else {
       this._isEditable = true;
@@ -82,11 +78,11 @@ export class RecipeShowComponent implements OnInit {
         this.recipeRest.addRecipe(this._rebuildRecipe()).subscribe(
           (recipe: Recipe) => {
             this.recipeForm.reset(recipe);
-            this.recipeForm.disable(); 
+            this.recipeForm.disable();
             this._isEditable = false;
 
             this._id = recipe.id;
-            this._isCreationMode = false;            
+            this._isCreationMode = false;
             this.snackBar.open('Recette ajoutée', 'Ok', {
               duration: 3000
             });
@@ -98,15 +94,15 @@ export class RecipeShowComponent implements OnInit {
         this.recipeRest.updateRecipe(this._rebuildRecipe()).subscribe(
           (recipe: Recipe) => {
             this.recipeForm.reset(recipe);
-            this.recipeForm.disable(); 
+            this.recipeForm.disable();
             this._isEditable = false;
-                            
+
             this.snackBar.open('Recette modifiée', 'Ok', {
               duration: 3000
             });
           },
           (error) => alert(error.customMessage)
-        );      
+        );
       }
     }
   }
@@ -115,7 +111,7 @@ export class RecipeShowComponent implements OnInit {
     this.recipeRest.deleteRecipe(this._id).subscribe(
       () => {
         this.snackBar.open('Recette supprimée', 'Ok', {
-          duration:3000
+          duration: 3000
         });
         this.router.navigate(['']);
       },
@@ -130,7 +126,7 @@ export class RecipeShowComponent implements OnInit {
     recipe.name = this.recipeForm.controls.name.value;
     recipe.preparationTime = this.recipeForm.controls.preparationTime.value;
     recipe.cookingTime = this.recipeForm.controls.cookingTime.value;
-    recipe.persons = this.recipeForm.controls.persons.value; 
+    recipe.persons = this.recipeForm.controls.persons.value;
 
     recipe.ingredients = this.dataSource.data as IngredientQuantity[];
 
@@ -143,7 +139,7 @@ export class RecipeShowComponent implements OnInit {
   private _loadRecipe() {
     this.recipeRest.getRecipe(this._id).subscribe((recipe: Recipe) => {
       this.recipeForm.reset(recipe);
-      this.recipeForm.disable(); 
+      this.recipeForm.disable();
 
       this.dataSource.data = recipe.ingredients;
 
@@ -155,14 +151,41 @@ export class RecipeShowComponent implements OnInit {
     const data = new IngredientQuantityDialog();
     data.ingredients = this.ingredients;
     data.ingredientQuantity = null;
-    
+    data.index = -1;
+
+    this._editIngredient(data);
+  }
+
+  onEditIngredient(ingredientQuantity: IngredientQuantity, index: number) {
+    const data = new IngredientQuantityDialog();
+    data.ingredients = this.ingredients;
+    data.ingredientQuantity = ingredientQuantity;
+    data.index = index;
+
+    this._editIngredient(data);
+   
+  }
+
+  private _editIngredient(data: IngredientQuantityDialog) {
     const dialogRef = this.dialog.open(AddIngredientDialogComponent, {
       data: data
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      if (result !== undefined)
-        this.dataSource.data.push(result);
-      });
+    dialogRef.afterClosed().subscribe((data: IngredientQuantityDialog) => {
+      if (data !== undefined) {
+        let temp = this.dataSource.data;
+        if (data.index != -1)
+          temp[data.index] = data.ingredientQuantity;
+        else
+          temp.push(data.ingredientQuantity);
+
+        this.dataSource.data = temp;
+      }
+    });
+  }
+
+  onDeleteIngredient(ingredientQuantity: IngredientQuantity) {
+    let temp = this.dataSource.data.filter(i => i !== ingredientQuantity);
+    this.dataSource.data = temp;
   }
 }

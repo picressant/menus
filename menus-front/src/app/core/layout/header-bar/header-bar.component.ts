@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MenuService } from '../service/menu.service';
 
 @Component({
   selector: 'menus-header-bar',
@@ -7,9 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderBarComponent implements OnInit {
 
-  constructor() { }
+  isOpen: boolean = false;
+
+  constructor(
+    private menuService: MenuService
+  ) { 
+    this.menuService.isOpenChanges.subscribe(
+      (isOpen) => this.isOpen = isOpen
+    );
+  }
 
   ngOnInit() {
+  }
+
+  toggleMenu() {
+    this.menuService.toggleOpen(!this.menuService.isOpen);
   }
 
 }

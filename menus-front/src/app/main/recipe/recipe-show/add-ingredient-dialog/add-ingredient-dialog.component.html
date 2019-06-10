@@ -1,5 +1,6 @@
 <div class="header">
-  <span>Ajouter un ingredient</span>
+  <span *ngIf="data.index == -1">Ajouter</span>
+  <span *ngIf="data.index > -1">Modifier</span>
 </div>
 <div class="form-wrapper" [formGroup]="form">
   <div class="form-field">
@@ -10,10 +11,13 @@
   </div>
   <div class="form-field">
     <label>Quantité</label>
-    <input type="number" formControlName="quantity" class="form-field-value"> 
+    <input type="number" formControlName="quantity" class="form-field-value has-suffix"> 
     <label class="suffix">{{getSymbol}}</label>
   </div>
 </div>
 <div class="submit-zone">
-  <button mat-raised-button color="primary" (click)="onAdd()">Ajouter</button>
+  <button mat-raised-button color="primary" (click)="onSubmit()">
+    <span *ngIf="data.index == -1">Ajouter</span>
+    <span *ngIf="data.index > -1">Modifier</span>
+  </button>
 </div>

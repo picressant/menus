@@ -33,9 +33,7 @@ public class IngredientMapSerializer extends JsonSerializer<Map<String, Integer>
                 Ingredient ingredient = this.ingredientService.getIngredient(id);
                 if (ingredient != null) {
                     gen.writeStartObject();
-                    gen.writeStringField("id", ingredient.getId());
-                    gen.writeStringField("name", ingredient.getName());
-                    gen.writeStringField("unit", ingredient.getUnit().toString());
+                    gen.writeObjectField("ingredient", ingredient);
                     gen.writeNumberField("quantity", quantity);
                     gen.writeEndObject();
                 }

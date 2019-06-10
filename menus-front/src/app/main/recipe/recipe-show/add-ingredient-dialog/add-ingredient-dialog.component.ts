@@ -30,6 +30,11 @@ export class AddIngredientDialogComponent implements OnInit {
       });
 
       this.ingredients = data.ingredients;
+      console.log(this.data);
+      if (this.data.index > -1) {
+        this.form.patchValue(this.data.ingredientQuantity);
+        this.form.get('ingredient').setValue(this.data.ingredients.find( i => i.id === this.data.ingredientQuantity.ingredient.id));
+      }
 
     }
 
@@ -37,12 +42,14 @@ export class AddIngredientDialogComponent implements OnInit {
     this.dialogRef.close(null);
   }
 
-  onAdd() {
+  onSubmit() {
     const ingredientQuantity = new IngredientQuantity();
     ingredientQuantity.ingredient = this.form.get('ingredient').value;
     ingredientQuantity.quantity = this.form.get('quantity').value;
+
+    this.data.ingredientQuantity = ingredientQuantity;
     
-    this.dialogRef.close(ingredientQuantity);
+    this.dialogRef.close(this.data);
   }
 
   get getSymbol() {

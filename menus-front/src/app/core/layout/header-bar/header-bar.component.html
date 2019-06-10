@@ -1,4 +1,15 @@
-<div class="header home" routerLink="">
+<!-- <a class="hamburger" (click)="toggleMenu()">
+  <mat-icon>menu</mat-icon>
+</a> -->
+<button class="hamburger hamburger--collapse" [ngClass]="{'is-active': isOpen}" type="button" (click)="toggleMenu()">
+  <span class="hamburger-box">
+    <span class="hamburger-inner"></span>
+  </span>
+</button>
+<a class="logo" routerLink="">
+  <img src="../../../../assets/img/linkedin_banner_image_1.png">
+</a>
+<!-- <div class="header home" routerLink="">
   Menus
 </div>
 <span class="header nav" routerLink="">
@@ -6,7 +17,7 @@
 </span>
 <span class="header nav" routerLink="/week">
   Semaine
-</span>
+</span> -->
 <span class="header nav right is-icon" routerLink="/parameters">
   <mat-icon>settings</mat-icon>
 </span>

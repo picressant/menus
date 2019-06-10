@@ -1,4 +1,6 @@
-@media (max-width: 700px) {
+@import "variables.less";
+
+@media @phone {
 
     .responsive {
         
@@ -8,6 +10,16 @@
 
         &.full-width {
             width: 100%;
+        }
+    }
+
+    .form-field {
+        margin: 0!important;
+
+        .suffix {
+            margin-left:auto;
+            min-width: auto!important;
+            width: 20px;
         }
     }
 }
