@@ -3,6 +3,7 @@ package fr.choupiteam.menus.application;
 import fr.choupiteam.menus.application.ingredient.service.IngredientService;
 import fr.choupiteam.menus.application.recipe.service.RecipeService;
 import fr.choupiteam.menus.application.week.model.Week;
+import fr.choupiteam.menus.application.week.model.WeekMeal;
 import fr.choupiteam.menus.application.week.service.WeekService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;

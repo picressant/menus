@@ -1,11 +1,9 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA, MatSelectChange } from '@angular/material';
-import { Unit } from 'src/app/shared/models/unit.model';
+import { MatDialogRef, MatSelectChange, MAT_DIALOG_DATA } from '@angular/material';
+import { IngredientQuantity } from 'src/app/shared/models/ingredient-quantity.model';
 import { SideDish } from 'src/app/shared/models/sidedish.model';
 import { SidedishDialogData } from './sidedish-dialog-data.model';
-import { IngredientQuantity } from 'src/app/shared/models/ingredient-quantity.model';
-import { Ingredient } from 'src/app/shared/models/ingredient.model';
 
 @Component({
   selector: 'menus-sidedish-dialog',
@@ -31,8 +29,7 @@ export class SidedishDialogComponent implements OnInit {
 
     if (data.side !== null) {
       this.form.reset(data.side);
-      this.ingredientsQuantity = this.data.side.ingredients;
-      console.log(this.ingredientsQuantity);
+      this.ingredientsQuantity = Object.assign([], this.data.side.ingredients);
     }
       
 
@@ -61,8 +58,16 @@ export class SidedishDialogComponent implements OnInit {
 
   onIngredientChange(changeEvent: MatSelectChange, index: number) {
     this.ingredientsQuantity[index].ingredient = changeEvent.value;
-    console.log(this.ingredientsQuantity);
   }
 
+  onIngredientQuantityChange(event, index: number) {
+    this.ingredientsQuantity[index].quantity = +event.srcElement.value;
+  }
+
+  findIngredient(ingredientQuantity: IngredientQuantity) {
+    if (ingredientQuantity.ingredient === undefined)
+      return null;
+    return this.data.ingredients.find(i => i.id === ingredientQuantity.ingredient.id);
+  }
 
 }

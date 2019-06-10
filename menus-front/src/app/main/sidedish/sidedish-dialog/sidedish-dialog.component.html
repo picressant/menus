@@ -15,10 +15,10 @@
       </button>
     </div>
     <div class="ingredient-wrapper" *ngFor="let ingredientQuantity of ingredientsQuantity; let i = index">
-      <mat-select [value]="ingredientQuantity.ingredient" (selectionChange)="onIngredientChange($event, i)">
+      <mat-select [value]="findIngredient(ingredientQuantity)" (selectionChange)="onIngredientChange($event, i)">
         <mat-option *ngFor="let ingredient of data.ingredients" [value]="ingredient">{{ingredient.name}}</mat-option>
       </mat-select>
-      <input #input1 type="number" class="ingredient-quantity" [value]="ingredientQuantity.quantity">
+      <input #input1 type="number" class="ingredient-quantity" [value]="ingredientQuantity.quantity" (input)="onIngredientQuantityChange($event, i)">
       <span class="suffix"
         *ngIf="ingredientQuantity.ingredient !== undefined">{{ingredientQuantity.ingredient.unit.symbol}}</span>
       <span class="suffix" *ngIf="ingredientQuantity.ingredient === undefined"></span>

@@ -42,7 +42,6 @@ export class SidedishSearchComponent implements OnInit {
   }
 
   getIndredients(side: SideDish) {
-    console.log(side);
     return side.ingredients.map(i => i.ingredient.name).join(", ");
   }
 

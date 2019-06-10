@@ -1,0 +1,24 @@
+
+<div cdkDropList (cdkDropListDropped)="drop($event)">
+  <mat-card cdkDrag class="day-card" *ngFor="let meal of meals; let i = index">
+    <mat-card-header>
+      <mat-card-title class="day-title">{{getDay(i)}} :</mat-card-title>        
+      <mat-icon cdkDragHandle class="drag-handle">open_with</mat-icon>         
+    </mat-card-header> 
+    <mat-card-content class="recette-content">
+      <ng-container *ngIf="meal !== null">
+        <div class="recette-name">{{meal.recipe.name}}</div>
+        <div class="recette-times">
+          <span>Préparation: {{meal.recipe.preparationTime}} min</span>
+          <span> / </span>
+          <span>Cuisson: {{meal.recipe.cookingTime}} min</span>
+        </div>
+      </ng-container>
+      <div class="recette-name" *ngIf="meal === null">-</div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button (click)="onChange(i)" mat-button>Changer</button>
+      <button (click)="clearRecette(i)" mat-button>Supprimer</button>        
+    </mat-card-actions>
+  </mat-card>
+</div>

@@ -37,6 +37,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
         MatTabsModule,
         MatTableModule,
         MatSelectModule,
+        MatCardModule,
 
         // browser part
         BrowserModule,
@@ -58,6 +59,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
         MatTabsModule,
         MatTableModule,
         MatSelectModule,
+        MatCardModule,
 
         // browser part
         BrowserModule,

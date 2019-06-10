@@ -1,0 +1,22 @@
+<div class="header">
+  <span>Modier le menu</span>
+</div>
+<div class="form-wrapper" [formGroup]="form">
+  <div class="form-field">
+    <label>Recette</label>
+    <mat-select formControlName="recipe" class="form-field-value">
+      <mat-option *ngFor="let recipe of data.recipes" [value]="recipe">{{recipe.name}}</mat-option>
+    </mat-select>
+  </div>
+  <div class="form-field">
+      <label>Accompagnements</label>
+      <mat-select formControlName="sideDishes" class="form-field-value">
+        <mat-option *ngFor="let side of data.sidedishes" [value]="side">{{side.name}}</mat-option>
+      </mat-select>
+    </div>
+</div>
+<div class="submit-zone">
+  <button mat-raised-button color="primary" (click)="onAdd()" [disabled]="form.invalid">
+    <span>Modifier</span>
+  </button>
+</div>
