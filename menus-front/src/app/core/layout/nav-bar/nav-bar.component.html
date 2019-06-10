@@ -6,6 +6,10 @@
   <mat-icon>restaurant</mat-icon>
   <span>Recettes</span>
 </a>
+<a class="nav-link" [ngClass]="{'selected' : isSideSelected}" (click)="navigate('/sidedish')">
+  <mat-icon>spa</mat-icon>
+  <span>Sides</span>
+</a>
 <a class="nav-link" [ngClass]="{'selected' : isMenusSelected}" (click)="navigate('/week')">
   <mat-icon>room_service</mat-icon>
   <span>Semaine</span>

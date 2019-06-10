@@ -4,6 +4,7 @@ import { RecipeSearchComponent } from './main/recipe/recipe-search/recipe-search
 import { RecipeShowComponent } from './main/recipe/recipe-show/recipe-show.component';
 import { ParametersManagementComponent } from './main/parameters/parameters-management/parameters-management.component';
 import { DashboardComponent } from './main/dashboard/dashboard/dashboard.component';
+import { SidedishSearchComponent } from './main/sidedish/sidedish-search/sidedish-search.component';
 
 const routes: Routes = [
   { path: 'home', component: DashboardComponent},
@@ -11,7 +12,7 @@ const routes: Routes = [
   { path: 'parameters', component: ParametersManagementComponent },
   { path: 'recipe/add', component: RecipeShowComponent },  
   { path: 'recipe/:id', component: RecipeShowComponent },
-  
+  { path: 'sidedish', component: SidedishSearchComponent},
   {
     path: '',
     redirectTo: 'home',

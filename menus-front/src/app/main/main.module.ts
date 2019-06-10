@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RecipeModule } from './recipe/recipe.module';
 import { DashboardModule } from './dashboard/dashboard.module';
+import { SidedishModule } from './sidedish/sidedish.module';
 
 @NgModule({
   declarations: [],
@@ -12,7 +13,8 @@ import { DashboardModule } from './dashboard/dashboard.module';
   ],
   exports: [
     RecipeModule,
-    DashboardModule
+    DashboardModule,
+    SidedishModule
   ]
 })
 export class MainModule { }

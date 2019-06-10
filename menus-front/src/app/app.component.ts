@@ -1,9 +1,6 @@
 import { Component } from '@angular/core';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { NavigationEnd, Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
+import { NavigationEnd, Router } from '@angular/router';
 import { NavEnum } from './shared/models/nav.enum';
 import { NavService } from './shared/services/nav.service';
 
@@ -32,7 +29,9 @@ export class AppComponent {
         else if (event.urlAfterRedirects.startsWith('/parameters'))
           navChoice = NavEnum.PARAMETERS;
         else if (event.urlAfterRedirects.startsWith("/home"))
-          navChoice = NavEnum.HOME
+          navChoice = NavEnum.HOME;
+        else if (event.urlAfterRedirects.startsWith("/sidedish"))
+          navChoice = NavEnum.SIDE;
 
         navService.changeNav(navChoice);
       }

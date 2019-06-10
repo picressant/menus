@@ -44,6 +44,10 @@ export class NavBarComponent implements OnInit {
     return this.currentNav === NavEnum.HOME;
   }
 
+  get isSideSelected() {
+    return this.currentNav === NavEnum.SIDE;
+  }
+
   navigate(path: String) {
     this.router.navigate([path]);
     this.menuService.toggleOpen(false);

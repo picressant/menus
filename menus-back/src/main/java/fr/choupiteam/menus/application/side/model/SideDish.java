@@ -1,10 +1,13 @@
 package fr.choupiteam.menus.application.side.model;
 
-import fr.choupiteam.menus.application.ingredient.model.Ingredient;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import fr.choupiteam.menus.infrastructure.rest.jackson.IngredientMapDeserializer;
+import fr.choupiteam.menus.infrastructure.rest.jackson.IngredientMapSerializer;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.List;
+import java.util.Map;
 
 @Document(collection = "sidedish")
 public class SideDish {
@@ -21,9 +24,11 @@ public class SideDish {
     private String name;
 
     /**
-     * List of ingredient for the side dish
+     * List of recipe ingredients with quantity
      */
-    private List<Ingredient> ingredients;
+    @JsonSerialize(using = IngredientMapSerializer.class)
+    @JsonDeserialize(using = IngredientMapDeserializer.class)
+    private Map<String, Integer> ingredients;
 
     public String getId() {
         return id;
@@ -41,11 +46,11 @@ public class SideDish {
         this.name = name;
     }
 
-    public List<Ingredient> getIngredients() {
+    public Map<String, Integer> getIngredients() {
         return ingredients;
     }
 
-    public void setIngredients(List<Ingredient> ingredients) {
+    public void setIngredients(Map<String, Integer> ingredients) {
         this.ingredients = ingredients;
     }
 }
