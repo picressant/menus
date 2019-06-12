@@ -9,11 +9,14 @@
     </mat-select>
   </div>
   <div class="form-field">
-      <label>Accompagnements</label>
-      <mat-select formControlName="sideDishes" class="form-field-value">
+    <label>Accompagnements</label>
+    <ng-select [items]="data.sidedishes" bindLabel="name" bindValue="id" [multiple]="true" placeholder="..."
+      formControlName="sideDishes" class="form-field-value">
+    </ng-select>
+    <!-- <mat-select formControlName="sideDishes" class="form-field-value">
         <mat-option *ngFor="let side of data.sidedishes" [value]="side">{{side.name}}</mat-option>
-      </mat-select>
-    </div>
+      </mat-select> -->
+  </div>
 </div>
 <div class="submit-zone">
   <button mat-raised-button color="primary" (click)="onAdd()" [disabled]="form.invalid">

@@ -22,3 +22,6 @@
     </mat-card-actions>
   </mat-card>
 </div>
+<button mat-fab class="save-button" (click)="onSave()" [color]="(isModified) ? 'warn' : 'primary'">
+  <mat-icon>save</mat-icon>
+</button>

@@ -41,6 +41,9 @@ export class WeekShowComponent implements OnInit {
   recipes: Recipe[];
   sidedishes: SideDish[];
 
+  isModified = false;
+  _id: string;
+
 
   constructor(
     private weekService: WeekRestService,
@@ -50,9 +53,7 @@ export class WeekShowComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.weekService.getWeek().subscribe(
-      (week) => this.meals = this._mapWeekToArray(week)
-    );
+    this._loadWeek();
 
     let search = new Search();
     search.term = "";
@@ -63,6 +64,16 @@ export class WeekShowComponent implements OnInit {
 
     this.sideDishService.getSideDishes().subscribe(
       (sideDishes) => this.sidedishes = sideDishes
+    );
+  }
+
+  private _loadWeek() {
+    this.weekService.getWeek().subscribe(
+      (week) => {
+        this.meals = this._mapWeekToArray(week);
+        this._id = week.id;
+        this.isModified = false;
+      }
     );
   }
 
@@ -87,6 +98,7 @@ export class WeekShowComponent implements OnInit {
 
   drop(event: CdkDragDrop<WeekMeal[]>) {
     moveItemInArray(this.meals, event.previousIndex, event.currentIndex);
+    this.isModified = true;
   }  
 
   private _mapWeekToArray(week: Week): WeekMeal[] {
@@ -127,6 +139,8 @@ export class WeekShowComponent implements OnInit {
     week.sundayLunch = meals[days.sundayLunch];
     week.sundayDinner = meals[days.sundayDinner];
 
+    week.id = this._id;
+
     return week;
   }
 
@@ -142,8 +156,16 @@ export class WeekShowComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result !== undefined)
+      if (result !== undefined) {
         this.meals[index] = result;
+        this.isModified = true;
+      }
     });
+  }
+
+  onSave() {
+    this.weekService.setWeek(this._mapArrayToWeek(this.meals)).subscribe(
+      () => this._loadWeek()
+    );
   }
 }

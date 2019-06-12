@@ -28,4 +28,8 @@ public class WeekService {
     public void insertWeek(Week week) {
         this.weekRepository.insert(week);
     }
+
+    public Week setWeek(Week week) {
+        return this.weekRepository.save(week);
+    }
 }

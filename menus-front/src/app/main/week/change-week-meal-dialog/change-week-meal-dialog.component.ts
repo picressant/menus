@@ -38,9 +38,10 @@ export class ChangeWeekMealDialogComponent implements OnInit {
   }
 
   onAdd() {
+    console.log(this.form.get('sideDishes').value);
     const meal = new WeekMeal();
     meal.recipe = this.form.get('recipe').value;
-    meal.sideDishes = this.form.get('sideDishes').value;
+    meal.sideDishes= this.data.sidedishes.filter( (dish) => this.form.get('sideDishes').value.includes(dish.id));
 
     this.dialogRef.close(meal);
   }

@@ -3,6 +3,7 @@ package fr.choupiteam.menus.resources.week;
 import fr.choupiteam.menus.application.week.model.Week;
 import fr.choupiteam.menus.application.week.service.WeekService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,5 +18,10 @@ public class WeekController {
     @RequestMapping(method = RequestMethod.GET)
     public Week getWeek() {
         return this.weekService.getWeek();
+    }
+
+    @RequestMapping(method = RequestMethod.POST)
+    public Week setWeek(@RequestBody Week week) {
+        return this.weekService.setWeek(week);
     }
 }
