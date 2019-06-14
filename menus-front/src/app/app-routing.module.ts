@@ -1,23 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { RecipeSearchComponent } from './main/recipe/recipe-search/recipe-search.component';
-import { RecipeShowComponent } from './main/recipe/recipe-show/recipe-show.component';
-import { ParametersManagementComponent } from './main/parameters/parameters-management/parameters-management.component';
-import { DashboardComponent } from './main/dashboard/dashboard/dashboard.component';
-import { SidedishSearchComponent } from './main/sidedish/sidedish-search/sidedish-search.component';
-import { WeekShowComponent } from './main/week/week-show/week-show.component';
+import { AuthShellComponent } from './auth/auth-shell/auth-shell.component';
+import { MainShellComponent } from './main/main-shell/main-shell.component';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
-  { path: 'home', component: DashboardComponent},
-  { path: 'recipe', component: RecipeSearchComponent },
-  { path: 'parameters', component: ParametersManagementComponent },
-  { path: 'recipe/add', component: RecipeShowComponent },  
-  { path: 'recipe/:id', component: RecipeShowComponent },
-  { path: 'sidedish', component: SidedishSearchComponent},
-  { path: 'week', component: WeekShowComponent},
+  { path: 'auth', component: AuthShellComponent, loadChildren: './auth/auth-routing.module#AuthRoutingModule'},
+  { path: 'main', component: MainShellComponent, canActivate: [AuthGuard], loadChildren: './main/main-routing.module#MainRoutingModule'},
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'main/home',
     pathMatch: 'full'
   },
 

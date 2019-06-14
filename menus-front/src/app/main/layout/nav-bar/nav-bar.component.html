@@ -1,0 +1,16 @@
+<a class="nav-link" [ngClass]="{'selected' : isHomeSelected}" (click)="navigate('/main/home')">
+  <mat-icon>home</mat-icon>
+  <span>Home</span>
+</a>
+<a class="nav-link" [ngClass]="{'selected' : isRecipesSelected}" (click)="navigate('/main/recipe')">
+  <mat-icon>restaurant</mat-icon>
+  <span>Recettes</span>
+</a>
+<a class="nav-link" [ngClass]="{'selected' : isSideSelected}" (click)="navigate('/main/sidedish')">
+  <mat-icon>spa</mat-icon>
+  <span>Sides</span>
+</a>
+<a class="nav-link" [ngClass]="{'selected' : isMenusSelected}" (click)="navigate('/main/week')">
+  <mat-icon>room_service</mat-icon>
+  <span>Semaine</span>
+</a>

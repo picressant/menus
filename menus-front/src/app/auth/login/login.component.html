@@ -1,0 +1,5 @@
+<div [formGroup]="form">
+  <input type="text" formControlName="username" placeholder="Login">
+  <input type="text" formControlName="password" placeholder="Mot de passe">
+  <button (click)="onLogin()" [disabled]="form.invalid">Se connecter</button>
+</div>

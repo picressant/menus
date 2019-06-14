@@ -39,9 +39,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
         MatSelectModule,
         MatCardModule,
 
-        // browser part
-        BrowserModule,
-        BrowserAnimationsModule
+        // // browser part
+        // BrowserModule,
+        // BrowserAnimationsModule
     ],
     exports: [
         MatSidenavModule,
@@ -62,8 +62,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
         MatCardModule,
 
         // browser part
-        BrowserModule,
-        BrowserAnimationsModule
+        // BrowserModule,
+        // BrowserAnimationsModule
     ]
 })
 export class MaterialModule { }

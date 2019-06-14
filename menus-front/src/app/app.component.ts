@@ -22,15 +22,15 @@ export class AppComponent {
 
         console.log(event.urlAfterRedirects);
 
-        if (event.urlAfterRedirects.startsWith('/recipe'))
+        if (event.urlAfterRedirects.startsWith('/main/recipe'))
           navChoice = NavEnum.RECIPES;
-        else if (event.urlAfterRedirects.startsWith('/week'))
+        else if (event.urlAfterRedirects.startsWith('/main/week'))
           navChoice = NavEnum.MENUS;
-        else if (event.urlAfterRedirects.startsWith('/parameters'))
+        else if (event.urlAfterRedirects.startsWith('/main/parameters'))
           navChoice = NavEnum.PARAMETERS;
-        else if (event.urlAfterRedirects.startsWith("/home"))
+        else if (event.urlAfterRedirects.startsWith("/main/home"))
           navChoice = NavEnum.HOME;
-        else if (event.urlAfterRedirects.startsWith("/sidedish"))
+        else if (event.urlAfterRedirects.startsWith("/main/sidedish"))
           navChoice = NavEnum.SIDE;
 
         navService.changeNav(navChoice);
