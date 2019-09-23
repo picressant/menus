@@ -1,8 +1,5 @@
 import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { NavigationEnd, Router } from '@angular/router';
-import { NavEnum } from './shared/models/nav.enum';
-import { NavService } from './shared/services/nav.service';
 
 @Component({
   selector: 'app-root',
