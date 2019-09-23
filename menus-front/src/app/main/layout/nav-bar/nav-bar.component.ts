@@ -22,8 +22,7 @@ export class NavBarComponent implements OnInit {
   }
 
 
-  navigate(path: String) {
-    this.router.navigate([path]);
+  navigate() {
     this.menuService.toggleOpen(false);
   }
 

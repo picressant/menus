@@ -27,11 +27,8 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.less",
-              "src/styles/theme.scss",
-              "src/styles/responsive.less",
-              "src/styles/override-material.less",
-              "src/styles/override-ng-select.less"
+              "src/styles/styles.less",
+              "src/styles/theme.scss"
             ],
             "stylePreprocessorOptions": {
               "includePaths": [
