@@ -12,7 +12,7 @@ export class RestInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler):
     Observable<HttpEvent<any>> {
-    const lURL = (environment.production) ? location.origin + req.urlWithParams : "http://localhost:8080/" + req.urlWithParams;
+    const lURL = environment.restRoot + req.urlWithParams;
 
     console.log(lURL);
 

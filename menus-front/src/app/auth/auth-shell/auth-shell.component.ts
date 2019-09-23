@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'menus-auth-shell',
@@ -10,6 +11,10 @@ export class AuthShellComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+  }
+
+  get deployPath() {
+    return environment.deployUrl;
   }
 
 }

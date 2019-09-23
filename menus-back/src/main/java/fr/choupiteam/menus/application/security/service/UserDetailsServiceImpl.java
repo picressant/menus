@@ -9,7 +9,10 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.PostConstruct;
 
 import static java.util.Collections.emptyList;
 
@@ -18,6 +21,19 @@ import static java.util.Collections.emptyList;
 public class UserDetailsServiceImpl implements UserDetailsService {
     @Autowired
     private ApplicationUserRepository applicationUserRepository;
+
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    @PostConstruct
+    public void init() {
+        this.bCryptPasswordEncoder = new BCryptPasswordEncoder();
+    }
+
+    public void generatePassword(ApplicationUser user, String password) {
+        user.setPassword(this.bCryptPasswordEncoder.encode(password));
+    }
+
+
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

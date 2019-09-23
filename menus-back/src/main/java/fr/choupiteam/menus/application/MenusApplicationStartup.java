@@ -33,10 +33,17 @@ public class MenusApplicationStartup implements ApplicationListener<ApplicationR
             this.weekService.insertWeek(new Week());
         }
 
-        ApplicationUser user = this.userDetailsService.getUser("5d0403fe13f9781f2dd6b093");
-        user.setFirstname("Pierre");
-        user.setLastname("Cressant");
-        this.userDetailsService.saveUser(user);
+        try {
+            this.userDetailsService.loadUserByUsername("pcressant");
+        }
+        catch (Exception e) {
+            ApplicationUser pcr = new ApplicationUser();
+            pcr.setFirstname("Pierre");
+            pcr.setLastname("Lastname");
+            pcr.setUsername("pcressant");
+            this.userDetailsService.generatePassword(pcr, "toto");
+            this.userDetailsService.saveUser(pcr);
+        }
 
 //        Ingredient ingredient = new Ingredient();
 //        ingredient.setName("Pâtes");
