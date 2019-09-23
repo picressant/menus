@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuService } from '../service/menu.service';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'menus-header-bar',
@@ -25,4 +26,7 @@ export class HeaderBarComponent implements OnInit {
     this.menuService.toggleOpen(!this.menuService.isOpen);
   }
 
+  get deployUrl() {
+    return environment.deployUrl;
+  }
 }
