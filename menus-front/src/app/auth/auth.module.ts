@@ -5,13 +5,11 @@ import { AuthShellComponent } from './auth-shell/auth-shell.component';
 import { LoginComponent } from './login/login.component';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
-import { AuthHomeComponent } from './auth-home/auth-home.component';
 
 @NgModule({
   declarations: [
     AuthShellComponent,
-    LoginComponent,
-    AuthHomeComponent
+    LoginComponent
   ],
   imports: [
     CommonModule,
