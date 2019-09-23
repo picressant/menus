@@ -3,6 +3,8 @@ package fr.choupiteam.menus.application.security.service;
 import fr.choupiteam.menus.application.security.model.ApplicationUser;
 import fr.choupiteam.menus.infrastructure.repository.ApplicationUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -24,5 +26,18 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             throw new UsernameNotFoundException(username);
         }
         return new User(applicationUser.getUsername(), applicationUser.getPassword(), emptyList());
+    }
+
+    public ApplicationUser getCurrentUser() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        return applicationUserRepository.findByUsername((String) auth.getPrincipal());
+    }
+
+    public ApplicationUser getUser(String id) {
+        return this.applicationUserRepository.findById(id).get();
+    }
+
+    public void saveUser(ApplicationUser user) {
+        this.applicationUserRepository.save(user);
     }
 }

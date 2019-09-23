@@ -10,35 +10,9 @@ import { NavService } from './shared/services/nav.service';
   styleUrls: ['./app.component.less']
 })
 export class AppComponent {
-  title = 'menus-front-app';
-
   constructor(
-    router: Router,
-    navService: NavService,
     titleService: Title) {
-    router.events.forEach((event) => {
-      if (event instanceof NavigationEnd) {
-        let navChoice: NavEnum;
-
-        console.log(event.urlAfterRedirects);
-
-        if (event.urlAfterRedirects.startsWith('/main/recipe'))
-          navChoice = NavEnum.RECIPES;
-        else if (event.urlAfterRedirects.startsWith('/main/week'))
-          navChoice = NavEnum.MENUS;
-        else if (event.urlAfterRedirects.startsWith('/main/parameters'))
-          navChoice = NavEnum.PARAMETERS;
-        else if (event.urlAfterRedirects.startsWith("/main/home"))
-          navChoice = NavEnum.HOME;
-        else if (event.urlAfterRedirects.startsWith("/main/sidedish"))
-          navChoice = NavEnum.SIDE;
-
-        navService.changeNav(navChoice);
-      }
-    });
-
     titleService.setTitle('Food organistator');
-  
   }
 
 

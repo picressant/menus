@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthShellComponent } from './auth/auth-shell/auth-shell.component';
 import { MainShellComponent } from './main/main-shell/main-shell.component';
-import { AuthGuard } from './guards/auth.guard';
+import { AuthGuard } from './shared/guards/auth.guard';
 
 const routes: Routes = [
   { path: 'auth', component: AuthShellComponent, loadChildren: './auth/auth-routing.module#AuthRoutingModule'},
@@ -13,9 +13,9 @@ const routes: Routes = [
     pathMatch: 'full'
   },
 
-  // { path: 'recette', component: ShowRecetteComponent },  
+  // { path: 'recette', component: ShowRecetteComponent },
   // { path: 'menus', component: WeekMenusComponent },
-  // { path: 'menusV2', component: WeekMenusV2Component }  
+  // { path: 'menusV2', component: WeekMenusV2Component }
 ];
 
 @NgModule({

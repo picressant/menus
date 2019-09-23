@@ -6,11 +6,13 @@ import { LoginComponent } from './login/login.component';
 import { RouterModule } from '@angular/router';
 import { AuthRoutingModule } from './auth-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AuthBarComponent } from './auth-bar/auth-bar.component';
+import { AuthHomeComponent } from './auth-home/auth-home.component';
 
 @NgModule({
   declarations: [
-    AuthShellComponent, 
-    LoginComponent],
+    AuthShellComponent,
+    LoginComponent, AuthBarComponent, AuthHomeComponent],
   imports: [
     CommonModule,
     SharedModule,

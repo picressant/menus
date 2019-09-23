@@ -5,9 +5,10 @@ import { FooterComponent } from './footer/footer.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { RouterModule } from '@angular/router';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { UserInfoComponent } from './user-info/user-info.component';
 
 @NgModule({
-  declarations: [HeaderBarComponent, FooterComponent, NavBarComponent],
+  declarations: [HeaderBarComponent, FooterComponent, NavBarComponent, UserInfoComponent],
   imports: [
     SharedModule,
     RouterModule

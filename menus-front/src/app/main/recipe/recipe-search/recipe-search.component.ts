@@ -70,7 +70,7 @@ export class RecipeSearchComponent implements OnInit {
     if (this.isWeekSearch)
       this.choose.emit(iRecette);
     else {
-      this.router.navigate(['recipe', iRecette.id]);
+      this.router.navigate(['main/recipe', iRecette.id]);
     }
   }
 
