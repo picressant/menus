@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { WeekRestService } from '../../services/week-rest.service';
 import { Week } from 'src/app/shared/models/week.model';
 import { WeekMeal } from 'src/app/shared/models/week-meal.model';
-import { WebElement } from 'protractor';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { SideDish } from 'src/app/shared/models/sidedish.model';
 import { Recipe } from 'src/app/shared/models/recipe.model';
@@ -50,7 +49,8 @@ export class WeekShowComponent implements OnInit {
     private recipeService: RecipeRestService,
     private sideDishService: SideDishRestService,
     public dialog: MatDialog
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
     this._loadWeek();
@@ -78,28 +78,42 @@ export class WeekShowComponent implements OnInit {
   }
 
   getDay(index: number) {
-    switch(index) {
-      case 0: return "Lundi midi";
-      case 1: return "Lundi soir";
-      case 2: return "Mardi midi";
-      case 3: return "Mardi soir";
-      case 4: return "Mercredi midi";
-      case 5: return "Mercredi soir";
-      case 6: return "Jeudi midi";
-      case 7: return "Jeudi soir";
-      case 8: return "Vendredi midi";
-      case 9: return "Vendredi soir";
-      case 10: return "Samedi midi";
-      case 11: return "Samedi soir";
-      case 12: return "Dimance midi";
-      case 13: return "Dimance soir";
+    switch (index) {
+      case 0:
+        return "Lundi midi";
+      case 1:
+        return "Lundi soir";
+      case 2:
+        return "Mardi midi";
+      case 3:
+        return "Mardi soir";
+      case 4:
+        return "Mercredi midi";
+      case 5:
+        return "Mercredi soir";
+      case 6:
+        return "Jeudi midi";
+      case 7:
+        return "Jeudi soir";
+      case 8:
+        return "Vendredi midi";
+      case 9:
+        return "Vendredi soir";
+      case 10:
+        return "Samedi midi";
+      case 11:
+        return "Samedi soir";
+      case 12:
+        return "Dimance midi";
+      case 13:
+        return "Dimance soir";
     }
   }
 
   drop(event: CdkDragDrop<WeekMeal[]>) {
     moveItemInArray(this.meals, event.previousIndex, event.currentIndex);
     this.isModified = true;
-  }  
+  }
 
   private _mapWeekToArray(week: Week): WeekMeal[] {
     const meals: WeekMeal[] = [];
@@ -121,7 +135,7 @@ export class WeekShowComponent implements OnInit {
     return meals;
   }
 
-  private _mapArrayToWeek(meals: WeekMeal[]) : Week {
+  private _mapArrayToWeek(meals: WeekMeal[]): Week {
     const week: Week = new Week();
 
     week.mondayLunch = meals[days.mondayLunch];
@@ -167,5 +181,10 @@ export class WeekShowComponent implements OnInit {
     this.weekService.setWeek(this._mapArrayToWeek(this.meals)).subscribe(
       () => this._loadWeek()
     );
+  }
+
+  clearRecette(index: number) {
+    this.meals[index] = null;
+    this.isModified = true;
   }
 }

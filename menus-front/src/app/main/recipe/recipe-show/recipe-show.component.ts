@@ -163,7 +163,7 @@ export class RecipeShowComponent implements OnInit {
     data.index = index;
 
     this._editIngredient(data);
-   
+
   }
 
   private _editIngredient(data: IngredientQuantityDialog) {

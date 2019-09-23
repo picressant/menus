@@ -75,7 +75,7 @@ export class RecipeSearchComponent implements OnInit {
   }
 
   addRecipe() {
-    this.router.navigate(['recipe/add']);
+    this.router.navigate(['main/recipe/add']);
   }
 
 }

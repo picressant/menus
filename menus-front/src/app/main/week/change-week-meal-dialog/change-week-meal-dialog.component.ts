@@ -25,16 +25,12 @@ export class ChangeWeekMealDialogComponent implements OnInit {
     });
 
     if (data.weekmeal !== null) {
-      this.form.reset(data.weekmeal);
+      this.form.patchValue(data.weekmeal);
     }
     this.isModification = (data.weekmeal !== null);
   }
 
   ngOnInit() {
-  }
-
-  onNoClick(): void {
-    this.dialogRef.close(null);
   }
 
   onAdd() {

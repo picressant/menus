@@ -12,7 +12,7 @@ const routes: Routes = [
     { path: 'home', component: DashboardComponent},
     { path: 'recipe', component: RecipeSearchComponent },
     { path: 'parameters', component: ParametersManagementComponent },
-    { path: 'recipe/add', component: RecipeShowComponent },  
+    { path: 'recipe/add', component: RecipeShowComponent },
     { path: 'recipe/:id', component: RecipeShowComponent },
     { path: 'sidedish', component: SidedishSearchComponent},
     { path: 'week', component: WeekShowComponent},
@@ -22,7 +22,7 @@ const routes: Routes = [
       pathMatch: 'full'
     }
   ];
-  
+
   @NgModule({
     imports: [
         MainModule,
