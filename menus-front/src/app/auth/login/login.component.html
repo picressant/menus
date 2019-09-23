@@ -1,5 +1,14 @@
-<div [formGroup]="form">
-  <input type="text" formControlName="username" placeholder="Login">
-  <input type="text" formControlName="password" placeholder="Mot de passe">
-  <button (click)="onLogin()" [disabled]="form.invalid">Se connecter</button>
-</div>
+<form [formGroup]="form">
+  <div class="login-input">
+    <input type="text" formControlName="username" placeholder="Login">
+  </div>
+
+  <div class="login-input">
+    <input type="password" formControlName="password" placeholder="Mot de passe">
+  </div>
+
+  <div class="text-center">
+    <button mat-raised-button color="primary" type="submit" (click)="onLogin()" [disabled]="form.invalid">Se connecter
+    </button>
+  </div>
+</form>

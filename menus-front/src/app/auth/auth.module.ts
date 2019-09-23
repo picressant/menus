@@ -4,15 +4,15 @@ import { SharedModule } from '../shared/shared.module';
 import { AuthShellComponent } from './auth-shell/auth-shell.component';
 import { LoginComponent } from './login/login.component';
 import { RouterModule } from '@angular/router';
-import { AuthRoutingModule } from './auth-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
-import { AuthBarComponent } from './auth-bar/auth-bar.component';
 import { AuthHomeComponent } from './auth-home/auth-home.component';
 
 @NgModule({
   declarations: [
     AuthShellComponent,
-    LoginComponent, AuthBarComponent, AuthHomeComponent],
+    LoginComponent,
+    AuthHomeComponent
+  ],
   imports: [
     CommonModule,
     SharedModule,
@@ -23,4 +23,5 @@ import { AuthHomeComponent } from './auth-home/auth-home.component';
     AuthShellComponent
   ]
 })
-export class AuthModule { }
+export class AuthModule {
+}
