@@ -1,20 +1,19 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Recipe } from '../../../shared/models/recipe.model';
-import { RecipeRestService } from '../../services/recipe-rest.service';
+import { Recipe } from '../../../../shared/models/recipe.model';
+import { RecipeRestService } from '../../../services/recipe-rest.service';
 import { Router } from '@angular/router';
 import { finalize } from 'rxjs/operators';
 import { Search } from 'src/app/shared/models/search.model';
 
 @Component({
   selector: 'menus-recipe-search',
-  templateUrl: './recipe-search.component.html',
-  styleUrls: ['./recipe-search.component.less']
+  templateUrl: './recipe-list-page.component.html',
+  styleUrls: ['./recipe-list-page.component.less']
 })
-export class RecipeSearchComponent implements OnInit {
+export class RecipeListPageComponent implements OnInit {
 
 
   searchValue = '';
-  _selectText = "Voir plus";
   _isLoading = false;
 
   _isLoadingID: any;
@@ -36,9 +35,6 @@ export class RecipeSearchComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.isWeekSearch) {
-      this._selectText = "Selectionner";
-    }
     this._searchRecipe();
   }
 
@@ -66,16 +62,11 @@ export class RecipeSearchComponent implements OnInit {
         (err) => alert(err));
   }
 
-  selectRecipe(iRecette: Recipe) {
-    if (this.isWeekSearch)
-      this.choose.emit(iRecette);
-    else {
-      this.router.navigate(['main/recipe', iRecette.id]);
-    }
-  }
-
   addRecipe() {
     this.router.navigate(['main/recipe/add']);
   }
 
+  onSelectRecipe(recipe: Recipe) {
+    this.choose.emit(recipe);
+  }
 }

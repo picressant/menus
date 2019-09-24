@@ -2,20 +2,20 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatSnackBar, MatTableDataSource } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
-import { IngredientQuantity } from '../../../shared/models/ingredient-quantity.model';
-import { Ingredient } from '../../../shared/models/ingredient.model';
-import { Recipe } from '../../../shared/models/recipe.model';
-import { IngredientRestService } from '../../services/ingredient-rest.service';
-import { RecipeRestService } from '../../services/recipe-rest.service';
-import { AddIngredientDialogComponent } from './add-ingredient-dialog/add-ingredient-dialog.component';
-import { IngredientQuantityDialog } from './add-ingredient-dialog/ingredient-quantity-dialog.model';
+import { IngredientQuantity } from '../../../../shared/models/ingredient-quantity.model';
+import { Ingredient } from '../../../../shared/models/ingredient.model';
+import { Recipe } from '../../../../shared/models/recipe.model';
+import { IngredientRestService } from '../../../services/ingredient-rest.service';
+import { RecipeRestService } from '../../../services/recipe-rest.service';
+import { AddIngredientDialogComponent } from '../../components/add-ingredient-dialog/add-ingredient-dialog.component';
+import { IngredientQuantityDialog } from '../../components/add-ingredient-dialog/ingredient-quantity-dialog.model';
 
 @Component({
-  selector: 'menus-recipe-show',
-  templateUrl: './recipe-show.component.html',
-  styleUrls: ['./recipe-show.component.less']
+  selector: 'menus-item-page',
+  templateUrl: './recipe-item-page.component.html',
+  styleUrls: ['./recipe-item-page.component.less']
 })
-export class RecipeShowComponent implements OnInit {
+export class RecipeItemPageComponent implements OnInit {
 
   @ViewChild('wrapper') container: ElementRef;
 

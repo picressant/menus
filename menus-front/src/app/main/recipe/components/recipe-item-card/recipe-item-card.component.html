@@ -1,0 +1,15 @@
+<mat-card class="example-card">
+  <mat-card-header>
+    <!-- <img mat-card-avatar src="assets/icons/food-solid.svg" *ngIf="recipe.type == 'PLAT'">
+    <img mat-card-avatar src="assets/icons/icon-desert.jpg" *ngIf="recipe.type == 'DESSERT'">
+    <img mat-card-avatar src="assets/icons/salade.png" *ngIf="recipe.type == 'ENTREE'">         -->
+    <mat-card-title>{{recipe.name}}</mat-card-title>
+    <!-- <mat-card-subtitle>{{recipe.type}}</mat-card-subtitle> -->
+  </mat-card-header>
+  <mat-card-actions>
+    <button mat-button (click)="selectRecipe()">
+      {{selectText}}
+    </button>
+
+  </mat-card-actions>
+</mat-card>

@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ParametersManagementComponent } from './parameters-management/parameters-management.component';
+import { ParametersManagementPageComponent } from './pages/parameters-management-page/parameters-management-page.component';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { AddIngredientDialogComponent } from './add-ingredient-dialog/add-ingredient-dialog.component';
-import { AddUnitDialogComponent } from './add-unit-dialog/add-unit-dialog.component';
+import { AddIngredientDialogComponent } from './components/add-ingredient-dialog/add-ingredient-dialog.component';
+import { AddUnitDialogComponent } from './components/add-unit-dialog/add-unit-dialog.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
-    ParametersManagementComponent,
+    ParametersManagementPageComponent,
     AddIngredientDialogComponent,
     AddUnitDialogComponent,
   ],
@@ -19,7 +19,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FormsModule
   ],
   exports: [
-    ParametersManagementComponent
+    ParametersManagementPageComponent
   ],
   entryComponents: [
     AddUnitDialogComponent,

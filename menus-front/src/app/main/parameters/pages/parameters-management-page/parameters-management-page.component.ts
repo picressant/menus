@@ -2,17 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource, MatDialog } from '@angular/material';
 import { Ingredient } from 'src/app/shared/models/ingredient.model';
 import { Unit } from 'src/app/shared/models/unit.model';
-import { IngredientRestService } from '../../services/ingredient-rest.service';
-import { AddUnitDialogComponent } from '../add-unit-dialog/add-unit-dialog.component';
-import { AddIngredientDialogComponent } from '../add-ingredient-dialog/add-ingredient-dialog.component';
-import { IngredientDialogData } from '../add-ingredient-dialog/ingredient-dialog-data.model';
+import { IngredientRestService } from '../../../services/ingredient-rest.service';
+import { AddUnitDialogComponent } from '../../components/add-unit-dialog/add-unit-dialog.component';
+import { AddIngredientDialogComponent } from '../../components/add-ingredient-dialog/add-ingredient-dialog.component';
+import { IngredientDialogData } from '../../components/add-ingredient-dialog/ingredient-dialog-data.model';
 
 @Component({
-  selector: 'menus-parameters-management',
-  templateUrl: './parameters-management.component.html',
-  styleUrls: ['./parameters-management.component.less']
+  selector: 'menus-parameters-page-management',
+  templateUrl: './parameters-management-page.component.html',
+  styleUrls: ['./parameters-management-page.component.less']
 })
-export class ParametersManagementComponent implements OnInit {
+export class ParametersManagementPageComponent implements OnInit {
 
   displayedColumnsIngredients: string[] = ['name', 'unit', 'actions'];
   dataSourceIngredients = new MatTableDataSource<Ingredient>()  ;

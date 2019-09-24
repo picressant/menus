@@ -1,15 +1,17 @@
 import { NgModule } from '@angular/core';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { RecipeSearchComponent } from './recipe-search/recipe-search.component';
+import { RecipeListPageComponent } from './pages/recipe-list-page/recipe-list-page.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { RecipeShowComponent } from './recipe-show/recipe-show.component';
-import { AddIngredientDialogComponent } from './recipe-show/add-ingredient-dialog/add-ingredient-dialog.component';
+import { RecipeItemPageComponent } from './pages/recipe-item-page/recipe-item-page.component';
+import { AddIngredientDialogComponent } from './components/add-ingredient-dialog/add-ingredient-dialog.component';
+import { RecipeItemCardComponent } from './components/recipe-item-card/recipe-item-card.component';
 
 @NgModule({
   declarations: [
-    RecipeSearchComponent,
-    RecipeShowComponent,
-    AddIngredientDialogComponent
+    RecipeListPageComponent,
+    RecipeItemPageComponent,
+    AddIngredientDialogComponent,
+    RecipeItemCardComponent
   ],
   imports: [
     SharedModule,
@@ -17,8 +19,8 @@ import { AddIngredientDialogComponent } from './recipe-show/add-ingredient-dialo
     FormsModule
   ],
   exports: [
-    RecipeSearchComponent,
-    RecipeShowComponent
+    RecipeListPageComponent,
+    RecipeItemPageComponent
   ],
   entryComponents: [
     AddIngredientDialogComponent

@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { SideDishRestService } from '../../services/sidedish-rest.service';
+import { SideDishRestService } from '../../../services/sidedish-rest.service';
 import { SideDish } from 'src/app/shared/models/sidedish.model';
 import { MatTableDataSource, MatDialog } from '@angular/material';
-import { SidedishDialogComponent } from '../sidedish-dialog/sidedish-dialog.component';
-import { SidedishDialogData } from '../sidedish-dialog/sidedish-dialog-data.model';
-import { IngredientRestService } from '../../services/ingredient-rest.service';
+import { SidedishDialogComponent } from '../../components/sidedish-dialog/sidedish-dialog.component';
+import { SidedishDialogData } from '../../components/sidedish-dialog/sidedish-dialog-data.model';
+import { IngredientRestService } from '../../../services/ingredient-rest.service';
 import { Ingredient } from 'src/app/shared/models/ingredient.model';
 
 @Component({
-  selector: 'menus-sidedish-search',
-  templateUrl: './sidedish-search.component.html',
-  styleUrls: ['./sidedish-search.component.less']
+  selector: 'menus-sidedish-list-page',
+  templateUrl: './sidedish-list-page.component.html',
+  styleUrls: ['./sidedish-list-page.component.less']
 })
-export class SidedishSearchComponent implements OnInit {
+export class SidedishListPageComponent implements OnInit {
 
   sideDishes: SideDish[];
 

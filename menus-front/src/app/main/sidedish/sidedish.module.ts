@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SidedishSearchComponent } from './sidedish-search/sidedish-search.component';
-import { SidedishDialogComponent } from './sidedish-dialog/sidedish-dialog.component';
+import { SidedishListPageComponent } from './pages/sidedish-list-page/sidedish-list-page.component';
+import { SidedishDialogComponent } from './components/sidedish-dialog/sidedish-dialog.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [SidedishSearchComponent, SidedishDialogComponent],
+  declarations: [SidedishListPageComponent, SidedishDialogComponent],
   imports: [
     CommonModule,
     SharedModule,
@@ -14,7 +14,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     FormsModule
   ],
   exports: [
-    SidedishSearchComponent
+    SidedishListPageComponent
   ],
   entryComponents: [
     SidedishDialogComponent

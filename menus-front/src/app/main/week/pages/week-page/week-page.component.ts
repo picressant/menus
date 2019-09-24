@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { WeekRestService } from '../../services/week-rest.service';
+import { WeekRestService } from '../../../services/week-rest.service';
 import { Week } from 'src/app/shared/models/week.model';
 import { WeekMeal } from 'src/app/shared/models/week-meal.model';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { SideDish } from 'src/app/shared/models/sidedish.model';
 import { Recipe } from 'src/app/shared/models/recipe.model';
-import { ChangeWeekMealDialogData } from '../change-week-meal-dialog/change-week-meal-dialog-data.model';
+import { ChangeWeekMealDialogData } from '../../components/change-week-meal-dialog/change-week-meal-dialog-data.model';
 import { MatDialog } from '@angular/material';
-import { RecipeRestService } from '../../services/recipe-rest.service';
-import { SideDishRestService } from '../../services/sidedish-rest.service';
+import { RecipeRestService } from '../../../services/recipe-rest.service';
+import { SideDishRestService } from '../../../services/sidedish-rest.service';
 import { Search } from 'src/app/shared/models/search.model';
-import { ChangeWeekMealDialogComponent } from '../change-week-meal-dialog/change-week-meal-dialog.component';
+import { ChangeWeekMealDialogComponent } from '../../components/change-week-meal-dialog/change-week-meal-dialog.component';
 
 const days = {
   mondayLunch: 0,
@@ -30,11 +30,11 @@ const days = {
 }
 
 @Component({
-  selector: 'menus-week-show',
-  templateUrl: './week-show.component.html',
-  styleUrls: ['./week-show.component.less']
+  selector: 'menus-week-page',
+  templateUrl: './week-page.component.html',
+  styleUrls: ['./week-page.component.less']
 })
-export class WeekShowComponent implements OnInit {
+export class WeekPageComponent implements OnInit {
 
   meals: WeekMeal[];
   recipes: Recipe[];
