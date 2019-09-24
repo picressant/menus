@@ -12,7 +12,7 @@
     <artifactId>menus</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>war</packaging>
-    <name>menus</name>
+    <name>menus-back</name>
     <description>Menus management for choupiteam</description>
 
     <properties>
