@@ -43,25 +43,5 @@ public class MenusApplicationStartup implements ApplicationListener<ApplicationR
             this.userDetailsService.generatePassword(pcr, "toto");
             this.userDetailsService.saveUser(pcr);
         }
-
-//        Ingredient ingredient = new Ingredient();
-//        ingredient.setName("Pâtes");
-//        ingredient.setUnit(IngredientUnit.GRAMME);
-
-//        ingredient = this.ingredientService.saveIngredient(ingredient);
-//
-//        Recipe recipe = new Recipe();
-//        recipe.setName("test");
-//        recipe.setPersons(2);
-//        recipe.setCookingTime(10);
-//        recipe.setPreparationTime(10);
-//        recipe.getIngredients().put(ingredient.getId(), 200);
-//
-//        this.recipeService.saveRecipe(recipe);
-
-//        Recipe recipe = this.recipeService.getRecipe("5ceaa291d2bd884df0770670");
-//        recipe.setIngredients(Collections.singletonList(ingredient));
-
-//        this.recipeService.saveRecipe(recipe);
     }
 }
