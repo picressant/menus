@@ -5,11 +5,6 @@ import fr.choupiteam.menus.application.security.model.ApplicationUser;
 import fr.choupiteam.menus.application.security.service.UserDetailsServiceImpl;
 import fr.choupiteam.menus.infrastructure.repository.ApplicationUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpMethod;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 

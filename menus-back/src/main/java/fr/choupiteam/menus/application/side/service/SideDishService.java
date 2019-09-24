@@ -3,7 +3,6 @@ package fr.choupiteam.menus.application.side.service;
 import fr.choupiteam.menus.application.side.model.SideDish;
 import fr.choupiteam.menus.infrastructure.repository.SideDishRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

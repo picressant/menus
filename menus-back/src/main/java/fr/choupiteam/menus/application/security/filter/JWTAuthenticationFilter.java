@@ -20,7 +20,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 
-import static fr.choupiteam.menus.application.security.model.SecurityConstants.*;
+import static fr.choupiteam.menus.application.security.model.SecurityConstants.EXPIRATION_TIME;
+import static fr.choupiteam.menus.application.security.model.SecurityConstants.SECRET;
 
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     private AuthenticationManager authenticationManager;
