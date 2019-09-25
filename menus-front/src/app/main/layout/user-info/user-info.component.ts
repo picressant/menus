@@ -14,13 +14,13 @@ export class UserInfoComponent implements OnInit {
   constructor(
     private authService: AuthService
   ) {
-    this.user = this.authService.currentUser;
-    this.authService.currentUserChange.subscribe(
+    this.authService.user.subscribe(
       (u) => this.user = u
     );
    }
 
   ngOnInit() {
+    this.user = this.authService.user.getValue();
   }
 
 }

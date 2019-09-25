@@ -12,10 +12,6 @@ const routes: Routes = [
     redirectTo: 'main/home',
     pathMatch: 'full'
   },
-
-  // { path: 'recette', component: ShowRecetteComponent },
-  // { path: 'menus', component: WeekMenusComponent },
-  // { path: 'menusV2', component: WeekMenusV2Component }
 ];
 
 @NgModule({

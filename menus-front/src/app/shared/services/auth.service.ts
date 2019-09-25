@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { User } from '../models/user.model';
-import { HttpClient, HttpResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { Subject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Injectable({
@@ -10,21 +10,15 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 })
 export class AuthService {
 
-  currentUser: User;
-  currentUserChange: Subject<User> = new Subject<User>();
-
+  public user: BehaviorSubject<User> = new BehaviorSubject(null);
 
   constructor(
     private http: HttpClient,
     private router: Router,
     private snackBar: MatSnackBar
   ) {
-    this.currentUser = null;
-    this.currentUserChange.subscribe((value) => {
-      this.currentUser = value
-    });
-   }
 
+  }
 
   connect(credentials: any) {
     this.http.post<any>('login', credentials).subscribe(
@@ -40,21 +34,21 @@ export class AuthService {
     )
   }
 
-  loadCurrentUser() {
-    if (this.currentUser === null) {
-      this.http.get<User>('user/me').subscribe(
-        (u) => {
-          this.currentUserChange.next(u);
-        }
-      );
-    }
+  logout() {
+    this.user.next(null);
+    this.router.navigate(['/auth/login'])
   }
 
+  loadCurrentUser() {
+    return this.http.get<User>('user/me');
+  }
+
+
   setToken(token: string) {
-    localStorage.setItem('token', token);
+    localStorage.setItem('menus-token', token);
   }
 
   getToken() {
-    return localStorage.getItem('token');
+    return localStorage.getItem('menus-token');
   }
 }
