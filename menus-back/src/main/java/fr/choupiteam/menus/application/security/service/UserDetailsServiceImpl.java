@@ -24,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.annotation.PostConstruct;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 
 import static java.util.Collections.emptyList;
@@ -125,4 +126,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         }
     }
 
+    public List<ApplicationUser> getAllUsers() {
+        return this.applicationUserRepository.findAll();
+    }
 }

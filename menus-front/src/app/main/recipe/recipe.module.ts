@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { RecipeListPageComponent } from './pages/recipe-list-page/recipe-list-page.component';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RecipeItemPageComponent } from './pages/recipe-item-page/recipe-item-page.component';
 import { AddIngredientDialogComponent } from './components/add-ingredient-dialog/add-ingredient-dialog.component';
 import { RecipeItemCardComponent } from './components/recipe-item-card/recipe-item-card.component';
@@ -26,4 +26,5 @@ import { RecipeItemCardComponent } from './components/recipe-item-card/recipe-it
     AddIngredientDialogComponent
   ]
 })
-export class RecipeModule { }
+export class RecipeModule {
+}

@@ -10,6 +10,7 @@ import { WeekModule } from './week/week.module';
 import { RouterModule } from '@angular/router';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { UserModule } from "./user/user.module";
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
     WeekModule,
     LayoutModule,
     SidedishModule,
-    ParametersModule
+    ParametersModule,
+    UserModule
   ],
   exports: [
     MainShellComponent

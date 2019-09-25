@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -55,5 +57,16 @@ public class UserController {
     @GetMapping(path = "/{id}/avatar")
     public ResponseEntity getAvatar(@PathVariable String id) {
         return this.userDetailsService.getAvatar(id);
+    }
+
+    @GetMapping(value = "/list")
+    public List<ApplicationUser> getUsers() {
+        return this.userDetailsService.getAllUsers();
+    }
+
+    @GetMapping(value = "/{id}")
+    public ApplicationUser getUser(@PathVariable String id) {
+        return this.userDetailsService.getUser(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Utilisateur inconnu"));
     }
 }
