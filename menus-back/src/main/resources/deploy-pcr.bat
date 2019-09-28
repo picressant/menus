@@ -1,5 +1,7 @@
 cd D:\Work\menus\menus-front
+rmdir /Q /S D:\Work\menus\menus-front\node_modules
 D:
+call npm install
 call npm run build
 
 cd D:\Work\menus\menus-back
