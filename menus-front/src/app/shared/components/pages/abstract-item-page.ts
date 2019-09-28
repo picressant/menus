@@ -4,6 +4,7 @@ import { ActivatedRoute } from "@angular/router";
 import { ToasterService } from "../../services/toaster.service";
 import { Observable } from "rxjs";
 import { AbstractData } from "../../models/abstract-data.model";
+import { isNullOrUndefined } from "util";
 
 export abstract class AbstractItemPage<T extends AbstractData> implements OnInit {
 
@@ -40,7 +41,7 @@ export abstract class AbstractItemPage<T extends AbstractData> implements OnInit
   }
 
   get isAddingMode() {
-    return this.id === null;
+    return isNullOrUndefined(this.id);
   }
 
   load() {

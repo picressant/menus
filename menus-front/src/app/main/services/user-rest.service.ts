@@ -23,6 +23,6 @@ export class UserRestService {
     if (user.id)
       return this.http.put<User>("user", user);
     else
-      return this.http.post<User>("contact", user);
+      return this.http.post<User>("user", user);
   }
 }

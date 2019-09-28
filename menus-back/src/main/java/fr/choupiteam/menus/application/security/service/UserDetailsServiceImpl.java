@@ -22,7 +22,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.PostConstruct;
-
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
@@ -70,8 +69,17 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         return this.applicationUserRepository.findById(id);
     }
 
-    public void saveUser(ApplicationUser user) {
-        this.applicationUserRepository.save(user);
+    public ApplicationUser saveUser(ApplicationUser user) {
+        return this.applicationUserRepository.save(user);
+    }
+
+    public ApplicationUser saveUserData(ApplicationUser user) {
+        this.getUser(user.getId()).ifPresent(applicationUser -> {
+            applicationUser.patch(user);
+            this.applicationUserRepository.save(applicationUser);
+        });
+
+        return this.getUser(user.getId()).orElse(null);
     }
 
 
@@ -128,5 +136,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     public List<ApplicationUser> getAllUsers() {
         return this.applicationUserRepository.findAll();
+    }
+
+    public ApplicationUser createUser(ApplicationUser user) {
+        return this.applicationUserRepository.insert(user);
     }
 }

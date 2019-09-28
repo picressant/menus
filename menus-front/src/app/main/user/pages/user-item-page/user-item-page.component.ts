@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup } from "@angular/forms";
 import { User } from "../../../../shared/models/user.model";
 import { ActivatedRoute, Router } from "@angular/router";
 import { UserRestService } from "../../../services/user-rest.service";
-import { AbstractItemPage } from "../../../../shared/components/pages/abstract-item-page.component";
+import { AbstractItemPage } from "../../../../shared/components/pages/abstract-item-page";
 import { ToasterService } from "../../../../shared/services/toaster.service";
 import { Observable } from "rxjs";
 

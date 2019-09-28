@@ -29,6 +29,7 @@ public class ApplicationUser {
     public String getUsername() {
         return username;
     }
+
     public void setUsername(String username) {
         this.username = username;
     }
@@ -57,5 +58,11 @@ public class ApplicationUser {
 
     public void setFirstname(String firstname) {
         this.firstname = firstname;
+    }
+
+    public void patch(ApplicationUser user) {
+        this.setFirstname(user.getFirstname());
+        this.setLastname(user.getLastname());
+        this.setUsername(user.getUsername());
     }
 }

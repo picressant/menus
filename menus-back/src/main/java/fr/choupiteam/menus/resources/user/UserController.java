@@ -45,8 +45,9 @@ public class UserController {
 
     @RequestMapping(value = "/{id}/avatar", method = RequestMethod.POST)
     public void storeAvatar(@PathVariable String id, @RequestParam("file") MultipartFile file, @AuthenticationPrincipal UserDetails loggedUser) {
-        if (!((ApplicationUser) loggedUser).getId().equals(id))
+        if (!((ApplicationUser) loggedUser).getId().equals(id)) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Non authorisé");
+        }
 
         ApplicationUser u = this.userDetailsService.getUser(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Utilisateur inconnu"));
@@ -68,5 +69,16 @@ public class UserController {
     public ApplicationUser getUser(@PathVariable String id) {
         return this.userDetailsService.getUser(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Utilisateur inconnu"));
+    }
+
+    @PutMapping()
+    public ApplicationUser saveUser(@RequestBody ApplicationUser user) {
+        return this.userDetailsService.saveUserData(user);
+    }
+
+    @PostMapping()
+    public ApplicationUser createUser(@RequestBody ApplicationUser user) {
+        this.userDetailsService.generatePassword(user, user.getUsername());
+        return this.userDetailsService.createUser(user);
     }
 }
