@@ -1,18 +1,23 @@
 <div [formGroup]="form" class="form-wrapper">
-  <div class="form-field-wrapper">
-    <label>Prénom</label>
-    <input type="text" formControlName="firstname">
-  </div>
 
-  <div class="form-field-wrapper">
-    <label>Nom</label>
-    <input type="text" formControlName="lastname">
-  </div>
+  <menus-form-field-wrapper
+    dataError="Obligatoire"
+    label="Prénom"
+    type="text"
+    [control]="form.controls.firstname"></menus-form-field-wrapper>
 
-  <div class="form-field-wrapper">
-    <label>login</label>
-    <input type="text" formControlName="username">
-  </div>
+  <menus-form-field-wrapper
+    dataError="Obligatoire"
+    label="Nom"
+    type="text"
+    [control]="form.controls.lastname"></menus-form-field-wrapper>
+
+  <menus-form-field-wrapper
+    dataError="Obligatoire"
+    label="Login"
+    type="text"
+    [control]="form.controls.username"></menus-form-field-wrapper>
+
 </div>
 <div class="submit-form">
   <button mat-raised-button color="warn" class="submit-button" type="button" (click)="cancel()" *ngIf="!isReadonly">
