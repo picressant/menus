@@ -6,6 +6,11 @@
 
   <table mat-table [dataSource]="dataSource">
 
+    <ng-container matColumnDef="username">
+      <th mat-header-cell *matHeaderCellDef>Login</th>
+      <td mat-cell *matCellDef="let user"> {{user.username}} </td>
+    </ng-container>
+
     <!-- Name Column -->
     <ng-container matColumnDef="lastName">
       <th mat-header-cell *matHeaderCellDef> Prénom</th>

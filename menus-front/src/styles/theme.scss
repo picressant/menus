@@ -1,6 +1,7 @@
 @import '~@angular/material/theming';
 //@import "./../../node_modules/hamburgers/_sass/hamburgers/hamburgers.scss";
 @import "~@ng-select/ng-select/themes/default.theme.css";
+@import '~ngx-toastr/toastr';
 @include mat-core();
 
 $my-primary: (

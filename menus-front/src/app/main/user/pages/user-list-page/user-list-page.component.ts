@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from "@angular/material/table";
-import { IngredientRestService } from "../../../services/ingredient-rest.service";
-import { MatDialog } from "@angular/material/dialog";
 import { User } from "../../../../shared/models/user.model";
 import { UserRestService } from "../../../services/user-rest.service";
 import { Router } from "@angular/router";
@@ -13,7 +11,7 @@ import { Router } from "@angular/router";
 })
 export class UserListPageComponent implements OnInit {
 
-  displayedColumns: string[] = ['firstName', 'lastName', 'actions'];
+  displayedColumns: string[] = ['username', 'firstName', 'lastName', 'actions'];
   dataSource = new MatTableDataSource<User>();
 
   constructor(

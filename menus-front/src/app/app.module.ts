@@ -9,6 +9,7 @@ import { RestInterceptor } from './shared/interceptors/rest.interceptor';
 import { SharedModule } from './shared/shared.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from "ngx-toastr";
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MainModule,
     AuthModule,
     HttpClientModule,
+    ToastrModule.forRoot()
   ],
   providers: [
     {

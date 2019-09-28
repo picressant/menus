@@ -16,6 +16,13 @@ export class UserRestService {
   }
 
   getUser(id: string) {
-    return this.http.get<User>(`user/${id}`);
+    return this.http.get<User>(`user/${ id }`);
+  }
+
+  saveUser(user: User) {
+    if (user.id)
+      return this.http.put<User>("user", user);
+    else
+      return this.http.post<User>("contact", user);
   }
 }

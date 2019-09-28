@@ -5,8 +5,8 @@ import { MainShellComponent } from './main/main-shell/main-shell.component';
 import { AuthGuard } from './shared/guards/auth.guard';
 
 const routes: Routes = [
-  { path: 'auth', component: AuthShellComponent, loadChildren: './auth/auth-routing.module#AuthRoutingModule'},
-  { path: 'main', component: MainShellComponent, canActivate: [AuthGuard], loadChildren: './main/main-routing.module#MainRoutingModule'},
+  { path: 'auth', component: AuthShellComponent, loadChildren: () => import('./auth/auth-routing.module').then(m => m.AuthRoutingModule)},
+  { path: 'main', component: MainShellComponent, canActivate: [AuthGuard], loadChildren: () => import('./main/main-routing.module').then(m => m.MainRoutingModule)},
   {
     path: '',
     redirectTo: 'main/home',

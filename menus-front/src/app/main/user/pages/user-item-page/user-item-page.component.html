@@ -14,3 +14,14 @@
     <input type="text" formControlName="username">
   </div>
 </div>
+<div class="submit-form">
+  <button mat-raised-button color="warn" class="submit-button" type="button" (click)="cancel()" *ngIf="!isReadonly">
+    Annuler
+  </button>
+  <button mat-raised-button color="primary" class="submit-button" type="button" (click)="submit()" [disabled]="form.invalid" *ngIf="!isReadonly">
+    Sauvegarder
+  </button>
+  <button mat-raised-button color="primary" class="submit-button" type="button" (click)="modify()" *ngIf="isReadonly">
+    Modifier
+  </button>
+</div>

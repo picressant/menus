@@ -17,7 +17,7 @@ import { IngredientQuantityDialog } from '../../components/add-ingredient-dialog
 })
 export class RecipeItemPageComponent implements OnInit {
 
-  @ViewChild('wrapper') container: ElementRef;
+  @ViewChild('wrapper', { static: false }) container: ElementRef;
 
   recipeForm: FormGroup;
   _id: string;
