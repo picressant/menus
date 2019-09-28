@@ -141,4 +141,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public ApplicationUser createUser(ApplicationUser user) {
         return this.applicationUserRepository.insert(user);
     }
+
+    public void deleteUser(String id) {
+        this.getUser(id)
+                .ifPresent(applicationUser -> this.applicationUserRepository.delete(applicationUser));
+    }
 }

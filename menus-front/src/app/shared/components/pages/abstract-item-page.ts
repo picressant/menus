@@ -8,7 +8,7 @@ import { isNullOrUndefined } from "util";
 
 export abstract class AbstractItemPage<T extends AbstractData> implements OnInit {
 
-  id: string;
+  id: string = null;
   form: FormGroup;
   isReadonly: boolean = false;
 

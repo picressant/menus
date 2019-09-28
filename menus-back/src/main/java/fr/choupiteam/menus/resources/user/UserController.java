@@ -92,4 +92,9 @@ public class UserController {
         this.userDetailsService.generatePassword(user, user.getUsername());
         return this.userDetailsService.createUser(user);
     }
+
+    @DeleteMapping(value = "/{id}")
+    public void deleteUser(@PathVariable String id) {
+        this.userDetailsService.deleteUser(id);
+    }
 }

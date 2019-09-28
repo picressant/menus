@@ -29,4 +29,8 @@ export class UserRestService {
   resetPassword(id: string, value: any) {
     return this.http.put(`user/${id}/reset-password`, value);
   }
+
+  deleteUser(user: User) {
+    return this.http.delete(`user/${user.id}`);
+  }
 }

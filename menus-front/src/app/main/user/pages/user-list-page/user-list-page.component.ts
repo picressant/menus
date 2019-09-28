@@ -3,6 +3,7 @@ import { MatTableDataSource } from "@angular/material/table";
 import { User } from "../../../../shared/models/user.model";
 import { UserRestService } from "../../../services/user-rest.service";
 import { Router } from "@angular/router";
+import { ConfirmationService } from "../../../../shared/services/confirmation.service";
 
 @Component({
   selector: 'menus-user-list-page',
@@ -16,6 +17,7 @@ export class UserListPageComponent implements OnInit {
 
   constructor(
     private userService: UserRestService,
+    private confirmationService: ConfirmationService,
     private router: Router
   ) {
   }
@@ -35,7 +37,15 @@ export class UserListPageComponent implements OnInit {
   }
 
   delete(user: User) {
-
+    this.confirmationService.confirm("Cette suppression est définitive. Continuer ?").subscribe(
+      (res: boolean) => {
+        if (res) {
+          this.userService.deleteUser(user).subscribe(() => {
+            this._loadUsers();
+          });
+        }
+      }
+    );
   }
 
   add() {

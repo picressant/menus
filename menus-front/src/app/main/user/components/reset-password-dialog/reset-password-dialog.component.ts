@@ -4,7 +4,6 @@ import { Ingredient } from '../../../../shared/models/ingredient.model';
 import { FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { ToasterService } from "../../../../shared/services/toaster.service";
 import { UserRestService } from "../../../services/user-rest.service";
-import { IngredientQuantityDialog } from "../../../recipe/components/add-ingredient-dialog/ingredient-quantity-dialog.model";
 import { User } from "../../../../shared/models/user.model";
 
 @Component({
@@ -15,8 +14,6 @@ import { User } from "../../../../shared/models/user.model";
 export class ResetPasswordDialogComponent implements OnInit {
 
   form: FormGroup;
-
-  ingredients: Ingredient[];
 
   ngOnInit(): void {
   }

@@ -16,8 +16,6 @@ import { AuthService } from "../../../../shared/services/auth.service";
   styleUrls: ['./user-item-page.component.less']
 })
 export class UserItemPageComponent extends AbstractItemPage<User> implements OnInit {
-  form: FormGroup;
-  id: string;
 
   constructor(
     private fb: FormBuilder,
