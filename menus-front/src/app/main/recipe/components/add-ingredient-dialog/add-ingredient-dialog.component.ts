@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Ingredient } from '../../../../shared/models/ingredient.model';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { IngredientQuantity } from '../../../../shared/models/ingredient-quantity.model';

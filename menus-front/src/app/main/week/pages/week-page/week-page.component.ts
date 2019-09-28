@@ -6,7 +6,7 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { SideDish } from 'src/app/shared/models/sidedish.model';
 import { Recipe } from 'src/app/shared/models/recipe.model';
 import { ChangeWeekMealDialogData } from '../../components/change-week-meal-dialog/change-week-meal-dialog-data.model';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { RecipeRestService } from '../../../services/recipe-rest.service';
 import { SideDishRestService } from '../../../services/sidedish-rest.service';
 import { Search } from 'src/app/shared/models/search.model';

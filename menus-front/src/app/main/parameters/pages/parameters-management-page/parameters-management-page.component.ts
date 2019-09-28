@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { MatTableDataSource, MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
+import { MatTableDataSource } from '@angular/material/table';
 import { Ingredient } from 'src/app/shared/models/ingredient.model';
 import { Unit } from 'src/app/shared/models/unit.model';
 import { IngredientRestService } from '../../../services/ingredient-rest.service';

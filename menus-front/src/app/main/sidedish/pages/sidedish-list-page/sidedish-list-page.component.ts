@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { SideDishRestService } from '../../../services/sidedish-rest.service';
 import { SideDish } from 'src/app/shared/models/sidedish.model';
-import { MatTableDataSource, MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
+import { MatTableDataSource } from '@angular/material/table';
 import { SidedishDialogComponent } from '../../components/sidedish-dialog/sidedish-dialog.component';
 import { SidedishDialogData } from '../../components/sidedish-dialog/sidedish-dialog-data.model';
 import { IngredientRestService } from '../../../services/ingredient-rest.service';
