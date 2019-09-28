@@ -2,6 +2,7 @@ package fr.choupiteam.menus.resources.user;
 
 
 import fr.choupiteam.menus.application.security.model.ApplicationUser;
+import fr.choupiteam.menus.application.security.model.ChangePasswordData;
 import fr.choupiteam.menus.application.security.service.UserDetailsServiceImpl;
 import fr.choupiteam.menus.infrastructure.repository.ApplicationUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,6 +76,16 @@ public class UserController {
     public ApplicationUser saveUser(@RequestBody ApplicationUser user) {
         return this.userDetailsService.saveUserData(user);
     }
+
+    @PutMapping(value = "/{id}/reset-password")
+    public void changePassword(@RequestBody ChangePasswordData data, @PathVariable String id) {
+        ApplicationUser user = this.userDetailsService.getUser(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Utilisateur inconnu"));
+
+        this.userDetailsService.generatePassword(user, data.getPassword());
+        this.userDetailsService.saveUser(user);
+    }
+
 
     @PostMapping()
     public ApplicationUser createUser(@RequestBody ApplicationUser user) {

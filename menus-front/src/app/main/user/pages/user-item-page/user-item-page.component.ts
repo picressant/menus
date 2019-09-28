@@ -6,6 +6,9 @@ import { UserRestService } from "../../../services/user-rest.service";
 import { AbstractItemPage } from "../../../../shared/components/pages/abstract-item-page";
 import { ToasterService } from "../../../../shared/services/toaster.service";
 import { Observable } from "rxjs";
+import { AddIngredientDialogComponent } from "../../../recipe/components/add-ingredient-dialog/add-ingredient-dialog.component";
+import { MatDialog } from "@angular/material/dialog";
+import { ResetPasswordDialogComponent } from "../../components/reset-password-dialog/reset-password-dialog.component";
 
 @Component({
   selector: 'menus-user-item-page',
@@ -21,10 +24,17 @@ export class UserItemPageComponent extends AbstractItemPage<User> implements OnI
     private route: ActivatedRoute,
     private userService: UserRestService,
     private toaster: ToasterService,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog,
   ) {
     super(route, toaster, 'Utilisateur sauvegardé avec succès', 'Utilisateur créé avec succès');
     this.form = User.form(this.fb);
+  }
+
+  public resetPassword() {
+    const dialogRef = this.dialog.open(ResetPasswordDialogComponent, {
+      data: this.form.value
+    });
   }
 
   get create$(): Observable<User> {

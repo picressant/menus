@@ -5,12 +5,14 @@ import { UserItemPageComponent } from './pages/user-item-page/user-item-page.com
 import { UserAvatarComponent } from './components/user-avatar/user-avatar.component';
 import { SharedModule } from "../../shared/shared.module";
 import { ReactiveFormsModule } from "@angular/forms";
+import { ResetPasswordDialogComponent } from "./components/reset-password-dialog/reset-password-dialog.component";
 
 @NgModule({
   declarations: [
     UserListPageComponent,
     UserItemPageComponent,
-    UserAvatarComponent
+    UserAvatarComponent,
+    ResetPasswordDialogComponent
   ],
   imports: [
     CommonModule,
@@ -20,6 +22,9 @@ import { ReactiveFormsModule } from "@angular/forms";
   exports: [
     UserListPageComponent,
     UserItemPageComponent
+  ],
+  entryComponents: [
+    ResetPasswordDialogComponent
   ]
 })
 export class UserModule {

@@ -25,4 +25,8 @@ export class UserRestService {
     else
       return this.http.post<User>("user", user);
   }
+
+  resetPassword(id: string, value: any) {
+    return this.http.put(`user/${id}/reset-password`, value);
+  }
 }

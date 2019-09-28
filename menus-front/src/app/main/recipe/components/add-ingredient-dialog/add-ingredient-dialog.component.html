@@ -1,23 +1,25 @@
-<div class="header">
-  <span *ngIf="data.index == -1">Ajouter</span>
-  <span *ngIf="data.index > -1">Modifier</span>
-</div>
-<div class="form-wrapper" [formGroup]="form">
-  <div class="form-field">
-    <label>Ingrédient</label>
-    <mat-select formControlName="ingredient" class="form-field-value">
-      <mat-option *ngFor="let ingredient of ingredients" [value]="ingredient">{{ingredient.name}}</mat-option>
-    </mat-select>
-  </div>
-  <div class="form-field">
-    <label>Quantité</label>
-    <input type="number" formControlName="quantity" class="form-field-value has-suffix"> 
-    <label class="suffix">{{getSymbol}}</label>
-  </div>
-</div>
-<div class="submit-zone">
-  <button mat-raised-button color="primary" (click)="onSubmit()">
+<div class="dialog">
+  <div class="header">
     <span *ngIf="data.index == -1">Ajouter</span>
     <span *ngIf="data.index > -1">Modifier</span>
-  </button>
+  </div>
+  <div class="form-wrapper" [formGroup]="form">
+    <div class="form-field-wrapper">
+      <label>Ingrédient</label>
+      <mat-select formControlName="ingredient">
+        <mat-option *ngFor="let ingredient of ingredients" [value]="ingredient">{{ingredient.name}}</mat-option>
+      </mat-select>
+    </div>
+    <div class="form-field-wrapper">
+      <label>Quantité</label>
+      <input type="number" formControlName="quantity">
+      <span class="suffix">{{getSymbol}}</span>
+    </div>
+  </div>
+  <div class="submit-zone">
+    <button mat-raised-button color="primary" (click)="onSubmit()">
+      <span *ngIf="data.index == -1">Ajouter</span>
+      <span *ngIf="data.index > -1">Modifier</span>
+    </button>
+  </div>
 </div>
