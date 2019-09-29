@@ -40,8 +40,8 @@ public class UserController {
     }
 
     @RequestMapping(path = "/me", method = RequestMethod.GET)
-    public ApplicationUser getMe() {
-        return this.userDetailsService.getCurrentUser();
+    public ApplicationUser getMe(@AuthenticationPrincipal ApplicationUser user) {
+        return user;
     }
 
     @RequestMapping(value = "/{id}/avatar", method = RequestMethod.POST)
