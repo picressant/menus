@@ -144,6 +144,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     public void deleteUser(String id) {
         this.getUser(id)
-                .ifPresent(applicationUser -> this.applicationUserRepository.delete(applicationUser));
+                .ifPresent(applicationUser -> {
+                    this.userPictureRepository.removeForUser(applicationUser.getId());
+                    this.applicationUserRepository.delete(applicationUser);
+                });
     }
 }

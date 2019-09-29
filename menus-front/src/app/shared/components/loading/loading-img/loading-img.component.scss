@@ -1,0 +1,12 @@
+:host {
+  display: inline-block;
+
+  .wrapper {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+  }
+  img.loading {
+    display: none;
+  }
+}

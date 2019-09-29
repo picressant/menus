@@ -46,10 +46,6 @@ public class UserController {
 
     @RequestMapping(value = "/{id}/avatar", method = RequestMethod.POST)
     public void storeAvatar(@PathVariable String id, @RequestParam("file") MultipartFile file, @AuthenticationPrincipal UserDetails loggedUser) {
-        if (!((ApplicationUser) loggedUser).getId().equals(id)) {
-            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Non authorisé");
-        }
-
         ApplicationUser u = this.userDetailsService.getUser(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Utilisateur inconnu"));
 

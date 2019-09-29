@@ -42,7 +42,6 @@ public class UserPictureRepository {
     }
 
     public void removeForUser(String userId) {
-        GridFsOperations gridOperations = fsTemplate;
         fsTemplate.delete(new Query(Criteria.where("metadata.userId").is(userId)));
     }
 }

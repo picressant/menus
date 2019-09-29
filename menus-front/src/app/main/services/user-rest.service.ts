@@ -33,4 +33,12 @@ export class UserRestService {
   deleteUser(user: User) {
     return this.http.delete(`user/${user.id}`);
   }
+
+  storeAvatar(userId: string, data: any) {
+
+    const formData = new FormData();
+    formData.append('file', data, data.name);
+
+    return this.http.post('user/' + userId + '/avatar', formData);
+  }
 }

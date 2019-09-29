@@ -79,6 +79,7 @@ export abstract class AbstractItemPage<T extends AbstractData> implements OnInit
         this.id = item.id;
         this.resetForm(item);
         this._toaster.info(this.createToast);
+        this.postCreate();
       }
     );
   }
@@ -104,4 +105,6 @@ export abstract class AbstractItemPage<T extends AbstractData> implements OnInit
 
   abstract onCancelAdd();
 
+  postCreate() {
+  }
 }

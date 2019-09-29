@@ -1,9 +1,12 @@
 package fr.choupiteam.menus.application.security.filter;
 
+import fr.choupiteam.menus.application.security.model.ApplicationUser;
+import fr.choupiteam.menus.application.security.service.UserDetailsServiceImpl;
 import io.jsonwebtoken.Jwts;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 import javax.servlet.FilterChain;
@@ -17,8 +20,11 @@ import static fr.choupiteam.menus.application.security.model.SecurityConstants.*
 
 public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 
-    public JWTAuthorizationFilter(AuthenticationManager authManager) {
+    private UserDetailsServiceImpl userService;
+
+    public JWTAuthorizationFilter(AuthenticationManager authManager, UserDetailsServiceImpl userService) {
         super(authManager);
+        this.userService = userService;
     }
 
     @Override
@@ -45,6 +51,7 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
                     .getBody()
                     .getSubject();
             if (user != null) {
+//                ApplicationUser userLogged = (ApplicationUser) this.userService.loadUserByUsername(user);
                 return new UsernamePasswordAuthenticationToken(user, null, new ArrayList<>());
             }
             return null;

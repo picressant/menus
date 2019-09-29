@@ -2,6 +2,7 @@ package fr.choupiteam.menus.application.security;
 
 import fr.choupiteam.menus.application.security.filter.JWTAuthenticationFilter;
 import fr.choupiteam.menus.application.security.filter.JWTAuthorizationFilter;
+import fr.choupiteam.menus.application.security.service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
@@ -24,7 +25,8 @@ import static fr.choupiteam.menus.application.security.model.SecurityConstants.S
 public class WebSecurity extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private UserDetailsService userDetailsService;
+    private UserDetailsServiceImpl userDetailsService;
+
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public WebSecurity() {
@@ -40,7 +42,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
             .anyRequest().authenticated()
             .and()
             .addFilter(new JWTAuthenticationFilter(authenticationManager()))
-            .addFilter(new JWTAuthorizationFilter(authenticationManager()));
+            .addFilter(new JWTAuthorizationFilter(authenticationManager(), userDetailsService));
     }
 
     @Override

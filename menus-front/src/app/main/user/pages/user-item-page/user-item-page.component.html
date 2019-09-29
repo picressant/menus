@@ -18,18 +18,31 @@
     type="text"
     [control]="form.controls.username"></menus-form-field-wrapper>
 
+  <div class="form-field-wrapper avatar-wrapper">
+    <label>Avatar</label>
+    <div class="input-avatar">
+      <div class="file-preview">
+        <img [src]="imgPreviewURL" alt="Profile" height="200" *ngIf="imgPreviewURL">
+        <menus-loading-img [styles]="imgStyles" [src]="'user/' + id + '/avatar' | secure | async"
+                           *ngIf="!imgPreviewURL"></menus-loading-img>
+      </div>
+      <input type="file" #file (change)="preview(file.files)" [disabled]="this.form.disabled">
+    </div>
+  </div>
 </div>
 <div class="submit-form">
   <button mat-raised-button color="warn" class="submit-button" type="button" (click)="cancel()" *ngIf="!isReadonly">
     Annuler
   </button>
-  <button mat-raised-button color="primary" class="submit-button" type="button" (click)="submit()" [disabled]="form.invalid" *ngIf="!isReadonly">
+  <button mat-raised-button color="primary" class="submit-button" type="button" (click)="submit()"
+          [disabled]="form.invalid" *ngIf="!isReadonly">
     Sauvegarder
   </button>
   <button mat-raised-button color="primary" class="submit-button" type="button" (click)="modify()" *ngIf="isReadonly">
     Modifier
   </button>
-  <button mat-raised-button color="primary" class="submit-button" type="button" (click)="resetPassword()" *ngIf="isReadonly">
+  <button mat-raised-button color="primary" class="submit-button" type="button" (click)="resetPassword()"
+          *ngIf="isReadonly">
     Reset password
   </button>
 </div>
