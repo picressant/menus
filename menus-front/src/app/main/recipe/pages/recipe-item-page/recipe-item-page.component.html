@@ -1,31 +1,35 @@
 <mat-tab-group>
   <mat-tab label="Détails">
-    <div [formGroup]="recipeForm" class="form-wrapper">
-      <div class="form-field-wrapper">
-        <label>Nom de la recette</label>
-        <input type="text" formControlName="name">
-      </div>
+    <div [formGroup]="form" class="form-wrapper">
+      <menus-form-field-wrapper
+        dataError="Obligatoire"
+        label="Nom de la recette"
+        type="text"
+        [control]="form.controls.name"></menus-form-field-wrapper>
 
-      <div class="form-field-wrapper">
-        <label>Temps de préparation</label>
-        <input type="number" formControlName="preparationTime">
-      </div>
+      <menus-form-field-wrapper
+        dataError="Obligatoire"
+        label="Temps de préparation"
+        type="number"
+        [control]="form.controls.preparationTime"></menus-form-field-wrapper>
 
-      <div class="form-field-wrapper">
-        <label>Temps de cuisson</label>
-        <input type="number" formControlName="cookingTime">
-      </div>
+      <menus-form-field-wrapper
+        dataError="Obligatoire"
+        label="Temps de cuisson"
+        type="number"
+        [control]="form.controls.cookingTime"></menus-form-field-wrapper>
 
-      <div class="form-field-wrapper">
-        <label>Nombre de personnes</label>
-        <input type="number" formControlName="persons">
-      </div>
+      <menus-form-field-wrapper
+        dataError="Obligatoire"
+        label="Temps de personnes"
+        type="number"
+        [control]="form.controls.persons"></menus-form-field-wrapper>
     </div>
 
   </mat-tab>
   <mat-tab label="Ingrédients">
     <div class="table-wrapper">
-      <button mat-raised-button color="primary" class="add-button" (click)="addIngredient()" [disabled]="!_isEditable">
+      <button mat-raised-button color="primary" class="add-button" (click)="addIngredient()" [disabled]="isReadonly">
         <mat-icon>add</mat-icon>
         <span class="responsive hide">Ajouter</span>
       </button>
@@ -33,19 +37,19 @@
 
         <!-- Name Column -->
         <ng-container matColumnDef="name">
-          <th mat-header-cell *matHeaderCellDef> Nom </th>
+          <th mat-header-cell *matHeaderCellDef> Nom</th>
           <td mat-cell *matCellDef="let ingredientQuantity"> {{ingredientQuantity.ingredient.name}} </td>
         </ng-container>
 
         <!-- Weight Column -->
         <ng-container matColumnDef="quantity">
-          <th mat-header-cell *matHeaderCellDef> Quantité </th>
+          <th mat-header-cell *matHeaderCellDef> Quantité</th>
           <td mat-cell *matCellDef="let ingredientQuantity"> {{ingredientQuantity.quantity}} </td>
         </ng-container>
 
         <!-- Symbol Column -->
         <ng-container matColumnDef="unit">
-          <th mat-header-cell *matHeaderCellDef> Unité </th>
+          <th mat-header-cell *matHeaderCellDef> Unité</th>
           <td mat-cell *matCellDef="let ingredientQuantity"> {{ingredientQuantity.ingredient.unit.symbol}} </td>
         </ng-container>
 
@@ -54,17 +58,16 @@
           <td mat-cell *matCellDef="let ingredientQuantity; let i = index">
             <div class="table-button-wrapper">
               <button mat-icon-button color="primary" (click)="onEditIngredient(ingredientQuantity, i)"
-                [disabled]="!_isEditable">
+                      [disabled]="isReadonly">
                 <mat-icon>create</mat-icon>
               </button>
               <button mat-icon-button color="warn" (click)="onDeleteIngredient(ingredientQuantity)"
-                [disabled]="!_isEditable">
+                      [disabled]="isReadonly">
                 <mat-icon>delete</mat-icon>
               </button>
             </div>
           </td>
         </ng-container>
-
 
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -74,15 +77,14 @@
   </mat-tab>
 </mat-tab-group>
 <div class="submit-form">
-  <button mat-raised-button color="primary" class="submit-button" (click)="onSubmit()"
-    [disabled]="recipeForm.invalid && this._isEditable">
-    <span *ngIf="this._isCreationMode">Ajouter</span>
-    <span *ngIf="!this._isCreationMode && !this._isEditable">Modifier</span>
-    <span *ngIf="!this._isCreationMode && this._isEditable">Valider</span>
+  <button mat-raised-button color="warn" class="submit-button" type="button" (click)="cancel()" *ngIf="!isReadonly">
+    Annuler
   </button>
-
-  <button mat-raised-button color="warn" class="submit-button" (click)="onDelete()"
-    *ngIf="!this._isCreationMode && !this._isEditable">
-    <span>Supprimer</span>
+  <button mat-raised-button color="primary" class="submit-button" type="button" (click)="submit()"
+          [disabled]="form.invalid" *ngIf="!isReadonly">
+    Sauvegarder
+  </button>
+  <button mat-raised-button color="primary" class="submit-button" type="button" (click)="modify()" *ngIf="isReadonly">
+    Modifier
   </button>
 </div>
