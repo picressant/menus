@@ -1,9 +1,10 @@
-<div class="user-wrapper">
+<div class="user-wrapper responsive hide">
   <div class="name">
     {{user?.firstname}} {{user?.lastname}}
   </div>
-<!--  <div class="home">-->
-<!--    {{user?.house.name}}-->
-<!--  </div>-->
+  <!--  <div class="home">-->
+  <!--    {{user?.house.name}}-->
+  <!--  </div>-->
 </div>
-<img src="" #avatar>
+<menus-loading-img [styles]="imgStyles"
+                   [src]="'user/' + user?.id + '/avatar?' + timestamp | secure | async"></menus-loading-img>
