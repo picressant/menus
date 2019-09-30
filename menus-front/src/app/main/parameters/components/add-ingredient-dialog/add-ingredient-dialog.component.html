@@ -1,22 +1,26 @@
 <div class="header">
-    <span *ngIf="!isModification">Ajouter un ingrédient</span>
-    <span *ngIf="isModification">Modifier un ingrédient</span>
-  </div>
-  <div class="form-wrapper" [formGroup]="form">
-    <div class="form-field">
-      <label>Nom</label>
-      <input type="text" formControlName="name" class="form-field-value">
-    </div>
-    <div class="form-field">
-      <label>Unité</label>
+  <span *ngIf="!isModification">Ajouter un ingrédient</span>
+  <span *ngIf="isModification">Modifier un ingrédient</span>
+</div>
+<div class="form-wrapper" [formGroup]="form">
+  <menus-form-field-wrapper
+    [control]="form.controls.name"
+    dataError="Obligatoire"
+    label="Nom"
+    type="text"></menus-form-field-wrapper>
+
+  <div class="form-field-wrapper">
+    <label>Unité</label>
+    <div class="input-wrapper">
       <mat-select formControlName="unit" class="form-field-value">
         <mat-option *ngFor="let unit of data.units" [value]="unit">{{unit.name}}</mat-option>
-      </mat-select> 
+      </mat-select>
     </div>
   </div>
-  <div class="submit-zone">
-    <button mat-raised-button color="primary" (click)="onAdd()" [disabled]="form.invalid">
-      <span *ngIf="!isModification">Ajouter</span>
-      <span *ngIf="isModification">Modifier</span>
-    </button>
-  </div>
+</div>
+<div class="submit-zone">
+  <button mat-raised-button color="primary" (click)="onAdd()" [disabled]="form.invalid">
+    <span *ngIf="!isModification">Ajouter</span>
+    <span *ngIf="isModification">Modifier</span>
+  </button>
+</div>

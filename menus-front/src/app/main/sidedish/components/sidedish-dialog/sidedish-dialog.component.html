@@ -1,33 +1,37 @@
-<div class="header">
-  <span *ngIf="!isModification">Ajouter un accompagnement</span>
-  <span *ngIf="isModification">Modifier un accompagnement</span>
-</div>
-<div class="form-wrapper" [formGroup]="form">
-  <div class="form-field">
-    <label>Nom</label>
-    <input type="text" formControlName="name" class="form-field-value">
+<div class="dialog">
+  <div class="header">
+    <span *ngIf="!isModification">Ajouter un accompagnement</span>
+    <span *ngIf="isModification">Modifier un accompagnement</span>
   </div>
-  <div #ingredients class="ingredients-wrapper">
-    <div class="label-wrapper">
-      <label>Ingrédients</label>
-      <button mat-icon-button (click)="addLine()" class="add-ingredient">
-        <mat-icon>add</mat-icon>
-      </button>
-    </div>
-    <div class="ingredient-wrapper" *ngFor="let ingredientQuantity of ingredientsQuantity; let i = index">
-      <mat-select [value]="findIngredient(ingredientQuantity)" (selectionChange)="onIngredientChange($event, i)">
-        <mat-option *ngFor="let ingredient of data.ingredients" [value]="ingredient">{{ingredient.name}}</mat-option>
-      </mat-select>
-      <input #input1 type="number" class="ingredient-quantity" [value]="ingredientQuantity.quantity" (input)="onIngredientQuantityChange($event, i)">
-      <span class="suffix"
-        *ngIf="ingredientQuantity.ingredient !== undefined">{{ingredientQuantity.ingredient.unit.symbol}}</span>
-      <span class="suffix" *ngIf="ingredientQuantity.ingredient === undefined"></span>
+  <div class="form-wrapper" [formGroup]="form">
+    <menus-form-field-wrapper
+      label="Nom"
+      dataError="Obligatoire"
+      [control]="form.controls.name"
+      type="text"></menus-form-field-wrapper>
+    <div #ingredients class="ingredients-wrapper">
+      <div class="label-wrapper">
+        <label>Ingrédients</label>
+        <button mat-icon-button (click)="addLine()" class="add-ingredient">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+      <div class="ingredient-wrapper" *ngFor="let ingredientQuantity of ingredientsQuantity; let i = index">
+        <mat-select [value]="findIngredient(ingredientQuantity)" (selectionChange)="onIngredientChange($event, i)">
+          <mat-option *ngFor="let ingredient of data.ingredients" [value]="ingredient">{{ingredient.name}}</mat-option>
+        </mat-select>
+        <input #input1 type="number" class="ingredient-quantity" [value]="ingredientQuantity.quantity"
+               (input)="onIngredientQuantityChange($event, i)">
+        <span class="suffix"
+              *ngIf="ingredientQuantity.ingredient !== undefined">{{ingredientQuantity.ingredient.unit.symbol}}</span>
+        <span class="suffix" *ngIf="ingredientQuantity.ingredient === undefined"></span>
+      </div>
     </div>
   </div>
-</div>
-<div class="submit-zone">
-  <button mat-raised-button color="primary" (click)="onAdd()" [disabled]="form.invalid">
-    <span *ngIf="!isModification">Ajouter</span>
-    <span *ngIf="isModification">Modifier</span>
-  </button>
+  <div class="submit-zone">
+    <button mat-raised-button color="primary" (click)="onAdd()" [disabled]="form.invalid">
+      <span *ngIf="!isModification">Ajouter</span>
+      <span *ngIf="isModification">Modifier</span>
+    </button>
+  </div>
 </div>

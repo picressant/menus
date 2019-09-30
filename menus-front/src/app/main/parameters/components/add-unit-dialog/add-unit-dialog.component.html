@@ -3,14 +3,17 @@
   <span *ngIf="isModification">Modifier une unité</span>
 </div>
 <div class="form-wrapper" [formGroup]="form">
-  <div class="form-field">
-    <label>Nom</label>
-    <input type="text" formControlName="name" class="form-field-value">
-  </div>
-  <div class="form-field">
-    <label>Symbole</label>
-    <input formControlName="symbol" class="form-field-value">
-  </div>
+  <menus-form-field-wrapper
+    [control]="form.controls.name"
+    dataError="Obligatoire"
+    label="Nom"
+    type="text"></menus-form-field-wrapper>
+
+  <menus-form-field-wrapper
+    type="text"
+    label="Symbole"
+    dataError="Obligatoire"
+    [control]="form.controls.symbol"></menus-form-field-wrapper>
 </div>
 <div class="submit-zone">
   <button mat-raised-button color="primary" (click)="onAdd()" [disabled]="form.invalid">
