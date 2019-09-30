@@ -13,4 +13,12 @@ export class ToasterService {
   info(text: string) {
     this.toaster.info(text);
   }
+
+  warning(text: string) {
+    this.toaster.warning(text);
+  }
+
+  error(text: string) {
+    this.toaster.error(text);
+  }
 }

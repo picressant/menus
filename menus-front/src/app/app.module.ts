@@ -10,6 +10,7 @@ import { SharedModule } from './shared/shared.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from "ngx-toastr";
+import { ErrorInterceptor } from "./shared/interceptors/error.interceptor";
 
 
 @NgModule({
@@ -31,6 +32,11 @@ import { ToastrModule } from "ngx-toastr";
     {
       provide: HTTP_INTERCEPTORS,
       useClass: RestInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptor,
       multi: true
     }
   ],

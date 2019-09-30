@@ -25,13 +25,8 @@ export class AuthService {
       (response) => {
         this.setToken(response.token);
         this.router.navigate(['/main/home']);
-      },
-      (err) => {
-        this.snackBar.open("Identification incorrecte", 'Ok', {
-          duration: 3000
-        });
       }
-    )
+    );
   }
 
   logout() {
