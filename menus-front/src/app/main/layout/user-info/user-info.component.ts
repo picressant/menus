@@ -36,4 +36,7 @@ export class UserInfoComponent implements OnInit {
     };
   }
 
+  logout() {
+    this.authService.logout();
+  }
 }

@@ -14,11 +14,11 @@
   <mat-icon>room_service</mat-icon>
   <span>Semaine</span>
 </a>
-<a class="nav-link" routerLink="/main/user" routerLinkActive="selected" (click)="navigate()">
+<a class="nav-link" routerLink="/main/user" routerLinkActive="selected" (click)="navigate()" *appHasRole="'ROLE_ADMIN'">
   <mat-icon>face</mat-icon>
   <span>Utilisateurs</span>
 </a>
-<a class="nav-link" routerLink="/main/parameters" routerLinkActive="selected" (click)="navigate()">
+<a class="nav-link" routerLink="/main/parameters" routerLinkActive="selected" (click)="navigate()" *appHasRole="'ROLE_ADMIN'">
   <mat-icon>settings</mat-icon>
   <span>Paramètres</span>
 </a>

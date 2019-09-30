@@ -6,6 +6,7 @@ import fr.choupiteam.menus.application.unit.model.Unit;
 import fr.choupiteam.menus.application.unit.service.UnitService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +18,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 @RestController
 @RequestMapping("/ingredient")
+@PreAuthorize("hasRole('ROLE_ADMIN')")
 public class IngredientController {
 
     @Autowired

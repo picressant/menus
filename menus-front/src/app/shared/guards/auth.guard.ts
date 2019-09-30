@@ -18,13 +18,16 @@ export class AuthGuard implements CanActivate {
         return Observable.create((observer: Observer<boolean>) => {
           this.authenticationService.loadCurrentUser()
             .subscribe(res => {
+              console.log('next user', res);
               this.authenticationService.user.next(res);
               observer.next(true);
               observer.complete();
             }, err => observer.error(err));
         });
       }
-      return true;
+      else {
+        return true;
+      }
     }
 
     // not logged in so redirect to login page with the return url

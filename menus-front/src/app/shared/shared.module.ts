@@ -6,13 +6,16 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { ConfirmationModalComponent } from "./components/modals/confirmation-modal/confirmation-modal.component";
 import { SecurePipe } from "./pipes/secure.pipe";
 import { LoadingImgComponent } from "./components/loading/loading-img/loading-img.component";
+import { HasRoleDirective } from "./directives/has-role.directive";
 
 @NgModule({
   declarations: [
     FormFieldWrapperComponent,
     ConfirmationModalComponent,
     SecurePipe,
-    LoadingImgComponent],
+    LoadingImgComponent,
+    HasRoleDirective
+  ],
   imports: [
     CommonModule,
     MaterialModule,
@@ -26,7 +29,8 @@ import { LoadingImgComponent } from "./components/loading/loading-img/loading-im
     MaterialModule,
     FormFieldWrapperComponent,
     SecurePipe,
-    LoadingImgComponent
+    LoadingImgComponent,
+    HasRoleDirective
   ]
 })
 export class SharedModule {

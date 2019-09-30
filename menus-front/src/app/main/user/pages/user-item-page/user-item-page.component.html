@@ -18,6 +18,15 @@
     type="text"
     [control]="form.controls.username"></menus-form-field-wrapper>
 
+  <div class="form-field-wrapper" *appHasRole="'ROLE_ADMIN'">
+    <label>Role</label>
+    <div class="input-wrapper">
+      <mat-select formControlName="role">
+        <mat-option *ngFor="let role of roles" [value]="role">{{getRoleStringified(role)}}</mat-option>
+      </mat-select>
+    </div>
+  </div>
+
   <div class="form-field-wrapper avatar-wrapper">
     <label>Avatar</label>
     <div class="input-avatar">

@@ -9,6 +9,7 @@ import { forkJoin, Observable } from "rxjs";
 import { MatDialog } from "@angular/material/dialog";
 import { ResetPasswordDialogComponent } from "../../components/reset-password-dialog/reset-password-dialog.component";
 import { AuthService } from "../../../../shared/services/auth.service";
+import { getAllRoles, getRoleStringified, Role } from "../../../../shared/models/role.enum";
 
 @Component({
   selector: 'menus-user-item-page',
@@ -21,6 +22,7 @@ export class UserItemPageComponent extends AbstractItemPage<User> implements OnI
   imgPreviewURL: any;
   storeCurrentImages: any;
 
+  roles: Role[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -33,6 +35,8 @@ export class UserItemPageComponent extends AbstractItemPage<User> implements OnI
   ) {
     super(route, toaster, 'Utilisateur sauvegardé avec succès', 'Utilisateur créé avec succès');
     this.form = User.form(this.fb);
+
+    this.roles = getAllRoles();
   }
 
   public resetPassword() {
@@ -121,5 +125,9 @@ export class UserItemPageComponent extends AbstractItemPage<User> implements OnI
     reader.onload = (_event) => {
       this.imgPreviewURL = reader.result;
     };
+  }
+
+  getRoleStringified(role: Role) {
+    return getRoleStringified(role);
   }
 }

@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private builder: FormBuilder,
-    private authService: AuthService) { 
+    private authService: AuthService) {
     this.form = this.builder.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.authService.setToken('');
+    this.authService.logout();
   }
 
   onLogin() {
