@@ -8,6 +8,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Document(collection = "recipe")
@@ -46,6 +47,10 @@ public class Recipe {
     @JsonSerialize(using = IngredientMapSerializer.class)
     @JsonDeserialize(using = IngredientMapDeserializer.class)
     private Map<String, Integer> ingredients;
+
+    private String bookReference;
+
+    private List<String> steps;
 
     public Recipe() {
         this.ingredients = new HashMap<>();
@@ -97,5 +102,21 @@ public class Recipe {
 
     public void setIngredients(Map<String, Integer> ingredients) {
         this.ingredients = ingredients;
+    }
+
+    public String getBookReference() {
+        return bookReference;
+    }
+
+    public void setBookReference(String bookReference) {
+        this.bookReference = bookReference;
+    }
+
+    public List<String> getSteps() {
+        return steps;
+    }
+
+    public void setSteps(List<String> steps) {
+        this.steps = steps;
     }
 }

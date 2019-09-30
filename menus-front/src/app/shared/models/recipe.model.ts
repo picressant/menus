@@ -9,6 +9,7 @@ export class Recipe extends AbstractData {
   cookingTime: number;
   persons: number;
   ingredients: IngredientQuantity[];
+  bookReference: string;
 
   constructor() {
     super();
@@ -21,7 +22,8 @@ export class Recipe extends AbstractData {
       preparationTime: ['', Validators.required],
       cookingTime: [''],
       persons: ['', [Validators.required]],
-      ingredients: [[], Validators.required]
+      ingredients: [[], Validators.required],
+      bookReference: [null]
     });
 
     return mergeFormGroups(form, AbstractData.form(fb));
