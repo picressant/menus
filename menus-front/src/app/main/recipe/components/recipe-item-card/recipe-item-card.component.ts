@@ -37,4 +37,13 @@ export class RecipeItemCardComponent implements OnInit {
       this.router.navigate(['main/recipe', this.recipe.id]);
     }
   }
+
+  get imgStyles() {
+    return {
+      width: '75px',
+      height: '75px',
+      'border-radius': '10px',
+      'object-fit': 'cover'
+    };
+  }
 }
