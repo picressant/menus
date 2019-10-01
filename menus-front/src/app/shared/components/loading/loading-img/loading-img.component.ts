@@ -16,6 +16,9 @@ export class LoadingImgComponent implements OnInit {
   @Input()
   styles: any;
 
+  @Input()
+  diameter: number = 100;
+
   constructor() { }
 
   ngOnInit() {

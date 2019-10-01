@@ -1,4 +1,4 @@
 <div class="wrapper" [ngStyle]="styles" *ngIf="loading">
-  <mat-spinner></mat-spinner>
+  <mat-spinner [diameter]="diameter"></mat-spinner>
 </div>
 <img (load)="onImageLoaded()" [attr.src]="src" [class.loading]="loading" [ngStyle]="styles">

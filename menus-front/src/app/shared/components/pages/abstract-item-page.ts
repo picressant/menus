@@ -10,7 +10,7 @@ export abstract class AbstractItemPage<T extends AbstractData> implements OnInit
 
   id: string = null;
   form: FormGroup;
-  isReadonly: boolean = false;
+  isReadonly: boolean = true;
 
   protected readonly createToast: string;
   protected readonly saveToast: string;
@@ -37,6 +37,8 @@ export abstract class AbstractItemPage<T extends AbstractData> implements OnInit
 
       if (!this.isAddingMode)
         this.load();
+      else
+        this.isReadonly = false;
     });
   }
 
