@@ -2,7 +2,6 @@ package fr.choupiteam.menus.resources.recipe;
 
 import fr.choupiteam.menus.application.recipe.model.Recipe;
 import fr.choupiteam.menus.application.recipe.service.RecipeService;
-import fr.choupiteam.menus.application.security.model.ApplicationUser;
 import fr.choupiteam.menus.infrastructure.rest.model.Search;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
