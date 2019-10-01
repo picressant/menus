@@ -13,7 +13,7 @@ import { AddIngredientDialogComponent } from '../../components/add-ingredient-di
 import { IngredientQuantityDialog } from '../../components/add-ingredient-dialog/ingredient-quantity-dialog.model';
 import { AbstractItemPage } from "../../../../shared/components/pages/abstract-item-page";
 import { ToasterService } from "../../../../shared/services/toaster.service";
-import { Observable } from "rxjs";
+import { forkJoin, Observable } from "rxjs";
 import { tap } from "rxjs/operators";
 
 @Component({
@@ -29,6 +29,12 @@ export class RecipeItemPageComponent extends AbstractItemPage<Recipe> implements
 
   displayedColumns: string[] = ['name', 'quantity', 'unit', 'actions'];
   dataSource = new MatTableDataSource<IngredientQuantity>();
+
+  fileUploadError = '';
+  imgPreviewURL: any;
+  storeCurrentImages: any;
+
+  timestamp: string;
 
   constructor(private fb: FormBuilder,
               private toaster: ToasterService,
@@ -108,5 +114,67 @@ export class RecipeItemPageComponent extends AbstractItemPage<Recipe> implements
   get save$(): Observable<Recipe> {
     this.form.controls.ingredients.setValue(this.dataSource.data);
     return this.recipeRest.updateRecipe(this.form.value);
+  }
+
+
+  postCreate() {
+    if (this.imgPreviewURL != null) {
+      this.recipeRest.storePicture(this.id, this.storeCurrentImages[0]).subscribe();
+      this.timestamp = new Date().getTime().toString();
+      console.log(this.id);
+      this.imgPreviewURL = null;
+      this.storeCurrentImages = null;
+    }
+  }
+
+  _save() {
+    if (this.imgPreviewURL != null) {
+      forkJoin([
+        this.recipeRest.storePicture(this.id, this.storeCurrentImages[0]),
+        this.save$
+      ]).subscribe(([res, recipe]) => {
+        this.imgPreviewURL = null;
+        this.storeCurrentImages = null;
+        this.toaster.info(this.saveToast);
+        this.resetForm(recipe);
+      });
+    }
+    else {
+      this.save$.subscribe(
+        (recipe: Recipe) => {
+          this.resetForm(recipe);
+          this.toaster.info(this.saveToast);
+        }
+      );
+    }
+  }
+
+  get imgStyles() {
+    return {
+      width: '200px',
+      height: '200px',
+      'border-radius': '10px',
+      'object-fit': 'cover'
+    };
+  }
+
+  preview(files) {
+    if (files.length === 0) {
+      return;
+    }
+
+    const mimeType = files[0].type;
+    if (mimeType.match(/image\/*/) == null) {
+      this.fileUploadError = 'Le fichier doit être une image';
+      this.toaster.error(this.fileUploadError);
+      return;
+    }
+
+    const reader = new FileReader();
+    this.storeCurrentImages = files;
+    reader.readAsDataURL(files[0]);
+    reader.onload = (_event) => {
+      this.imgPreviewURL = reader.result;
+    };
   }
 }

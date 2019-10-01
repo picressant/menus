@@ -22,7 +22,7 @@ export class Recipe extends AbstractData {
       preparationTime: ['', Validators.required],
       cookingTime: [''],
       persons: ['', [Validators.required]],
-      ingredients: [[], Validators.required],
+      ingredients: [[]],
       bookReference: [null]
     });
 

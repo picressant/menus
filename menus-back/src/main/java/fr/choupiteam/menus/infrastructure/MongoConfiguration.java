@@ -24,6 +24,11 @@ public class MongoConfiguration extends AbstractMongoConfiguration {
         return new GridFsTemplate(mongoDbFactory(), mappingMongoConverter(), "user");
     }
 
+    @Bean(name = "recipepictures")
+    public GridFsTemplate gridFsRecipe() throws Exception {
+        return new GridFsTemplate(mongoDbFactory(), mappingMongoConverter(), "recipe");
+    }
+
     @Override
     public MongoClient mongoClient() {
         return new MongoClient(this.getHost(), this.getPort());

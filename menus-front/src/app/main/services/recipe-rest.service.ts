@@ -30,4 +30,11 @@ export class RecipeRestService {
   deleteRecipe(iID: String): Observable<void> {
     return this.http.delete<void>('recipe/' + iID);
   }
+
+  storePicture(id: string, data: any) {
+    const formData = new FormData();
+    formData.append('file', data, data.name);
+
+    return this.http.post('recipe/' + id + '/picture', formData);
+  }
 }

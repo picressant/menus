@@ -1,5 +1,16 @@
 <mat-tab-group>
   <mat-tab label="Détails">
+    <div class="file-input-wrapper">
+      <div class="picture c-hand" (click)="file.click()">
+        <img [src]="imgPreviewURL" alt="Profile" height="200" width="200" *ngIf="imgPreviewURL">
+        <menus-loading-img
+          [styles]="imgStyles"
+          [src]="'recipe/' + id + '/picture?' + timestamp | secure | async"
+          *ngIf="!imgPreviewURL"></menus-loading-img>
+        <mat-icon class="upload-icon" *ngIf="!isReadonly">cloud_upload</mat-icon>
+      </div>
+      <input type="file" #file (change)="preview(file.files)" [disabled]="this.form.disabled">
+    </div>
     <div [formGroup]="form" class="form-wrapper">
       <menus-form-field-wrapper
         dataError="Obligatoire"
