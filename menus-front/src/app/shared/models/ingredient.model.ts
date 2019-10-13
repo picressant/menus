@@ -1,7 +1,7 @@
 import { Unit } from './unit.model';
 
 export class Ingredient {
-    id: String;
-    name: String;
+    id: string;
+    name: string;
     unit: Unit;
 }

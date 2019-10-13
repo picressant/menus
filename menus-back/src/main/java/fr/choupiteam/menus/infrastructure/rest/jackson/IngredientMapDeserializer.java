@@ -42,7 +42,7 @@ public class IngredientMapDeserializer extends JsonDeserializer<Map<String, Inte
 
                     if (p.getCurrentToken().isScalarValue()) {
                         if (p.currentName().equals("quantity")) {
-                            quantity = p.getIntValue();
+                            quantity = p.getValueAsInt();
                         }
                     }
 
