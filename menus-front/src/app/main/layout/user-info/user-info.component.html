@@ -6,7 +6,7 @@
   <!--    {{user?.house.name}}-->
   <!--  </div>-->
 </div>
-<menus-loading-img [styles]="imgStyles" class="c-hand"
+<menus-loading-img [styles]="imgStyles" class="c-hand" [diameter]="45"
                    [src]="'user/' + user?.id + '/avatar?' + timestamp | secure | async" [matMenuTriggerFor]="menu"></menus-loading-img>
 
 <mat-menu #menu="matMenu">

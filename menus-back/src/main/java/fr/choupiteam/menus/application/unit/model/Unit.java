@@ -1,5 +1,6 @@
 package fr.choupiteam.menus.application.unit.model;
 
+import fr.choupiteam.menus.infrastructure.annotation.Searchable;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -8,6 +9,8 @@ public class Unit {
 
     @Id
     private String id;
+
+    @Searchable
     private String name;
     private String symbol;
 

@@ -2,15 +2,14 @@ package fr.choupiteam.menus.resources.ingredient;
 
 import fr.choupiteam.menus.application.ingredient.model.Ingredient;
 import fr.choupiteam.menus.application.ingredient.service.IngredientService;
+import fr.choupiteam.menus.application.pager.model.Pager;
 import fr.choupiteam.menus.application.unit.model.Unit;
 import fr.choupiteam.menus.application.unit.service.UnitService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -43,19 +42,28 @@ public class IngredientController {
         return this.ingredientService.getIngredients();
     }
 
-    @RequestMapping(value = "/unit", method = GET)
+    @PostMapping(value = "/unit/list")
+    public Page<Unit> getUnits(@RequestBody Pager pager) {
+        return this.unitService.getUnitsByPager(pager);
+    }
+
+    @GetMapping(value = "/unit")
     public List<Unit> getUnits() {
         return this.unitService.getUnits();
     }
 
-    @RequestMapping(value = "/unit", method = POST)
+    @PostMapping(value = "/unit")
+    public Unit createUnit(@RequestBody Unit unit) {
+        return this.unitService.createUnit(unit);
+    }
+
+    @PutMapping(value = "/unit")
     public Unit saveUnit(@RequestBody Unit unit) {
         return this.unitService.saveUnit(unit);
     }
 
-    @RequestMapping(value = "/unit/{id}", method = DELETE)
-    public HttpStatus deleteUnit(@PathVariable("id") String id) {
+    @DeleteMapping(value = "/unit/{id}")
+    public void deleteUnit(@PathVariable("id") String id) {
         this.unitService.deleteUnit(id);
-        return HttpStatus.OK;
     }
 }

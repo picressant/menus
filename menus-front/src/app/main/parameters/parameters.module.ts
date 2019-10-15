@@ -5,12 +5,14 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { AddIngredientDialogComponent } from './components/add-ingredient-dialog/add-ingredient-dialog.component';
 import { AddUnitDialogComponent } from './components/add-unit-dialog/add-unit-dialog.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { UnitTableComponent } from './components/unit-table/unit-table.component';
 
 @NgModule({
   declarations: [
     ParametersManagementPageComponent,
     AddIngredientDialogComponent,
     AddUnitDialogComponent,
+    UnitTableComponent,
   ],
   imports: [
     CommonModule,

@@ -16,6 +16,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from "@angular/material/menu";
+import { MatPaginatorModule } from "@angular/material/paginator";
 
 @NgModule({
   imports: [
@@ -35,7 +36,8 @@ import { MatMenuModule } from "@angular/material/menu";
     MatTableModule,
     MatSelectModule,
     MatCardModule,
-    MatMenuModule
+    MatMenuModule,
+    MatPaginatorModule
 
     // // browser part
     // BrowserModule,
@@ -58,7 +60,8 @@ import { MatMenuModule } from "@angular/material/menu";
     MatTableModule,
     MatSelectModule,
     MatCardModule,
-    MatMenuModule
+    MatMenuModule,
+    MatPaginatorModule
 
     // browser part
     // BrowserModule,

@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Ingredient } from '../../shared/models/ingredient.model';
 import { Observable } from 'rxjs';
 import { Unit } from 'src/app/shared/models/unit.model';
+import { Pageable } from "../../shared/models/pager/pageable.model";
+import { Pager } from "../../shared/models/pager/pager.model";
 
 @Injectable({
   providedIn: 'root'
@@ -23,15 +25,18 @@ export class IngredientRestService {
     return this.http.delete<void>('ingredient/' + ingredient.id);
   }
 
-  getUnits(): Observable<Unit[]> {
-    return this.http.get<Unit[]>('ingredient/unit');
+  getUnits(pager: Pager): Observable<Pageable<Unit>> {
+    return this.http.post<Pageable<Unit>>('ingredient/unit/list', pager);
   }
 
   saveUnit(unit: Unit): Observable<Unit> {
-    return this.http.post<Unit>('ingredient/unit', unit);
+    if (unit.id)
+      return this.http.put<Unit>('ingredient/unit', unit);
+    else
+      return this.http.post<Unit>('ingredient/unit', unit);
   }
 
   deleteUnit(unit: Unit): Observable<void> {
-    return this.http.delete<void>('ingredient/unit/' + unit.id);;
+    return this.http.delete<void>('ingredient/unit/' + unit.id);
   }
 }
