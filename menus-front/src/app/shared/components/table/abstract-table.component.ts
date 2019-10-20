@@ -4,6 +4,8 @@ import { MatTableDataSource } from "@angular/material/table";
 import { Pageable } from "../../models/pager/pageable.model";
 import { Observable } from "rxjs";
 import { PageEvent } from "@angular/material/paginator";
+import { FormBuilder, FormGroup } from "@angular/forms";
+import { debounceTime } from "rxjs/operators";
 
 export abstract class AbstractTableComponent<T> implements OnInit {
 
@@ -12,11 +14,17 @@ export abstract class AbstractTableComponent<T> implements OnInit {
   pageSizeOptions = [10, 20, 50];
   totalItems: number;
 
-  protected constructor() {
+  protected constructor(
+  ) {
     this.pager = new Pager(10);
   }
 
   ngOnInit() {
+    this.load();
+  }
+
+  onSearch(search: string) {
+    this.pager.search = search;
     this.load();
   }
 

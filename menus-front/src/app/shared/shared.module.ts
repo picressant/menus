@@ -7,6 +7,7 @@ import { ConfirmationModalComponent } from "./components/modals/confirmation-mod
 import { SecurePipe } from "./pipes/secure.pipe";
 import { LoadingImgComponent } from "./components/loading/loading-img/loading-img.component";
 import { HasRoleDirective } from "./directives/has-role.directive";
+import { TableHeaderComponent } from './components/table/table-header/table-header.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { HasRoleDirective } from "./directives/has-role.directive";
     ConfirmationModalComponent,
     SecurePipe,
     LoadingImgComponent,
-    HasRoleDirective
+    HasRoleDirective,
+    TableHeaderComponent
   ],
   imports: [
     CommonModule,
@@ -30,7 +32,8 @@ import { HasRoleDirective } from "./directives/has-role.directive";
     FormFieldWrapperComponent,
     SecurePipe,
     LoadingImgComponent,
-    HasRoleDirective
+    HasRoleDirective,
+    TableHeaderComponent
   ]
 })
 export class SharedModule {
