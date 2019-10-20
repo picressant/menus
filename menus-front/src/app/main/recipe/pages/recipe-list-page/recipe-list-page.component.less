@@ -1,4 +1,15 @@
+@import 'variables.less';
+
 :host {
+
+  .search-results {
+    display: inline-block;
+    margin: 0 20px 10px;
+    @media @phone {
+      display: block;
+    }
+  }
+
   .scroll-wrapper {
     overflow-y: auto;
     width: 100%;
