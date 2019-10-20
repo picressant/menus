@@ -51,9 +51,9 @@ export class RecipeItemPageComponent extends AbstractItemPage<Recipe> implements
 
   ngOnInit() {
     super.ngOnInit();
-    this.ingredientService.getIngredients().subscribe(
-      (ingredients) => this.ingredients = ingredients
-    )
+    // this.ingredientService.getIngredients().subscribe(
+    //   (ingredients) => this.ingredients = ingredients
+    // )
   }
 
   addIngredient() {

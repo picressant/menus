@@ -21,11 +21,33 @@
     flex: 1;
     display: flex;
 
-    input, mat-select {
+    ng-select {
+      padding-bottom: 0;
+      width: 100%;
+
+      &.ng-select-focused:not(.ng-select-opened) > .ng-select-container {
+        box-shadow: none;
+        border-color: darken(@main-color, 20%);
+      }
+
+      & .ng-select-container .ng-value-container {
+        border-top: none;
+      }
+
+      & .ng-select-container:after {
+        display: none;
+      }
+
+      & .ng-select-container {
+        border-color: @text-color;
+      }
+    }
+
+    & > input, & > mat-select {
       flex: 1;
       border-radius: 5px;
       border: 1px solid @text-color;
-      padding: 5px;
+      padding: 7px;
       line-height: 16px;
       font-size: 16px;
       background-color: white;
@@ -35,6 +57,11 @@
         color: rgb(84, 84, 84);
         background-color: @background-color;
         border: 1px solid lighten(@text-color, 30%);
+      }
+
+      &:focus {
+        outline: none;
+        border-color: darken(@main-color, 20%);
       }
     }
 
@@ -55,9 +82,15 @@
   }
 
 
-  &.error .input-wrapper {
+  .input-wrapper.error  {
     input, mat-select {
       border-color: @error-color;
+    }
+
+    ng-select {
+      .ng-select-container {
+        border-color: @error-color;
+      }
     }
 
     .error-text {
@@ -65,14 +98,13 @@
     }
   }
 
-}
+  .submit-form {
+    margin: 15px;
+    display: flex;
+    justify-content: flex-end;
 
-.submit-form {
-  margin: 15px;
-  display: flex;
-  justify-content: flex-end;
-
-  button {
-    margin-right: 20px;
+    button {
+      margin-right: 20px;
+    }
   }
 }

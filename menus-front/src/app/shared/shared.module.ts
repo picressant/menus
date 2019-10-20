@@ -2,12 +2,14 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from './material/material.module';
 import { FormFieldWrapperComponent } from './components/inputs/form-field-wrapper/form-field-wrapper.component';
-import { ReactiveFormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { ConfirmationModalComponent } from "./components/modals/confirmation-modal/confirmation-modal.component";
 import { SecurePipe } from "./pipes/secure.pipe";
 import { LoadingImgComponent } from "./components/loading/loading-img/loading-img.component";
 import { HasRoleDirective } from "./directives/has-role.directive";
 import { TableHeaderComponent } from './components/table/table-header/table-header.component';
+import { UnitSelectorComponent } from './components/selectors/unit-selector/unit-selector.component';
+import { NgSelectModule } from "@ng-select/ng-select";
 
 @NgModule({
   declarations: [
@@ -16,12 +18,16 @@ import { TableHeaderComponent } from './components/table/table-header/table-head
     SecurePipe,
     LoadingImgComponent,
     HasRoleDirective,
-    TableHeaderComponent
+    TableHeaderComponent,
+    UnitSelectorComponent,
+    UnitSelectorComponent
   ],
   imports: [
     CommonModule,
     MaterialModule,
     ReactiveFormsModule,
+    NgSelectModule,
+    FormsModule
   ],
   entryComponents: [
     ConfirmationModalComponent
@@ -33,7 +39,8 @@ import { TableHeaderComponent } from './components/table/table-header/table-head
     SecurePipe,
     LoadingImgComponent,
     HasRoleDirective,
-    TableHeaderComponent
+    TableHeaderComponent,
+    UnitSelectorComponent
   ]
 })
 export class SharedModule {

@@ -11,11 +11,7 @@
 
   <div class="form-field-wrapper">
     <label>Unité</label>
-    <div class="input-wrapper">
-      <mat-select formControlName="unit" class="form-field-value">
-        <mat-option *ngFor="let unit of data.units" [value]="unit">{{unit.name}}</mat-option>
-      </mat-select>
-    </div>
+     <menus-unit-selector formControlName="unit" dataError="Obligatoire"></menus-unit-selector>
   </div>
 </div>
 <div class="submit-zone">

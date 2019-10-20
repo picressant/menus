@@ -18,7 +18,7 @@ export class AddIngredientDialogComponent implements OnInit {
     public dialogRef: MatDialogRef<AddIngredientDialogComponent>,
     private build: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: IngredientDialogData
-  ) { 
+  ) {
     this.form = this.build.group({
       id: [null],
       name: ['', Validators.required],
@@ -27,7 +27,7 @@ export class AddIngredientDialogComponent implements OnInit {
 
     if (data.ingredient !== null) {
       this.form.reset(data.ingredient);
-      this.form.controls.unit.setValue(data.units.find((u) => u.id === data.ingredient.unit.id));
+      //this.form.controls.unit.setValue(data.units.find((u) => u.id === data.ingredient.unit.id));
     }
     this.isModification = (data.ingredient !== null);
   }

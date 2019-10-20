@@ -31,9 +31,9 @@ export class SidedishListPageComponent implements OnInit {
 
   ngOnInit() {
     this._loadDishes();
-    this.ingredientService.getIngredients().subscribe(
-      (ingredients) => this.ingredients = ingredients
-    );
+    // this.ingredientService.getIngredients().subscribe(
+    //   (ingredients) => this.ingredients = ingredients
+    // );
   }
 
   private _loadDishes() {

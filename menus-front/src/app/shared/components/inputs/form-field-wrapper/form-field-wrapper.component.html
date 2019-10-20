@@ -1,6 +1,6 @@
-<div class="form-field-wrapper" [ngClass]="isError ? 'error' : ''">
+<div class="form-field-wrapper">
   <label>{{label}}</label>
-  <div class="input-wrapper">
+  <div class="input-wrapper" [ngClass]="isError ? 'error' : ''">
     <input type="{{type}}" [formControl]="control">
     <span class="suffix" *ngIf="suffix">{{suffix}}</span>
     <span class="error-text">{{dataError}}</span>
