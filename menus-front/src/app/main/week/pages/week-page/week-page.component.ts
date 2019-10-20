@@ -37,7 +37,6 @@ const days = {
 export class WeekPageComponent implements OnInit {
 
   meals: WeekMeal[];
-  recipes: Recipe[];
   sidedishes: SideDish[];
 
   isModified = false;
@@ -57,10 +56,6 @@ export class WeekPageComponent implements OnInit {
 
     let search = new Search();
     search.term = "";
-
-    // this.recipeService.searchRecipe(search).subscribe(
-    //   (recipes) => this.recipes = recipes
-    // );
 
     // this.sideDishService.getSideDishes().subscribe(
     //   (sideDishes) => this.sidedishes = sideDishes
@@ -162,7 +157,6 @@ export class WeekPageComponent implements OnInit {
     const data = new ChangeWeekMealDialogData();
     data.index = index;
     data.weekmeal = this.meals[index];
-    data.recipes = this.recipes;
     data.sidedishes = this.sidedishes;
 
     const dialogRef = this.dialog.open(ChangeWeekMealDialogComponent, {

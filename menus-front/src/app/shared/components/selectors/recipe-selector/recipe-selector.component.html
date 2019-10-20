@@ -1,0 +1,19 @@
+<div class="input-wrapper" [ngClass]="isError ? 'error' : ''">
+  <ng-select
+    [items]="content"
+    [multiple]="false"
+    [(ngModel)]="value"
+    placeholder="{{ label }}"
+    bindLabel="name"
+    (search)="search($event)"
+    [searchFn]="searchFn"
+    [searchable]="true"
+    (clear)="onClear()"
+    [virtualScroll]="true"
+    (scrollToEnd)="onScrollEnd()"
+    (blur)="propagateTouch()"
+    appendTo="body"
+    [loading]="isLoading">
+  </ng-select>
+  <span class="error-text">{{dataError}}</span>
+</div>

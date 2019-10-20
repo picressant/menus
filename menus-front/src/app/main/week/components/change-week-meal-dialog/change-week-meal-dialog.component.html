@@ -1,22 +1,22 @@
-<div class="header">
-  <span>Modier le menu</span>
-</div>
-<div class="form-wrapper" [formGroup]="form">
-  <div class="form-field">
-    <label>Recette</label>
-    <mat-select formControlName="recipe" class="form-field-value">
-      <mat-option *ngFor="let recipe of data.recipes" [value]="recipe">{{recipe.name}}</mat-option>
-    </mat-select>
+<div class="dialog">
+  <div class="header">
+    <span>Modier le menu</span>
   </div>
-  <div class="form-field">
-    <label>Accompagnements</label>
-    <ng-select [items]="data.sidedishes" bindLabel="name" bindValue="id" [multiple]="true" placeholder="..."
-      formControlName="sideDishes" class="form-field-value">
-    </ng-select>
+  <div class="form-wrapper" [formGroup]="form">
+    <div class="form-field-wrapper">
+      <label>Recette</label>
+      <menus-recipe-selector dataError="Obligatoire" formControlName="recipe"></menus-recipe-selector>
+    </div>
+    <div class="form-field-wrapper">
+      <label>Accompagnements</label>
+      <ng-select [items]="data.sidedishes" bindLabel="name" bindValue="id" [multiple]="true" placeholder="..."
+                 formControlName="sideDishes" class="form-field-value">
+      </ng-select>
+    </div>
   </div>
-</div>
-<div class="submit-zone">
-  <button mat-raised-button color="primary" (click)="onAdd()" [disabled]="form.invalid">
-    <span>Modifier</span>
-  </button>
+  <div class="submit-zone">
+    <button mat-raised-button color="primary" (click)="onAdd()" [disabled]="form.invalid">
+      <span>Modifier</span>
+    </button>
+  </div>
 </div>

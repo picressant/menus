@@ -11,6 +11,7 @@ import { TableHeaderComponent } from './components/table/table-header/table-head
 import { UnitSelectorComponent } from './components/selectors/unit-selector/unit-selector.component';
 import { NgSelectModule } from "@ng-select/ng-select";
 import { IngredientSelectorComponent } from './components/selectors/ingredient-selector/ingredient-selector.component';
+import { RecipeSelectorComponent } from './components/selectors/recipe-selector/recipe-selector.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { IngredientSelectorComponent } from './components/selectors/ingredient-s
     TableHeaderComponent,
     UnitSelectorComponent,
     UnitSelectorComponent,
-    IngredientSelectorComponent
+    IngredientSelectorComponent,
+    RecipeSelectorComponent
   ],
   imports: [
     CommonModule,
@@ -43,7 +45,8 @@ import { IngredientSelectorComponent } from './components/selectors/ingredient-s
     HasRoleDirective,
     TableHeaderComponent,
     UnitSelectorComponent,
-    IngredientSelectorComponent
+    IngredientSelectorComponent,
+    RecipeSelectorComponent
   ]
 })
 export class SharedModule {
