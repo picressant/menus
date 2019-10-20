@@ -1,17 +1,15 @@
 package fr.choupiteam.menus.resources.side;
 
+import fr.choupiteam.menus.application.pager.model.Pager;
 import fr.choupiteam.menus.application.side.model.SideDish;
 import fr.choupiteam.menus.application.side.service.SideDishService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
-import static org.springframework.web.bind.annotation.RequestMethod.*;
+import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @RestController
 @RequestMapping("/sidedish")
@@ -20,9 +18,9 @@ public class SideDishController {
     @Autowired
     private SideDishService sideDishService;
 
-    @RequestMapping(method = GET)
-    public List<SideDish> getSideDishes() {
-        return this.sideDishService.getAllSideDishes();
+    @PostMapping(value = "/list")
+    public Page<SideDish> getSideDishes(@RequestBody Pager pager) {
+        return this.sideDishService.getSideDishesByPager(pager);
     }
 
     @RequestMapping(method = POST)

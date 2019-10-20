@@ -2,6 +2,7 @@ package fr.choupiteam.menus.application.side.model;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import fr.choupiteam.menus.infrastructure.annotation.Searchable;
 import fr.choupiteam.menus.infrastructure.rest.jackson.IngredientMapDeserializer;
 import fr.choupiteam.menus.infrastructure.rest.jackson.IngredientMapSerializer;
 import org.springframework.data.annotation.Id;
@@ -21,6 +22,7 @@ public class SideDish {
     /**
      * Name of the side dish
      */
+    @Searchable
     private String name;
 
     /**

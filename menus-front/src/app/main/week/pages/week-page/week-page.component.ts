@@ -62,9 +62,9 @@ export class WeekPageComponent implements OnInit {
       (recipes) => this.recipes = recipes
     );
 
-    this.sideDishService.getSideDishes().subscribe(
-      (sideDishes) => this.sidedishes = sideDishes
-    );
+    // this.sideDishService.getSideDishes().subscribe(
+    //   (sideDishes) => this.sidedishes = sideDishes
+    // );
   }
 
   private _loadWeek() {

@@ -4,9 +4,10 @@ import { SidedishListPageComponent } from './pages/sidedish-list-page/sidedish-l
 import { SidedishDialogComponent } from './components/sidedish-dialog/sidedish-dialog.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { SidedishTableComponent } from './components/sidedish-table/sidedish-table.component';
 
 @NgModule({
-  declarations: [SidedishListPageComponent, SidedishDialogComponent],
+  declarations: [SidedishListPageComponent, SidedishDialogComponent, SidedishTableComponent],
   imports: [
     CommonModule,
     SharedModule,
