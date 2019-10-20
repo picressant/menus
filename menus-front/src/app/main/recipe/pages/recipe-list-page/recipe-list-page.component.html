@@ -1,17 +1,8 @@
-<div class="header-search">
-  <mat-form-field class="search-field">
-    <input matInput placeholder="Recherche..." [(ngModel)]="searchValue" (input)="onChangeEvent()">
-  </mat-form-field>
+<div class="scroll-wrapper" infinite-scroll (scrolled)="onScrollDown()" [scrollWindow]="false">
+  <menus-table-header (onSearch)="onSearch($event)" (onAdd)="addRecipe()"></menus-table-header>
 
-  <button mat-raised-button color="primary" class="add-recipe-button" (click)="addRecipe()" *ngIf="!this.isWeekSearch">
-    <mat-icon>add</mat-icon>
-    <span class="responsive hide">Ajouter une recette</span>
-  </button>
-</div>
-
-<mat-spinner *ngIf="this._isLoading"></mat-spinner>
-
-<div class="search-results" *ngFor="let recipe of recipes">
-  <menus-recipe-item-card [recipe]="recipe" [isWeekSearch]="isWeekSearch"
-                          (choose)="onSelectRecipe($event)"></menus-recipe-item-card>
+  <div class="search-results" *ngFor="let recipe of recipes">
+    <menus-recipe-item-card [recipe]="recipe"
+                            (choose)="onSelectRecipe($event)"></menus-recipe-item-card>
+  </div>
 </div>

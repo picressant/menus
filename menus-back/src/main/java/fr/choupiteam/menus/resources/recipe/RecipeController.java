@@ -1,16 +1,15 @@
 package fr.choupiteam.menus.resources.recipe;
 
+import fr.choupiteam.menus.application.pager.model.Pager;
 import fr.choupiteam.menus.application.recipe.model.Recipe;
 import fr.choupiteam.menus.application.recipe.service.RecipeService;
-import fr.choupiteam.menus.infrastructure.rest.model.Search;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
-
-import java.util.List;
 
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
@@ -39,9 +38,9 @@ public class RecipeController {
         return this.recipeService.saveRecipe(recipe);
     }
 
-    @RequestMapping(value = "/search", method = POST)
-    public List<Recipe> searchRecipe(@RequestBody Search search) {
-        return this.recipeService.search(search.getTerm());
+    @PostMapping(value = "/list")
+    public Page<Recipe> getRecipes(@RequestBody Pager pager) {
+        return this.recipeService.findByPager(pager);
     }
 
     @RequestMapping(value = "/{id}/picture", method = RequestMethod.POST)

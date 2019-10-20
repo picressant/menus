@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RecipeItemPageComponent } from './pages/recipe-item-page/recipe-item-page.component';
 import { AddIngredientDialogComponent } from './components/add-ingredient-dialog/add-ingredient-dialog.component';
 import { RecipeItemCardComponent } from './components/recipe-item-card/recipe-item-card.component';
+import { InfiniteScrollModule } from "ngx-infinite-scroll";
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { RecipeItemCardComponent } from './components/recipe-item-card/recipe-it
   imports: [
     SharedModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    InfiniteScrollModule
   ],
   exports: [
     RecipeListPageComponent,

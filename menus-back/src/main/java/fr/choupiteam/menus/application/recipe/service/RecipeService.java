@@ -1,5 +1,6 @@
 package fr.choupiteam.menus.application.recipe.service;
 
+import fr.choupiteam.menus.application.pager.model.Pager;
 import fr.choupiteam.menus.application.recipe.model.Recipe;
 import fr.choupiteam.menus.infrastructure.repository.RecipePictureRepository;
 import fr.choupiteam.menus.infrastructure.repository.RecipeRepository;
@@ -8,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -42,8 +44,8 @@ public class RecipeService {
         return this.recipeRepository.save(recipe);
     }
 
-    public List<Recipe> search(String search) {
-        return this.recipeRepository.findAllByNameLike(search);
+    public Page<Recipe> findByPager(Pager pager) {
+        return this.recipeRepository.findAllByPager(pager, Recipe.class);
     }
 
     public void storePicture(Recipe recipe, MultipartFile file) {

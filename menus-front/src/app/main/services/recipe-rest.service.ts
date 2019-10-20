@@ -3,6 +3,8 @@ import { Recipe } from '../../shared/models/recipe.model';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Search } from 'src/app/shared/models/search.model';
+import { Pager } from "../../shared/models/pager/pager.model";
+import { Pageable } from "../../shared/models/pager/pageable.model";
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +13,8 @@ export class RecipeRestService {
 
   constructor(private http: HttpClient) { }
 
-  searchRecipe(search: Search): Observable<Recipe[]> {
-    return this.http.post<Recipe[]>('recipe/search', search);
+  getRecipes(pager: Pager): Observable<Pageable<Recipe>> {
+    return this.http.post<Pageable<Recipe>>('recipe/list', pager);
   }
 
   getRecipe(iID: string): Observable<Recipe> {

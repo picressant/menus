@@ -1,28 +1,7 @@
-@import 'variables.less';
-
 :host {
-
-    .search-results {
-        display: inline-block;
-        margin: 0 20px 10px;
-        @media @phone {
-            display: block;
-        }
-    }
-
-    .search-field {
-        margin-left: 5px;
-        min-width: 220px;
-    }
-
-    .add-recipe-button {
-        float: right;
-        margin-right: 15px;
-        margin-top: 10px;
-        & span {
-            @media @phone {
-                display: none;
-            }
-        } 
-    }
+  .scroll-wrapper {
+    overflow-y: auto;
+    width: 100%;
+    height: 100%;
+  }
 }

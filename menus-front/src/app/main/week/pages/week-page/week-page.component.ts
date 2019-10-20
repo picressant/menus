@@ -27,7 +27,7 @@ const days = {
   saturdayDinner: 11,
   sundayLunch: 12,
   sundayDinner: 13
-}
+};
 
 @Component({
   selector: 'menus-week-page',
@@ -58,9 +58,9 @@ export class WeekPageComponent implements OnInit {
     let search = new Search();
     search.term = "";
 
-    this.recipeService.searchRecipe(search).subscribe(
-      (recipes) => this.recipes = recipes
-    );
+    // this.recipeService.searchRecipe(search).subscribe(
+    //   (recipes) => this.recipes = recipes
+    // );
 
     // this.sideDishService.getSideDishes().subscribe(
     //   (sideDishes) => this.sidedishes = sideDishes
