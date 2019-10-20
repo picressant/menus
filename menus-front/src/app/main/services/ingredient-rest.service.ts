@@ -13,8 +13,8 @@ export class IngredientRestService {
 
   constructor(private http: HttpClient) { }
 
-  getIngredients(): Observable<Ingredient[]> {
-    return this.http.get<Ingredient[]>('ingredient');
+  getIngredients(pager: Pager = null): Observable<Pageable<Ingredient>> {
+    return this.http.post<Pageable<Ingredient>>('ingredient/list', pager);
   }
 
   saveIngredient(ingredient: Ingredient): Observable<Ingredient> {

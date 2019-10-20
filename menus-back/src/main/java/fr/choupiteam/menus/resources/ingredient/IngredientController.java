@@ -11,9 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
-import static org.springframework.web.bind.annotation.RequestMethod.*;
+import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @RestController
 @RequestMapping("/ingredient")
@@ -37,19 +36,14 @@ public class IngredientController {
         return HttpStatus.OK;
     }
 
-    @RequestMapping(method = GET)
-    public List<Ingredient> getIngredients() {
-        return this.ingredientService.getIngredients();
+    @PostMapping(value = "/list")
+    public Page<Ingredient> getIngredients(@RequestBody Pager pager) {
+        return this.ingredientService.getIngredientsByPager(pager);
     }
 
     @PostMapping(value = "/unit/list")
     public Page<Unit> getUnits(@RequestBody Pager pager) {
         return this.unitService.getUnitsByPager(pager);
-    }
-
-    @GetMapping(value = "/unit")
-    public List<Unit> getUnits() {
-        return this.unitService.getUnits();
     }
 
     @PostMapping(value = "/unit")

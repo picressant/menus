@@ -1,6 +1,7 @@
 package fr.choupiteam.menus.application.ingredient.model;
 
 import fr.choupiteam.menus.application.unit.model.Unit;
+import fr.choupiteam.menus.infrastructure.annotation.Searchable;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -10,6 +11,7 @@ public class Ingredient {
     @Id
     private String id;
 
+    @Searchable
     private String name;
 
     private Unit unit;

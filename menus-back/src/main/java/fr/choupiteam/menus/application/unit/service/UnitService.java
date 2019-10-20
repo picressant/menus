@@ -19,10 +19,6 @@ public class UnitService {
         return this.unitRepository.findAllByPager(pager, Unit.class);
     }
 
-    public List<Unit> getUnits() {
-        return this.unitRepository.findAll();
-    }
-
     public Unit createUnit(Unit unit) {
         return this.unitRepository.insert(unit);
     }

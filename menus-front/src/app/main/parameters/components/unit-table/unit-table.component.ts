@@ -11,8 +11,6 @@ import { MatDialog } from "@angular/material/dialog";
   styleUrls: ['./unit-table.component.less']
 })
 export class UnitTableComponent extends AbstractTableComponent<Unit> {
-  totalItems: any;
-
   constructor(
     private ingredientService: IngredientRestService,
     public dialog: MatDialog

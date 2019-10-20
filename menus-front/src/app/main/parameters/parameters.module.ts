@@ -6,6 +6,7 @@ import { AddIngredientDialogComponent } from './components/add-ingredient-dialog
 import { AddUnitDialogComponent } from './components/add-unit-dialog/add-unit-dialog.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UnitTableComponent } from './components/unit-table/unit-table.component';
+import { IngredientTableComponent } from './components/ingredient-table/ingredient-table.component';
 
 @NgModule({
   declarations: [
@@ -13,6 +14,7 @@ import { UnitTableComponent } from './components/unit-table/unit-table.component
     AddIngredientDialogComponent,
     AddUnitDialogComponent,
     UnitTableComponent,
+    IngredientTableComponent,
   ],
   imports: [
     CommonModule,
