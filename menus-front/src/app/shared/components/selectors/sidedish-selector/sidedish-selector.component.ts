@@ -1,18 +1,18 @@
 import { Component } from '@angular/core';
 import { AbstractPageableSelectorComponent } from "../abstract-pageable-selector.component";
-import { Recipe } from "../../../models/recipe.model";
 import { NgControl } from "@angular/forms";
-import { RecipeRestService } from "../../../../main/services/recipe-rest.service";
+import { SideDish } from "../../../models/sidedish.model";
+import { SideDishRestService } from "../../../../main/services/sidedish-rest.service";
 
 @Component({
-  selector: 'menus-recipe-selector',
-  templateUrl: './recipe-selector.component.html',
-  styleUrls: ['./recipe-selector.component.less']
+  selector: 'menus-sidedish-selector',
+  templateUrl: './sidedish-selector.component.html',
+  styleUrls: ['./sidedish-selector.component.less']
 })
-export class RecipeSelectorComponent extends AbstractPageableSelectorComponent<Recipe> {
+export class SidedishSelectorComponent extends AbstractPageableSelectorComponent<SideDish> {
 
   constructor(
-    private recipeService: RecipeRestService,
+    private sideDishService: SideDishRestService,
     public ngControl: NgControl
   ) {
     super();
@@ -21,7 +21,7 @@ export class RecipeSelectorComponent extends AbstractPageableSelectorComponent<R
 
   load(isSetValue: boolean) {
     this.isLoading = true;
-    this.recipeService.getRecipes(this.pager).subscribe(
+    this.sideDishService.getSideDishes(this.pager).subscribe(
       (data) => this.setContent(data, isSetValue)
     );
   }

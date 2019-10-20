@@ -26,6 +26,14 @@
       padding-bottom: 0;
       width: 100%;
 
+      &.ng-select-multiple .ng-select-container .ng-value-container .ng-value {
+        background-color: @main-color;
+      }
+
+      &.ng-select-multiple .ng-select-container.ng-has-value .ng-clear-wrapper, .ng-select.ng-select-multiple .ng-select-container.ng-has-value .ng-arrow-wrapper {
+        border-top: none;
+      }
+
       &.ng-select-focused:not(.ng-select-opened) > .ng-select-container {
         box-shadow: none;
         border-color: darken(@main-color, 20%);

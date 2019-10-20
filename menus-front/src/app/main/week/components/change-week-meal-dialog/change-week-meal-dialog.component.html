@@ -9,9 +9,7 @@
     </div>
     <div class="form-field-wrapper">
       <label>Accompagnements</label>
-      <ng-select [items]="data.sidedishes" bindLabel="name" bindValue="id" [multiple]="true" placeholder="..."
-                 formControlName="sideDishes" class="form-field-value">
-      </ng-select>
+      <menus-sidedish-selector formControlName="sideDishes" [isMultiple]="true"></menus-sidedish-selector>
     </div>
   </div>
   <div class="submit-zone">
