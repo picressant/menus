@@ -6,11 +6,7 @@
   <div class="form-wrapper" [formGroup]="form">
     <div class="form-field-wrapper">
       <label>Ingrédient</label>
-      <div class="input-wrapper">
-        <mat-select formControlName="ingredient">
-          <mat-option *ngFor="let ingredient of ingredients" [value]="ingredient">{{ingredient.name}}</mat-option>
-        </mat-select>
-      </div>
+      <menus-ingredient-selector dataError="Obligatoire" formControlName="ingredient"></menus-ingredient-selector>
     </div>
 
     <menus-form-field-wrapper

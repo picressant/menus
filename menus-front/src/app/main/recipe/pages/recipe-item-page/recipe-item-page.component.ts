@@ -1,13 +1,10 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IngredientQuantity } from '../../../../shared/models/ingredient-quantity.model';
-import { Ingredient } from '../../../../shared/models/ingredient.model';
 import { Recipe } from '../../../../shared/models/recipe.model';
-import { IngredientRestService } from '../../../services/ingredient-rest.service';
 import { RecipeRestService } from '../../../services/recipe-rest.service';
 import { AddIngredientDialogComponent } from '../../components/add-ingredient-dialog/add-ingredient-dialog.component';
 import { IngredientQuantityDialog } from '../../components/add-ingredient-dialog/ingredient-quantity-dialog.model';
@@ -25,8 +22,6 @@ export class RecipeItemPageComponent extends AbstractItemPage<Recipe> implements
 
   @ViewChild('wrapper', { static: false }) container: ElementRef;
 
-  ingredients: Ingredient[] = [];
-
   displayedColumns: string[] = ['name', 'quantity', 'unit', 'actions'];
   dataSource = new MatTableDataSource<IngredientQuantity>();
 
@@ -41,9 +36,7 @@ export class RecipeItemPageComponent extends AbstractItemPage<Recipe> implements
               private recipeRest: RecipeRestService,
               private route: ActivatedRoute,
               private router: Router,
-              private snackBar: MatSnackBar,
-              public dialog: MatDialog,
-              private ingredientService: IngredientRestService) {
+              public dialog: MatDialog) {
 
     super(route, toaster, "Recette modifiée avec succès", "Recette ajoutée avec succès");
     this.form = Recipe.form(this.fb);
@@ -51,14 +44,10 @@ export class RecipeItemPageComponent extends AbstractItemPage<Recipe> implements
 
   ngOnInit() {
     super.ngOnInit();
-    // this.ingredientService.getIngredients().subscribe(
-    //   (ingredients) => this.ingredients = ingredients
-    // )
   }
 
   addIngredient() {
     const data = new IngredientQuantityDialog();
-    data.ingredients = this.ingredients;
     data.ingredientQuantity = null;
     data.index = -1;
 
@@ -67,7 +56,6 @@ export class RecipeItemPageComponent extends AbstractItemPage<Recipe> implements
 
   onEditIngredient(ingredientQuantity: IngredientQuantity, index: number) {
     const data = new IngredientQuantityDialog();
-    data.ingredients = this.ingredients;
     data.ingredientQuantity = ingredientQuantity;
     data.index = index;
 
@@ -121,7 +109,6 @@ export class RecipeItemPageComponent extends AbstractItemPage<Recipe> implements
     if (this.imgPreviewURL != null) {
       this.recipeRest.storePicture(this.id, this.storeCurrentImages[0]).subscribe();
       this.timestamp = new Date().getTime().toString();
-      console.log(this.id);
       this.imgPreviewURL = null;
       this.storeCurrentImages = null;
     }

@@ -10,14 +10,9 @@ import { IngredientQuantityDialog } from './ingredient-quantity-dialog.model';
   templateUrl: './add-ingredient-dialog.component.html',
   styleUrls: ['./add-ingredient-dialog.component.less']
 })
-export class AddIngredientDialogComponent implements OnInit {
+export class AddIngredientDialogComponent {
 
   form: FormGroup;
-
-  ingredients: Ingredient[];
-
-  ngOnInit(): void {
-  }
 
   constructor(
     public dialogRef: MatDialogRef<AddIngredientDialogComponent>,
@@ -29,11 +24,8 @@ export class AddIngredientDialogComponent implements OnInit {
       quantity: ['', Validators.required],
     });
 
-    this.ingredients = data.ingredients;
-    console.log(this.data);
     if (this.data.index > -1) {
       this.form.patchValue(this.data.ingredientQuantity);
-      this.form.get('ingredient').setValue(this.data.ingredients.find(i => i.id === this.data.ingredientQuantity.ingredient.id));
     }
 
   }
@@ -50,7 +42,7 @@ export class AddIngredientDialogComponent implements OnInit {
 
   get getSymbol() {
     if (this.form.get('ingredient').value !== null)
-      return this.form.get('ingredient').value.unit.symbol
+      return this.form.get('ingredient').value.unit.symbol;
     else
       return "";
   }

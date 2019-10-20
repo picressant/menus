@@ -22,7 +22,7 @@ export class SidedishDialogComponent implements OnInit {
     public dialogRef: MatDialogRef<SidedishDialogComponent>,
     private build: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: SidedishDialogData
-  ) { 
+  ) {
     this.form = this.build.group({
       id: [null],
       name: ['', Validators.required]
@@ -32,7 +32,7 @@ export class SidedishDialogComponent implements OnInit {
       this.form.reset(data.side);
       this.ingredientsQuantity = Object.assign([], this.data.side.ingredients);
     }
-      
+
 
     this.isModification = (data.side !== null);
   }
@@ -57,8 +57,8 @@ export class SidedishDialogComponent implements OnInit {
     this.ingredientsQuantity.push(new IngredientQuantity());
   }
 
-  onIngredientChange(changeEvent: MatSelectChange, index: number) {
-    this.ingredientsQuantity[index].ingredient = changeEvent.value;
+  onIngredientChange(changeEvent, index: number) {
+    this.ingredientsQuantity[index].ingredient = changeEvent;
   }
 
   onIngredientQuantityChange(event, index: number) {
@@ -68,7 +68,7 @@ export class SidedishDialogComponent implements OnInit {
   findIngredient(ingredientQuantity: IngredientQuantity) {
     if (ingredientQuantity.ingredient === undefined)
       return null;
-    return this.data.ingredients.find(i => i.id === ingredientQuantity.ingredient.id);
+    return ingredientQuantity.ingredient;
   }
 
 }

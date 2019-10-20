@@ -17,9 +17,7 @@
         </button>
       </div>
       <div class="ingredient-wrapper" *ngFor="let ingredientQuantity of ingredientsQuantity; let i = index">
-        <mat-select [value]="findIngredient(ingredientQuantity)" (selectionChange)="onIngredientChange($event, i)">
-          <mat-option *ngFor="let ingredient of data.ingredients" [value]="ingredient">{{ingredient.name}}</mat-option>
-        </mat-select>
+        <menus-ingredient-selector [ngModel]="findIngredient(ingredientQuantity)" (ngModelChange)="onIngredientChange($event, i)" [ngModelOptions]="{standalone: true}"></menus-ingredient-selector>
         <input #input1 type="number" class="ingredient-quantity" [value]="ingredientQuantity.quantity"
                (input)="onIngredientQuantityChange($event, i)">
         <span class="suffix"

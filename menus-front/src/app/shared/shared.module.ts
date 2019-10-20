@@ -10,6 +10,7 @@ import { HasRoleDirective } from "./directives/has-role.directive";
 import { TableHeaderComponent } from './components/table/table-header/table-header.component';
 import { UnitSelectorComponent } from './components/selectors/unit-selector/unit-selector.component';
 import { NgSelectModule } from "@ng-select/ng-select";
+import { IngredientSelectorComponent } from './components/selectors/ingredient-selector/ingredient-selector.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { NgSelectModule } from "@ng-select/ng-select";
     HasRoleDirective,
     TableHeaderComponent,
     UnitSelectorComponent,
-    UnitSelectorComponent
+    UnitSelectorComponent,
+    IngredientSelectorComponent
   ],
   imports: [
     CommonModule,
@@ -40,7 +42,8 @@ import { NgSelectModule } from "@ng-select/ng-select";
     LoadingImgComponent,
     HasRoleDirective,
     TableHeaderComponent,
-    UnitSelectorComponent
+    UnitSelectorComponent,
+    IngredientSelectorComponent
   ]
 })
 export class SharedModule {
