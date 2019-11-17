@@ -4,13 +4,11 @@ import { Week } from 'src/app/shared/models/week.model';
 import { WeekMeal } from 'src/app/shared/models/week-meal.model';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { SideDish } from 'src/app/shared/models/sidedish.model';
-import { Recipe } from 'src/app/shared/models/recipe.model';
 import { ChangeWeekMealDialogData } from '../../components/change-week-meal-dialog/change-week-meal-dialog-data.model';
 import { MatDialog } from '@angular/material/dialog';
-import { RecipeRestService } from '../../../services/recipe-rest.service';
-import { SideDishRestService } from '../../../services/sidedish-rest.service';
 import { Search } from 'src/app/shared/models/search.model';
 import { ChangeWeekMealDialogComponent } from '../../components/change-week-meal-dialog/change-week-meal-dialog.component';
+import { Router } from "@angular/router";
 
 const days = {
   mondayLunch: 0,
@@ -45,9 +43,8 @@ export class WeekPageComponent implements OnInit {
 
   constructor(
     private weekService: WeekRestService,
-    private recipeService: RecipeRestService,
-    private sideDishService: SideDishRestService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private router: Router
   ) {
   }
 
@@ -56,10 +53,6 @@ export class WeekPageComponent implements OnInit {
 
     let search = new Search();
     search.term = "";
-
-    // this.sideDishService.getSideDishes().subscribe(
-    //   (sideDishes) => this.sidedishes = sideDishes
-    // );
   }
 
   private _loadWeek() {
@@ -99,9 +92,9 @@ export class WeekPageComponent implements OnInit {
       case 11:
         return "Samedi soir";
       case 12:
-        return "Dimance midi";
+        return "Dimanche midi";
       case 13:
-        return "Dimance soir";
+        return "Dimanche soir";
     }
   }
 
@@ -180,5 +173,9 @@ export class WeekPageComponent implements OnInit {
   clearRecette(index: number) {
     this.meals[index] = null;
     this.isModified = true;
+  }
+
+  see(index: number) {
+    this.router.navigate(["main/recipe", this.meals[index].recipe.id]);
   }
 }

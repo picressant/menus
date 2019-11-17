@@ -21,7 +21,7 @@ export class ChangeWeekMealDialogComponent implements OnInit {
   ) {
     this.form = this.build.group({
       recipe: [null, Validators.required],
-      sideDishes: [[], Validators.required]
+      sideDishes: [[]]
     });
 
     if (data.weekmeal !== null) {

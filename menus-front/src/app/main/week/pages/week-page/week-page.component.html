@@ -2,12 +2,21 @@
 <div cdkDropList (cdkDropListDropped)="drop($event)">
   <mat-card cdkDrag class="day-card" *ngFor="let meal of meals; let i = index">
     <mat-card-header>
-      <mat-card-title class="day-title">{{getDay(i)}} :</mat-card-title>        
-      <mat-icon cdkDragHandle class="drag-handle">open_with</mat-icon>         
-    </mat-card-header> 
+      <mat-card-title class="day-title">{{getDay(i)}} :</mat-card-title>
+      <mat-icon cdkDragHandle class="drag-handle">open_with</mat-icon>
+    </mat-card-header>
     <mat-card-content class="recette-content">
       <ng-container *ngIf="meal !== null">
-        <div class="recette-name">{{meal.recipe.name}}</div>
+        <div class="recette-name">
+          <span class="name">{{meal.recipe.name}}</span>
+          <span class="side" *ngIf="meal.sideDishes.length > 0">
+            (
+            <span *ngFor="let side of meal.sideDishes; let i = index">
+              {{ side.name }}<span *ngIf="i < meal.sideDishes.length-1"> - </span>
+            </span>
+            )
+          </span>
+        </div>
         <div class="recette-times">
           <span>Préparation: {{meal.recipe.preparationTime}} min</span>
           <span> / </span>
@@ -17,8 +26,9 @@
       <div class="recette-name" *ngIf="meal === null">-</div>
     </mat-card-content>
     <mat-card-actions>
+      <button (click)="see(i)" mat-button>Voir</button>
       <button (click)="onChange(i)" mat-button>Changer</button>
-      <button (click)="clearRecette(i)" mat-button>Supprimer</button>        
+      <button (click)="clearRecette(i)" mat-button>Supprimer</button>
     </mat-card-actions>
   </mat-card>
 </div>
