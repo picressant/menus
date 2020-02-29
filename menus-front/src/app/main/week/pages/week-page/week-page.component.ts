@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { WeekRestService } from '../../../services/week-rest.service';
 import { Week } from 'src/app/shared/models/week.model';
 import { WeekMeal } from 'src/app/shared/models/week-meal.model';
@@ -9,6 +9,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Search } from 'src/app/shared/models/search.model';
 import { ChangeWeekMealDialogComponent } from '../../components/change-week-meal-dialog/change-week-meal-dialog.component';
 import { Router } from "@angular/router";
+import { ConfirmationService } from "../../../../shared/services/confirmation.service";
 
 const days = {
   mondayLunch: 0,
@@ -32,7 +33,7 @@ const days = {
   templateUrl: './week-page.component.html',
   styleUrls: ['./week-page.component.less']
 })
-export class WeekPageComponent implements OnInit {
+export class WeekPageComponent implements OnInit, OnDestroy {
 
   meals: WeekMeal[];
   sidedishes: SideDish[];
@@ -44,7 +45,8 @@ export class WeekPageComponent implements OnInit {
   constructor(
     private weekService: WeekRestService,
     public dialog: MatDialog,
-    private router: Router
+    private router: Router,
+    private confirmationService: ConfirmationService
   ) {
   }
 
@@ -177,5 +179,15 @@ export class WeekPageComponent implements OnInit {
 
   see(index: number) {
     this.router.navigate(["main/recipe", this.meals[index].recipe.id]);
+  }
+
+  ngOnDestroy(): void {
+    if (this.isModified) {
+      this.confirmationService.confirm("La semaine n'a pas été sauvegardée. Voulez-vous l'enregistrer ?").subscribe((res) => {
+        if (res) {
+          this.onSave();
+        }
+      })
+    }
   }
 }
