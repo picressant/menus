@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  restRoot: "back/",
+  restRoot: "menus-back/",
   deployUrl: "."
 };

@@ -16,3 +16,13 @@ To build : ```npm run build```. It changes to base to "/menus"
 Java 8 with spring boot
 
 To build : ```mvn clean install```. Generates a war to be deploy.
+
+##DevOps
+
+Backend is hosted by tomcat 9
+
+Frontend is hosted by nginx
+
+Nginx set reverse-proxy on /menus-back
+
+SSL is defined using cerbot 
