@@ -3,6 +3,9 @@ package fr.choupiteam.menus.application.security.filter;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
+import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier;
+import fr.choupiteam.menus.application.security.google.GoogleLoginVerifier;
 import fr.choupiteam.menus.application.security.model.ApplicationUser;
 import fr.choupiteam.menus.application.security.model.SecurityConstants;
 import fr.choupiteam.menus.application.security.service.UserDetailsServiceImpl;
@@ -24,7 +27,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.security.GeneralSecurityException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -49,7 +54,8 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
 
             if (dataReq.containsKey("googleid")) {
-                ApplicationUser user = this.userService.getUserByGoogleId(dataReq.get("googleid")).orElseThrow(() -> new BadCredentialsException(""));
+                GoogleIdToken.Payload payload = GoogleLoginVerifier.verifyToken(dataReq.get("googleid"));
+                ApplicationUser user = this.userService.getUserByGoogleId(payload.getUserId()).orElseThrow(() -> new BadCredentialsException(""));
                 return new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
             }
             else {
@@ -86,7 +92,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
             return null;
         }
-        catch (IOException e) {
+        catch (IOException | GeneralSecurityException e) {
             throw new RuntimeException(e);
         }
 

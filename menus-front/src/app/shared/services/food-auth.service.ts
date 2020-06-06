@@ -21,7 +21,7 @@ export class FoodAuthService {
     this.authService.authState.subscribe((user) => {
       this.socialUser = user;
       if (this.socialUser) {
-        this.http.post<any>('login', { googleid: this.socialUser.id }).subscribe((response) => {
+        this.http.post<any>('login', { googleid: this.socialUser.idToken }).subscribe((response) => {
           this.setToken(response.token);
           this.router.navigate(['/main/home']);
         });
