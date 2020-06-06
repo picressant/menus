@@ -66,6 +66,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         return this.applicationUserRepository.findById(id);
     }
 
+    public Optional<ApplicationUser> getUserByGoogleId(String id) {
+        return this.applicationUserRepository.findByGoogleId(id);
+    }
+
     public ApplicationUser saveUser(ApplicationUser user) {
         return this.applicationUserRepository.save(user);
     }

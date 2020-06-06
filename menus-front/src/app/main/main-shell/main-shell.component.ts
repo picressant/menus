@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/shared/services/auth.service';
+import { FoodAuthService } from 'src/app/shared/services/food-auth.service';
 
 @Component({
   selector: 'menus-main-shell',
@@ -9,7 +9,7 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 export class MainShellComponent implements OnInit {
 
   constructor(
-    private authService: AuthService
+    private authService: FoodAuthService
   ) {
   }
 

@@ -18,6 +18,11 @@
     type="text"
     [control]="form.controls.username"></menus-form-field-wrapper>
 
+  <menus-form-field-wrapper *appHasRole="'ROLE_ADMIN'"
+    label="googleId"
+    type="text"
+    [control]="form.controls.googleId"></menus-form-field-wrapper>
+
   <div class="form-field-wrapper" *appHasRole="'ROLE_ADMIN'">
     <label>Role</label>
     <div class="input-wrapper">

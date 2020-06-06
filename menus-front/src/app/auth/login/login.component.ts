@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { AuthService } from 'src/app/shared/services/auth.service';
+import { FoodAuthService } from 'src/app/shared/services/food-auth.service';
 
 @Component({
   selector: 'menus-login',
@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private builder: FormBuilder,
-    private authService: AuthService) {
+    private authService: FoodAuthService) {
     this.form = this.builder.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
@@ -26,5 +26,9 @@ export class LoginComponent implements OnInit {
 
   onLogin() {
     this.authService.connect(this.form.value);
+  }
+
+  onLoginGoogle() {
+    this.authService.connectWithGoogle();
   }
 }

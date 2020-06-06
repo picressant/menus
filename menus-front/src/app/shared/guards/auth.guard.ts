@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
-import { AuthService } from '../services/auth.service';
+import { FoodAuthService } from '../services/food-auth.service';
 import { Observable, Observer } from "rxjs";
 
 @Injectable({ providedIn: 'root' })
 export class AuthGuard implements CanActivate {
   constructor(
     private router: Router,
-    private authenticationService: AuthService
+    private authenticationService: FoodAuthService
   ) {
   }
 
@@ -18,7 +18,6 @@ export class AuthGuard implements CanActivate {
         return Observable.create((observer: Observer<boolean>) => {
           this.authenticationService.loadCurrentUser()
             .subscribe(res => {
-              console.log('next user', res);
               this.authenticationService.user.next(res);
               observer.next(true);
               observer.complete();

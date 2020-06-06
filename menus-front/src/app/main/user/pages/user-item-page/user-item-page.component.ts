@@ -8,7 +8,7 @@ import { ToasterService } from "../../../../shared/services/toaster.service";
 import { forkJoin, Observable } from "rxjs";
 import { MatDialog } from "@angular/material/dialog";
 import { ResetPasswordDialogComponent } from "../../components/reset-password-dialog/reset-password-dialog.component";
-import { AuthService } from "../../../../shared/services/auth.service";
+import { FoodAuthService } from "../../../../shared/services/food-auth.service";
 import { getAllRoles, getRoleStringified, Role } from "../../../../shared/models/role.enum";
 
 @Component({
@@ -28,7 +28,7 @@ export class UserItemPageComponent extends AbstractItemPage<User> implements OnI
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private userService: UserRestService,
-    private authService: AuthService,
+    private authService: FoodAuthService,
     private toaster: ToasterService,
     private router: Router,
     private dialog: MatDialog,

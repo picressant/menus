@@ -5,6 +5,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.choupiteam.menus.application.security.model.ApplicationUser;
 import fr.choupiteam.menus.application.security.model.SecurityConstants;
+import fr.choupiteam.menus.application.security.service.UserDetailsServiceImpl;
 import fr.choupiteam.menus.infrastructure.rest.error.ResponseError;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -25,30 +26,42 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
     private AuthenticationManager authenticationManager;
+    private UserDetailsServiceImpl userService;
 
 
-    public JWTAuthenticationFilter(AuthenticationManager authenticationManager) {
+    public JWTAuthenticationFilter(AuthenticationManager authenticationManager, UserDetailsServiceImpl userService) {
         this.authenticationManager = authenticationManager;
+        this.userService = userService;
     }
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest req,
                                                 HttpServletResponse res) {
         try {
-            ApplicationUser creds = new ObjectMapper()
-                    .readValue(req.getInputStream(), ApplicationUser.class);
+            HashMap<String, String> dataReq = new ObjectMapper()
+                    .readValue(req.getInputStream(), HashMap.class);
 
-            return authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(
-                            creds.getUsername(),
-                            creds.getPassword(),
-                            new ArrayList<>())
-            );
+
+            if (dataReq.containsKey("googleid")) {
+                ApplicationUser user = this.userService.getUserByGoogleId(dataReq.get("googleid")).orElseThrow(() -> new BadCredentialsException(""));
+                return new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
+            }
+            else {
+                return authenticationManager.authenticate(
+                        new UsernamePasswordAuthenticationToken(
+                                dataReq.get("username"),
+                                dataReq.get("password"),
+                                new ArrayList<>())
+                );
+            }
+
+
         }
         catch (AuthenticationException e) {
             String reason = "";

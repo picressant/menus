@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/shared/models/user.model';
-import { AuthService } from 'src/app/shared/services/auth.service';
+import { FoodAuthService } from 'src/app/shared/services/food-auth.service';
 
 @Component({
   selector: 'menus-user-info',
@@ -13,7 +13,7 @@ export class UserInfoComponent implements OnInit {
   timestamp: string;
 
   constructor(
-    private authService: AuthService
+    private authService: FoodAuthService
   ) {
     this.authService.user.subscribe(
       (u) => {

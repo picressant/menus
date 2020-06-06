@@ -26,6 +26,8 @@ public class ApplicationUser implements UserDetails {
 
     private Role role;
 
+    private String googleId;
+
     public String getId() {
         return id;
     }
@@ -72,6 +74,7 @@ public class ApplicationUser implements UserDetails {
         this.setFirstname(user.getFirstname());
         this.setLastname(user.getLastname());
         this.setUsername(user.getUsername());
+        this.setGoogleId(user.getGoogleId());
     }
 
     @JsonIgnore
@@ -110,5 +113,13 @@ public class ApplicationUser implements UserDetails {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public String getGoogleId() {
+        return googleId;
+    }
+
+    public void setGoogleId(String googleId) {
+        this.googleId = googleId;
     }
 }

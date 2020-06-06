@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
-import { AuthService } from '../services/auth.service';
+import { FoodAuthService } from '../services/food-auth.service';
 import { ToasterService } from '../services/toaster.service';
 import { AdminGuard } from './admin.guard';
 
@@ -11,7 +11,7 @@ import { AdminGuard } from './admin.guard';
 export class AdminOrSelfGuard extends AdminGuard implements CanActivate {
 
   constructor(
-    private authService: AuthService,
+    private authService: FoodAuthService,
     private toaster: ToasterService,
     private router: Router
   ) {

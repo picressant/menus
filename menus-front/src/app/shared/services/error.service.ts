@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { ToasterService } from './toaster.service';
-import { AuthService } from "./auth.service";
+import { FoodAuthService } from "./food-auth.service";
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +9,7 @@ export class ErrorService {
 
   constructor(
     private toaster: ToasterService,
-    private authService: AuthService) {
+    private authService: FoodAuthService) {
   }
 
   manageError(error: any) {

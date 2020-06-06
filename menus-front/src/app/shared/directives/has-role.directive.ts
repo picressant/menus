@@ -1,7 +1,7 @@
 import { Directive, Input, OnDestroy, OnInit, TemplateRef, ViewContainerRef } from '@angular/core';
 import { Subject } from "rxjs";
 import { takeUntil } from "rxjs/operators";
-import { AuthService } from "../services/auth.service";
+import { FoodAuthService } from "../services/food-auth.service";
 import { Role } from "../models/role.enum";
 
 @Directive({
@@ -18,7 +18,7 @@ export class HasRoleDirective implements OnInit, OnDestroy {
   constructor(
     private viewContainerRef: ViewContainerRef,
     private templateRef: TemplateRef<any>,
-    private authService : AuthService
+    private authService : FoodAuthService
   ) {
   }
 

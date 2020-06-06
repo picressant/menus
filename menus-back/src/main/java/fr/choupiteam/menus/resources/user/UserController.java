@@ -35,12 +35,6 @@ public class UserController {
         this.bCryptPasswordEncoder = new BCryptPasswordEncoder();
     }
 
-    @PostMapping("/sign-up")
-    public void signUp(@RequestBody ApplicationUser user) {
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        applicationUserRepository.save(user);
-    }
-
     @RequestMapping(path = "/me", method = RequestMethod.GET)
     public ApplicationUser getMe(@AuthenticationPrincipal ApplicationUser user) {
         return user;

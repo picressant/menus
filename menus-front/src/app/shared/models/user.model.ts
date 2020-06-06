@@ -7,6 +7,7 @@ export class User extends AbstractData {
     firstname: string;
     lastname: string;
     username: string;
+    googleId: string;
     role: Role;
 
     static form(fb: FormBuilder) {
@@ -14,6 +15,7 @@ export class User extends AbstractData {
         firstname: [null, Validators.required],
         lastname: [null, Validators.required],
         username: [null, Validators.required],
+        googleId: [null],
         role: [Role.ROLE_USER, Validators.required]
       });
 
