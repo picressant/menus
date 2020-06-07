@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Group {
 
     @Id
-    private String  id;
+    private String id;
 
     @Searchable
     private String name;

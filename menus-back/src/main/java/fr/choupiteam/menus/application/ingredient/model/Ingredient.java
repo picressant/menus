@@ -3,6 +3,7 @@ package fr.choupiteam.menus.application.ingredient.model;
 import fr.choupiteam.menus.application.unit.model.Unit;
 import fr.choupiteam.menus.infrastructure.annotation.Searchable;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "ingredient")
@@ -14,6 +15,7 @@ public class Ingredient {
     @Searchable
     private String name;
 
+    @DBRef
     private Unit unit;
 
     public String getId() {

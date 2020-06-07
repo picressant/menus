@@ -29,10 +29,6 @@ public class MenusApplicationStartup implements ApplicationListener<ApplicationR
 
     @Override
     public void onApplicationEvent(ApplicationReadyEvent applicationReadyEvent) {
-        if (this.weekService.getWeek() == null) {
-            this.weekService.insertWeek(new Week());
-        }
-
         try {
             this.userDetailsService.loadUserByUsername("pcressant");
         }

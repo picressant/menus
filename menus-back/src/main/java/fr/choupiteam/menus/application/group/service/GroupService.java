@@ -3,6 +3,7 @@ package fr.choupiteam.menus.application.group.service;
 import fr.choupiteam.menus.application.group.model.Group;
 import fr.choupiteam.menus.application.pager.model.Pager;
 import fr.choupiteam.menus.application.security.model.ApplicationUser;
+import fr.choupiteam.menus.application.week.service.WeekService;
 import fr.choupiteam.menus.infrastructure.repository.ApplicationUserRepository;
 import fr.choupiteam.menus.infrastructure.repository.GroupRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,9 @@ public class GroupService {
     @Autowired
     private ApplicationUserRepository userRepository;
 
+    @Autowired
+    private WeekService weekService;
+
     public Page<Group> getGroupsByPager(Pager pager) {
         return this.groupRepository.findAllByPager(pager, Group.class);
     }
@@ -38,7 +42,11 @@ public class GroupService {
     }
 
     public void deleteGroup(String id) {
-        this.groupRepository.deleteById(id);
+        this.getGroup(id)
+                .ifPresent(group -> {
+                    this.weekService.deleteWeek(this.weekService.getWeek(group));
+                    this.groupRepository.deleteById(id);
+                });
     }
 
     public List<ApplicationUser> getGroupUsers(String id) {

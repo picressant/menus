@@ -1,8 +1,10 @@
 package fr.choupiteam.menus.resources.week;
 
+import fr.choupiteam.menus.application.security.model.ApplicationUser;
 import fr.choupiteam.menus.application.week.model.Week;
 import fr.choupiteam.menus.application.week.service.WeekService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,12 +18,13 @@ public class WeekController {
     private WeekService weekService;
 
     @RequestMapping(method = RequestMethod.GET)
-    public Week getWeek() {
-        return this.weekService.getWeek();
+    public Week getWeek(@AuthenticationPrincipal ApplicationUser user) {
+        return this.weekService.getWeek(user.getGroup());
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public Week setWeek(@RequestBody Week week) {
+    public Week setWeek(@RequestBody Week week, @AuthenticationPrincipal ApplicationUser user) {
+        week.setGroup(user.getGroup());
         return this.weekService.setWeek(week);
     }
 }

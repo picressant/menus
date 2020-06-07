@@ -1,6 +1,9 @@
 package fr.choupiteam.menus.application.week.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import fr.choupiteam.menus.application.group.model.Group;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "week")
@@ -8,6 +11,10 @@ public class Week {
 
     @Id
     private String id;
+
+    @JsonIgnore
+    @DBRef
+    private Group group;
 
     private WeekMeal mondayLunch;
 
@@ -156,5 +163,13 @@ public class Week {
 
     public void setSundayDinner(WeekMeal sundayDinner) {
         this.sundayDinner = sundayDinner;
+    }
+
+    public Group getGroup() {
+        return group;
+    }
+
+    public void setGroup(Group group) {
+        this.group = group;
     }
 }

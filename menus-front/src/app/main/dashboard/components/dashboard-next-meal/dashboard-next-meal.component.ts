@@ -43,7 +43,7 @@ export class DashboardNextMealComponent implements OnInit {
         isLunch = !isLunch;
 
         foundMeal = this.findMeal(day, isLunch);
-      } while (foundMeal === null && (day !== currentDate.getHours() || isLunch !== (currentDate.getHours() < 14)))
+      } while (foundMeal === null && (day !== currentDate.getDay() || isLunch !== (currentDate.getHours() < 14)))
     }
 
     this.nextMeal = foundMeal;
