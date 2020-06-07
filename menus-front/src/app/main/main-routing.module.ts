@@ -11,6 +11,7 @@ import { UserListPageComponent } from "./user/pages/user-list-page/user-list-pag
 import { UserItemPageComponent } from "./user/pages/user-item-page/user-item-page.component";
 import { AdminGuard } from "../shared/guards/admin.guard";
 import { AdminOrSelfGuard } from "../shared/guards/admin-or-self-guard.service";
+import { GroupItemPageComponent } from "./user/pages/group-item-page/group-item-page.component";
 
 const routes: Routes = [
   { path: 'home', component: DashboardComponent },
@@ -23,6 +24,8 @@ const routes: Routes = [
   { path: 'user', canActivate: [AdminGuard], component: UserListPageComponent },
   { path: 'user/add', canActivate: [AdminGuard], component: UserItemPageComponent },
   { path: 'user/:id', canActivate: [AdminOrSelfGuard], component: UserItemPageComponent },
+  { path: 'user/group/add', canActivate: [AdminGuard], component: GroupItemPageComponent },
+  { path: 'user/group/:id', canActivate: [AdminGuard], component: GroupItemPageComponent },
   {
     path: '',
     redirectTo: 'home',

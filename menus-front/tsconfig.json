@@ -18,6 +18,10 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "@models/*":["src/app/shared/models/*"],
+      "@mainServices/*": ["src/app/main/services/*"]
+    }
   }
 }

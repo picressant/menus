@@ -36,6 +36,7 @@ import java.util.HashMap;
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
+
     private AuthenticationManager authenticationManager;
     private UserDetailsServiceImpl userService;
 

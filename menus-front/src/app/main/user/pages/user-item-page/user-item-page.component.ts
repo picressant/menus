@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from "@angular/forms";
-import { User } from "../../../../shared/models/user.model";
+import { User } from "@models/user.model";
 import { ActivatedRoute, Router } from "@angular/router";
 import { UserRestService } from "../../../services/user-rest.service";
 import { AbstractItemPage } from "../../../../shared/components/pages/abstract-item-page";
@@ -9,7 +9,7 @@ import { forkJoin, Observable } from "rxjs";
 import { MatDialog } from "@angular/material/dialog";
 import { ResetPasswordDialogComponent } from "../../components/reset-password-dialog/reset-password-dialog.component";
 import { FoodAuthService } from "../../../../shared/services/food-auth.service";
-import { getAllRoles, getRoleStringified, Role } from "../../../../shared/models/role.enum";
+import { getAllRoles, getRoleStringified, Role } from "@models/role.enum";
 
 @Component({
   selector: 'menus-user-item-page',

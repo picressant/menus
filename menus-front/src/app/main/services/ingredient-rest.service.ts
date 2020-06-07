@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Ingredient } from '../../shared/models/ingredient.model';
+import { Ingredient } from '@models/ingredient.model';
 import { Observable } from 'rxjs';
 import { Unit } from 'src/app/shared/models/unit.model';
-import { Pageable } from "../../shared/models/pager/pageable.model";
-import { Pager } from "../../shared/models/pager/pager.model";
+import { Pageable } from "@models/pager/pageable.model";
+import { Pager } from "@models/pager/pager.model";
 
 @Injectable({
   providedIn: 'root'

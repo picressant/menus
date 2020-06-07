@@ -1,18 +1,18 @@
 import { Component } from '@angular/core';
 import { AbstractPageableSelectorComponent } from "../abstract-pageable-selector.component";
-import { IngredientRestService } from "@mainServices/ingredient-rest.service";
 import { NgControl } from "@angular/forms";
-import { Ingredient } from "@models/ingredient.model";
+import { Group } from "@models/group.model";
+import { GroupRestService } from "@mainServices/group-rest.service";
 
 @Component({
-  selector: 'menus-ingredient-selector',
-  templateUrl: './ingredient-selector.component.html',
-  styleUrls: ['./ingredient-selector.component.less']
+  selector: 'menus-group-selector',
+  templateUrl: './group-selector.component.html',
+  styleUrls: ['./group-selector.component.less']
 })
-export class IngredientSelectorComponent extends AbstractPageableSelectorComponent<Ingredient> {
+export class GroupSelectorComponent extends AbstractPageableSelectorComponent<Group> {
 
   constructor(
-    private ingredientService: IngredientRestService,
+    private groupService: GroupRestService,
     public ngControl: NgControl
   ) {
     super();
@@ -21,7 +21,7 @@ export class IngredientSelectorComponent extends AbstractPageableSelectorCompone
 
   load(isSetValue: boolean) {
     this.isLoading = true;
-    this.ingredientService.getIngredients(this.pager).subscribe(
+    this.groupService.getGroups(this.pager).subscribe(
       (data) => this.setContent(data, isSetValue)
     );
   }
@@ -29,4 +29,5 @@ export class IngredientSelectorComponent extends AbstractPageableSelectorCompone
   get isError() {
     return this.ngControl.invalid && this.ngControl.touched;
   }
+
 }

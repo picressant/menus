@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { SideDish } from 'src/app/shared/models/sidedish.model';
+import { SideDish } from '@models/sidedish.model';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { Pageable } from "../../shared/models/pager/pageable.model";
-import { Pager } from "../../shared/models/pager/pager.model";
+import { Pageable } from "@models/pager/pageable.model";
+import { Pager } from "@models/pager/pager.model";
 
 @Injectable({
     providedIn: 'root'

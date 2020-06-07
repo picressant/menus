@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
-import { Recipe } from '../../shared/models/recipe.model';
+import { Recipe } from '@models/recipe.model';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { Search } from 'src/app/shared/models/search.model';
-import { Pager } from "../../shared/models/pager/pager.model";
-import { Pageable } from "../../shared/models/pager/pageable.model";
+import { Pager } from "@models/pager/pager.model";
+import { Pageable } from "@models/pager/pageable.model";
 
 @Injectable({
   providedIn: 'root'
 })
 export class RecipeRestService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   getRecipes(pager: Pager): Observable<Pageable<Recipe>> {
     return this.http.post<Pageable<Recipe>>('recipe/list', pager);

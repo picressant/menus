@@ -13,6 +13,7 @@ import { NgSelectModule } from "@ng-select/ng-select";
 import { IngredientSelectorComponent } from './components/selectors/ingredient-selector/ingredient-selector.component';
 import { RecipeSelectorComponent } from './components/selectors/recipe-selector/recipe-selector.component';
 import { SidedishSelectorComponent } from './components/selectors/sidedish-selector/sidedish-selector.component';
+import { GroupSelectorComponent } from './components/selectors/group-selector/group-selector.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { SidedishSelectorComponent } from './components/selectors/sidedish-selec
     UnitSelectorComponent,
     IngredientSelectorComponent,
     RecipeSelectorComponent,
-    SidedishSelectorComponent
+    SidedishSelectorComponent,
+    GroupSelectorComponent
   ],
   imports: [
     CommonModule,
@@ -49,7 +51,8 @@ import { SidedishSelectorComponent } from './components/selectors/sidedish-selec
     UnitSelectorComponent,
     IngredientSelectorComponent,
     RecipeSelectorComponent,
-    SidedishSelectorComponent
+    SidedishSelectorComponent,
+    GroupSelectorComponent
   ]
 })
 export class SharedModule {

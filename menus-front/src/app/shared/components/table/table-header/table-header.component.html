@@ -1,5 +1,5 @@
 <div class="header-wrapper" [formGroup]="searchForm">
-  <input formControlName="search" class="search-input" placeholder="Rechercher...">
+  <input formControlName="search" class="search-input" placeholder="Rechercher..." *ngIf="!noSearch">
   <button mat-raised-button class="add-button" color="primary" (click)="onAddClick()">
     <mat-icon>add</mat-icon>
     <span class="responsive hide">Ajouter</span>

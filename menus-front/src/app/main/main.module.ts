@@ -39,4 +39,5 @@ import { UserModule } from "./user/user.module";
     }
   ]
 })
-export class MainModule { }
+export class MainModule {
+}

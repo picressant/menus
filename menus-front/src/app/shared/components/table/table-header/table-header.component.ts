@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { debounceTime } from "rxjs/operators";
 
@@ -15,6 +15,9 @@ export class TableHeaderComponent {
 
   @Output()
   onAdd = new EventEmitter<void>();
+
+  @Input()
+  noSearch: boolean = false;
 
   constructor(
     private fb: FormBuilder

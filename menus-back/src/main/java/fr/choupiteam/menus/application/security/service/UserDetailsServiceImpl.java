@@ -83,7 +83,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         return this.getUser(user.getId()).orElse(null);
     }
 
-
     public void storeAvatar(ApplicationUser user, MultipartFile avatar) {
         try {
             this.userPictureRepository.removeForUser(user.getId());

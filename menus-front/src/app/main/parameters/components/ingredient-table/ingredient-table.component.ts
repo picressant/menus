@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { IngredientDialogData } from "../add-ingredient-dialog/ingredient-dialog-data.model";
-import { Ingredient } from "../../../../shared/models/ingredient.model";
+import { Ingredient } from "@models/ingredient.model";
 import { AddIngredientDialogComponent } from "../add-ingredient-dialog/add-ingredient-dialog.component";
 import { IngredientRestService } from "../../../services/ingredient-rest.service";
 import { MatDialog } from "@angular/material/dialog";
 import { AbstractTableComponent } from "../../../../shared/components/table/abstract-table.component";
 import { Observable } from "rxjs";
-import { Pageable } from "../../../../shared/models/pager/pageable.model";
+import { Pageable } from "@models/pager/pageable.model";
 
 @Component({
   selector: 'menus-ingredient-table',

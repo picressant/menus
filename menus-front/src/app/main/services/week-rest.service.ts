@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Week } from 'src/app/shared/models/week.model';
+import { Week } from '@models/week.model';
 
 @Injectable({
   providedIn: 'root'

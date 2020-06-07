@@ -2,6 +2,7 @@ package fr.choupiteam.menus.application.security.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import fr.choupiteam.menus.application.group.model.Group;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.core.GrantedAuthority;
@@ -27,6 +28,8 @@ public class ApplicationUser implements UserDetails {
     private Role role;
 
     private String googleId;
+
+    private Group group;
 
     public String getId() {
         return id;
@@ -75,6 +78,7 @@ public class ApplicationUser implements UserDetails {
         this.setLastname(user.getLastname());
         this.setUsername(user.getUsername());
         this.setGoogleId(user.getGoogleId());
+        this.setGroup(user.getGroup());
     }
 
     @JsonIgnore
@@ -121,5 +125,13 @@ public class ApplicationUser implements UserDetails {
 
     public void setGoogleId(String googleId) {
         this.googleId = googleId;
+    }
+
+    public Group getGroup() {
+        return group;
+    }
+
+    public void setGroup(Group group) {
+        this.group = group;
     }
 }
