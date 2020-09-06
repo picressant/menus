@@ -1,0 +1,41 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Recettes</ion-title>
+    <ion-searchbar (ionChange)="onSearch($event)"
+                   inputmode="text"
+                   debounce="500"
+                   animated="true"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="onAdd()">
+    <ion-fab-button>
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <div id="container">
+    <ion-header collapse="condense">
+      <ion-toolbar>
+        <ion-title size="large">Recettes</ion-title>
+      </ion-toolbar>
+    </ion-header>
+
+
+
+      <app-recipe-item-card [recipe]="recipe"  *ngFor="let recipe of recipes"
+                              ></app-recipe-item-card>
+
+    <ion-infinite-scroll threshold="100px" (ionInfinite)="onScrollDown()">
+      <ion-infinite-scroll-content
+              loadingSpinner="bubbles"
+              loadingText="Loading more data...">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+    </div>
+</ion-content>
