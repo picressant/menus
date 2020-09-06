@@ -4,6 +4,7 @@ import { RecipeItemCardComponent } from "./components/recipe-item-card/recipe-it
 import { CommonModule } from "@angular/common";
 import { IonicModule } from "@ionic/angular";
 import { RecipeItemPageComponent } from "./pages/recipe-item-page/recipe-item-page.component";
+import { SharedModule } from "../../shared/shared.module";
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { RecipeItemPageComponent } from "./pages/recipe-item-page/recipe-item-pa
     ],
     imports: [
         CommonModule,
-        IonicModule
+        IonicModule,
+        SharedModule
     ],
     exports: [
         RecipeListPageComponent,

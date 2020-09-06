@@ -3,7 +3,7 @@
         <ion-buttons slot="start">
             <ion-back-button defaultHref="/"></ion-back-button>
         </ion-buttons>
-        <ion-title>Recettes</ion-title>
+        <ion-title>{{ isAddingMode ? "Ajouter une recette" : data?.name}}</ion-title>
     </ion-toolbar>
 </ion-header>
 

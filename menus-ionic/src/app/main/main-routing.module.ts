@@ -8,6 +8,7 @@ import { RecipeItemPageComponent } from "./recipe/pages/recipe-item-page/recipe-
 const routes: Routes = [
     { path: 'recipe', component: RecipeListPageComponent },
     { path: 'recipe/add', component: RecipeItemPageComponent },
+    { path: 'recipe/:id', component: RecipeItemPageComponent },
     { path: 'week', component: WeekPageComponent },
     {
         path: '',

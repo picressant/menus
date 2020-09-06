@@ -51,4 +51,8 @@ export class RecipeListPageComponent implements OnInit {
   onAdd() {
     this.router.navigate(["main/recipe/add"]);
   }
+
+  goToRecipe(recipe: Recipe) {
+    this.router.navigate(["main/recipe", recipe.id]);
+  }
 }

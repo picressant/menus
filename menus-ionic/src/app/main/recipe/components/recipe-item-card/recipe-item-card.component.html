@@ -1,4 +1,7 @@
 <ion-card>
+  <menus-loading-img
+          [styles]="imgStyles" [diameter]="75"
+          [src]="'recipe/' + recipe.id + '/picture' | secure | async"></menus-loading-img>
   <ion-card-header>
     <ion-card-title>{{recipe.name}}</ion-card-title>
   </ion-card-header>

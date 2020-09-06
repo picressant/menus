@@ -1,12 +1,11 @@
 <ion-split-pane contentId="main-content">
     <ion-menu contentId="main-content" type="overlay">
+        <img src="{{deployUrl}}/assets/img/linkedin_banner_image_1.png" (click)="clicktoto(1, null)">
+
         <ion-content>
             <ion-list id="inbox-list">
-                <ion-list-header>Food organisator</ion-list-header>
-
                 <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
-                    <ion-item (click)="goTo(p)" lines="none"
-                              detail="false" [class.selected]="selectedIndex == i">
+                    <ion-item (click)="clicktoto(i, p)" lines="none" detail="false" [class.selected]="selectedIndex == i">
                         <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
                         <ion-label>{{ p.title }}</ion-label>
                     </ion-item>

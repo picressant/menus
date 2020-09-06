@@ -10,6 +10,7 @@ export class RecipeItemCardComponent implements OnInit {
 
   @Input()
   recipe: Recipe;
+  imgStyles: any;
 
   constructor() { }
 
