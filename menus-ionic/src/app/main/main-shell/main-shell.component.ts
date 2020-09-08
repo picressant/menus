@@ -29,11 +29,6 @@ export class MainShellComponent implements OnInit {
     ) {
     }
 
-    clicktoto(i: number, p: any) {
-        console.log("selected " + i, p);
-        this.selectedIndex = i;
-    }
-
     goTo(pageToGo: any) {
         this.selectedIndex = this.appPages.findIndex(page => page.url.toLowerCase() === pageToGo.url.toLowerCase());
         this.router.navigate(["main/" + pageToGo.url]);
