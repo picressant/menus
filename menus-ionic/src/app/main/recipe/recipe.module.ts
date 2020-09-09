@@ -6,6 +6,7 @@ import { IonicModule } from "@ionic/angular";
 import { RecipeItemPageComponent } from "./pages/recipe-item-page/recipe-item-page.component";
 import { SharedModule } from "../../shared/shared.module";
 import { LayoutModule } from "../layout/layout.module";
+import { ReactiveFormsModule } from "@angular/forms";
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { LayoutModule } from "../layout/layout.module";
         CommonModule,
         IonicModule,
         SharedModule,
-        LayoutModule
+        LayoutModule,
+        ReactiveFormsModule
     ],
     exports: [
         RecipeListPageComponent,

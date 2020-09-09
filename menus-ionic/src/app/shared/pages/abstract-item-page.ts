@@ -5,6 +5,7 @@ import { Observable } from "rxjs";
 import { isNullOrUndefined } from "util";
 import { ToastController } from "@ionic/angular";
 import { AbstractData } from "@models/abstract-data.model";
+import { ToasterService } from "../services/toaster.service";
 
 export abstract class AbstractItemPage<T extends AbstractData> implements OnInit {
 
@@ -18,7 +19,7 @@ export abstract class AbstractItemPage<T extends AbstractData> implements OnInit
 
     protected constructor(
         private _route: ActivatedRoute,
-        private _toaster: ToastController,
+        private _toaster: ToasterService,
         saveToast: string,
         createToast: string
     ) {
@@ -79,25 +80,18 @@ export abstract class AbstractItemPage<T extends AbstractData> implements OnInit
             (item: T) => {
                 this.id = item.id;
                 this.resetForm(item);
-                this.showToastCreation(this.createToast);
+                this._toaster.info(this.createToast);
                 this.postCreate();
             }
         );
     }
 
-  async showToastCreation(text: string) {
-    const toast = await this._toaster.create({
-      message: text,
-      duration: 2000
-    });
-    toast.present();
-  }
 
   protected _save() {
         this.save$.subscribe(
             (item: T) => {
                 this.resetForm(item);
-                this.showToastCreation(this.saveToast);
+                this._toaster.info(this.saveToast);
             }
         );
     }

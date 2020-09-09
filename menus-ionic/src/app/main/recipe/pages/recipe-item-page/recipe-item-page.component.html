@@ -1,14 +1,81 @@
 <app-page-header [title]="title" [backButton]="true" backRef="/"></app-page-header>
 
 <ion-content [fullscreen]="true">
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+        <ion-fab-button>
+            <ion-icon name="checkmark-outline" *ngIf="!isReadonly"></ion-icon>
+            <ion-icon name="create-outline" *ngIf="isReadonly" (click)="modify()"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
 
     <div id="container">
-        <ion-header collapse="condense">
-            <ion-toolbar>
-                <ion-title size="large">Recettes</ion-title>
-            </ion-toolbar>
-        </ion-header>
+        <div *ngIf="selectedTab === 'tab-overview'">
+            <div class="file-input-wrapper">
+                <div class="picture c-hand" (click)="file.click()">
+                    <img [src]="imgPreviewURL" alt="Profile" height="200" width="200" *ngIf="imgPreviewURL">
+                    <menus-loading-img
+                            [styles]="imgStyles"
+                            [src]="'recipe/' + id + '/picture?' + timestamp | secure | async"
+                            *ngIf="!imgPreviewURL"></menus-loading-img>
+                    <ion-icon name="cloud-upload-outline" *ngIf="!isReadonly"></ion-icon>
+                </div>
+                <input type="file" #file (change)="preview(file.files)" [disabled]="this.form.disabled">
+            </div>
+            <div [formGroup]="form" class="form-wrapper">
+                <ion-item>
+                    <ion-label position="floating">Nom de la recette</ion-label>
+                    <ion-input formControlName="name"></ion-input>
+                </ion-item>
 
-        Add recipe
+                <ion-item>
+                    <ion-label position="floating">Temps de préparation</ion-label>
+                    <ion-input type="number" formControlName="preparationTime"></ion-input>
+                </ion-item>
+
+                <ion-item>
+                    <ion-label position="floating">Temps de cuisson</ion-label>
+                    <ion-input type="number" formControlName="cookingTime"></ion-input>
+                </ion-item>
+
+                <ion-item>
+                    <ion-label position="floating">Nombres de personnes</ion-label>
+                    <ion-input type="number" formControlName="persons"></ion-input>
+                </ion-item>
+
+                <ion-item>
+                    <ion-label position="floating">Livre de recette</ion-label>
+                    <ion-input formControlName="bookReference"></ion-input>
+                </ion-item>
+            </div>
+        </div>
+        <div *ngIf="selectedTab === 'tab-steps'">Steps</div>
+        <div *ngIf="selectedTab === 'tab-ingredients'">
+            <ion-list *ngFor="let ingredientQuantity of form.controls.ingredients.value">
+                <ion-item>
+                    <ion-label slot="start">{{ingredientQuantity.ingredient.name}}</ion-label>
+                    <ion-label slot="end">{{ingredientQuantity.quantity}} {{ingredientQuantity.ingredient.unit.symbol}}</ion-label>
+                </ion-item>
+            </ion-list>
+        </div>
+
+        <ion-tabs>
+            <ion-tab-bar slot="bottom">
+                <ion-tab-button selected="{{selectedTab === 'tab-overview'}}" (click)="select('tab-overview')">
+                    <ion-icon name="restaurant-outline"></ion-icon>
+                    <ion-label>Résumé</ion-label>
+                </ion-tab-button>
+
+                <ion-tab-button selected="{{selectedTab === 'tab-steps'}}" (click)="select('tab-steps')">
+                    <ion-icon name="list-circle-outline"></ion-icon>
+                    <ion-label>Etapes</ion-label>
+                </ion-tab-button>
+
+                <ion-tab-button selected="{{selectedTab === 'tab-ingredients'}}"
+                                (click)="select('tab-ingredients')">
+                    <ion-icon name="list-circle-outline"></ion-icon>
+                    <ion-label>Ingrédients</ion-label>
+                </ion-tab-button>
+            </ion-tab-bar>
+        </ion-tabs>
     </div>
 </ion-content>

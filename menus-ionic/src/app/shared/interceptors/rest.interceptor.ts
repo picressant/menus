@@ -12,7 +12,6 @@ export class RestInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler):
     Observable<HttpEvent<any>> {
-    console.log("rest interceptor", req);
     const lURL = (environment.production) ? location.origin + "/" + environment.restRoot + req.urlWithParams : environment.restRoot + req.urlWithParams;
 
     req = req.clone({
