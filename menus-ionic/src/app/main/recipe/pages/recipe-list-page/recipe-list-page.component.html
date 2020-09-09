@@ -1,11 +1,4 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <ion-title>Recettes</ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-page-header title="Recette"></app-page-header>
 
 <ion-content [fullscreen]="true">
   <ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="onAdd()">
@@ -13,6 +6,10 @@
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
 
   <div id="container">
     <ion-header collapse="condense">
@@ -25,17 +22,17 @@
                    inputmode="text"
                    debounce="500"
                    animated="true"
-                   slot="start" mode="ios"></ion-searchbar>
+                   slot="start"
+                   mode="ios"></ion-searchbar>
 
 
 
       <app-recipe-item-card [recipe]="recipe"  *ngFor="let recipe of recipes" (click)="goToRecipe(recipe)"
                               ></app-recipe-item-card>
 
-    <ion-infinite-scroll threshold="100px" (ionInfinite)="onScrollDown()">
+    <ion-infinite-scroll threshold="100px" (ionInfinite)="onScrollDown($event)">
       <ion-infinite-scroll-content
-              loadingSpinner="bubbles"
-              loadingText="Loading more data...">
+              loadingSpinner="bubbles">
       </ion-infinite-scroll-content>
     </ion-infinite-scroll>
     </div>

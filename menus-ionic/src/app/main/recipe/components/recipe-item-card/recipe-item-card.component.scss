@@ -1,0 +1,18 @@
+:host {
+  ion-card-title {
+    display: flex;
+
+    .info {
+      display: flex;
+      align-items: center;
+      margin-left: auto;
+      font-size: 15px;
+
+
+      .info-element {
+        display: flex;
+        margin-left: 5px;
+      }
+    }
+  }
+}

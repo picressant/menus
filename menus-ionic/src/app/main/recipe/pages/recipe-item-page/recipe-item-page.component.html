@@ -1,11 +1,4 @@
-<ion-header [translucent]="true">
-    <ion-toolbar>
-        <ion-buttons slot="start">
-            <ion-back-button defaultHref="/"></ion-back-button>
-        </ion-buttons>
-        <ion-title>{{ isAddingMode ? "Ajouter une recette" : data?.name}}</ion-title>
-    </ion-toolbar>
-</ion-header>
+<app-page-header [title]="title" [backButton]="true" backRef="/"></app-page-header>
 
 <ion-content [fullscreen]="true">
 

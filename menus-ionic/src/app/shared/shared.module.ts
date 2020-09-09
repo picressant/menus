@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LoadingImgComponent } from "./components/loading/loading-img/loading-img.component";
 import { SecurePipe } from "./pipes/secure.pipe";
+import { IonicModule } from "@ionic/angular";
 
 
 
@@ -10,9 +11,10 @@ import { SecurePipe } from "./pipes/secure.pipe";
       LoadingImgComponent,
       SecurePipe
   ],
-  imports: [
-    CommonModule
-  ],
+    imports: [
+        CommonModule,
+        IonicModule
+    ],
   exports: [
       LoadingImgComponent,
       SecurePipe

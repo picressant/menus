@@ -6,6 +6,7 @@ import { RouterModule } from "@angular/router";
 import { AuthInterceptor } from "./interceptors/auth.interceptor";
 import { IonicModule } from "@ionic/angular";
 import { RecipeModule } from "./recipe/recipe.module";
+import { LayoutModule } from "./layout/layout.module";
 
 
 @NgModule({
@@ -16,6 +17,8 @@ import { RecipeModule } from "./recipe/recipe.module";
         CommonModule,
         RouterModule,
         IonicModule,
+
+        LayoutModule,
 
         RecipeModule
 

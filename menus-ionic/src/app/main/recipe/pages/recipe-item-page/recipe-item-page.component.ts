@@ -26,6 +26,9 @@ export class RecipeItemPageComponent extends AbstractItemPage<Recipe> implements
     this.form = Recipe.form(this.fb);
   }
 
+  get title(): string {
+    return this.isAddingMode ? "Ajouter une recette" : isNullOrUndefined(this.data) ? "" : this.data.name;
+  }
 
   get get$(): Observable<Recipe> {
     return this.recipeRest.getRecipe(this.id);

@@ -3,6 +3,24 @@
           [styles]="imgStyles" [diameter]="75"
           [src]="'recipe/' + recipe.id + '/picture' | secure | async"></menus-loading-img>
   <ion-card-header>
-    <ion-card-title>{{recipe.name}}</ion-card-title>
+    <ion-card-title>
+      <div class="title">
+      {{recipe.name}}
+      </div>
+      <div class="info">
+        <div *ngIf="recipe?.preparationTime" class="info-element">
+          <ion-icon name="time-outline"></ion-icon>
+          {{recipe?.preparationTime}}
+        </div>
+        <div *ngIf="recipe?.cookingTime" class="info-element">
+          <ion-icon name="flame-outline"></ion-icon>
+          {{recipe?.cookingTime}}
+        </div>
+        <div class="info-element">
+          <ion-icon name="person-outline"></ion-icon>
+          {{recipe?.persons}}
+        </div>
+      </div>
+    </ion-card-title>
   </ion-card-header>
 </ion-card>
