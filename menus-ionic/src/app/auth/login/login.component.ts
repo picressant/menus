@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { FoodAuthService } from "../../shared/services/food-auth.service";
+import { environment } from "../../../environments/environment";
 
 @Component({
   selector: 'app-login',
@@ -31,5 +32,10 @@ export class LoginComponent implements OnInit {
   onLoginGoogle() {
     this.authService.connectWithGoogle();
   }
+
+  get deployPath(): string {
+    return environment.deployUrl;
+  }
+
 
 }

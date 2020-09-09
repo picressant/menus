@@ -2,25 +2,24 @@ import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError, map } from "rxjs/operators";
-//import { ErrorService } from "../services/error.service";
+import { ErrorService } from "../services/error.service";
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
 
-  constructor(
-    //private errorService: ErrorService
-  ) {
-  }
+    constructor(
+        private errorService: ErrorService
+    ) {
+    }
 
-  public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    return next.handle(req).pipe(
-      map((event: HttpEvent<any>) => {
-        return event;
-      }),
-      catchError((error: HttpErrorResponse) => {
-        //this.errorService.manageError(error.error);
-
-        return of(null);
-      }));
-  }
+    public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+        return next.handle(req).pipe(
+            map((event: HttpEvent<any>) => {
+                return event;
+            }),
+            catchError((error: HttpErrorResponse) => {
+                this.errorService.manageError(error.error);
+                return of(null);
+            }));
+    }
 }

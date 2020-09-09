@@ -1,0 +1,16 @@
+:host {
+  .login-header {
+    margin-bottom: 25px;
+    text-align: center;
+    background-color: var(--ion-color-primary);
+
+    img {
+      height: 120px;
+    }
+  }
+
+  .button-wrapper {
+    text-align: center;
+    margin-top: 20px;
+  }
+}

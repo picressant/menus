@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 import { MenuController } from "@ionic/angular";
 import { environment } from "../../../environments/environment";
+import { FoodAuthService } from "../../shared/services/food-auth.service";
 
 @Component({
     selector: 'app-main-shell',
@@ -25,7 +26,7 @@ export class MainShellComponent implements OnInit {
 
     constructor(
         private router : Router,
-        private menu: MenuController
+        private foodAuthService: FoodAuthService
     ) {
     }
 
@@ -46,4 +47,7 @@ export class MainShellComponent implements OnInit {
         return environment.deployUrl;
     }
 
+    disconnect() {
+        this.foodAuthService.logout();
+    }
 }

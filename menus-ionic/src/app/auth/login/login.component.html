@@ -1,24 +1,33 @@
-<form [formGroup]="form">
-  <div class="login-input">
-    <input type="text" formControlName="username" placeholder="Login">
-  </div>
+<ion-content [fullscreen]="true">
+    <div class="login-header">
+        <img src="{{deployPath}}/assets/img/linkedin_banner_image_1.png">
+    </div>
 
-  <div class="login-input">
-    <input type="password" formControlName="password" placeholder="Mot de passe">
-  </div>
+    <form [formGroup]="form">
 
-  <div class="text-center">
-    <button mat-raised-button color="primary" type="submit" (click)="onLogin()" [disabled]="form.invalid">Se connecter
-    </button>
-  </div>
+        <ion-item>
+            <ion-label position="fixed">Login</ion-label>
+            <ion-input formControlName="username"></ion-input>
+        </ion-item>
 
-  <div>
-    -- ou --
-  </div>
+        <ion-item>
+            <ion-label position="fixed">Mot de passe</ion-label>
+            <ion-input type="password" formControlName="password"></ion-input>
+        </ion-item>
 
-  <div class="text-center">
-    <button mat-raised-button color="primary" type="button" (click)="onLoginGoogle()">
-      Se connecter avec Google
-    </button>
-  </div>
-</form>
+        <div class="button-wrapper">
+            <ion-button type="submit" (click)="onLogin()" [disabled]="form.invalid">Se connecter</ion-button>
+        </div>
+
+        <div class="button-wrapper">
+            -- ou --
+        </div>
+
+        <div class="button-wrapper">
+            <ion-button (click)="onLoginGoogle()">
+                <ion-icon slot="start" name="logo-google"></ion-icon>
+                Se connecter avec Google
+            </ion-button>
+        </div>
+    </form>
+</ion-content>

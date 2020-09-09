@@ -45,6 +45,7 @@ export class FoodAuthService {
   logout() {
     this.user.next(null);
     this.socialUser = null;
+    this.setToken("");
     this.authService.signOut().finally(() => {
       this.router.navigate(['/auth/login'])
     });
