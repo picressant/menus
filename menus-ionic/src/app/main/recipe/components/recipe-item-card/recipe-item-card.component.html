@@ -1,7 +1,9 @@
 <ion-card>
+  <div class="ion-text-center">
   <menus-loading-img
           [styles]="imgStyles" [diameter]="75"
           [src]="'recipe/' + recipe.id + '/picture' | secure | async"></menus-loading-img>
+  </div>
   <ion-card-header>
     <ion-card-title>
       <div class="title">

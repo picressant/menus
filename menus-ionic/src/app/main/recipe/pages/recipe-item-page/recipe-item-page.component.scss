@@ -60,4 +60,33 @@
       }
     }
   }
+
+  .ingredient-label {
+    display: flex;
+
+    ion-icon {
+      margin-left: 5px;
+    }
+  }
+
+  .ingredient-quantity {
+    display: flex;
+    align-items: center;
+
+    input {
+      border: none;
+      font-weight: bold;
+      width: 20px;
+
+      &:focus {
+        border: none;
+        outline: none;
+      }
+    }
+
+    ion-icon {
+      margin-left: auto;
+      font-size: 20px;
+    }
+  }
 }

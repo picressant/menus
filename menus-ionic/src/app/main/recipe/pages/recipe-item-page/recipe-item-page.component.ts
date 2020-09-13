@@ -4,9 +4,15 @@ import { AbstractItemPage } from "../../../../shared/pages/abstract-item-page";
 import { Recipe } from "@models/recipe.model";
 import { forkJoin, Observable } from "rxjs";
 import { FormBuilder } from "@angular/forms";
-import { RecipeRestService } from "../../service/recipe-rest.service";
+import { RecipeRestService } from "../../../services/recipe-rest.service";
 import { ActivatedRoute, Router } from "@angular/router";
 import { ToasterService } from "../../../../shared/services/toaster.service";
+import { Ingredient } from "@models/ingredient.model";
+import { Pager } from "@models/pager/pager.model";
+import { Pageable } from "@models/pager/pageable.model";
+import { ModalController } from "@ionic/angular";
+import { IngredientModalSelectorComponent } from "../../../../shared/components/selectors/ingredient-modal-selector/ingredient-modal-selector.component";
+import { IngredientQuantity } from "@models/ingredient-quantity.model";
 
 @Component({
     selector: 'app-recipe-item-page',
@@ -23,14 +29,20 @@ export class RecipeItemPageComponent extends AbstractItemPage<Recipe> implements
 
     timestamp: string;
 
+    ingredients: Ingredient[] = [];
+    pageableIngredients: Pageable<Ingredient>;
+    pagerIngredients: Pager;
+
     constructor(private fb: FormBuilder,
                 private recipeRest: RecipeRestService,
                 private route: ActivatedRoute,
                 private toaster: ToasterService,
-                private router: Router) {
+                private router: Router,
+                private modalController: ModalController) {
 
         super(route, toaster, "Recette modifiée avec succès", "Recette ajoutée avec succès");
         this.form = Recipe.form(this.fb);
+        this.pagerIngredients = new Pager(20);
     }
 
     ngOnInit() {
@@ -50,7 +62,6 @@ export class RecipeItemPageComponent extends AbstractItemPage<Recipe> implements
     }
 
     get save$(): Observable<Recipe> {
-        //this.form.controls.ingredients.setValue(this.dataSource.data);
         return this.recipeRest.updateRecipe(this.form.value);
     }
 
@@ -121,7 +132,46 @@ export class RecipeItemPageComponent extends AbstractItemPage<Recipe> implements
         };
     }
 
-    show(toto: string) {
-        console.log(toto);
+    async changeIngredient(i: number) {
+        if (!this.isReadonly) {
+            const modal = await this.modalController.create({
+                component: IngredientModalSelectorComponent,
+                componentProps: {
+                    "excludeIds": this.form.controls.ingredients.value.map(iq => iq.ingredient.id)
+                }
+            });
+
+            await modal.present();
+
+            const { data } = await modal.onWillDismiss();
+            if (data.ingredient) {
+                this.form.controls.ingredients.value[i].ingredient = data.ingredient;
+            }
+        }
+    }
+
+    async addIngredientQuantity() {
+        if (!this.isReadonly) {
+            const modal = await this.modalController.create({
+                component: IngredientModalSelectorComponent,
+                componentProps: {
+                    "excludeIds": this.form.controls.ingredients.value.map(iq => iq.ingredient.id)
+                }
+            });
+
+            await modal.present();
+
+            const { data } = await modal.onWillDismiss();
+            if (data.ingredient) {
+                let ingredientQuantity = new IngredientQuantity();
+                ingredientQuantity.ingredient = data.ingredient;
+                ingredientQuantity.quantity = 1;
+                this.form.controls.ingredients.value.push(ingredientQuantity);
+            }
+        }
+    }
+
+    deleteIngredient(ingredientQuantity: IngredientQuantity) {
+        this.form.controls.ingredients.setValue(this.form.controls.ingredients.value.filter(i => i !== ingredientQuantity));
     }
 }

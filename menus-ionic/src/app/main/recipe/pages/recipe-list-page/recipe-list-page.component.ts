@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Recipe } from "@models/recipe.model";
 import { Pager } from "@models/pager/pager.model";
 import { Pageable } from "@models/pager/pageable.model";
-import { RecipeRestService } from "../../service/recipe-rest.service";
+import { RecipeRestService } from "../../../services/recipe-rest.service";
 import { Router } from "@angular/router";
 import { IonInfiniteScroll } from "@ionic/angular";
 
@@ -60,15 +60,13 @@ export class RecipeListPageComponent implements OnInit {
     }
 
     onScrollDown(event) {
-        setTimeout(() => {
-            if (this.pager.page < this.currentPageable.totalPages) {
-                this.pager.page++;
-                this._loadAndComplete(event);
-            }
-            else {
-                this.toggleInfiniteScroll();
-            }
-        });
+        if (this.pager.page < this.currentPageable.totalPages) {
+            this.pager.page++;
+            this._loadAndComplete(event);
+        }
+        else {
+            this.toggleInfiniteScroll();
+        }
     }
 
     onSearch(search: CustomEvent) {

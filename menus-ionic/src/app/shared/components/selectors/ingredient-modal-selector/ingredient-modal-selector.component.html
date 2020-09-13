@@ -1,0 +1,34 @@
+<ion-header translucent>
+    <ion-toolbar>
+        <ion-title>Ingrédients</ion-title>
+        <ion-buttons slot="end">
+            <ion-button (click)="closeModal(null)">Close</ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+    <div id="container">
+        <ion-searchbar (ionChange)="searchIngredient($event.detail.value)"
+                       inputmode="text"
+                       debounce="500"
+                       animated="true"
+                       slot="start"
+                       mode="ios"></ion-searchbar>
+
+
+        <ion-list>
+            <ion-item *ngFor="let ingredient of ingredients" (click)="closeModal(ingredient)">
+                <ion-label slot="start">{{ingredient.name}}</ion-label>
+                <ion-label slot="end">{{ingredient.unit.symbol}}</ion-label>
+            </ion-item>
+        </ion-list>
+
+        <ion-infinite-scroll threshold="100px" (ionInfinite)="scrollIngredients($event)">
+            <ion-infinite-scroll-content
+                    loadingSpinner="bubbles">
+            </ion-infinite-scroll-content>
+        </ion-infinite-scroll>
+    </div>
+</ion-content>

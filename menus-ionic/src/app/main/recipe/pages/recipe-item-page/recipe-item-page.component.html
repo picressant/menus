@@ -14,8 +14,14 @@
 
 
 <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="isReadonly">
-    <ion-fab-button>
-        <ion-icon name="create-outline" (click)="modify()"></ion-icon>
+    <ion-fab-button (click)="modify()">
+        <ion-icon name="create-outline"></ion-icon>
+    </ion-fab-button>
+</ion-fab>
+
+<ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="!isReadonly && selectedTab==='tab-ingredients'">
+    <ion-fab-button (click)="addIngredientQuantity()">
+        <ion-icon name="add-outline"></ion-icon>
     </ion-fab-button>
 </ion-fab>
 
@@ -61,11 +67,21 @@
     </ng-container>
     <ng-container *ngIf="selectedTab === 'tab-steps'">Steps</ng-container>
     <ng-container *ngIf="selectedTab === 'tab-ingredients'">
-        <ion-list *ngFor="let ingredientQuantity of form.controls.ingredients.value">
+        <ion-list *ngFor="let ingredientQuantity of form.controls.ingredients.value; let i = index">
             <ion-item>
-                <ion-label slot="start">{{ingredientQuantity.ingredient.name}}</ion-label>
-                <ion-label
-                        slot="end">{{ingredientQuantity.quantity}} {{ingredientQuantity.ingredient.unit.symbol}}</ion-label>
+                <ion-label class="ingredient-label" slot="start" (click)="changeIngredient(i)">
+                    <ion-label>{{ingredientQuantity.ingredient.name}}</ion-label>
+                    <ion-icon slot="start" name="caret-down-outline" *ngIf="!isReadonly"></ion-icon>
+                </ion-label>
+
+                <ion-label class="ingredient-quantity">
+                    <input type="number" [(ngModel)]="ingredientQuantity.quantity" *ngIf="!isReadonly">
+                    <ion-label>
+                        <span *ngIf="isReadonly"> {{ingredientQuantity.quantity}} </span>
+                        {{ingredientQuantity.ingredient.unit.symbol}}</ion-label>
+                    <ion-icon slot="end" name="trash" color="danger" (click)="deleteIngredient(ingredientQuantity)"
+                              *ngIf="!isReadonly"></ion-icon>
+                </ion-label>
             </ion-item>
         </ion-list>
     </ng-container>
