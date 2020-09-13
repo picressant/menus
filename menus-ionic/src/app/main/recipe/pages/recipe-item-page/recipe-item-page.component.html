@@ -1,81 +1,97 @@
-<app-page-header [title]="title" [backButton]="true" backRef="/"></app-page-header>
+<ion-header [translucent]="true">
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="/"></ion-back-button>
+        </ion-buttons>
+        <ion-title>{{title}}</ion-title>
+        <ion-buttons slot="end" *ngIf="!isReadonly">
+            <ion-button (click)="submit()">
+                <ion-icon name="checkmark-sharp"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+
+<ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="isReadonly">
+    <ion-fab-button>
+        <ion-icon name="create-outline" (click)="modify()"></ion-icon>
+    </ion-fab-button>
+</ion-fab>
 
 <ion-content [fullscreen]="true">
-    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-        <ion-fab-button>
-            <ion-icon name="checkmark-outline" *ngIf="!isReadonly"></ion-icon>
-            <ion-icon name="create-outline" *ngIf="isReadonly" (click)="modify()"></ion-icon>
-        </ion-fab-button>
-    </ion-fab>
-
-    <div id="container">
-        <div *ngIf="selectedTab === 'tab-overview'">
-            <div class="file-input-wrapper">
-                <div class="picture c-hand" (click)="file.click()">
-                    <img [src]="imgPreviewURL" alt="Profile" height="200" width="200" *ngIf="imgPreviewURL">
-                    <menus-loading-img
-                            [styles]="imgStyles"
-                            [src]="'recipe/' + id + '/picture?' + timestamp | secure | async"
-                            *ngIf="!imgPreviewURL"></menus-loading-img>
-                    <ion-icon name="cloud-upload-outline" *ngIf="!isReadonly"></ion-icon>
-                </div>
-                <input type="file" #file (change)="preview(file.files)" [disabled]="this.form.disabled">
+    <ng-container *ngIf="selectedTab === 'tab-overview'">
+        <div class="file-input-wrapper">
+            <div class="picture c-hand" (click)="file.click()">
+                <img [src]="imgPreviewURL" alt="Profile" height="200" width="200" *ngIf="imgPreviewURL">
+                <menus-loading-img
+                        [styles]="imgStyles"
+                        [src]="'recipe/' + id + '/picture?' + timestamp | secure | async"
+                        *ngIf="!imgPreviewURL"></menus-loading-img>
+                <ion-icon name="cloud-upload-outline" class="upload-icon" *ngIf="!isReadonly"></ion-icon>
             </div>
-            <div [formGroup]="form" class="form-wrapper">
-                <ion-item>
-                    <ion-label position="floating">Nom de la recette</ion-label>
-                    <ion-input formControlName="name"></ion-input>
-                </ion-item>
-
-                <ion-item>
-                    <ion-label position="floating">Temps de préparation</ion-label>
-                    <ion-input type="number" formControlName="preparationTime"></ion-input>
-                </ion-item>
-
-                <ion-item>
-                    <ion-label position="floating">Temps de cuisson</ion-label>
-                    <ion-input type="number" formControlName="cookingTime"></ion-input>
-                </ion-item>
-
-                <ion-item>
-                    <ion-label position="floating">Nombres de personnes</ion-label>
-                    <ion-input type="number" formControlName="persons"></ion-input>
-                </ion-item>
-
-                <ion-item>
-                    <ion-label position="floating">Livre de recette</ion-label>
-                    <ion-input formControlName="bookReference"></ion-input>
-                </ion-item>
-            </div>
+            <input type="file" #file (change)="preview(file.files)" [disabled]="this.form.disabled">
         </div>
-        <div *ngIf="selectedTab === 'tab-steps'">Steps</div>
-        <div *ngIf="selectedTab === 'tab-ingredients'">
-            <ion-list *ngFor="let ingredientQuantity of form.controls.ingredients.value">
-                <ion-item>
-                    <ion-label slot="start">{{ingredientQuantity.ingredient.name}}</ion-label>
-                    <ion-label slot="end">{{ingredientQuantity.quantity}} {{ingredientQuantity.ingredient.unit.symbol}}</ion-label>
-                </ion-item>
-            </ion-list>
+        <div [formGroup]="form" class="form-wrapper">
+            <ion-item>
+                <ion-label position="floating">Nom de la recette</ion-label>
+                <ion-input formControlName="name"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label position="floating">Temps de préparation</ion-label>
+                <ion-input type="number" formControlName="preparationTime"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label position="floating">Temps de cuisson</ion-label>
+                <ion-input type="number" formControlName="cookingTime"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label position="floating">Nombres de personnes</ion-label>
+                <ion-input type="number" formControlName="persons"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label position="floating">Livre de recette</ion-label>
+                <ion-input formControlName="bookReference"></ion-input>
+            </ion-item>
         </div>
-
-        <ion-tabs>
-            <ion-tab-bar slot="bottom">
-                <ion-tab-button selected="{{selectedTab === 'tab-overview'}}" (click)="select('tab-overview')">
-                    <ion-icon name="restaurant-outline"></ion-icon>
-                    <ion-label>Résumé</ion-label>
-                </ion-tab-button>
-
-                <ion-tab-button selected="{{selectedTab === 'tab-steps'}}" (click)="select('tab-steps')">
-                    <ion-icon name="list-circle-outline"></ion-icon>
-                    <ion-label>Etapes</ion-label>
-                </ion-tab-button>
-
-                <ion-tab-button selected="{{selectedTab === 'tab-ingredients'}}"
-                                (click)="select('tab-ingredients')">
-                    <ion-icon name="list-circle-outline"></ion-icon>
-                    <ion-label>Ingrédients</ion-label>
-                </ion-tab-button>
-            </ion-tab-bar>
-        </ion-tabs>
-    </div>
+    </ng-container>
+    <ng-container *ngIf="selectedTab === 'tab-steps'">Steps</ng-container>
+    <ng-container *ngIf="selectedTab === 'tab-ingredients'">
+        <ion-list *ngFor="let ingredientQuantity of form.controls.ingredients.value">
+            <ion-item>
+                <ion-label slot="start">{{ingredientQuantity.ingredient.name}}</ion-label>
+                <ion-label
+                        slot="end">{{ingredientQuantity.quantity}} {{ingredientQuantity.ingredient.unit.symbol}}</ion-label>
+            </ion-item>
+        </ion-list>
+    </ng-container>
 </ion-content>
+
+<ion-footer>
+    <ion-toolbar>
+        <div class="footer-button-wrapper">
+            <div class="footer-button ion-activatable ripple-parent" (click)="select('tab-overview')"
+                 [ngClass]="{'selected' : selectedTab === 'tab-overview'}">
+                <ion-icon name="restaurant-outline"></ion-icon>
+                <ion-label>Résumé</ion-label>
+                <ion-ripple-effect></ion-ripple-effect>
+            </div>
+            <div class="footer-button ion-activatable ripple-parent" (click)="select('tab-steps')"
+                 [ngClass]="{'selected' : selectedTab === 'tab-steps'}">
+                <ion-icon name="list-circle-outline"></ion-icon>
+                <ion-label>Etapes</ion-label>
+                <ion-ripple-effect></ion-ripple-effect>
+            </div>
+            <div class="footer-button ion-activatable ripple-parent" (click)="select('tab-ingredients')"
+                 [ngClass]="{'selected' : selectedTab === 'tab-ingredients'}">
+                <ion-icon name="nutrition-outline"></ion-icon>
+                <ion-label>Ingrédients</ion-label>
+                <ion-ripple-effect></ion-ripple-effect>
+            </div>
+        </div>
+    </ion-toolbar>
+</ion-footer>

@@ -24,4 +24,40 @@
       }
     }
   }
+
+  .footer-button-wrapper {
+    display: flex;
+    justify-content: center;
+
+    .ripple-parent {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .footer-button {
+      width: 100px;
+      height: 60px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      &.selected {
+        color: var(--ion-color-secondary);
+      }
+
+      &:hover {
+        cursor: pointer;
+      }
+
+      ion-icon {
+        font-size: 20px;
+      }
+
+      ion-label {
+        font-size: 11px;
+        margin-top: 5px;
+      }
+    }
+  }
 }

@@ -28,7 +28,13 @@ export class RecipeListPageComponent implements OnInit {
     }
 
     ngOnInit() {
+    }
+
+    ionViewWillEnter() {
+        this.pager.page = 0;
+        this.recipes = [];
         this._load();
+
     }
 
     private _loadAndComplete(event: any) {

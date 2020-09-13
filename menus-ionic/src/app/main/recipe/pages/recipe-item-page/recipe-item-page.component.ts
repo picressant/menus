@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { isNullOrUndefined } from "util";
 import { AbstractItemPage } from "../../../../shared/pages/abstract-item-page";
 import { Recipe } from "@models/recipe.model";
-import { Observable } from "rxjs";
+import { forkJoin, Observable } from "rxjs";
 import { FormBuilder } from "@angular/forms";
 import { RecipeRestService } from "../../service/recipe-rest.service";
 import { ActivatedRoute, Router } from "@angular/router";
@@ -50,7 +50,40 @@ export class RecipeItemPageComponent extends AbstractItemPage<Recipe> implements
     }
 
     get save$(): Observable<Recipe> {
-        return undefined;
+        //this.form.controls.ingredients.setValue(this.dataSource.data);
+        return this.recipeRest.updateRecipe(this.form.value);
+    }
+
+
+    postCreate() {
+        if (this.imgPreviewURL != null) {
+            this.recipeRest.storePicture(this.id, this.storeCurrentImages[0]).subscribe();
+            this.timestamp = new Date().getTime().toString();
+            this.imgPreviewURL = null;
+            this.storeCurrentImages = null;
+        }
+    }
+
+    _save() {
+        if (this.imgPreviewURL != null) {
+            forkJoin([
+                this.recipeRest.storePicture(this.id, this.storeCurrentImages[0]),
+                this.save$
+            ]).subscribe(([res, recipe]) => {
+                this.imgPreviewURL = null;
+                this.storeCurrentImages = null;
+                this.toaster.info(this.saveToast);
+                this.resetForm(recipe);
+            });
+        }
+        else {
+            this.save$.subscribe(
+                (recipe: Recipe) => {
+                    this.resetForm(recipe);
+                    this.toaster.info(this.saveToast);
+                }
+            );
+        }
     }
 
 
@@ -88,4 +121,7 @@ export class RecipeItemPageComponent extends AbstractItemPage<Recipe> implements
         };
     }
 
+    show(toto: string) {
+        console.log(toto);
+    }
 }
