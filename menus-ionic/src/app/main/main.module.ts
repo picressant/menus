@@ -7,6 +7,7 @@ import { AuthInterceptor } from "./interceptors/auth.interceptor";
 import { IonicModule } from "@ionic/angular";
 import { RecipeModule } from "./recipe/recipe.module";
 import { LayoutModule } from "./layout/layout.module";
+import { WeekModule } from "./week/week.module";
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { LayoutModule } from "./layout/layout.module";
 
         LayoutModule,
 
-        RecipeModule
+        RecipeModule,
+        WeekModule
 
     ],
     exports: [

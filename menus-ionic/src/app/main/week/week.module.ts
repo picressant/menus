@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { WeekPageComponent } from "./pages/week-page/week-page.component";
 import { IonicModule } from "@ionic/angular";
+import { LayoutModule } from "../layout/layout.module";
 
 
 @NgModule({
@@ -10,7 +11,8 @@ import { IonicModule } from "@ionic/angular";
     ],
     imports: [
         CommonModule,
-        IonicModule
+        IonicModule,
+        LayoutModule
     ],
     exports: [
         WeekPageComponent

@@ -1,20 +1,35 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <ion-title>Semaine</ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Semaine</ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
 
-  <div id="container">
-    <ion-header collapse="condense">
-      <ion-toolbar>
-        <ion-title size="large">Semaine</ion-title>
-      </ion-toolbar>
-    </ion-header>
-    Planning de la semaine
-  </div>
+    <div id="container">
+        <ion-reorder-group (ionItemReorder)="doReorder($event)" disabled="false">
+            <!-- Default reorder icon, end aligned items -->
+            <ion-item *ngFor="let weekMeal of meals; let i = index">
+                <div class="meal-wrapper">
+                    <div class="meal-day">{{getDay(i)}}</div>
+                    <div class="meal-detail">
+                        <span class="meal-recipe">
+                            {{weekMeal?.recipe?.name}}
+                        </span>
+                        <span class="meal-side" *ngIf="weekMeal?.sideDishes.length > 0">
+                            (
+                            <span *ngFor="let side of weekMeal?.sideDishes; let i = index">
+                              {{ side.name }}<span *ngIf="i < weekMeal?.sideDishes.length-1"> - </span>
+                            </span>
+                            )
+                      </span>
+                    </div>
+                </div>
+                <ion-reorder slot="end"></ion-reorder>
+            </ion-item>
+        </ion-reorder-group>
+    </div>
 </ion-content>
