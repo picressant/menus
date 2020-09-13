@@ -7,6 +7,7 @@ import { RecipeItemPageComponent } from "./pages/recipe-item-page/recipe-item-pa
 import { SharedModule } from "../../shared/shared.module";
 import { LayoutModule } from "../layout/layout.module";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { AutoSizeInputModule } from "ngx-autosize-input";
 
 @NgModule({
     declarations: [
@@ -19,6 +20,8 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
         IonicModule,
         SharedModule,
         LayoutModule,
+        AutoSizeInputModule,
+
         ReactiveFormsModule,
         FormsModule
     ],

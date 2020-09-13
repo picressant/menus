@@ -75,7 +75,11 @@
                 </ion-label>
 
                 <ion-label class="ingredient-quantity">
-                    <input type="number" [(ngModel)]="ingredientQuantity.quantity" *ngIf="!isReadonly">
+                    <input
+                            type="number"
+                            AutoSizeInput
+                            [(ngModel)]="ingredientQuantity.quantity"
+                            *ngIf="!isReadonly">
                     <ion-label>
                         <span *ngIf="isReadonly"> {{ingredientQuantity.quantity}} </span>
                         {{ingredientQuantity.ingredient.unit.symbol}}</ion-label>
