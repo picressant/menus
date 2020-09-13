@@ -1,12 +1,15 @@
-import { OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormGroup } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
 import { Observable } from "rxjs";
 import { isNullOrUndefined } from "util";
-import { ToastController } from "@ionic/angular";
 import { AbstractData } from "@models/abstract-data.model";
 import { ToasterService } from "../services/toaster.service";
 
+@Component({
+    selector: 'base-item-page',
+    template: '<div></div>'
+})
 export abstract class AbstractItemPage<T extends AbstractData> implements OnInit {
 
     id: string = null;
@@ -20,8 +23,8 @@ export abstract class AbstractItemPage<T extends AbstractData> implements OnInit
     protected constructor(
         private _route: ActivatedRoute,
         private _toaster: ToasterService,
-        saveToast: string,
-        createToast: string
+        @Inject(String) saveToast: string,
+        @Inject(String) createToast: string
     ) {
         this.saveToast = saveToast;
         this.createToast = createToast;
@@ -55,7 +58,7 @@ export abstract class AbstractItemPage<T extends AbstractData> implements OnInit
     };
 
     protected resetForm(item: T) {
-      this.data = item;
+        this.data = item;
         this.form.patchValue(item);
         this._disable();
     }
@@ -87,7 +90,7 @@ export abstract class AbstractItemPage<T extends AbstractData> implements OnInit
     }
 
 
-  protected _save() {
+    protected _save() {
         this.save$.subscribe(
             (item: T) => {
                 this.resetForm(item);
