@@ -3,7 +3,7 @@
   "index": "/index.html",
   "assetGroups": [
     {
-      "name": "app",
+      "name": "Food Organisator",
       "installMode": "prefetch",
       "resources": {
         "files": [

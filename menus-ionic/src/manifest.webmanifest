@@ -1,7 +1,7 @@
 {
-  "name": "app",
-  "short_name": "app",
-  "theme_color": "#1976d2",
+  "name": "Food Organisator",
+  "short_name": "FO",
+  "theme_color": "#C6F1EA",
   "background_color": "#fafafa",
   "display": "standalone",
   "scope": "./",
