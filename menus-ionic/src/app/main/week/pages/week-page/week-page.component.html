@@ -4,8 +4,19 @@
             <ion-menu-button></ion-menu-button>
         </ion-buttons>
         <ion-title>Planning</ion-title>
+        <ion-buttons slot="end" *ngIf="isEditingWeek">
+            <ion-button (click)="saveWeek()">
+                <ion-icon name="checkmark-sharp"></ion-icon>
+            </ion-button>
+        </ion-buttons>
     </ion-toolbar>
 </ion-header>
+
+<ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="selectedTab===footerWeek.selectedTab && !isEditingWeek">
+    <ion-fab-button (click)="editWeek()">
+        <ion-icon name="create-outline"></ion-icon>
+    </ion-fab-button>
+</ion-fab>
 
 <ion-content [fullscreen]="true">
     <div id="container">
@@ -47,5 +58,9 @@
     </div>
 </ion-content>
 
-<app-footer-tab selectedTab="{{footerDay.selectedTab}}" (elementSelect)="selectedTab = $event" [footerElements]="[footerDay, footerWeek, footerGrocery]">
+<app-footer-tab
+        *ngIf="!isEditingWeek"
+        selectedTab="{{selectedTab}}"
+        (elementSelect)="selectedTab = $event"
+        [footerElements]="[footerDay, footerWeek, footerGrocery]">
 </app-footer-tab>

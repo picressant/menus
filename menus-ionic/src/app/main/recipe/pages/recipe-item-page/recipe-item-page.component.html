@@ -19,7 +19,7 @@
     </ion-fab-button>
 </ion-fab>
 
-<ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="!isReadonly && selectedTab==='tab-ingredients'">
+<ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="!isReadonly && selectedTab===footerIngredients.selectedTab">
     <ion-fab-button (click)="addIngredientQuantity()">
         <ion-icon name="add-outline"></ion-icon>
     </ion-fab-button>

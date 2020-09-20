@@ -58,6 +58,8 @@ export class WeekPageComponent implements OnInit {
     todayLunch: WeekMeal;
     todayDinner: WeekMeal;
 
+    isEditingWeek = false;
+
     constructor(
         private weekService: WeekRestService,
         private router: Router
@@ -71,7 +73,7 @@ export class WeekPageComponent implements OnInit {
     private _loadWeek() {
         this.weekService.getWeek().subscribe(
             (week) => {
-               this.setCurrentWeek(week);
+                this.setCurrentWeek(week);
             }
         );
     }
@@ -79,6 +81,7 @@ export class WeekPageComponent implements OnInit {
     private setCurrentWeek(week: Week) {
         this.currentWeek = week;
         this.meals = this._mapWeekToArray(week);
+        this.isEditingWeek = false;
 
         this.changeTodayMeal();
     }
@@ -172,32 +175,28 @@ export class WeekPageComponent implements OnInit {
     }
 
     private _mapArrayToWeek(meals: WeekMeal[]): Week {
-        const week: Week = new Week();
 
-        week.mondayLunch = meals[days.mondayLunch];
-        week.mondayDinner = meals[days.mondayDinner];
-        week.tuesdayLunch = meals[days.tuesdayLunch];
-        week.tuesdayDinner = meals[days.tuesdayDinner];
-        week.wednesdayLunch = meals[days.wednesdayLunch];
-        week.wednesdayDinner = meals[days.wednesdayDinner];
-        week.thursdayLunch = meals[days.thursdayLunch];
-        week.thursdayDinner = meals[days.thursdayDinner];
-        week.fridayLunch = meals[days.fridayLunch];
-        week.fridayDinner = meals[days.fridayDinner];
-        week.saturdayLunch = meals[days.saturdayLunch];
-        week.saturdayDinner = meals[days.saturdayDinner];
-        week.sundayLunch = meals[days.sundayLunch];
-        week.sundayDinner = meals[days.sundayDinner];
+        this.currentWeek.mondayLunch = meals[days.mondayLunch];
+        this.currentWeek.mondayDinner = meals[days.mondayDinner];
+        this.currentWeek.tuesdayLunch = meals[days.tuesdayLunch];
+        this.currentWeek.tuesdayDinner = meals[days.tuesdayDinner];
+        this.currentWeek.wednesdayLunch = meals[days.wednesdayLunch];
+        this.currentWeek.wednesdayDinner = meals[days.wednesdayDinner];
+        this.currentWeek.thursdayLunch = meals[days.thursdayLunch];
+        this.currentWeek.thursdayDinner = meals[days.thursdayDinner];
+        this.currentWeek.fridayLunch = meals[days.fridayLunch];
+        this.currentWeek.fridayDinner = meals[days.fridayDinner];
+        this.currentWeek.saturdayLunch = meals[days.saturdayLunch];
+        this.currentWeek.saturdayDinner = meals[days.saturdayDinner];
+        this.currentWeek.sundayLunch = meals[days.sundayLunch];
+        this.currentWeek.sundayDinner = meals[days.sundayDinner];
 
-        week.id = this._id;
-
-        return week;
+        return this.currentWeek;
     }
 
-    onSave() {
+    saveWeek() {
         this.weekService.setWeek(this._mapArrayToWeek(this.meals)).subscribe(
-            () => this._loadWeek()
-        );
+            (week) => this.setCurrentWeek(week));
     }
 
     clearRecette(index: number) {
@@ -207,7 +206,7 @@ export class WeekPageComponent implements OnInit {
 
 
     ngOnDestroy(): void {
-        this.onSave();
+        this.saveWeek();
     }
 
     doReorder(event: any) {
@@ -216,12 +215,16 @@ export class WeekPageComponent implements OnInit {
 
         event.detail.complete();
 
-        this.weekService.setWeek(this._mapArrayToWeek(this.meals)).subscribe((week: Week) => this.setCurrentWeek(week));
+        this.saveWeek()
     }
 
     goToRecipe(meal: WeekMeal) {
         if (meal && meal.recipe) {
             this.router.navigate(["main/recipe", meal.recipe.id]);
         }
+    }
+
+    editWeek() {
+        this.isEditingWeek = true;
     }
 }
