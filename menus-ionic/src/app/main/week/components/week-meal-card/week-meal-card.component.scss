@@ -1,0 +1,42 @@
+:host {
+  ion-card {
+    display: flex;
+
+    .img-wrapper {
+    }
+
+    .menu-titles {
+      flex-grow: 1;
+
+      .menu-meal-title {
+        margin: 10px 0;
+        font-size: 22px;
+        font-weight: bold;
+      }
+
+      .menu-sides {
+        .side {
+          font-style: italic;
+          margin-right: 5px;
+        }
+      }
+    }
+
+    .menu-info {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      margin-right: 5px;
+      font-size: 15px;
+
+      .info-element {
+        display: flex;
+        align-items: center;
+
+        ion-icon {
+          margin-right: 5px;
+        }
+      }
+    }
+  }
+}

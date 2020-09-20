@@ -10,7 +10,13 @@
 <ion-content [fullscreen]="true">
     <div id="container">
 
-        <ng-container *ngIf="selectedTab === footerDay.selectedTab"></ng-container>
+        <ng-container *ngIf="selectedTab === footerDay.selectedTab">
+            <h2 class="ion-margin lunch-margin">Midi</h2>
+            <app-week-meal-card [meal]="todayLunch" (click)="goToRecipe(todayLunch)"></app-week-meal-card>
+
+            <h2 class="ion-margin dinner-margin">Soir</h2>
+            <app-week-meal-card [meal]="todayDinner" (click)="goToRecipe(todayDinner)"></app-week-meal-card>
+        </ng-container>
 
         <ng-container *ngIf="selectedTab === footerWeek.selectedTab">
             <ion-reorder-group (ionItemReorder)="doReorder($event)" disabled="false">
@@ -35,7 +41,9 @@
                 </ion-item>
             </ion-reorder-group>
         </ng-container>
-        <ng-container *ngIf="selectedTab === footerGrocery.selectedTab"></ng-container>
+        <ng-container *ngIf="selectedTab === footerGrocery.selectedTab">
+            <app-week-grocery-list [meals]="meals"></app-week-grocery-list>
+        </ng-container>
     </div>
 </ion-content>
 

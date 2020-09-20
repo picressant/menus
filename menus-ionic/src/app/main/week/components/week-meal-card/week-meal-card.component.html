@@ -1,0 +1,42 @@
+<ion-card>
+    <ng-container *ngIf="meal">
+        <div class="img-wrapper ion-margin" *ngIf="meal.recipe">
+            <!--    <menus-loading-img-->
+            <!--            [styles]="imgStyles" [diameter]="75"-->
+            <!--            [src]="'recipe/' + meal.recipe.id + '/picture' | secure | async"></menus-loading-img>-->
+
+            <ion-avatar>
+                <img [src]="'recipe/' + meal.recipe.id + '/picture' | secure | async">
+            </ion-avatar>
+        </div>
+        <div class="menu-titles">
+            <div class="menu-meal-title">
+                {{meal.recipe?.name}}
+            </div>
+            <div class="menu-sides" *ngIf="meal.sideDishes?.length > 0">
+                avec
+                <span class="side" *ngFor="let side of meal.sideDishes; let i=index">
+                    {{side.name}}
+                    <span *ngIf="i < meal.sideDishes.length-1"> - </span>
+                </span>
+            </div>
+        </div>
+        <div class="menu-info">
+            <div *ngIf="meal.recipe?.preparationTime" class="info-element">
+                <ion-icon name="time-outline"></ion-icon>
+                {{meal.recipe?.preparationTime}}
+            </div>
+            <div *ngIf="meal.recipe?.cookingTime" class="info-element">
+                <ion-icon name="flame-outline"></ion-icon>
+                {{meal.recipe?.cookingTime}}
+            </div>
+            <div class="info-element" *ngIf="meal.recipe">
+                <ion-icon name="person-outline"></ion-icon>
+                {{meal.recipe?.persons}}
+            </div>
+        </div>
+    </ng-container>
+    <div *ngIf="!meal">
+        Pas de menu
+    </div>
+</ion-card>

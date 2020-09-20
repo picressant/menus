@@ -3,6 +3,7 @@ import { WeekMeal } from "@models/week-meal.model";
 import { SideDish } from "@models/sidedish.model";
 import { WeekRestService } from "../../../services/week-rest.service";
 import { Week } from "@models/week.model";
+import { Router } from "@angular/router";
 
 const days = {
     mondayLunch: 0,
@@ -28,6 +29,7 @@ const days = {
 })
 export class WeekPageComponent implements OnInit {
     meals: WeekMeal[];
+    currentWeek: Week;
     sidedishes: SideDish[];
 
     isModified = false;
@@ -53,8 +55,12 @@ export class WeekPageComponent implements OnInit {
 
     selectedTab: string = this.footerDay.selectedTab;
 
+    todayLunch: WeekMeal;
+    todayDinner: WeekMeal;
+
     constructor(
-        private weekService: WeekRestService
+        private weekService: WeekRestService,
+        private router: Router
     ) {
     }
 
@@ -65,11 +71,50 @@ export class WeekPageComponent implements OnInit {
     private _loadWeek() {
         this.weekService.getWeek().subscribe(
             (week) => {
-                this.meals = this._mapWeekToArray(week);
-                this._id = week.id;
-                this.isModified = false;
+               this.setCurrentWeek(week);
             }
         );
+    }
+
+    private setCurrentWeek(week: Week) {
+        this.currentWeek = week;
+        this.meals = this._mapWeekToArray(week);
+
+        this.changeTodayMeal();
+    }
+
+    changeTodayMeal() {
+        const currentDate = new Date();
+        let day = currentDate.getDay();
+
+        if (day === 0) {
+            this.todayLunch = this.currentWeek.sundayLunch;
+            this.todayDinner = this.currentWeek.sundayDinner;
+        }
+        else if (day === 1) {
+            this.todayLunch = this.currentWeek.mondayLunch;
+            this.todayDinner = this.currentWeek.mondayDinner;
+        }
+        else if (day === 2) {
+            this.todayLunch = this.currentWeek.tuesdayLunch;
+            this.todayDinner = this.currentWeek.tuesdayDinner;
+        }
+        else if (day === 3) {
+            this.todayLunch = this.currentWeek.wednesdayLunch;
+            this.todayDinner = this.currentWeek.wednesdayDinner;
+        }
+        else if (day === 4) {
+            this.todayLunch = this.currentWeek.thursdayLunch;
+            this.todayDinner = this.currentWeek.thursdayDinner;
+        }
+        else if (day === 5) {
+            this.todayLunch = this.currentWeek.fridayLunch;
+            this.todayDinner = this.currentWeek.fridayDinner;
+        }
+        else if (day === 6) {
+            this.todayLunch = this.currentWeek.saturdayLunch;
+            this.todayDinner = this.currentWeek.saturdayDinner;
+        }
     }
 
     getDay(index: number) {
@@ -105,10 +150,6 @@ export class WeekPageComponent implements OnInit {
         }
     }
 
-    // drop(event: CdkDragDrop<WeekMeal[]>) {
-    //     moveItemInArray(this.meals, event.previousIndex, event.currentIndex);
-    //     this.isModified = true;
-    // }
 
     private _mapWeekToArray(week: Week): WeekMeal[] {
         const meals: WeekMeal[] = [];
@@ -175,6 +216,12 @@ export class WeekPageComponent implements OnInit {
 
         event.detail.complete();
 
-        this.weekService.setWeek(this._mapArrayToWeek(this.meals)).subscribe();
+        this.weekService.setWeek(this._mapArrayToWeek(this.meals)).subscribe((week: Week) => this.setCurrentWeek(week));
+    }
+
+    goToRecipe(meal: WeekMeal) {
+        if (meal && meal.recipe) {
+            this.router.navigate(["main/recipe", meal.recipe.id]);
+        }
     }
 }
