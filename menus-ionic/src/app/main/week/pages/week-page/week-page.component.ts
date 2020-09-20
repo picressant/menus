@@ -33,6 +33,25 @@ export class WeekPageComponent implements OnInit {
     isModified = false;
     _id: string;
 
+    footerDay = {
+        name: "Aujourd'hui",
+        icon: "today-outline",
+        selectedTab: "tab-day"
+    }
+
+    footerWeek = {
+        name: "Semaine",
+        icon: "calendar-outline",
+        selectedTab: "tab-week"
+    }
+
+    footerGrocery = {
+        name: "Courses",
+        icon: "checkbox-outline",
+        selectedTab: "tab-grocery"
+    }
+
+    selectedTab: string = this.footerDay.selectedTab;
 
     constructor(
         private weekService: WeekRestService

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { WeekPageComponent } from "./pages/week-page/week-page.component";
 import { IonicModule } from "@ionic/angular";
 import { LayoutModule } from "../layout/layout.module";
+import { SharedModule } from "../../shared/shared.module";
 
 
 @NgModule({
@@ -12,7 +13,9 @@ import { LayoutModule } from "../layout/layout.module";
     imports: [
         CommonModule,
         IonicModule,
-        LayoutModule
+        LayoutModule,
+
+        SharedModule
     ],
     exports: [
         WeekPageComponent

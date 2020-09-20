@@ -1,0 +1,14 @@
+<ion-footer>
+    <ion-toolbar>
+        <div class="footer-button-wrapper">
+            <ng-container *ngFor="let footer of footerElements">
+                <div class="footer-button ion-activatable ripple-parent" (click)="select(footer)"
+                     [ngClass]="{'selected' : selectedTab === footer.selectedTab}">
+                    <ion-icon name="{{footer.icon}}"></ion-icon>
+                    <ion-label>{{footer.name}}</ion-label>
+                    <ion-ripple-effect></ion-ripple-effect>
+                </div>
+            </ng-container>
+        </div>
+    </ion-toolbar>
+</ion-footer>

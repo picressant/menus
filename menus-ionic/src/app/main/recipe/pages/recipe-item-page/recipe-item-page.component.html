@@ -26,7 +26,7 @@
 </ion-fab>
 
 <ion-content [fullscreen]="true">
-    <ng-container *ngIf="selectedTab === 'tab-overview'">
+    <ng-container *ngIf="selectedTab === footerOverview.selectedTab">
         <div class="file-input-wrapper">
             <div class="picture c-hand" (click)="file.click()">
                 <img [src]="imgPreviewURL" alt="Profile" height="200" width="200" *ngIf="imgPreviewURL">
@@ -65,8 +65,8 @@
             </ion-item>
         </div>
     </ng-container>
-    <ng-container *ngIf="selectedTab === 'tab-steps'">Steps</ng-container>
-    <ng-container *ngIf="selectedTab === 'tab-ingredients'">
+    <ng-container *ngIf="selectedTab === footerSteps.selectedTab">Steps</ng-container>
+    <ng-container *ngIf="selectedTab === footerIngredients.selectedTab">
         <ion-list *ngFor="let ingredientQuantity of form.controls.ingredients.value; let i = index">
             <ion-item>
                 <ion-label class="ingredient-label" slot="start" (click)="changeIngredient(i)">
@@ -91,27 +91,5 @@
     </ng-container>
 </ion-content>
 
-<ion-footer>
-    <ion-toolbar>
-        <div class="footer-button-wrapper">
-            <div class="footer-button ion-activatable ripple-parent" (click)="select('tab-overview')"
-                 [ngClass]="{'selected' : selectedTab === 'tab-overview'}">
-                <ion-icon name="restaurant-outline"></ion-icon>
-                <ion-label>Résumé</ion-label>
-                <ion-ripple-effect></ion-ripple-effect>
-            </div>
-            <div class="footer-button ion-activatable ripple-parent" (click)="select('tab-steps')"
-                 [ngClass]="{'selected' : selectedTab === 'tab-steps'}">
-                <ion-icon name="list-circle-outline"></ion-icon>
-                <ion-label>Etapes</ion-label>
-                <ion-ripple-effect></ion-ripple-effect>
-            </div>
-            <div class="footer-button ion-activatable ripple-parent" (click)="select('tab-ingredients')"
-                 [ngClass]="{'selected' : selectedTab === 'tab-ingredients'}">
-                <ion-icon name="nutrition-outline"></ion-icon>
-                <ion-label>Ingrédients</ion-label>
-                <ion-ripple-effect></ion-ripple-effect>
-            </div>
-        </div>
-    </ion-toolbar>
-</ion-footer>
+<app-footer-tab selectedTab="{{footerOverview.selectedTab}}" (elementSelect)="selectedTab = $event" [footerElements]="[footerOverview, footerSteps, footerIngredients]">
+</app-footer-tab>

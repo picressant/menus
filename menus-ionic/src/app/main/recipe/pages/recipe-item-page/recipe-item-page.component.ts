@@ -21,8 +21,6 @@ import { IngredientQuantity } from "@models/ingredient-quantity.model";
 })
 export class RecipeItemPageComponent extends AbstractItemPage<Recipe> implements OnInit {
 
-    selectedTab = "tab-overview";
-
     fileUploadError = '';
     imgPreviewURL: any;
     storeCurrentImages: any;
@@ -32,6 +30,27 @@ export class RecipeItemPageComponent extends AbstractItemPage<Recipe> implements
     ingredients: Ingredient[] = [];
     pageableIngredients: Pageable<Ingredient>;
     pagerIngredients: Pager;
+
+    footerOverview = {
+        name: "Résumé",
+        icon: "restaurant-outline",
+        selectedTab: "tab-overview"
+    }
+
+    footerSteps = {
+        name: "Étapes",
+        icon: "list-circle-outline",
+        selectedTab: "tab-steps"
+    }
+
+    footerIngredients = {
+        name: "Ingrédients",
+        icon: "nutrition-outline",
+        selectedTab: "tab-ingredients"
+    }
+
+    selectedTab = this.footerOverview.selectedTab;
+
 
     constructor(private fb: FormBuilder,
                 private recipeRest: RecipeRestService,
