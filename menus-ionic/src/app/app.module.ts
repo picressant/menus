@@ -15,6 +15,7 @@ import { RestInterceptor } from "./shared/interceptors/rest.interceptor";
 import { ErrorInterceptor } from "./shared/interceptors/error.interceptor";
 import { MainModule } from "./main/main.module";
 import { AuthModule } from "./auth/auth.module";
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { AuthModule } from "./auth/auth.module";
         HttpClientModule,
 
         MainModule,
-        AuthModule
+        AuthModule,
+        ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
     ],
     providers: [
         StatusBar,
