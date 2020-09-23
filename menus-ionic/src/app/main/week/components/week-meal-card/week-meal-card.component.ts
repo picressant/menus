@@ -13,6 +13,9 @@ export class WeekMealCardComponent implements OnInit {
   meal: WeekMeal;
   imgStyles: any;
 
+  @Input()
+  showSides: boolean;
+
   constructor(
       private router: Router
   ) { }

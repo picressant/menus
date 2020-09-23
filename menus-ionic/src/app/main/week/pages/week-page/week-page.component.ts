@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { WeekMeal } from "@models/week-meal.model";
-import { SideDish } from "@models/sidedish.model";
-import { WeekRestService } from "../../../services/week-rest.service";
-import { Week } from "@models/week.model";
-import { Router } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
+import { AlertController } from "@ionic/angular";
+import { WeekService } from "../../../../shared/services/week.service";
 
 const days = {
     mondayLunch: 0,
@@ -27,14 +26,7 @@ const days = {
     templateUrl: './week-page.component.html',
     styleUrls: ['./week-page.component.scss'],
 })
-export class WeekPageComponent implements OnInit {
-    meals: WeekMeal[];
-    currentWeek: Week;
-    sidedishes: SideDish[];
-
-    isModified = false;
-    _id: string;
-
+export class WeekPageComponent {
     footerDay = {
         name: "Aujourd'hui",
         icon: "today-outline",
@@ -60,63 +52,66 @@ export class WeekPageComponent implements OnInit {
 
     isEditingWeek = false;
 
+    meals: WeekMeal[] = [];
+
     constructor(
-        private weekService: WeekRestService,
-        private router: Router
+        private weekService: WeekService,
+        private router: Router,
+        private route: ActivatedRoute,
+        private alertController: AlertController
     ) {
-    }
-
-    ngOnInit() {
-        this._loadWeek();
-    }
-
-    private _loadWeek() {
-        this.weekService.getWeek().subscribe(
-            (week) => {
-                this.setCurrentWeek(week);
-            }
-        );
-    }
-
-    private setCurrentWeek(week: Week) {
-        this.currentWeek = week;
-        this.meals = this._mapWeekToArray(week);
-        this.isEditingWeek = false;
-
+        this.meals = this.weekService.meals$.getValue();
         this.changeTodayMeal();
+
+        this.weekService.meals$.subscribe(m => {
+            this.meals = m;
+            this.changeTodayMeal();
+        });
+    }
+
+    ionViewWillEnter() {
+        this.route.queryParams.subscribe(params => {
+            if (params.isEditing) {
+                this.selectedTab = this.footerWeek.selectedTab;
+                this.isEditingWeek = true;
+            }
+        })
     }
 
     changeTodayMeal() {
         const currentDate = new Date();
         let day = currentDate.getDay();
+        const currentWeek = this.weekService.getWeek();
 
-        if (day === 0) {
-            this.todayLunch = this.currentWeek.sundayLunch;
-            this.todayDinner = this.currentWeek.sundayDinner;
-        }
-        else if (day === 1) {
-            this.todayLunch = this.currentWeek.mondayLunch;
-            this.todayDinner = this.currentWeek.mondayDinner;
-        }
-        else if (day === 2) {
-            this.todayLunch = this.currentWeek.tuesdayLunch;
-            this.todayDinner = this.currentWeek.tuesdayDinner;
-        }
-        else if (day === 3) {
-            this.todayLunch = this.currentWeek.wednesdayLunch;
-            this.todayDinner = this.currentWeek.wednesdayDinner;
-        }
-        else if (day === 4) {
-            this.todayLunch = this.currentWeek.thursdayLunch;
-            this.todayDinner = this.currentWeek.thursdayDinner;
-        }
-        else if (day === 5) {
-            this.todayLunch = this.currentWeek.fridayLunch;
-            this.todayDinner = this.currentWeek.fridayDinner;
-        }
-        else if (day === 6) {
-            this.todayLunch = this.currentWeek.saturdayLunch;
-            this.todayDinner = this.currentWeek.saturdayDinner;
+        if (currentWeek) {
+            if (day === 0) {
+                this.todayLunch = currentWeek.sundayLunch;
+                this.todayDinner = currentWeek.sundayDinner;
+            }
+            else if (day === 1) {
+                this.todayLunch = currentWeek.mondayLunch;
+                this.todayDinner = currentWeek.mondayDinner;
+            }
+            else if (day === 2) {
+                this.todayLunch = currentWeek.tuesdayLunch;
+                this.todayDinner = currentWeek.tuesdayDinner;
+            }
+            else if (day === 3) {
+                this.todayLunch = currentWeek.wednesdayLunch;
+                this.todayDinner = currentWeek.wednesdayDinner;
+            }
+            else if (day === 4) {
+                this.todayLunch = currentWeek.thursdayLunch;
+                this.todayDinner = currentWeek.thursdayDinner;
+            }
+            else if (day === 5) {
+                this.todayLunch = currentWeek.fridayLunch;
+                this.todayDinner = currentWeek.fridayDinner;
+            }
+            else if (day === 6) {
+                this.todayLunch = currentWeek.saturdayLunch;
+                this.todayDinner = currentWeek.saturdayDinner;
+            }
         }
     }
 
@@ -153,60 +148,8 @@ export class WeekPageComponent implements OnInit {
         }
     }
 
-
-    private _mapWeekToArray(week: Week): WeekMeal[] {
-        const meals: WeekMeal[] = [];
-        meals[days.mondayLunch] = week.mondayLunch;
-        meals[days.mondayDinner] = week.mondayDinner;
-        meals[days.tuesdayLunch] = week.tuesdayLunch;
-        meals[days.tuesdayDinner] = week.tuesdayDinner;
-        meals[days.wednesdayLunch] = week.wednesdayLunch;
-        meals[days.wednesdayDinner] = week.wednesdayDinner;
-        meals[days.thursdayLunch] = week.thursdayLunch;
-        meals[days.thursdayDinner] = week.thursdayDinner;
-        meals[days.fridayLunch] = week.fridayLunch;
-        meals[days.fridayDinner] = week.fridayDinner;
-        meals[days.saturdayLunch] = week.saturdayLunch;
-        meals[days.saturdayDinner] = week.saturdayDinner;
-        meals[days.sundayLunch] = week.sundayLunch;
-        meals[days.sundayDinner] = week.sundayDinner;
-
-        return meals;
-    }
-
-    private _mapArrayToWeek(meals: WeekMeal[]): Week {
-
-        this.currentWeek.mondayLunch = meals[days.mondayLunch];
-        this.currentWeek.mondayDinner = meals[days.mondayDinner];
-        this.currentWeek.tuesdayLunch = meals[days.tuesdayLunch];
-        this.currentWeek.tuesdayDinner = meals[days.tuesdayDinner];
-        this.currentWeek.wednesdayLunch = meals[days.wednesdayLunch];
-        this.currentWeek.wednesdayDinner = meals[days.wednesdayDinner];
-        this.currentWeek.thursdayLunch = meals[days.thursdayLunch];
-        this.currentWeek.thursdayDinner = meals[days.thursdayDinner];
-        this.currentWeek.fridayLunch = meals[days.fridayLunch];
-        this.currentWeek.fridayDinner = meals[days.fridayDinner];
-        this.currentWeek.saturdayLunch = meals[days.saturdayLunch];
-        this.currentWeek.saturdayDinner = meals[days.saturdayDinner];
-        this.currentWeek.sundayLunch = meals[days.sundayLunch];
-        this.currentWeek.sundayDinner = meals[days.sundayDinner];
-
-        return this.currentWeek;
-    }
-
-    saveWeek() {
-        this.weekService.setWeek(this._mapArrayToWeek(this.meals)).subscribe(
-            (week) => this.setCurrentWeek(week));
-    }
-
     clearRecette(index: number) {
-        this.meals[index] = null;
-        this.isModified = true;
-    }
-
-
-    ngOnDestroy(): void {
-        this.saveWeek();
+        this.weekService.deleteMeal(index);
     }
 
     doReorder(event: any) {
@@ -215,7 +158,7 @@ export class WeekPageComponent implements OnInit {
 
         event.detail.complete();
 
-        this.saveWeek()
+        this.saveWeek();
     }
 
     goToRecipe(meal: WeekMeal) {
@@ -226,5 +169,37 @@ export class WeekPageComponent implements OnInit {
 
     editWeek() {
         this.isEditingWeek = true;
+    }
+
+    saveWeek() {
+        this.weekService.saveAllMeals(this.meals);
+        this.isEditingWeek = false;
+    }
+
+    async deleteWeekMeal(i: number) {
+        const alert = await this.alertController.create({
+            header: 'Confirmation',
+            cssClass: 'confirmation-modal',
+            message: 'Supprimer ce repas de la semaine ?',
+            buttons: [
+                {
+                    text: 'Annuler',
+                    role: 'cancel',
+                    cssClass: 'cancel'
+                }, {
+                    cssClass: 'confirmation',
+                    text: 'Okay',
+                    handler: () => {
+                        this.weekService.deleteMeal(i);
+                    }
+                }
+            ]
+        });
+
+        await alert.present();
+    }
+
+    editMeal(i: number) {
+        this.router.navigate(["main/week", i]);
     }
 }

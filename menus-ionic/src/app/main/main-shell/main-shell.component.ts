@@ -3,6 +3,7 @@ import { Router } from "@angular/router";
 import { MenuController } from "@ionic/angular";
 import { environment } from "../../../environments/environment";
 import { FoodAuthService } from "../../shared/services/food-auth.service";
+import { WeekService } from "../../shared/services/week.service";
 
 @Component({
     selector: 'app-main-shell',
@@ -26,7 +27,8 @@ export class MainShellComponent implements OnInit {
 
     constructor(
         private router : Router,
-        private foodAuthService: FoodAuthService
+        private foodAuthService: FoodAuthService,
+        private weekService: WeekService
     ) {
     }
 
@@ -36,8 +38,8 @@ export class MainShellComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.weekService.getWeekFromApi();
         const path = window.location.pathname.split('main/')[1];
-        console.log(path);
         if (path !== undefined) {
             this.selectedIndex = this.appPages.findIndex(page => page.url.toLowerCase() === path.toLowerCase());
         }

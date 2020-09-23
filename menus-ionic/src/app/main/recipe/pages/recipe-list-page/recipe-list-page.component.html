@@ -1,33 +1,17 @@
 <app-page-header title="Recette"></app-page-header>
 
 <ion-content [fullscreen]="true">
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="onAdd()">
-    <ion-fab-button>
-      <ion-icon name="add"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="onAdd()">
+        <ion-fab-button>
+            <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
 
-  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
-    <ion-refresher-content></ion-refresher-content>
-  </ion-refresher>
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
 
-  <div id="container">
-    <ion-searchbar (ionChange)="onSearch($event)"
-                   inputmode="text"
-                   debounce="500"
-                   animated="true"
-                   slot="start"
-                   mode="ios"></ion-searchbar>
-
-
-
-      <app-recipe-item-card [recipe]="recipe"  *ngFor="let recipe of recipes" (click)="goToRecipe(recipe)"
-                              ></app-recipe-item-card>
-
-    <ion-infinite-scroll threshold="100px" (ionInfinite)="onScrollDown($event)">
-      <ion-infinite-scroll-content
-              loadingSpinner="bubbles">
-      </ion-infinite-scroll-content>
-    </ion-infinite-scroll>
+    <div id="container">
+        <app-recipe-list (clickRecipe)="goToRecipe($event)"></app-recipe-list>
     </div>
 </ion-content>

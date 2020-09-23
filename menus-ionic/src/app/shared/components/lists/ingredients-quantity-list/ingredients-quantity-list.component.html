@@ -1,0 +1,21 @@
+<ion-list *ngFor="let ingredientQuantity of ingredientsQuantity; let i = index">
+    <ion-item>
+        <ion-label class="ingredient-label" slot="start" (click)="changeIngredient(i)">
+            <ion-label>{{ingredientQuantity.ingredient.name}}</ion-label>
+            <ion-icon slot="start" name="caret-down-outline" *ngIf="!isReadonly"></ion-icon>
+        </ion-label>
+
+        <ion-label class="ingredient-quantity">
+            <input
+                    type="number"
+                    AutoSizeInput
+                    [(ngModel)]="ingredientQuantity.quantity"
+                    *ngIf="!isReadonly">
+            <ion-label>
+                <span *ngIf="isReadonly"> {{ingredientQuantity.quantity}} </span>
+                {{ingredientQuantity.ingredient.unit.symbol}}</ion-label>
+            <ion-icon slot="end" name="trash" color="danger" (click)="deleteIngredient(ingredientQuantity)"
+                      *ngIf="!isReadonly"></ion-icon>
+        </ion-label>
+    </ion-item>
+</ion-list>

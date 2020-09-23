@@ -18,6 +18,12 @@
     "paths": {
       "@models/*": [
         "src/app/shared/models/*"
+      ],
+      "@components/*": [
+        "src/app/shared/components/*"
+      ],
+      "@services/*": [
+        "src/app/shared/services/*"
       ]
     }
   },

@@ -7,6 +7,12 @@
 
     .menu-titles {
       flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+
+      &.no-side {
+        justify-content: center;
+      }
 
       .menu-meal-title {
         margin: 10px 0;

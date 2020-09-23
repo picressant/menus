@@ -21,7 +21,7 @@
         <ion-list>
             <ion-item *ngFor="let ingredient of ingredients" (click)="closeModal(ingredient)">
                 <ion-label slot="start">{{ingredient.name}}</ion-label>
-                <ion-label slot="end">{{ingredient.unit.symbol}}</ion-label>
+                <ion-label slot="end">{{ingredient.unit.name}}</ion-label>
             </ion-item>
         </ion-list>
 

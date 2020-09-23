@@ -1,0 +1,39 @@
+<ion-header [translucent]="true">
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="/"></ion-back-button>
+        </ion-buttons>
+        <ion-title>Modifier le repas</ion-title>
+        <ion-buttons slot="end">
+            <ion-button (click)="submit()">
+                <ion-icon name="checkmark-sharp"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true">
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="addSide()">
+        <ion-fab-button>
+            <ion-icon name="edit"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+
+    <div id="container">
+        <h3 class="ion-margin">Plat</h3>
+
+        <app-week-meal-card [meal]="meal" [showSides]="false" (click)="selectMeal()"></app-week-meal-card>
+        <ion-button class="ion-margin">Saisie libre</ion-button>
+
+        <h3 class="ion-margin">Accompagnements</h3>
+        <ion-list *ngIf="meal?.sideDishes.length > 0">
+            <ion-item *ngFor="let side of meal?.sideDishes">
+                <ion-label>
+                    {{side.name}}
+                </ion-label>
+            </ion-item>
+        </ion-list>
+        <div *ngIf="meal?.sideDishes.length === 0">
+            Aucun accompagnements
+        </div>
+    </div>
+</ion-content>

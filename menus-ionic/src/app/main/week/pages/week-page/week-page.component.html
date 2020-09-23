@@ -21,15 +21,15 @@
 <ion-content [fullscreen]="true">
     <div id="container">
 
-        <ng-container *ngIf="selectedTab === footerDay.selectedTab">
+        <div [hidden]="selectedTab !== footerDay.selectedTab">
             <h2 class="ion-margin lunch-margin">Midi</h2>
-            <app-week-meal-card [meal]="todayLunch" (click)="goToRecipe(todayLunch)"></app-week-meal-card>
+            <app-week-meal-card [meal]="todayLunch" (click)="goToRecipe(todayLunch)" [showSides]="true"></app-week-meal-card>
 
             <h2 class="ion-margin dinner-margin">Soir</h2>
-            <app-week-meal-card [meal]="todayDinner" (click)="goToRecipe(todayDinner)"></app-week-meal-card>
-        </ng-container>
+            <app-week-meal-card [meal]="todayDinner" (click)="goToRecipe(todayDinner)" [showSides]="true"></app-week-meal-card>
+        </div>
 
-        <ng-container *ngIf="selectedTab === footerWeek.selectedTab">
+        <div [hidden]="selectedTab !== footerWeek.selectedTab">
             <ion-reorder-group (ionItemReorder)="doReorder($event)" disabled="false">
                 <!-- Default reorder icon, end aligned items -->
                 <ion-item *ngFor="let weekMeal of meals; let i = index">
@@ -48,13 +48,21 @@
                       </span>
                         </div>
                     </div>
-                    <ion-reorder slot="end"></ion-reorder>
+                    <ion-reorder slot="end" *ngIf="!isEditingWeek"></ion-reorder>
+                    <ion-buttons slot="end" *ngIf="isEditingWeek">
+                        <ion-button (click)="editMeal(i)">
+                            <ion-icon name="pencil-sharp"></ion-icon>
+                        </ion-button>
+                        <ion-button (click)="deleteWeekMeal(i)">
+                            <ion-icon name="trash-sharp" color="danger"></ion-icon>
+                        </ion-button>
+                    </ion-buttons>
                 </ion-item>
             </ion-reorder-group>
-        </ng-container>
-        <ng-container *ngIf="selectedTab === footerGrocery.selectedTab">
+        </div>
+        <div [hidden]="selectedTab !== footerGrocery.selectedTab">
             <app-week-grocery-list [meals]="meals"></app-week-grocery-list>
-        </ng-container>
+        </div>
     </div>
 </ion-content>
 

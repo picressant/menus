@@ -9,11 +9,11 @@
                 <img [src]="'recipe/' + meal.recipe.id + '/picture' | secure | async">
             </ion-avatar>
         </div>
-        <div class="menu-titles">
+        <div class="menu-titles" [class.no-side]="meal.sideDishes?.length === 0 || !showSides">
             <div class="menu-meal-title">
                 {{meal.recipe?.name}}
             </div>
-            <div class="menu-sides" *ngIf="meal.sideDishes?.length > 0">
+            <div class="menu-sides" *ngIf="meal.sideDishes?.length > 0 && showSides">
                 avec
                 <span class="side" *ngFor="let side of meal.sideDishes; let i=index">
                     {{side.name}}

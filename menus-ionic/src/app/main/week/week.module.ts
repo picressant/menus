@@ -6,13 +6,17 @@ import { LayoutModule } from "../layout/layout.module";
 import { SharedModule } from "../../shared/shared.module";
 import { WeekGroceryListComponent } from "./components/week-grocery-list/week-grocery-list.component";
 import { WeekMealCardComponent } from "./components/week-meal-card/week-meal-card.component";
+import { ModifyMealPageComponent } from "./pages/modify-meal-page/modify-meal-page.component";
+import { WeekSelectRecipeModalComponent } from "./components/week-select-recipe-modal/week-select-recipe-modal.component";
 
 
 @NgModule({
     declarations: [
         WeekPageComponent,
         WeekGroceryListComponent,
-        WeekMealCardComponent
+        WeekMealCardComponent,
+        ModifyMealPageComponent,
+        WeekSelectRecipeModalComponent
     ],
     imports: [
         CommonModule,
