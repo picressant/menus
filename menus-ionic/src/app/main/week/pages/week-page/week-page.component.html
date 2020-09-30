@@ -33,7 +33,7 @@
             <ion-reorder-group (ionItemReorder)="doReorder($event)" disabled="false">
                 <!-- Default reorder icon, end aligned items -->
                 <ion-item *ngFor="let weekMeal of meals; let i = index">
-                    <div class="meal-wrapper">
+                    <div class="meal-wrapper" (click)="editMeal(i)">
                         <div class="meal-day">{{getDay(i)}}</div>
                         <div class="meal-detail">
                         <span class="meal-recipe">

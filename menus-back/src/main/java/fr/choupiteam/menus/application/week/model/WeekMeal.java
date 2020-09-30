@@ -11,6 +11,8 @@ public class WeekMeal {
 
     private List<SideDish> sideDishes;
 
+    private int persons;
+
     public Recipe getRecipe() {
         return recipe;
     }
@@ -25,5 +27,13 @@ public class WeekMeal {
 
     public void setSideDishes(List<SideDish> sideDishes) {
         this.sideDishes = sideDishes;
+    }
+
+    public int getPersons() {
+        return persons;
+    }
+
+    public void setPersons(int persons) {
+        this.persons = persons;
     }
 }

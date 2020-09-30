@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { WeekMeal } from "@models/week-meal.model";
 import { ActivatedRoute, Router } from "@angular/router";
 import { WeekService } from "@services/week.service";
 import { ModalController } from "@ionic/angular";
 import { WeekSelectRecipeModalComponent } from "../../components/week-select-recipe-modal/week-select-recipe-modal.component";
-import { SideDish } from "@models/sidedish.model";
+import { WeekSelectSideModalComponent } from "../../components/week-select-side-modal/week-select-side-modal.component";
+import { IngredientQuantity } from "@models/ingredient-quantity.model";
+import { Ingredient } from "@models/ingredient.model";
 
 @Component({
     selector: 'app-modify-meal-page',
@@ -17,6 +19,28 @@ export class ModifyMealPageComponent implements OnInit {
 
     mealIndex: number;
 
+    @Input()
+    isEdit: boolean = false;
+
+    footerDetails = {
+        name: "Détails",
+        icon: "list-outline",
+        selectedTab: "tab-details"
+    }
+
+    footerIngredients = {
+        name: "Ingrédients",
+        icon: "nutrition-outline",
+        selectedTab: "tab-ingredients"
+    }
+
+    selectedTab = this.footerDetails.selectedTab;
+
+    ingredientRecipeMap: Map<number, number>;
+    ingredientSideMap: Map<number, number>;
+    ingredients: Ingredient[] = [];
+
+
     constructor(
         private route: ActivatedRoute,
         private modalController: ModalController,
@@ -28,14 +52,47 @@ export class ModifyMealPageComponent implements OnInit {
     ngOnInit() {
         this.route.params.subscribe(params => {
             this.mealIndex = params['index'];
-
             this.meal = this.weekService.meals$.getValue()[this.mealIndex];
+            this.buildIngredients();
         });
 
         this.weekService.meals$.subscribe(meals => {
             this.meal = meals[this.mealIndex];
+            this.buildIngredients();
         });
     }
+
+    buildIngredients() {
+        const ratio = this.meal.persons / this.meal.recipe.persons;
+        this.ingredientRecipeMap = new Map<number, number>();
+        this.ingredientSideMap = new Map<number, number>();
+
+        this.meal.recipe.ingredients.forEach(i => {
+            this.addIngredientToMap(i, this.ingredientRecipeMap, ratio);
+        });
+
+        this.meal.sideDishes.forEach(side => {
+            side.ingredients.forEach(i => {
+                this.addIngredientToMap(i, this.ingredientSideMap, ratio);
+            });
+        });
+
+    }
+
+    private addIngredientToMap(ingredientQ: IngredientQuantity, mapI: Map<number, number>, ratio: number) {
+        if (this.ingredients.findIndex(i => i.id === ingredientQ.ingredient.id) < 0) {
+            this.ingredients.push(ingredientQ.ingredient);
+        }
+
+        const index = this.ingredients.findIndex(i => i.id === ingredientQ.ingredient.id);
+
+        if (!mapI.has(index)) {
+            mapI.set(index, 0);
+        }
+
+        mapI.set(index, mapI.get(index) + (ingredientQ.quantity * ratio));
+    }
+
 
     submit() {
         this.weekService.updateMeal(this.meal, this.mealIndex);
@@ -57,13 +114,31 @@ export class ModifyMealPageComponent implements OnInit {
             if (!this.meal)
                 this.meal = new WeekMeal();
             this.meal.recipe = data.recipe;
+            this.buildIngredients();
         }
     }
 
-    addSide() {
+    async addSide() {
         if (!this.meal)
             this.meal = new WeekMeal();
 
-        this.meal.sideDishes.push(new SideDish());
+        const modal = await this.modalController.create({
+            component: WeekSelectSideModalComponent
+        });
+
+        await modal.present();
+
+        const { data } = await modal.onWillDismiss();
+        if (data.side) {
+            if (!this.meal)
+                this.meal = new WeekMeal();
+            this.meal.sideDishes.push(data.side);
+            this.buildIngredients();
+        }
+    }
+
+    deleteSide(i: number) {
+        this.meal.sideDishes.splice(i, 1);
+        this.buildIngredients();
     }
 }

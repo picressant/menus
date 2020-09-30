@@ -3,7 +3,7 @@
         <ion-buttons slot="start">
             <ion-back-button defaultHref="/"></ion-back-button>
         </ion-buttons>
-        <ion-title>Modifier le repas</ion-title>
+        <ion-title>Repas</ion-title>
         <ion-buttons slot="end">
             <ion-button (click)="submit()">
                 <ion-icon name="checkmark-sharp"></ion-icon>
@@ -12,28 +12,67 @@
     </ion-toolbar>
 </ion-header>
 <ion-content [fullscreen]="true">
-    <ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="addSide()">
+    <ion-fab *ngIf="selectedTab === footerDetails.selectedTab" vertical="bottom" horizontal="end" slot="fixed" (click)="addSide()">
         <ion-fab-button>
-            <ion-icon name="edit"></ion-icon>
+            <ion-icon name="add-outline"></ion-icon>
         </ion-fab-button>
     </ion-fab>
 
     <div id="container">
-        <h3 class="ion-margin">Plat</h3>
 
-        <app-week-meal-card [meal]="meal" [showSides]="false" (click)="selectMeal()"></app-week-meal-card>
-        <ion-button class="ion-margin">Saisie libre</ion-button>
+        <div [hidden]="selectedTab !== footerDetails.selectedTab">
+            <ion-item>
+                <ion-label>Convives :</ion-label>
+                <ion-input *ngIf="meal" [(ngModel)]="meal.persons" (ionChange)="buildIngredients()"></ion-input>
+            </ion-item>
+            <h3 class="ion-margin">Plat</h3>
 
-        <h3 class="ion-margin">Accompagnements</h3>
-        <ion-list *ngIf="meal?.sideDishes.length > 0">
-            <ion-item *ngFor="let side of meal?.sideDishes">
-                <ion-label>
-                    {{side.name}}
+            <app-week-meal-card [meal]="meal" [showSides]="false" (click)="selectMeal()"></app-week-meal-card>
+
+            <h3 class="ion-margin">Accompagnements</h3>
+            <ion-list *ngIf="meal?.sideDishes.length > 0">
+                <ion-item *ngFor="let side of meal?.sideDishes; let i = index">
+                    <ion-label slot="start">
+                        {{side.name}}
+                    </ion-label>
+                    <ion-icon slot="end" name="trash-outline" color="danger" (click)="deleteSide(i)"></ion-icon>
+                </ion-item>
+            </ion-list>
+            <div *ngIf="meal?.sideDishes.length === 0">
+                Aucun accompagnements
+            </div>
+        </div>
+    </div>
+
+    <div [hidden]="selectedTab !== footerIngredients.selectedTab">
+        <h3>Plat</h3>
+        <ion-list *ngIf="ingredients">
+            <ion-item *ngFor="let ingredient of ingredientRecipeMap | keyvalue">
+                <ion-label slot="start">
+                    {{ingredients[ingredient.key].name}}
+                </ion-label>
+                <ion-label slot="end">
+                    {{ingredient.value}} {{ingredients[ingredient.key].unit.symbol}}
                 </ion-label>
             </ion-item>
         </ion-list>
-        <div *ngIf="meal?.sideDishes.length === 0">
-            Aucun accompagnements
-        </div>
+
+        <h3>Accompagnements</h3>
+        <ion-list *ngIf="ingredients">
+            <ion-item *ngFor="let ingredient of ingredientSideMap | keyvalue">
+                <ion-label slot="start">
+                    {{ingredients[ingredient.key].name}}
+                </ion-label>
+                <ion-label slot="end">
+                    {{ingredient.value}} {{ingredients[ingredient.key].unit.symbol}}
+                </ion-label>
+            </ion-item>
+        </ion-list>
     </div>
 </ion-content>
+
+<app-footer-tab
+        selectedTab="{{selectedTab}}"
+        (elementSelect)="selectedTab = $event"
+        [footerElements]="[footerDetails, footerIngredients]">
+</app-footer-tab>

@@ -8,6 +8,8 @@ import { WeekGroceryListComponent } from "./components/week-grocery-list/week-gr
 import { WeekMealCardComponent } from "./components/week-meal-card/week-meal-card.component";
 import { ModifyMealPageComponent } from "./pages/modify-meal-page/modify-meal-page.component";
 import { WeekSelectRecipeModalComponent } from "./components/week-select-recipe-modal/week-select-recipe-modal.component";
+import { FormsModule } from "@angular/forms";
+import { WeekSelectSideModalComponent } from "./components/week-select-side-modal/week-select-side-modal.component";
 
 
 @NgModule({
@@ -16,14 +18,16 @@ import { WeekSelectRecipeModalComponent } from "./components/week-select-recipe-
         WeekGroceryListComponent,
         WeekMealCardComponent,
         ModifyMealPageComponent,
-        WeekSelectRecipeModalComponent
+        WeekSelectRecipeModalComponent,
+        WeekSelectSideModalComponent
     ],
     imports: [
         CommonModule,
         IonicModule,
         LayoutModule,
 
-        SharedModule
+        SharedModule,
+        FormsModule
     ],
     exports: [
         WeekPageComponent

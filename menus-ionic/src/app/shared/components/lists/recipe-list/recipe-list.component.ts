@@ -24,7 +24,6 @@ export class RecipeListComponent implements OnInit {
 
     @Input()
     set loadOnInit(load: boolean) {
-        console.log("loadOnInit");
         if (load)
             this.refresh(null);
     }
@@ -32,7 +31,7 @@ export class RecipeListComponent implements OnInit {
     constructor(
         private recipeRest: RecipeRestService
     ) {
-        this.pager = new Pager(2);
+        this.pager = new Pager(10);
     }
 
     ngOnInit() {

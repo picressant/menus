@@ -4,8 +4,10 @@ import { SideDish } from './sidedish.model';
 export class WeekMeal {
     recipe: Recipe;
     sideDishes: SideDish[];
+    persons: number;
 
     constructor() {
         this.sideDishes = [];
+        this.persons = 2;
     }
 }
