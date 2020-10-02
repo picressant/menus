@@ -168,30 +168,35 @@ export class WeekPageComponent {
         this.router.navigate(["main/week", i]);
     }
 
-    async longpressed(i: number) {
+    longpressed(i: number) {
         this.isDeleting = i;
+    }
 
-        const alert = await this.alertController.create({
-            header: 'Confirmation',
-            cssClass: 'confirmation-modal',
-            message: 'Supprimer le repas de ' + this.getDay(i) + ' ?',
-            buttons: [
-                {
-                    text: 'Annuler',
-                    role: 'cancel',
-                    cssClass: 'cancel'
-                }, {
-                    cssClass: 'confirmation',
-                    text: 'Okay',
-                    handler: () => {
-                        this.weekService.deleteMeal(i);
+    async pressEnded(i: number) {
+        if (this.isDeleting === i) {
+
+            const alert = await this.alertController.create({
+                header: 'Confirmation',
+                cssClass: 'confirmation-modal',
+                message: 'Supprimer le repas de ' + this.getDay(i) + ' ?',
+                buttons: [
+                    {
+                        text: 'Annuler',
+                        role: 'cancel',
+                        cssClass: 'cancel'
+                    }, {
+                        cssClass: 'confirmation',
+                        text: 'Okay',
+                        handler: () => {
+                            this.weekService.deleteMeal(i);
+                        }
                     }
-                }
-            ]
-        });
+                ]
+            });
 
-        await alert.present();
+            await alert.present();
 
-        this.isDeleting = undefined;
+            this.isDeleting = undefined;
+        }
     }
 }
