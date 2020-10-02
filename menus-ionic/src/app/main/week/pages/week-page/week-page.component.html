@@ -4,36 +4,26 @@
             <ion-menu-button></ion-menu-button>
         </ion-buttons>
         <ion-title>Planning</ion-title>
-        <ion-buttons slot="end" *ngIf="isEditingWeek">
-            <ion-button (click)="saveWeek()">
-                <ion-icon name="checkmark-sharp"></ion-icon>
-            </ion-button>
-        </ion-buttons>
     </ion-toolbar>
 </ion-header>
-
-<ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="selectedTab===footerWeek.selectedTab && !isEditingWeek">
-    <ion-fab-button (click)="editWeek()">
-        <ion-icon name="create-outline"></ion-icon>
-    </ion-fab-button>
-</ion-fab>
 
 <ion-content [fullscreen]="true">
     <div id="container">
 
         <div [hidden]="selectedTab !== footerDay.selectedTab">
             <h2 class="ion-margin lunch-margin">Midi</h2>
-            <app-week-meal-card [meal]="todayLunch" (click)="goToRecipe(todayLunch)" [showSides]="true"></app-week-meal-card>
+            <app-week-meal-card [meal]="meals[todayLunchIndex]" (click)="goToRecipe(todayLunchIndex)" [showSides]="true"></app-week-meal-card>
 
             <h2 class="ion-margin dinner-margin">Soir</h2>
-            <app-week-meal-card [meal]="todayDinner" (click)="goToRecipe(todayDinner)" [showSides]="true"></app-week-meal-card>
+            <app-week-meal-card [meal]="meals[todayDinnerIndex]" (click)="goToRecipe(todayDinnerIndex)" [showSides]="true"></app-week-meal-card>
         </div>
 
         <div [hidden]="selectedTab !== footerWeek.selectedTab">
             <ion-reorder-group (ionItemReorder)="doReorder($event)" disabled="false">
                 <!-- Default reorder icon, end aligned items -->
-                <ion-item *ngFor="let weekMeal of meals; let i = index">
-                    <div class="meal-wrapper" (click)="editMeal(i)">
+                <ion-item *ngFor="let weekMeal of meals; let i = index"
+                          ion-long-press [interval]="400" (longPressed)="longpressed(i)" [class.is-deleting]="isDeleting === i">
+                    <div class="meal-wrapper" (click)="gotToMeal(i)">
                         <div class="meal-day">{{getDay(i)}}</div>
                         <div class="meal-detail">
                         <span class="meal-recipe">
@@ -48,15 +38,7 @@
                       </span>
                         </div>
                     </div>
-                    <ion-reorder slot="end" *ngIf="!isEditingWeek"></ion-reorder>
-                    <ion-buttons slot="end" *ngIf="isEditingWeek">
-                        <ion-button (click)="editMeal(i)">
-                            <ion-icon name="pencil-sharp"></ion-icon>
-                        </ion-button>
-                        <ion-button (click)="deleteWeekMeal(i)">
-                            <ion-icon name="trash-sharp" color="danger"></ion-icon>
-                        </ion-button>
-                    </ion-buttons>
+                    <ion-reorder slot="end"></ion-reorder>
                 </ion-item>
             </ion-reorder-group>
         </div>
@@ -67,7 +49,6 @@
 </ion-content>
 
 <app-footer-tab
-        *ngIf="!isEditingWeek"
         selectedTab="{{selectedTab}}"
         (elementSelect)="selectedTab = $event"
         [footerElements]="[footerDay, footerWeek, footerGrocery]">

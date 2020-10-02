@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
@@ -16,6 +16,7 @@ import { ErrorInterceptor } from "./shared/interceptors/error.interceptor";
 import { MainModule } from "./main/main.module";
 import { AuthModule } from "./auth/auth.module";
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { IonicGestureConfig } from "./shared/config/ionic-gesture.config";
 
 
 @NgModule({
@@ -35,6 +36,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     providers: [
         StatusBar,
         SplashScreen,
+        { provide: HAMMER_GESTURE_CONFIG, useClass: IonicGestureConfig },
         { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
         {
             provide: HTTP_INTERCEPTORS,

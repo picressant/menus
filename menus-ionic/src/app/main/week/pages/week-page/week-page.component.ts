@@ -47,12 +47,12 @@ export class WeekPageComponent {
 
     selectedTab: string = this.footerDay.selectedTab;
 
-    todayLunch: WeekMeal;
-    todayDinner: WeekMeal;
+    todayLunchIndex: number;
+    todayDinnerIndex: number;
 
-    isEditingWeek = false;
 
     meals: WeekMeal[] = [];
+    isDeleting: number = undefined;
 
     constructor(
         private weekService: WeekService,
@@ -69,50 +69,21 @@ export class WeekPageComponent {
         });
     }
 
-    ionViewWillEnter() {
-        this.route.queryParams.subscribe(params => {
-            if (params.isEditing) {
-                this.selectedTab = this.footerWeek.selectedTab;
-                this.isEditingWeek = true;
-            }
-        })
-    }
-
     changeTodayMeal() {
         const currentDate = new Date();
         let day = currentDate.getDay();
-        const currentWeek = this.weekService.getWeek();
+        let index = 0;
 
-        if (currentWeek) {
-            if (day === 0) {
-                this.todayLunch = currentWeek.sundayLunch;
-                this.todayDinner = currentWeek.sundayDinner;
-            }
-            else if (day === 1) {
-                this.todayLunch = currentWeek.mondayLunch;
-                this.todayDinner = currentWeek.mondayDinner;
-            }
-            else if (day === 2) {
-                this.todayLunch = currentWeek.tuesdayLunch;
-                this.todayDinner = currentWeek.tuesdayDinner;
-            }
-            else if (day === 3) {
-                this.todayLunch = currentWeek.wednesdayLunch;
-                this.todayDinner = currentWeek.wednesdayDinner;
-            }
-            else if (day === 4) {
-                this.todayLunch = currentWeek.thursdayLunch;
-                this.todayDinner = currentWeek.thursdayDinner;
-            }
-            else if (day === 5) {
-                this.todayLunch = currentWeek.fridayLunch;
-                this.todayDinner = currentWeek.fridayDinner;
-            }
-            else if (day === 6) {
-                this.todayLunch = currentWeek.saturdayLunch;
-                this.todayDinner = currentWeek.saturdayDinner;
-            }
+        if (day === 0) {
+            index = 6;
         }
+        else {
+            index = day - 1;
+        }
+
+        this.todayLunchIndex = index * 2;
+        this.todayDinnerIndex = index * 2 + 1;
+
     }
 
     getDay(index: number) {
@@ -161,19 +132,13 @@ export class WeekPageComponent {
         this.saveWeek();
     }
 
-    goToRecipe(meal: WeekMeal) {
-        if (meal && meal.recipe) {
-            this.router.navigate(["main/recipe", meal.recipe.id]);
-        }
-    }
+    goToRecipe(index: number) {
+        this.router.navigate(["main/week", index]);
 
-    editWeek() {
-        this.isEditingWeek = true;
     }
 
     saveWeek() {
         this.weekService.saveAllMeals(this.meals);
-        this.isEditingWeek = false;
     }
 
     async deleteWeekMeal(i: number) {
@@ -199,7 +164,34 @@ export class WeekPageComponent {
         await alert.present();
     }
 
-    editMeal(i: number) {
+    gotToMeal(i: number) {
         this.router.navigate(["main/week", i]);
+    }
+
+    async longpressed(i: number) {
+        this.isDeleting = i;
+
+        const alert = await this.alertController.create({
+            header: 'Confirmation',
+            cssClass: 'confirmation-modal',
+            message: 'Supprimer le repas de ' + this.getDay(i) + ' ?',
+            buttons: [
+                {
+                    text: 'Annuler',
+                    role: 'cancel',
+                    cssClass: 'cancel'
+                }, {
+                    cssClass: 'confirmation',
+                    text: 'Okay',
+                    handler: () => {
+                        this.weekService.deleteMeal(i);
+                    }
+                }
+            ]
+        });
+
+        await alert.present();
+
+        this.isDeleting = undefined;
     }
 }

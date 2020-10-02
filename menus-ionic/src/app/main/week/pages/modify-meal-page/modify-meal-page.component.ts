@@ -19,6 +19,8 @@ export class ModifyMealPageComponent implements OnInit {
 
     mealIndex: number;
 
+    isEditing = false;
+
     @Input()
     isEdit: boolean = false;
 
@@ -52,8 +54,10 @@ export class ModifyMealPageComponent implements OnInit {
     ngOnInit() {
         this.route.params.subscribe(params => {
             this.mealIndex = params['index'];
-            this.meal = this.weekService.meals$.getValue()[this.mealIndex];
-            this.buildIngredients();
+            if (this.weekService.meals$.getValue()) {
+                this.meal = this.weekService.meals$.getValue()[this.mealIndex];
+                this.buildIngredients();
+            }
         });
 
         this.weekService.meals$.subscribe(meals => {
@@ -63,20 +67,21 @@ export class ModifyMealPageComponent implements OnInit {
     }
 
     buildIngredients() {
-        const ratio = this.meal.persons / this.meal.recipe.persons;
-        this.ingredientRecipeMap = new Map<number, number>();
-        this.ingredientSideMap = new Map<number, number>();
+        if (this.meal) {
+            const ratio = this.meal.persons / this.meal.recipe.persons;
+            this.ingredientRecipeMap = new Map<number, number>();
+            this.ingredientSideMap = new Map<number, number>();
 
-        this.meal.recipe.ingredients.forEach(i => {
-            this.addIngredientToMap(i, this.ingredientRecipeMap, ratio);
-        });
-
-        this.meal.sideDishes.forEach(side => {
-            side.ingredients.forEach(i => {
-                this.addIngredientToMap(i, this.ingredientSideMap, ratio);
+            this.meal.recipe.ingredients.forEach(i => {
+                this.addIngredientToMap(i, this.ingredientRecipeMap, ratio);
             });
-        });
 
+            this.meal.sideDishes.forEach(side => {
+                side.ingredients.forEach(i => {
+                    this.addIngredientToMap(i, this.ingredientSideMap, ratio);
+                });
+            });
+        }
     }
 
     private addIngredientToMap(ingredientQ: IngredientQuantity, mapI: Map<number, number>, ratio: number) {
@@ -96,7 +101,7 @@ export class ModifyMealPageComponent implements OnInit {
 
     submit() {
         this.weekService.updateMeal(this.meal, this.mealIndex);
-        this.router.navigate(["main/week"], { queryParams: { isEditing: 'true' } });
+        this.isEditing = false;
     }
 
     async selectMeal() {
@@ -140,5 +145,16 @@ export class ModifyMealPageComponent implements OnInit {
     deleteSide(i: number) {
         this.meal.sideDishes.splice(i, 1);
         this.buildIngredients();
+    }
+
+    clickOnMeal() {
+        if (this.isEditing) {
+            this.selectMeal();
+        }
+        else {
+            if (this.meal && this.meal.recipe) {
+                this.router.navigate(["main/recipe", this.meal.recipe.id]);
+            }
+        }
     }
 }

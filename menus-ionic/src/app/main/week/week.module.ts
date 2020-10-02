@@ -10,6 +10,7 @@ import { ModifyMealPageComponent } from "./pages/modify-meal-page/modify-meal-pa
 import { WeekSelectRecipeModalComponent } from "./components/week-select-recipe-modal/week-select-recipe-modal.component";
 import { FormsModule } from "@angular/forms";
 import { WeekSelectSideModalComponent } from "./components/week-select-side-modal/week-select-side-modal.component";
+import { LongPressModule } from "ionic-long-press";
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { WeekSelectSideModalComponent } from "./components/week-select-side-moda
         LayoutModule,
 
         SharedModule,
-        FormsModule
+        FormsModule,
+        LongPressModule
     ],
     exports: [
         WeekPageComponent
