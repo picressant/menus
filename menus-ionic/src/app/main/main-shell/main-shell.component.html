@@ -10,14 +10,14 @@
                         <ion-label>{{ p.title }}</ion-label>
                     </ion-item>
                 </ion-menu-toggle>
-                <ion-menu-toggle auto-hide="false">
-                    <ion-item (click)="disconnect()">
-                        <ion-icon slot="start" ios="exit-outline" md="exit-sharp"></ion-icon>
-                        <ion-label>Se déconnecter</ion-label>
-                    </ion-item>
-                </ion-menu-toggle>
             </ion-list>
 
+            <ion-menu-toggle class="menu-disconect" auto-hide="false">
+                <ion-item (click)="disconnect()" lines="none">
+                    <ion-icon slot="start" ios="exit-outline" md="exit-sharp"></ion-icon>
+                    <ion-label>Se déconnecter</ion-label>
+                </ion-item>
+            </ion-menu-toggle>
 
         </ion-content>
     </ion-menu>
