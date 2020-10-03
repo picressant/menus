@@ -12,10 +12,12 @@
 
         <div [hidden]="selectedTab !== footerDay.selectedTab">
             <h2 class="ion-margin lunch-margin">Midi</h2>
-            <app-week-meal-card [meal]="meals[todayLunchIndex]" (click)="goToRecipe(todayLunchIndex)" [showSides]="true"></app-week-meal-card>
+            <app-week-meal-card [meal]="meals[todayLunchIndex]" (click)="goToRecipe(todayLunchIndex)"
+                                [showSides]="true"></app-week-meal-card>
 
             <h2 class="ion-margin dinner-margin">Soir</h2>
-            <app-week-meal-card [meal]="meals[todayDinnerIndex]" (click)="goToRecipe(todayDinnerIndex)" [showSides]="true"></app-week-meal-card>
+            <app-week-meal-card [meal]="meals[todayDinnerIndex]" (click)="goToRecipe(todayDinnerIndex)"
+                                [showSides]="true"></app-week-meal-card>
         </div>
 
         <div [hidden]="selectedTab !== footerWeek.selectedTab">
@@ -30,15 +32,14 @@
                          (longPressCanceled)="refreshWiggleEffect(undefined)">
                         <div class="meal-day">{{getDay(i)}}</div>
                         <div class="meal-detail">
-                        <span class="meal-recipe">
-                            {{weekMeal?.recipe?.name}}
-                        </span>
+                            <div class="meal-recipe">
+                                {{weekMeal?.recipe?.name}}
+                            </div>
                             <span class="meal-side" *ngIf="weekMeal?.sideDishes.length > 0">
-                            (
+                            avec
                             <span *ngFor="let side of weekMeal?.sideDishes; let i = index">
-                              {{ side.name }}<span *ngIf="i < weekMeal?.sideDishes.length-1"> - </span>
+                              {{ side.name }}<span *ngIf="i < weekMeal?.sideDishes.length-1">, </span>
                             </span>
-                            )
                       </span>
                         </div>
                     </div>
