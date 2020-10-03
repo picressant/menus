@@ -199,4 +199,12 @@ export class WeekPageComponent {
             this.isDeleting = undefined;
         }
     }
+
+    onPress(i: number) {
+        console.log("pressing", i);
+    }
+
+    onPressUp(i: number) {
+        console.log("press up", i);
+    }
 }

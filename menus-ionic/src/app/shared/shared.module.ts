@@ -11,6 +11,7 @@ import { FormsModule } from "@angular/forms";
 import { AutoSizeInputModule } from "ngx-autosize-input";
 import { RecipeListComponent } from "@components/lists/recipe-list/recipe-list.component";
 import { RecipeItemCardComponent } from "@components/cards/recipe-item-card/recipe-item-card.component";
+import { LongPressDirective } from "./directives/long-press.directive";
 
 
 @NgModule({
@@ -21,7 +22,9 @@ import { RecipeItemCardComponent } from "@components/cards/recipe-item-card/reci
         FooterTabComponent,
         IngredientsQuantityListComponent,
         RecipeListComponent,
-        RecipeItemCardComponent
+        RecipeItemCardComponent,
+
+        LongPressDirective
     ],
     imports: [
         CommonModule,
@@ -36,7 +39,9 @@ import { RecipeItemCardComponent } from "@components/cards/recipe-item-card/reci
         SecurePipe,
         FooterTabComponent,
         IngredientsQuantityListComponent,
-        RecipeListComponent
+        RecipeListComponent,
+
+        LongPressDirective
     ]
 })
 export class SharedModule {
