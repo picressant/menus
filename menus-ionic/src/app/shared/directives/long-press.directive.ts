@@ -37,10 +37,7 @@ export class LongPressDirective implements OnInit, OnDestroy {
 
             },
             onMove: () => {
-                if (this.timerStartId || this.timerId) {
-                    this.longPressCanceled.emit();
-                    this.clearTimeouts();
-                }
+                this.clearTimeouts();
             },
             onEnd: () => {
                 this.clearTimeouts();
@@ -50,10 +47,13 @@ export class LongPressDirective implements OnInit, OnDestroy {
     }
 
     private clearTimeouts() {
-        clearTimeout(this.timerStartId);
-        clearTimeout(this.timerId);
+        if (this.timerStartId || this.timerId) {
+            this.longPressCanceled.emit();
+            clearTimeout(this.timerStartId);
+            clearTimeout(this.timerId);
 
-        this.timerStartId = this.timerId = undefined;
+            this.timerStartId = this.timerId = undefined;
+        }
     }
 
     ngOnDestroy() {
