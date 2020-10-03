@@ -38,12 +38,14 @@ export class WeekService {
 
     public updateMeal(meal: WeekMeal, i: number) {
         this._meals[i] = meal;
+        this.meals$.next(this._meals);
         this.saveAllMeals(this._meals);
     }
 
     public deleteMeal(i: number) {
         this._meals[i] = null;
         this.meals$.next(this._meals);
+        this.saveAllMeals(this._meals);
     }
 
     public saveAllMeals(meals: WeekMeal[]) {
