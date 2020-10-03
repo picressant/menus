@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { WeekMeal } from "@models/week-meal.model";
 import { ActivatedRoute, Router } from "@angular/router";
 import { AlertController } from "@ionic/angular";
-import { WeekService } from "../../../../shared/services/week.service";
+import { WeekService } from "@services/week.service";
 
 const days = {
     mondayLunch: 0,
@@ -58,7 +58,8 @@ export class WeekPageComponent {
         private weekService: WeekService,
         private router: Router,
         private route: ActivatedRoute,
-        private alertController: AlertController
+        private alertController: AlertController,
+        private cdr: ChangeDetectorRef
     ) {
         this.meals = this.weekService.meals$.getValue();
         this.changeTodayMeal();
@@ -165,16 +166,18 @@ export class WeekPageComponent {
     }
 
     gotToMeal(i: number) {
+        this.isDeleting = undefined;
         this.router.navigate(["main/week", i]);
     }
 
-    longpressed(i: number) {
+    refreshWiggleEffect(i: number) {
+        console.log("refreshing thy shit", i);
         this.isDeleting = i;
+        this.cdr.detectChanges();
     }
 
     async pressEnded(i: number) {
         if (this.isDeleting === i) {
-
             const alert = await this.alertController.create({
                 header: 'Confirmation',
                 cssClass: 'confirmation-modal',
@@ -198,13 +201,5 @@ export class WeekPageComponent {
 
             this.isDeleting = undefined;
         }
-    }
-
-    onPress(i: number) {
-        console.log("pressing", i);
-    }
-
-    onPressUp(i: number) {
-        console.log("press up", i);
     }
 }

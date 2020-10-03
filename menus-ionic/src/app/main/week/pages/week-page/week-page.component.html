@@ -22,9 +22,12 @@
             <ion-reorder-group (ionItemReorder)="doReorder($event)" disabled="false">
                 <!-- Default reorder icon, end aligned items -->
                 <ion-item *ngFor="let weekMeal of meals; let i = index"
-                          appLongPress delay="1000" (longPressed)="pressEnded(i)" (longPressStarted)="longpressed(i)"
-                          [class.is-deleting]="isDeleting === i" >
-                    <div class="meal-wrapper" (click)="gotToMeal(i)">
+                          [class.is-deleting]="isDeleting === i" class="week-meal-item">
+                    <div class="meal-wrapper" (click)="gotToMeal(i)"
+                         appLongPress delay="1000"
+                         (longPressed)="pressEnded(i)"
+                         (longPressStarted)="refreshWiggleEffect(i)"
+                         (longPressCanceled)="refreshWiggleEffect(undefined)">
                         <div class="meal-day">{{getDay(i)}}</div>
                         <div class="meal-detail">
                         <span class="meal-recipe">

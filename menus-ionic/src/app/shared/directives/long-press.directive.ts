@@ -1,5 +1,5 @@
 import { createGesture, Gesture, GestureDetail } from '@ionic/core';
-import { EventEmitter, Directive, OnInit, OnDestroy, Output, Input, ElementRef } from '@angular/core';
+import { Directive, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 
 @Directive({
     selector: '[appLongPress]'
@@ -8,14 +8,17 @@ export class LongPressDirective implements OnInit, OnDestroy {
 
     ionicGesture: Gesture;
     timerId: any;
+    timerStartId: any;
 
     @Input() delay: number;
     @Output() longPressed: EventEmitter<any> = new EventEmitter();
     @Output() longPressStarted: EventEmitter<any> = new EventEmitter();
+    @Output() longPressCanceled: EventEmitter<any> = new EventEmitter();
 
     constructor(
         private elementRef: ElementRef
-    ) {  }
+    ) {
+    }
 
     ngOnInit() {
         this.ionicGesture = createGesture({
@@ -25,16 +28,32 @@ export class LongPressDirective implements OnInit, OnDestroy {
             canStart: () => true,
             onStart: (gestureEv: GestureDetail) => {
                 //gestureEv.event.preventDefault();
-                this.longPressStarted.emit();
-                this.timerId = setTimeout(() => {
-                    this.longPressed.emit(gestureEv.event);
-                }, this.delay);
+                this.timerStartId = setTimeout(() => {
+                    this.longPressStarted.emit();
+                    this.timerId = setTimeout(() => {
+                        this.longPressed.emit(gestureEv.event);
+                    }, this.delay);
+                }, 500);
+
+            },
+            onMove: () => {
+                if (this.timerStartId || this.timerId) {
+                    this.longPressCanceled.emit();
+                    this.clearTimeouts();
+                }
             },
             onEnd: () => {
-                clearTimeout(this.timerId);
+                this.clearTimeouts();
             }
         });
         this.ionicGesture.enable(true);
+    }
+
+    private clearTimeouts() {
+        clearTimeout(this.timerStartId);
+        clearTimeout(this.timerId);
+
+        this.timerStartId = this.timerId = undefined;
     }
 
     ngOnDestroy() {
