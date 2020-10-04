@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { Recipe } from "@models/recipe.model";
-import { Pager } from "@models/pager/pager.model";
+import { Direction, Order, Pager } from "@models/pager/pager.model";
 import { Pageable } from "@models/pager/pageable.model";
 import { IonInfiniteScroll } from "@ionic/angular";
 import { RecipeRestService } from "@services/recipe-rest.service";
@@ -32,6 +32,7 @@ export class RecipeListComponent implements OnInit {
         private recipeRest: RecipeRestService
     ) {
         this.pager = new Pager(10);
+        this.pager.orders.push(new Order("name", Direction.ASC));
     }
 
     ngOnInit() {
