@@ -81,7 +81,7 @@ export class RecipeItemPageComponent extends AbstractItemPage<Recipe> implements
     }
 
     get create$(): Observable<Recipe> {
-        return undefined;
+        return this.recipeRest.addRecipe(this.form.value);
     }
 
     get save$(): Observable<Recipe> {
@@ -183,5 +183,9 @@ export class RecipeItemPageComponent extends AbstractItemPage<Recipe> implements
 
     onDeleteIngredient(ingredientQuantity: IngredientQuantity) {
         this.form.controls.ingredients.setValue(this.form.controls.ingredients.value.filter(i => i !== ingredientQuantity));
+    }
+
+    getSubmitColor() {
+        return this.form.valid ? "" : "danger";
     }
 }

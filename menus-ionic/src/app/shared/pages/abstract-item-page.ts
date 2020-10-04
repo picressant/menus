@@ -68,10 +68,15 @@ export abstract class AbstractItemPage<T extends AbstractData> implements OnInit
     }
 
     submit() {
-        if (this.isAddingMode)
-            this._create();
-        else
-            this._save();
+        if (this.form.invalid) {
+            this._toaster.error("La saisie est invalide. Vérifier vos données.")
+        }
+        else {
+            if (this.isAddingMode)
+                this._create();
+            else
+                this._save();
+        }
     }
 
     modify() {

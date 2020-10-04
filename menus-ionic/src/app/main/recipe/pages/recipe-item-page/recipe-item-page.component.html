@@ -6,7 +6,7 @@
         <ion-title>{{title}}</ion-title>
         <ion-buttons slot="end" *ngIf="!isReadonly">
             <ion-button (click)="submit()">
-                <ion-icon name="checkmark-sharp"></ion-icon>
+                <ion-icon name="checkmark-sharp" [color]="getSubmitColor()"></ion-icon>
             </ion-button>
         </ion-buttons>
     </ion-toolbar>
