@@ -13,6 +13,8 @@ import { Pageable } from "@models/pager/pageable.model";
 import { ModalController } from "@ionic/angular";
 import { IngredientModalSelectorComponent } from "@components/selectors/ingredient-modal-selector/ingredient-modal-selector.component";
 import { IngredientQuantity } from "@models/ingredient-quantity.model";
+import { WeekService } from "@services/week.service";
+import { tap } from "rxjs/operators";
 
 @Component({
     selector: 'app-recipe-item-page',
@@ -57,7 +59,9 @@ export class RecipeItemPageComponent extends AbstractItemPage<Recipe> implements
                 private route: ActivatedRoute,
                 private toaster: ToasterService,
                 private router: Router,
-                private modalController: ModalController) {
+                private modalController: ModalController,
+                private weekService: WeekService
+    ) {
 
         super(route, toaster, "Recette modifiée avec succès", "Recette ajoutée avec succès");
         this.form = Recipe.form(this.fb);
@@ -81,7 +85,12 @@ export class RecipeItemPageComponent extends AbstractItemPage<Recipe> implements
     }
 
     get save$(): Observable<Recipe> {
-        return this.recipeRest.updateRecipe(this.form.value);
+        return this.recipeRest.updateRecipe(this.form.value)
+            .pipe(tap(() => {
+                if (this.weekService.meals$.getValue().filter(meal => meal.recipe && meal.recipe.id === this.id).length > 0) {
+                    this.weekService.getWeekFromApi();
+                }
+            }));
     }
 
 
