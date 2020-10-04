@@ -36,7 +36,6 @@ export class RecipeListPageComponent implements OnInit {
         this.router.navigate(["main/recipe", recipe.id]);
     }
 
-
     doRefresh(event: any) {
         this.recipeListComponent.refresh(event);
     }

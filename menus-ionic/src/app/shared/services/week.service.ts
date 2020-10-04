@@ -41,7 +41,10 @@ export class WeekService {
     }
 
     public deleteMeal(i: number) {
-        this._meals[i] = null;
+        this._meals[i].recipe = null;
+        this._meals[i].sideDishes = [];
+        this._meals[i].persons = 2;
+
         this.meals$.next(this._meals);
         this.saveWeek();
     }
