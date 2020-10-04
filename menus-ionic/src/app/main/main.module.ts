@@ -8,6 +8,7 @@ import { IonicModule } from "@ionic/angular";
 import { RecipeModule } from "./recipe/recipe.module";
 import { LayoutModule } from "./layout/layout.module";
 import { WeekModule } from "./week/week.module";
+import { SidesModule } from "./sides/sides.module";
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { WeekModule } from "./week/week.module";
         LayoutModule,
 
         RecipeModule,
-        WeekModule
+        WeekModule,
+        SidesModule
 
     ],
     exports: [

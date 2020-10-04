@@ -1,34 +1,14 @@
 <ion-header translucent>
-  <ion-toolbar>
-    <ion-title>Ingrédients</ion-title>
-    <ion-buttons slot="end">
-      <ion-button (click)="closeModal(null)">Close</ion-button>
-    </ion-buttons>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-title>Ingrédients</ion-title>
+        <ion-buttons slot="end">
+            <ion-button (click)="closeModal(null)">Close</ion-button>
+        </ion-buttons>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-
-  <div id="container">
-    <ion-searchbar (ionChange)="searchSides($event.detail.value)"
-                   inputmode="text"
-                   debounce="500"
-                   animated="true"
-                   slot="start"
-                   mode="ios"></ion-searchbar>
-
-
-    <ion-list>
-      <ion-item *ngFor="let side of sides" (click)="closeModal(side)">
-        <ion-label slot="start">{{side.name}}</ion-label>
-        <ion-label slot="end">{{getIngredients(side)}}</ion-label>
-      </ion-item>
-    </ion-list>
-
-    <ion-infinite-scroll threshold="100px" (ionInfinite)="scrollSides($event)">
-      <ion-infinite-scroll-content
-              loadingSpinner="bubbles">
-      </ion-infinite-scroll-content>
-    </ion-infinite-scroll>
-  </div>
+    <div id="container">
+        <app-side-list (selected)="closeModal($event)" [excludeIds]="sidesId"></app-side-list>
+    </div>
 </ion-content>

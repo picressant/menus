@@ -12,6 +12,7 @@ import { AutoSizeInputModule } from "ngx-autosize-input";
 import { RecipeListComponent } from "@components/lists/recipe-list/recipe-list.component";
 import { RecipeItemCardComponent } from "@components/cards/recipe-item-card/recipe-item-card.component";
 import { LongPressDirective } from "./directives/long-press.directive";
+import { SideListComponent } from "@components/lists/side-list/side-list.component";
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import { LongPressDirective } from "./directives/long-press.directive";
         IngredientsQuantityListComponent,
         RecipeListComponent,
         RecipeItemCardComponent,
+        SideListComponent,
 
         LongPressDirective
     ],
@@ -40,6 +42,7 @@ import { LongPressDirective } from "./directives/long-press.directive";
         FooterTabComponent,
         IngredientsQuantityListComponent,
         RecipeListComponent,
+        SideListComponent,
 
         LongPressDirective
     ]

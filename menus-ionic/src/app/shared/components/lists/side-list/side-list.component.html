@@ -1,0 +1,20 @@
+<ion-searchbar (ionChange)="searchSides($event.detail.value)"
+               inputmode="text"
+               debounce="500"
+               animated="true"
+               slot="start"
+               mode="ios"></ion-searchbar>
+
+
+<ion-list>
+    <ion-item *ngFor="let side of sides" (click)="selectSide(side)">
+        <ion-label slot="start">{{side.name}}</ion-label>
+        <ion-label slot="end">{{getIngredients(side)}}</ion-label>
+    </ion-item>
+</ion-list>
+
+<ion-infinite-scroll threshold="100px" (ionInfinite)="scrollSides($event)">
+    <ion-infinite-scroll-content
+            loadingSpinner="bubbles">
+    </ion-infinite-scroll-content>
+</ion-infinite-scroll>

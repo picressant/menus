@@ -21,7 +21,12 @@ export class MainShellComponent implements OnInit {
         {
             title: 'Planning',
             url: 'week',
-            icon: 'list'
+            icon: 'calendar'
+        },
+        {
+            title: 'Accompagnements',
+            url: 'side',
+            icon: 'leaf'
         },
     ];
 

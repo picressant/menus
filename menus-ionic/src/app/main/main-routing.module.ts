@@ -5,6 +5,8 @@ import { RecipeListPageComponent } from "./recipe/pages/recipe-list-page/recipe-
 import { WeekPageComponent } from "./week/pages/week-page/week-page.component";
 import { RecipeItemPageComponent } from "./recipe/pages/recipe-item-page/recipe-item-page.component";
 import { ModifyMealPageComponent } from "./week/pages/modify-meal-page/modify-meal-page.component";
+import { SideListPageComponent } from "./sides/pages/side-list-page/side-list-page.component";
+import { SideItemPageComponent } from "./sides/pages/side-item-page/side-item-page.component";
 
 const routes: Routes = [
     { path: 'recipe', component: RecipeListPageComponent },
@@ -12,6 +14,8 @@ const routes: Routes = [
     { path: 'recipe/:id', component: RecipeItemPageComponent },
     { path: 'week', component: WeekPageComponent },
     { path: 'week/:index', component: ModifyMealPageComponent },
+    { path: 'side', component: SideListPageComponent },
+    { path: 'side/:id', component: SideItemPageComponent },
     {
         path: '',
         redirectTo: 'recipe',

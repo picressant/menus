@@ -127,8 +127,13 @@ export class ModifyMealPageComponent implements OnInit {
         if (!this.meal)
             this.meal = new WeekMeal();
 
+        const sidesId = this.meal.sideDishes.map(value => value.id);
+
         const modal = await this.modalController.create({
-            component: WeekSelectSideModalComponent
+            component: WeekSelectSideModalComponent,
+            componentProps: {
+                sidesId
+            }
         });
 
         await modal.present();
