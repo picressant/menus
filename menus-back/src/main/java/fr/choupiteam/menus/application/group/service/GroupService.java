@@ -44,7 +44,7 @@ public class GroupService {
     public void deleteGroup(String id) {
         this.getGroup(id)
                 .ifPresent(group -> {
-                    this.weekService.deleteWeek(this.weekService.getWeek(group));
+                    this.weekService.deleteWeek(group);
                     this.groupRepository.deleteById(id);
                 });
     }

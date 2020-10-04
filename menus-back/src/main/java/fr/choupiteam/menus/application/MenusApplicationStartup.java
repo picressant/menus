@@ -5,7 +5,6 @@ import fr.choupiteam.menus.application.recipe.service.RecipeService;
 import fr.choupiteam.menus.application.security.model.ApplicationUser;
 import fr.choupiteam.menus.application.security.model.Role;
 import fr.choupiteam.menus.application.security.service.UserDetailsServiceImpl;
-import fr.choupiteam.menus.application.week.model.Week;
 import fr.choupiteam.menus.application.week.service.WeekService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;

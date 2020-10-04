@@ -41,7 +41,9 @@ public class RecipeService {
     }
 
     public Recipe saveRecipe(Recipe recipe) {
-        return this.recipeRepository.save(recipe);
+        recipe = this.recipeRepository.save(recipe);
+
+        return recipe;
     }
 
     public Page<Recipe> findByPager(Pager pager) {

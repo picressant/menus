@@ -1,11 +1,13 @@
 package fr.choupiteam.menus.application.week.service;
 
 import fr.choupiteam.menus.application.group.model.Group;
-import fr.choupiteam.menus.application.security.model.ApplicationUser;
-import fr.choupiteam.menus.application.week.model.Week;
-import fr.choupiteam.menus.infrastructure.repository.WeekRepository;
+import fr.choupiteam.menus.application.week.model.WeekDayEnum;
+import fr.choupiteam.menus.application.week.model.WeekMeal;
+import fr.choupiteam.menus.infrastructure.repository.WeekMealRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 
@@ -13,31 +15,39 @@ import java.util.List;
 public class WeekService {
 
     @Autowired
-    private WeekRepository weekRepository;
+    private WeekMealRepository weekRepository;
 
     /**
      * Get week from database
      * @return The found week
      */
-    public Week getWeek(Group group) {
-        return this.weekRepository.findByGroup(group)
-                .orElseGet(() -> {
-                    Week week = new Week();
-                    week.setGroup(group);
-                    this.insertWeek(week);
-                    return week;
-                });
+    public List<WeekMeal> getWeek(Group group) {
+        List<WeekMeal> meals =  this.weekRepository.findAllByGroup(group);
+        if (CollectionUtils.isEmpty(meals)) {
+            for (WeekDayEnum weekDayEnum : WeekDayEnum.values()) {
+                WeekMeal weekMeal = new WeekMeal();
+                weekMeal.setGroup(group);
+                weekMeal.setWeekDayIndex(weekDayEnum);
+                meals.add(this.insertWeekMeal(weekMeal));
+            }
+        }
+        return meals;
     }
 
-    private void insertWeek(Week week) {
-        this.weekRepository.insert(week);
+    private WeekMeal insertWeekMeal(WeekMeal weekMeal) {
+        return this.weekRepository.insert(weekMeal);
     }
 
-    public Week setWeek(Week week) {
-        return this.weekRepository.save(week);
+    public WeekMeal setWeekMeal(WeekMeal weekMeal) {
+        return this.weekRepository.save(weekMeal);
     }
 
-    public void deleteWeek(Week week) {
-        this.weekRepository.delete(week);
+    public void deleteWeek(Group group) {
+        this.weekRepository.deleteByGroup(group);
+    }
+
+    public List<WeekMeal> setWeek(List<WeekMeal> meals, Group group) {
+        meals.forEach(this::setWeekMeal);
+        return this.getWeek(group);
     }
 }

@@ -1,14 +1,15 @@
 package fr.choupiteam.menus.resources.week;
 
 import fr.choupiteam.menus.application.security.model.ApplicationUser;
-import fr.choupiteam.menus.application.week.model.Week;
+import fr.choupiteam.menus.application.week.model.WeekMeal;
 import fr.choupiteam.menus.application.week.service.WeekService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/week")
@@ -17,14 +18,17 @@ public class WeekController {
     @Autowired
     private WeekService weekService;
 
-    @RequestMapping(method = RequestMethod.GET)
-    public Week getWeek(@AuthenticationPrincipal ApplicationUser user) {
-        return this.weekService.getWeek(user.getGroup());
+    @GetMapping
+    public List<WeekMeal> getWeek(@AuthenticationPrincipal ApplicationUser user) {
+        return this.weekService.getWeek(user.getGroup())
+                .stream()
+                .sorted(Comparator.comparingInt(o -> o.getWeekDayIndex().getValue()))
+                .collect(Collectors.toList());
     }
 
-    @RequestMapping(method = RequestMethod.POST)
-    public Week setWeek(@RequestBody Week week, @AuthenticationPrincipal ApplicationUser user) {
-        week.setGroup(user.getGroup());
-        return this.weekService.setWeek(week);
+    @PostMapping
+    public List<WeekMeal> setWeek(@RequestBody List<WeekMeal> meals, @AuthenticationPrincipal ApplicationUser user) {
+        meals.forEach(meal -> meal.setGroup(user.getGroup()));
+        return this.weekService.setWeek(meals, user.getGroup());
     }
 }
