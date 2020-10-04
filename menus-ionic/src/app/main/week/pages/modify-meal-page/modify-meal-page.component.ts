@@ -67,7 +67,7 @@ export class ModifyMealPageComponent implements OnInit {
     }
 
     buildIngredients() {
-        if (this.meal) {
+        if (this.meal && this.meal.recipe) {
             const ratio = this.meal.persons / this.meal.recipe.persons;
             this.ingredientRecipeMap = new Map<number, number>();
             this.ingredientSideMap = new Map<number, number>();

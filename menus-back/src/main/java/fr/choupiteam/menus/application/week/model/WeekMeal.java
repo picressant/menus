@@ -8,6 +8,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Document(collection = "weekMeal")
@@ -28,6 +29,10 @@ public class WeekMeal {
     private Group group;
 
     private WeekDayEnum weekDayIndex;
+
+    public WeekMeal() {
+        this.setSideDishes(new ArrayList<>());
+    }
 
     public Recipe getRecipe() {
         return recipe;

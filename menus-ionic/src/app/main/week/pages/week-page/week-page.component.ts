@@ -139,7 +139,8 @@ export class WeekPageComponent {
     }
 
     saveWeek() {
-        this.weekService.saveAllMeals(this.meals);
+        this.meals.forEach((meal, index) => meal.weekDayIndex = index);
+        this.weekService.saveMeals(this.meals);
     }
 
     async deleteWeekMeal(i: number) {

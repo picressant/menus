@@ -5,6 +5,7 @@ export class WeekMeal {
     recipe: Recipe;
     sideDishes: SideDish[];
     persons: number;
+    weekDayIndex: number;
 
     constructor() {
         this.sideDishes = [];

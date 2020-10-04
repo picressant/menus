@@ -20,10 +20,7 @@ public class WeekController {
 
     @GetMapping
     public List<WeekMeal> getWeek(@AuthenticationPrincipal ApplicationUser user) {
-        return this.weekService.getWeek(user.getGroup())
-                .stream()
-                .sorted(Comparator.comparingInt(o -> o.getWeekDayIndex().getValue()))
-                .collect(Collectors.toList());
+        return this.weekService.getWeek(user.getGroup());
     }
 
     @PostMapping

@@ -1,5 +1,7 @@
 package fr.choupiteam.menus.application.week.model;
 
+import com.fasterxml.jackson.annotation.JsonValue;
+
 public enum WeekDayEnum {
     MONDAY_LUNCH(0),
     MONDAY_DINNER(1),
@@ -16,12 +18,14 @@ public enum WeekDayEnum {
     SUNDAY_LUNCH(12),
     SUNDAY_DINNER(13);
 
+
     private final int value;
 
     private WeekDayEnum(int value) {
         this.value = value;
     }
 
+    @JsonValue
     public int getValue() {
         return this.value;
     }

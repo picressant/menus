@@ -9,7 +9,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class WeekService {
@@ -31,7 +33,9 @@ public class WeekService {
                 meals.add(this.insertWeekMeal(weekMeal));
             }
         }
-        return meals;
+        return meals.stream()
+                .sorted(Comparator.comparingInt(o -> o.getWeekDayIndex().getValue()))
+                .collect(Collectors.toList());
     }
 
     private WeekMeal insertWeekMeal(WeekMeal weekMeal) {
