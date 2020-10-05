@@ -9,6 +9,6 @@
 
 <ion-content [fullscreen]="true">
     <div id="container">
-        <app-side-list (selected)="closeModal($event)" [excludeIds]="sidesId"></app-side-list>
+        <app-side-list (selected)="closeModal($event)" [excludeIds]="sidesId" [loadOnInit]="true"></app-side-list>
     </div>
 </ion-content>

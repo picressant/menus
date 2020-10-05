@@ -26,6 +26,14 @@ export class SideListComponent implements OnInit {
   @Input()
   excludeIds: string[];
 
+  @Input()
+  set loadOnInit(load: boolean) {
+    if (load)
+      this.refresh(null);
+  }
+
+  _loadOnInit: boolean = false;
+
   constructor(
       private sideRest: SideDishRestService
   ) {
@@ -33,6 +41,7 @@ export class SideListComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (this._loadOnInit)
       this.refresh(null);
   }
 
