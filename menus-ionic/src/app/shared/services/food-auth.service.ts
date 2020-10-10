@@ -3,63 +3,85 @@ import { User } from '@models/user.model';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
-import { SocialAuthService, GoogleLoginProvider, SocialUser } from "angularx-social-login";
+import { GoogleLoginProvider, SocialAuthService, SocialUser } from "angularx-social-login";
+import { LoadingController } from "@ionic/angular";
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class FoodAuthService {
 
-  public user: BehaviorSubject<User> = new BehaviorSubject(null);
-  private socialUser: SocialUser;
+    public user: BehaviorSubject<User> = new BehaviorSubject(null);
+    private socialUser: SocialUser;
 
-  constructor(
-    private http: HttpClient,
-    private router: Router,
-    private authService: SocialAuthService
-  ) {
-    this.authService.authState.subscribe((user) => {
-      this.socialUser = user;
-      if (this.socialUser) {
-        this.http.post<any>('login', { googleid: this.socialUser.idToken }).subscribe((response) => {
-          this.setToken(response.token);
-          this.router.navigate(['/main/recipe']);
+    private loading: any;
+
+    constructor(
+        private http: HttpClient,
+        private router: Router,
+        private authService: SocialAuthService,
+        private loadingController: LoadingController
+    ) {
+        this.authService.authState.subscribe((user) => {
+            this.socialUser = user;
+            if (this.socialUser) {
+                this.http.post<any>('login', { googleid: this.socialUser.idToken }).subscribe((response) => {
+                    this.setToken(response.token);
+                    if (this.loading) {
+                        this.loading.dismiss();
+                        this.loading = undefined;
+                    }
+                    this.router.navigate(['/main/recipe']);
+                });
+            }
         });
-      }
-    });
-  }
+    }
 
-  connectWithGoogle() {
-    this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
-  }
+    async presentLoading() {
+        this.loading = await this.loadingController.create({
+          translucent: true,
+          mode: "ios"
+        });
+        await this.loading.present();
+    }
 
-  connect(credentials: any) {
-    this.http.post<any>('login', credentials).subscribe(
-      (response) => {
-        this.setToken(response.token);
-        this.router.navigate(['/main/recipe']);
-      }
-    );
-  }
+    connectWithGoogle() {
+        this.presentLoading();
+        this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
+    }
 
-  logout() {
-    this.user.next(null);
-    this.socialUser = null;
-    this.setToken("");
-    this.authService.signOut().finally(() => {
-      this.router.navigate(['/auth/login'])
-    });
-  }
+    connect(credentials: any) {
+        this.presentLoading();
+        this.http.post<any>('login', credentials).subscribe(
+            (response) => {
+                this.setToken(response.token);
+                if (this.loading) {
+                    this.loading.dismiss();
+                    this.loading = undefined;
+                }
+                this.router.navigate(['/main/recipe']);
+            }
+        );
+    }
 
-  loadCurrentUser() {
-    return this.http.get<User>('user/me');
-  }
+    logout() {
+        this.user.next(null);
+        this.socialUser = null;
+        this.setToken("");
+        this.authService.signOut().finally(() => {
+            this.router.navigate(['/auth/login'])
+        });
+    }
 
-  setToken(token: string) {
-    localStorage.setItem('menus-ionic-token', token);
-  }
+    loadCurrentUser() {
+        return this.http.get<User>('user/me');
+    }
 
-  getToken() {
-    return localStorage.getItem('menus-ionic-token');
-  }
+    setToken(token: string) {
+        localStorage.setItem('menus-ionic-token', token);
+    }
+
+    getToken() {
+        return localStorage.getItem('menus-ionic-token');
+    }
 }
