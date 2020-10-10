@@ -15,6 +15,7 @@ const routes: Routes = [
     { path: 'week', component: WeekPageComponent },
     { path: 'week/:index', component: ModifyMealPageComponent },
     { path: 'side', component: SideListPageComponent },
+    { path: 'side/add', component: SideItemPageComponent },
     { path: 'side/:id', component: SideItemPageComponent },
     {
         path: '',

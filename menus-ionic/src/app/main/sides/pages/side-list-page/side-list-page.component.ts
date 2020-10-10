@@ -31,6 +31,7 @@ export class SideListPageComponent implements OnInit {
     }
 
     onAdd() {
+        this.router.navigate(["main/side/add"]);
     }
 
     goToSide(sideDish: SideDish) {

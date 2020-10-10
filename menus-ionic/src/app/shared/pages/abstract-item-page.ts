@@ -116,4 +116,8 @@ export abstract class AbstractItemPage<T extends AbstractData> implements OnInit
 
     postCreate() {
     }
+
+    getSubmitColor() {
+        return this.form.valid ? "" : "danger";
+    }
 }

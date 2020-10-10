@@ -17,8 +17,16 @@ export class SideDishRestService {
         return this.http.post<Pageable<SideDish>>('sidedish/list', pager);
     }
 
-    saveSide(side: SideDish): Observable<SideDish> {
+    getSide(id: string): Observable<SideDish> {
+        return this.http.get<SideDish>('sidedish/' + id);
+    }
+
+    addSide(side: SideDish): Observable<SideDish> {
         return this.http.post<SideDish>('sidedish', side);
+    }
+
+    saveSide(side: SideDish): Observable<SideDish> {
+        return this.http.put<SideDish>('sidedish', side);
     }
 
     deleteSide(side: SideDish): Observable<void> {

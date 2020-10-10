@@ -27,6 +27,9 @@ export class SideListComponent implements OnInit {
   excludeIds: string[];
 
   @Input()
+  showIngredients = true;
+
+  @Input()
   set loadOnInit(load: boolean) {
     if (load)
       this.refresh(null);

@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 
 @SpringBootApplication(scanBasePackages = {"fr.choupiteam.menus"})
 @EnableMongoRepositories(basePackages = "fr.choupiteam.menus.infrastructure.repository")
-public class MenusApplication  extends SpringBootServletInitializer {
+public class MenusApplication extends SpringBootServletInitializer {
 
     public static void main(String[] args) {
         SpringApplication.run(MenusApplication.class, args);
@@ -18,5 +18,4 @@ public class MenusApplication  extends SpringBootServletInitializer {
     protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
         return builder.sources(MenusApplication.class);
     }
-
 }

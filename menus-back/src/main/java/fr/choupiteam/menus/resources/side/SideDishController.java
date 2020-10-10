@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
@@ -23,13 +24,26 @@ public class SideDishController {
         return this.sideDishService.getSideDishesByPager(pager);
     }
 
-    @RequestMapping(method = POST)
-    public SideDish saveDish(@RequestBody SideDish dish) {
-        dish = this.sideDishService.saveDish(dish);
-        return this.sideDishService.getDish(dish.getId());
+    @GetMapping(value = "/{id}")
+    public SideDish getSide(@PathVariable String id) {
+        return this.sideDishService.getDish(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Accompagnement inconnu"));
     }
 
-    @RequestMapping(value = "/{id}", method = DELETE)
+    @PostMapping
+    public SideDish addSide(@RequestBody SideDish dish) {
+        dish = this.sideDishService.addSide(dish);
+        return (dish != null) ? this.getSide(dish.getId()) : null;
+    }
+
+    @PutMapping
+    public SideDish saveSide(@RequestBody SideDish dish) {
+        dish = this.sideDishService.saveDish(dish);
+        return (dish != null) ? this.getSide(dish.getId()) : null;
+    }
+
+
+    @DeleteMapping(value = "/{id}")
     public HttpStatus deleteSide(@PathVariable("id") String id) {
         this.sideDishService.deleteSide(id);
         return HttpStatus.OK;

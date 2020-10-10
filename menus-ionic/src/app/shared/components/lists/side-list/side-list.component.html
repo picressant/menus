@@ -8,8 +8,8 @@
 
 <ion-list>
     <ion-item *ngFor="let side of sides" (click)="selectSide(side)">
-        <ion-label slot="start">{{side.name}}</ion-label>
-        <ion-label slot="end">{{getIngredients(side)}}</ion-label>
+        <ion-label [slot]="showIngredients ? 'start' : ''">{{side.name}}</ion-label>
+        <ion-label slot="end" *ngIf="showIngredients">{{getIngredients(side)}}</ion-label>
     </ion-item>
 </ion-list>
 

@@ -7,9 +7,6 @@ import { FormBuilder } from "@angular/forms";
 import { RecipeRestService } from "@services/recipe-rest.service";
 import { ActivatedRoute, Router } from "@angular/router";
 import { ToasterService } from "@services/toaster.service";
-import { Ingredient } from "@models/ingredient.model";
-import { Pager } from "@models/pager/pager.model";
-import { Pageable } from "@models/pager/pageable.model";
 import { ModalController } from "@ionic/angular";
 import { IngredientModalSelectorComponent } from "@components/selectors/ingredient-modal-selector/ingredient-modal-selector.component";
 import { IngredientQuantity } from "@models/ingredient-quantity.model";
@@ -28,10 +25,6 @@ export class RecipeItemPageComponent extends AbstractItemPage<Recipe> implements
     storeCurrentImages: any;
 
     timestamp: string;
-
-    ingredients: Ingredient[] = [];
-    pageableIngredients: Pageable<Ingredient>;
-    pagerIngredients: Pager;
 
     footerOverview = {
         name: "Résumé",
@@ -65,7 +58,6 @@ export class RecipeItemPageComponent extends AbstractItemPage<Recipe> implements
 
         super(route, toaster, "Recette modifiée avec succès", "Recette ajoutée avec succès");
         this.form = Recipe.form(this.fb);
-        this.pagerIngredients = new Pager(20);
     }
 
     ngOnInit() {
@@ -183,9 +175,5 @@ export class RecipeItemPageComponent extends AbstractItemPage<Recipe> implements
 
     onDeleteIngredient(ingredientQuantity: IngredientQuantity) {
         this.form.controls.ingredients.setValue(this.form.controls.ingredients.value.filter(i => i !== ingredientQuantity));
-    }
-
-    getSubmitColor() {
-        return this.form.valid ? "" : "danger";
     }
 }

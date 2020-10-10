@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.Optional;
 
 @Service
 public class SideDishService {
@@ -23,8 +23,12 @@ public class SideDishService {
         return this.sideDishRepository.save(dish);
     }
 
-    public SideDish getDish(String id) {
-        return this.sideDishRepository.findById(id).orElse(null);
+    public SideDish addSide(SideDish dish) {
+        return this.sideDishRepository.insert(dish);
+    }
+
+    public Optional<SideDish> getDish(String id) {
+        return this.sideDishRepository.findById(id);
     }
 
     public void deleteSide(String id) {

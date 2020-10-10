@@ -20,20 +20,20 @@ public class RecipeController {
     @Autowired
     private RecipeService recipeService;
 
-    @RequestMapping(value = "/{id}", method = GET)
+    @GetMapping(value = "/{id}")
     public Recipe getRecipe(@PathVariable("id") String id) {
         return this.recipeService.getRecipe(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Recette inconnue"));
     }
 
-    @RequestMapping(method = POST)
+    @PostMapping
     public Recipe addRecipe(@RequestBody Recipe recipe) {
         recipe = this.recipeService.addRecipe(recipe);
 
         return (recipe != null) ? this.getRecipe(recipe.getId()) : null;
     }
 
-    @RequestMapping(method = PUT)
+    @PutMapping
     public Recipe saveRecipe(@RequestBody Recipe recipe) {
         return this.recipeService.saveRecipe(recipe);
     }
@@ -43,7 +43,7 @@ public class RecipeController {
         return this.recipeService.findByPager(pager);
     }
 
-    @RequestMapping(value = "/{id}/picture", method = RequestMethod.POST)
+    @PostMapping(value = "/{id}/picture")
     public void storePicture(@PathVariable String id, @RequestParam("file") MultipartFile file) {
         Recipe recipe = this.recipeService.getRecipe(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Recette inconnue"));

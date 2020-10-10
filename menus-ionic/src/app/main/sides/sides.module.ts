@@ -5,6 +5,7 @@ import { SideListPageComponent } from "./pages/side-list-page/side-list-page.com
 import { SideItemPageComponent } from "./pages/side-item-page/side-item-page.component";
 import { LayoutModule } from "../layout/layout.module";
 import { IonicModule } from "@ionic/angular";
+import { ReactiveFormsModule } from "@angular/forms";
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { IonicModule } from "@ionic/angular";
         CommonModule,
         IonicModule,
         LayoutModule,
-        SharedModule
+        SharedModule,
+        ReactiveFormsModule
     ],
     exports: [
         SideListPageComponent,

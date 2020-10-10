@@ -1,3 +1,34 @@
-<p>
-  side-item-page works!
-</p>
+<ion-header [translucent]="true">
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="/main/side"></ion-back-button>
+        </ion-buttons>
+        <ion-title>{{title}}</ion-title>
+        <ion-buttons slot="end" *ngIf="!isReadonly">
+            <ion-button (click)="submit()">
+                <ion-icon name="checkmark-sharp" [color]="getSubmitColor()"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="isReadonly">
+    <ion-fab-button (click)="modify()">
+        <ion-icon name="create-outline"></ion-icon>
+    </ion-fab-button>
+</ion-fab>
+
+<ion-content [fullscreen]="true">
+    <div [formGroup]="form" class="form-wrapper">
+        <ion-item>
+            <ion-label position="floating">Nom de l'accompagnement</ion-label>
+            <ion-input formControlName="name"></ion-input>
+        </ion-item>
+    </div>
+
+    <h3 class="ion-margin h3-icon">Ingrédients
+        <ion-icon name="add-outline" *ngIf="!isReadonly" (click)="addIngredient()"></ion-icon>
+    </h3>
+    <app-ingredients-quantity-list [ingredientsQuantity]="form.controls.ingredients.value" [isReadonly]="isReadonly"
+                                   (delete)="onDeleteIngredient($event)"></app-ingredients-quantity-list>
+</ion-content>
