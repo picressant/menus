@@ -13,6 +13,7 @@ import { RecipeListComponent } from "@components/lists/recipe-list/recipe-list.c
 import { RecipeItemCardComponent } from "@components/cards/recipe-item-card/recipe-item-card.component";
 import { LongPressDirective } from "./directives/long-press.directive";
 import { SideListComponent } from "@components/lists/side-list/side-list.component";
+import { HasRoleDirective } from "./directives/has-role.directive";
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { SideListComponent } from "@components/lists/side-list/side-list.compone
         RecipeItemCardComponent,
         SideListComponent,
 
-        LongPressDirective
+        LongPressDirective,
+        HasRoleDirective
     ],
     imports: [
         CommonModule,
@@ -44,7 +46,8 @@ import { SideListComponent } from "@components/lists/side-list/side-list.compone
         RecipeListComponent,
         SideListComponent,
 
-        LongPressDirective
+        LongPressDirective,
+        HasRoleDirective
     ]
 })
 export class SharedModule {

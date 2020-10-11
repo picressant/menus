@@ -7,7 +7,7 @@ import { FormBuilder } from "@angular/forms";
 import { RecipeRestService } from "@services/recipe-rest.service";
 import { ActivatedRoute, Router } from "@angular/router";
 import { ToasterService } from "@services/toaster.service";
-import { ModalController } from "@ionic/angular";
+import { AlertController, ModalController } from "@ionic/angular";
 import { IngredientModalSelectorComponent } from "@components/selectors/ingredient-modal-selector/ingredient-modal-selector.component";
 import { IngredientQuantity } from "@models/ingredient-quantity.model";
 import { WeekService } from "@services/week.service";
@@ -53,7 +53,8 @@ export class RecipeItemPageComponent extends AbstractItemPage<Recipe> implements
                 private toaster: ToasterService,
                 private router: Router,
                 private modalController: ModalController,
-                private weekService: WeekService
+                private weekService: WeekService,
+                private alertController: AlertController
     ) {
 
         super(route, toaster, "Recette modifiée avec succès", "Recette ajoutée avec succès");
@@ -175,5 +176,31 @@ export class RecipeItemPageComponent extends AbstractItemPage<Recipe> implements
 
     onDeleteIngredient(ingredientQuantity: IngredientQuantity) {
         this.form.controls.ingredients.setValue(this.form.controls.ingredients.value.filter(i => i !== ingredientQuantity));
+    }
+
+    async delete() {
+        const alert = await this.alertController.create({
+            header: 'Confirmation',
+            cssClass: 'confirmation-modal',
+            message: 'Supprimer cette recette ?',
+            buttons: [
+                {
+                    text: 'Annuler',
+                    role: 'cancel',
+                    cssClass: 'cancel'
+                }, {
+                    cssClass: 'confirmation',
+                    text: 'Okay',
+                    handler: () => {
+                        this.recipeRest.deleteRecipe(this.id).subscribe(() => {
+                            this.weekService.getWeekFromApi();
+                            this.router.navigate(["/main/recipe"]);
+                        });
+                    }
+                }
+            ]
+        });
+
+        await alert.present();
     }
 }

@@ -2,6 +2,7 @@ package fr.choupiteam.menus.application.recipe.service;
 
 import fr.choupiteam.menus.application.pager.model.Pager;
 import fr.choupiteam.menus.application.recipe.model.Recipe;
+import fr.choupiteam.menus.application.week.service.WeekService;
 import fr.choupiteam.menus.infrastructure.repository.RecipePictureRepository;
 import fr.choupiteam.menus.infrastructure.repository.RecipeRepository;
 import org.apache.commons.io.IOUtils;
@@ -17,13 +18,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.Optional;
 
 @Service
 public class RecipeService {
 
-    private static final String DEFAULT_RECIPE_PATH = "defaults/default-recipe.png";;
+    private static final String DEFAULT_RECIPE_PATH = "defaults/default-recipe.png";
+    ;
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
@@ -31,6 +32,9 @@ public class RecipeService {
 
     @Autowired
     private RecipePictureRepository recipePictureRepository;
+
+    @Autowired
+    private WeekService weekService;
 
     public Optional<Recipe> getRecipe(String id) {
         return this.recipeRepository.findById(id);
@@ -88,5 +92,12 @@ public class RecipeService {
             return ResponseEntity
                     .status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
+    }
+
+    public void deleteRecipe(String id) {
+        this.getRecipe(id).ifPresent(recipe -> {
+            this.weekService.clearRecipeFromWeeks(recipe);
+            this.recipeRepository.delete(recipe);
+        });
     }
 }

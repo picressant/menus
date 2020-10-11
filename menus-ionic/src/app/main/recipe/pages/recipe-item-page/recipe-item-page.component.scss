@@ -24,4 +24,13 @@
       }
     }
   }
+
+  .h3-icon {
+    display: flex;
+    align-items: center;
+
+    ion-icon {
+      margin-left: auto;
+    }
+  }
 }

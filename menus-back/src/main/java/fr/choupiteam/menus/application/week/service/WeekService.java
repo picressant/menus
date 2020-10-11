@@ -1,13 +1,12 @@
 package fr.choupiteam.menus.application.week.service;
 
 import fr.choupiteam.menus.application.group.model.Group;
+import fr.choupiteam.menus.application.recipe.model.Recipe;
 import fr.choupiteam.menus.application.week.model.WeekDayEnum;
 import fr.choupiteam.menus.application.week.model.WeekMeal;
 import fr.choupiteam.menus.infrastructure.repository.WeekMealRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.CollectionUtils;
-import org.springframework.util.StringUtils;
 
 import java.util.Comparator;
 import java.util.List;
@@ -21,16 +20,19 @@ public class WeekService {
 
     /**
      * Get week from database
+     *
      * @return The found week
      */
     public List<WeekMeal> getWeek(Group group) {
-        List<WeekMeal> meals =  this.weekRepository.findAllByGroup(group);
-        if (CollectionUtils.isEmpty(meals)) {
+        List<WeekMeal> meals = this.weekRepository.findAllByGroup(group);
+        if (meals.size() < WeekDayEnum.values().length) {
             for (WeekDayEnum weekDayEnum : WeekDayEnum.values()) {
-                WeekMeal weekMeal = new WeekMeal();
-                weekMeal.setGroup(group);
-                weekMeal.setWeekDayIndex(weekDayEnum);
-                meals.add(this.insertWeekMeal(weekMeal));
+                if (meals.stream().noneMatch(meal -> meal.getWeekDayIndex().equals(weekDayEnum))) {
+                    WeekMeal weekMeal = new WeekMeal();
+                    weekMeal.setGroup(group);
+                    weekMeal.setWeekDayIndex(weekDayEnum);
+                    meals.add(this.insertWeekMeal(weekMeal));
+                }
             }
         }
         return meals.stream()
@@ -53,5 +55,15 @@ public class WeekService {
     public List<WeekMeal> setWeek(List<WeekMeal> meals, Group group) {
         meals.forEach(this::setWeekMeal);
         return this.getWeek(group);
+    }
+
+    public void clearRecipeFromWeeks(Recipe recipe) {
+        this.weekRepository.findAllByRecipe(recipe).forEach(meal -> {
+            WeekDayEnum index = meal.getWeekDayIndex();
+            this.weekRepository.delete(meal);
+            meal = new WeekMeal();
+            meal.setWeekDayIndex(index);
+            this.insertWeekMeal(meal);
+        });
     }
 }
