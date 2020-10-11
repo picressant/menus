@@ -74,7 +74,7 @@
     </div>
     <div [hidden]="selectedTab !== footerSteps.selectedTab">Steps</div>
     <div [hidden]="selectedTab !== footerIngredients.selectedTab">
-        <h3 class="ion-margin h3-icon">Ingrédients
+        <h3 class="ion-margin with-icon">Ingrédients
             <ion-icon name="add-outline" *ngIf="!isReadonly" (click)="addIngredientQuantity()"></ion-icon>
         </h3>
         <app-ingredients-quantity-list [ingredientsQuantity]="form.controls.ingredients.value" [isReadonly]="isReadonly"

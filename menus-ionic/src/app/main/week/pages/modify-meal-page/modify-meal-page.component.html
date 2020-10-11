@@ -19,13 +19,6 @@
         </ion-fab-button>
     </ion-fab>
 
-    <ion-fab *ngIf="selectedTab === footerDetails.selectedTab && isEditing" vertical="bottom" horizontal="end" slot="fixed"
-             (click)="addSide()">
-        <ion-fab-button>
-            <ion-icon name="add-outline"></ion-icon>
-        </ion-fab-button>
-    </ion-fab>
-
     <div id="container">
         <div [hidden]="selectedTab !== footerDetails.selectedTab">
             <ion-item [disabled]="!isEditing">
@@ -36,10 +29,12 @@
 
             <app-week-meal-card [meal]="meal" [showSides]="false" (click)="clickOnMeal()"></app-week-meal-card>
 
-            <h3 class="ion-margin">Accompagnements</h3>
+            <h3 class="ion-margin with-icon">Accompagnements
+                <ion-icon name="add-outline" *ngIf="isEditing" (click)="addSide()"></ion-icon>
+            </h3>
             <ion-list *ngIf="meal?.sideDishes.length > 0">
                 <ion-item *ngFor="let side of meal?.sideDishes; let i = index">
-                    <ion-label slot="start">
+                    <ion-label>
                         {{side.name}}
                     </ion-label>
                     <ion-icon slot="end" name="trash-outline" color="danger" (click)="deleteSide(i)" *ngIf="isEditing"></ion-icon>
