@@ -2,6 +2,7 @@ package fr.choupiteam.menus.application.week.service;
 
 import fr.choupiteam.menus.application.group.model.Group;
 import fr.choupiteam.menus.application.recipe.model.Recipe;
+import fr.choupiteam.menus.application.side.model.SideDish;
 import fr.choupiteam.menus.application.week.model.WeekDayEnum;
 import fr.choupiteam.menus.application.week.model.WeekMeal;
 import fr.choupiteam.menus.infrastructure.repository.WeekMealRepository;
@@ -64,6 +65,13 @@ public class WeekService {
             meal = new WeekMeal();
             meal.setWeekDayIndex(index);
             this.insertWeekMeal(meal);
+        });
+    }
+
+    public void clearSideFromWeeks(SideDish side) {
+        this.weekRepository.findAllBySideDishes(side).forEach(meal -> {
+            meal.getSideDishes().remove(side);
+            this.setWeekMeal(meal);
         });
     }
 }

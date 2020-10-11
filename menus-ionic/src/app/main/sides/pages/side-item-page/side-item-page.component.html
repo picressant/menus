@@ -13,11 +13,23 @@
 </ion-header>
 
 <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="isReadonly">
-    <ion-fab-button (click)="modify()">
+    <ion-fab-button (click)="modify()" *appHasRole="'ROLE_USER'">
         <ion-icon name="create-outline"></ion-icon>
     </ion-fab-button>
-</ion-fab>
 
+    <ion-fab-button *appHasRole="'ROLE_ADMIN'">
+        <ion-icon name="create-outline"></ion-icon>
+    </ion-fab-button>
+
+    <ion-fab-list side="top"  *appHasRole="'ROLE_ADMIN'">
+        <ion-fab-button (click)="modify()" color="secondary">
+            <ion-icon name="pencil-outline"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-button (click)="delete()" color="danger">
+            <ion-icon name="trash-outline"></ion-icon>
+        </ion-fab-button>
+    </ion-fab-list>
+</ion-fab>
 <ion-content [fullscreen]="true">
     <div [formGroup]="form" class="form-wrapper">
         <ion-item>

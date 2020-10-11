@@ -6,6 +6,7 @@ import fr.choupiteam.menus.application.side.service.SideDishService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -44,9 +45,9 @@ public class SideDishController {
 
 
     @DeleteMapping(value = "/{id}")
-    public HttpStatus deleteSide(@PathVariable("id") String id) {
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public void deleteSide(@PathVariable("id") String id) {
         this.sideDishService.deleteSide(id);
-        return HttpStatus.OK;
     }
 
 }

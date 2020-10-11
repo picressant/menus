@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { AbstractItemPage } from "../../../../shared/pages/abstract-item-page";
 import { Observable } from "rxjs";
 import { FormBuilder } from "@angular/forms";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { ToasterService } from "@services/toaster.service";
 import { SideDish } from "@models/sidedish.model";
 import { SideDishRestService } from "@services/sidedish-rest.service";
@@ -11,7 +11,7 @@ import { tap } from "rxjs/operators";
 import { isNullOrUndefined } from "util";
 import { IngredientQuantity } from "@models/ingredient-quantity.model";
 import { IngredientModalSelectorComponent } from "@components/selectors/ingredient-modal-selector/ingredient-modal-selector.component";
-import { ModalController } from "@ionic/angular";
+import { AlertController, ModalController } from "@ionic/angular";
 
 @Component({
     selector: 'app-side-item-page',
@@ -22,10 +22,12 @@ export class SideItemPageComponent extends AbstractItemPage<SideDish> {
 
     constructor(private fb: FormBuilder,
                 private sideRest: SideDishRestService,
+                private router: Router,
                 private route: ActivatedRoute,
                 private toaster: ToasterService,
                 private weekService: WeekService,
-                private modalController: ModalController
+                private modalController: ModalController,
+                private alertController: AlertController
     ) {
 
         super(route, toaster, "Accompagnement modifié avec succès", "Accompagnement ajouté avec succès");
@@ -74,5 +76,29 @@ export class SideItemPageComponent extends AbstractItemPage<SideDish> {
             }
         }
     }
+    async delete() {
+        const alert = await this.alertController.create({
+            header: 'Confirmation',
+            cssClass: 'confirmation-modal',
+            message: 'Supprimer cette recette ?',
+            buttons: [
+                {
+                    text: 'Annuler',
+                    role: 'cancel',
+                    cssClass: 'cancel'
+                }, {
+                    cssClass: 'confirmation',
+                    text: 'Okay',
+                    handler: () => {
+                        this.sideRest.deleteSide(this.id).subscribe(() => {
+                            this.weekService.getWeekFromApi();
+                            this.router.navigate(["/main/side"]);
+                        });
+                    }
+                }
+            ]
+        });
 
+        await alert.present();
+    }
 }

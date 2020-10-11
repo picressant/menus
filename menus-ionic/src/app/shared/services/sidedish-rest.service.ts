@@ -29,8 +29,8 @@ export class SideDishRestService {
         return this.http.put<SideDish>('sidedish', side);
     }
 
-    deleteSide(side: SideDish): Observable<void> {
-        return this.http.delete<void>('sidedish/' + side.id);
+    deleteSide(id: string): Observable<void> {
+        return this.http.delete<void>('sidedish/' + id);
     }
 
 }
