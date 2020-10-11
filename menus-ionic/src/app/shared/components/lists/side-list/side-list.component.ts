@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { SideDish } from "@models/sidedish.model";
-import { Pager } from "@models/pager/pager.model";
+import { Direction, Order, Pager } from "@models/pager/pager.model";
 import { Pageable } from "@models/pager/pageable.model";
-import { IonInfiniteScroll, ModalController } from "@ionic/angular";
+import { IonInfiniteScroll } from "@ionic/angular";
 import { SideDishRestService } from "@services/sidedish-rest.service";
 
 @Component({
@@ -41,6 +41,7 @@ export class SideListComponent implements OnInit {
       private sideRest: SideDishRestService
   ) {
     this.pager = new Pager(20);
+    this.pager.orders.push(new Order("name", Direction.ASC));
   }
 
   ngOnInit() {

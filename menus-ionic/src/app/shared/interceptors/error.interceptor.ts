@@ -1,8 +1,8 @@
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http'
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { catchError, map } from "rxjs/operators";
-import { ErrorService } from "../services/error.service";
+import { ErrorService } from "@services/error.service";
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
@@ -19,7 +19,7 @@ export class ErrorInterceptor implements HttpInterceptor {
             }),
             catchError((error: HttpErrorResponse) => {
                 this.errorService.manageError(error.error);
-                return of(null);
+                throw error
             }));
     }
 }

@@ -27,20 +27,27 @@ export class FoodAuthService {
             if (this.socialUser) {
                 this.http.post<any>('login', { googleid: this.socialUser.idToken }).subscribe((response) => {
                     this.setToken(response.token);
-                    if (this.loading) {
-                        this.loading.dismiss();
-                        this.loading = undefined;
-                    }
+                    this.dismissLoading();
                     this.router.navigate(['/main/recipe']);
                 });
+            }
+            else {
+                this.dismissLoading()
             }
         });
     }
 
+    dismissLoading() {
+        if (this.loading) {
+            this.loading.dismiss();
+            this.loading = undefined;
+        }
+    }
+
     async presentLoading() {
         this.loading = await this.loadingController.create({
-          translucent: true,
-          mode: "ios"
+            translucent: true,
+            mode: "ios"
         });
         await this.loading.present();
     }
@@ -55,12 +62,10 @@ export class FoodAuthService {
         this.http.post<any>('login', credentials).subscribe(
             (response) => {
                 this.setToken(response.token);
-                if (this.loading) {
-                    this.loading.dismiss();
-                    this.loading = undefined;
-                }
+                this.dismissLoading();
                 this.router.navigate(['/main/recipe']);
-            }
+            },
+            () => this.dismissLoading()
         );
     }
 
