@@ -10,7 +10,7 @@
   <ion-item *ngFor="let unit of units; let i = index"
             (click)="selectUnit(unit)"
             [class.is-deleting]="deleteIndex === i"
-            appLongPress delay="1000"
+            appLongPress
             (longPressStarted)="refreshWiggle(i)"
             (longPressCanceled)="refreshWiggle(-1)"
             (longPressed)="deleteUnit(unit)">

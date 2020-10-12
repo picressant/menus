@@ -26,7 +26,7 @@
                 <ion-item *ngFor="let weekMeal of meals; let i = index"
                           [class.is-deleting]="isDeleting === i" class="week-meal-item">
                     <div class="meal-wrapper" (click)="gotToMeal(i)"
-                         appLongPress delay="1000"
+                         appLongPress
                          (longPressed)="pressEnded(i)"
                          (longPressStarted)="refreshWiggleEffect(i)"
                          (longPressCanceled)="refreshWiggleEffect(undefined)">

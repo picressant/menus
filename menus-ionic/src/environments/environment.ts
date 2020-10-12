@@ -6,7 +6,9 @@ export const environment = {
   production: false,
   restRoot: "http://localhost:8080/",
   deployUrl: "",
-  googleOAuthId: "1041951006561-034he6fpudts5a8iuif5cdloifjoqsst.apps.googleusercontent.com"
+  googleOAuthId: "1041951006561-034he6fpudts5a8iuif5cdloifjoqsst.apps.googleusercontent.com",
+  delayLongPress: 300,
+  delayLongPressStart: 100,
 };
 
 /*

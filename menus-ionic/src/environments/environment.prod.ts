@@ -1,6 +1,8 @@
 export const environment = {
-  production: true,
-  restRoot: "menus-back/",
-  deployUrl: ".",
-  googleOAuthId: "1041951006561-034he6fpudts5a8iuif5cdloifjoqsst.apps.googleusercontent.com"
+    production: true,
+    restRoot: "menus-back/",
+    deployUrl: ".",
+    googleOAuthId: "1041951006561-034he6fpudts5a8iuif5cdloifjoqsst.apps.googleusercontent.com",
+    delayLongPress: 1000,
+    delayLongPressStart: 400
 };
