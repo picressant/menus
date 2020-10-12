@@ -1,0 +1,26 @@
+<ion-searchbar (ionChange)="searchUnits($event.detail.value)"
+               inputmode="text"
+               debounce="500"
+               animated="true"
+               slot="start"
+               mode="ios"></ion-searchbar>
+
+
+<ion-list>
+  <ion-item *ngFor="let unit of units; let i = index"
+            (click)="selectUnit(unit)"
+            [class.is-deleting]="deleteIndex === i"
+            appLongPress delay="1000"
+            (longPressStarted)="refreshWiggle(i)"
+            (longPressCanceled)="refreshWiggle(-1)"
+            (longPressed)="deleteUnit(unit)">
+    <ion-label slot="start">{{unit.name}}</ion-label>
+    <ion-label slot="end">{{unit.symbol}}</ion-label>
+  </ion-item>
+</ion-list>
+
+<ion-infinite-scroll threshold="100px" (ionInfinite)="scrollUnits($event)">
+  <ion-infinite-scroll-content
+          loadingSpinner="bubbles">
+  </ion-infinite-scroll-content>
+</ion-infinite-scroll>

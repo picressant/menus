@@ -7,6 +7,8 @@ import { RecipeItemPageComponent } from "./recipe/pages/recipe-item-page/recipe-
 import { ModifyMealPageComponent } from "./week/pages/modify-meal-page/modify-meal-page.component";
 import { SideListPageComponent } from "./sides/pages/side-list-page/side-list-page.component";
 import { SideItemPageComponent } from "./sides/pages/side-item-page/side-item-page.component";
+import { ParametersPageComponent } from "./parameters/pages/parameters-page/parameters-page.component";
+import { AdminGuard } from "../shared/guards/admin.guard";
 
 const routes: Routes = [
     { path: 'recipe', component: RecipeListPageComponent },
@@ -17,6 +19,7 @@ const routes: Routes = [
     { path: 'side', component: SideListPageComponent },
     { path: 'side/add', component: SideItemPageComponent },
     { path: 'side/:id', component: SideItemPageComponent },
+    { path: 'parameters', component: ParametersPageComponent, canActivate: [AdminGuard] },
     {
         path: '',
         redirectTo: 'recipe',

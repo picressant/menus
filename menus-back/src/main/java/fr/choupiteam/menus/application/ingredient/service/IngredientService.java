@@ -25,6 +25,10 @@ public class IngredientService {
         return this.ingredientRepository.save(ingredient);
     }
 
+    public Ingredient addIngredient(Ingredient ingredient) {
+        return this.ingredientRepository.insert(ingredient);
+    }
+
     public Ingredient getIngredient(String id) {
         return this.ingredientRepository.findById(id).orElse(null);
     }

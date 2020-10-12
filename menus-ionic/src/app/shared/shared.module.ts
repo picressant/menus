@@ -14,6 +14,7 @@ import { RecipeItemCardComponent } from "@components/cards/recipe-item-card/reci
 import { LongPressDirective } from "./directives/long-press.directive";
 import { SideListComponent } from "@components/lists/side-list/side-list.component";
 import { HasRoleDirective } from "./directives/has-role.directive";
+import { IngredientListComponent } from "@components/lists/ingredient-list/ingredient-list.component";
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import { HasRoleDirective } from "./directives/has-role.directive";
         RecipeListComponent,
         RecipeItemCardComponent,
         SideListComponent,
+        IngredientListComponent,
 
         LongPressDirective,
         HasRoleDirective
@@ -45,6 +47,7 @@ import { HasRoleDirective } from "./directives/has-role.directive";
         IngredientsQuantityListComponent,
         RecipeListComponent,
         SideListComponent,
+        IngredientListComponent,
 
         LongPressDirective,
         HasRoleDirective

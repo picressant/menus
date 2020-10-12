@@ -1,0 +1,28 @@
+<app-page-header title="Paramètres"></app-page-header>
+
+<ion-content [fullscreen]="true">
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="onAdd()">
+        <ion-fab-button>
+            <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+
+    <div id="container">
+        <div [hidden]="selectedTab !== footerIngredient.selectedTab">
+            <app-ingredient-list (ingredientSelected)="onClickIngredient($event)"></app-ingredient-list>
+        </div>
+        <div [hidden]="selectedTab !== footerUnit.selectedTab">
+            <app-unit-list [loadOnInit]="true" (selected)="showUnit($event)"></app-unit-list>
+        </div>
+    </div>
+</ion-content>
+
+<app-footer-tab
+        selectedTab="{{selectedTab}}"
+        (elementSelect)="selectedTab = $event"
+        [footerElements]="[footerIngredient, footerUnit]">
+</app-footer-tab>

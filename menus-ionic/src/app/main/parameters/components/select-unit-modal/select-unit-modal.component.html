@@ -1,0 +1,15 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-title>Unité</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="closeModal()">Fermer</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <div id="container">
+    <app-unit-list (selected)="closeModal($event)" [loadOnInit]="true"></app-unit-list>
+  </div>
+</ion-content>

@@ -9,6 +9,8 @@ import { RecipeModule } from "./recipe/recipe.module";
 import { LayoutModule } from "./layout/layout.module";
 import { WeekModule } from "./week/week.module";
 import { SidesModule } from "./sides/sides.module";
+import { SharedModule } from "../shared/shared.module";
+import { ParametersModule } from "./parameters/parameters.module";
 
 
 @NgModule({
@@ -24,7 +26,9 @@ import { SidesModule } from "./sides/sides.module";
 
         RecipeModule,
         WeekModule,
-        SidesModule
+        SidesModule,
+        ParametersModule,
+        SharedModule
 
     ],
     exports: [

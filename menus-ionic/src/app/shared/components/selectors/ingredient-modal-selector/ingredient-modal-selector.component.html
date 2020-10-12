@@ -10,25 +10,6 @@
 <ion-content [fullscreen]="true">
 
     <div id="container">
-        <ion-searchbar (ionChange)="searchIngredient($event.detail.value)"
-                       inputmode="text"
-                       debounce="500"
-                       animated="true"
-                       slot="start"
-                       mode="ios"></ion-searchbar>
-
-
-        <ion-list>
-            <ion-item *ngFor="let ingredient of ingredients" (click)="closeModal(ingredient)">
-                <ion-label slot="start">{{ingredient.name}}</ion-label>
-                <ion-label slot="end">{{ingredient.unit.name}}</ion-label>
-            </ion-item>
-        </ion-list>
-
-        <ion-infinite-scroll threshold="100px" (ionInfinite)="scrollIngredients($event)">
-            <ion-infinite-scroll-content
-                    loadingSpinner="bubbles">
-            </ion-infinite-scroll-content>
-        </ion-infinite-scroll>
+        <app-ingredient-list (ingredientSelected)="closeModal($event)" [excludeIds]="excludeIds"></app-ingredient-list>
     </div>
 </ion-content>

@@ -10,6 +10,14 @@
                         <ion-label>{{ p.title }}</ion-label>
                     </ion-item>
                 </ion-menu-toggle>
+                <ng-container *appHasRole="'ROLE_ADMIN'">
+                    <ion-menu-toggle auto-hide="false" *ngFor="let p of adminPages; let i = index">
+                        <ion-item (click)="goTo(p, true)" lines="none" detail="false" [class.selected]="selectedIndex == i+appPages.length">
+                            <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
+                            <ion-label>{{ p.title }}</ion-label>
+                        </ion-item>
+                    </ion-menu-toggle>
+                </ng-container>
             </ion-list>
 
             <ion-menu-toggle class="menu-disconect" auto-hide="false">

@@ -3,23 +3,7 @@ import { WeekMeal } from "@models/week-meal.model";
 import { ActivatedRoute, Router } from "@angular/router";
 import { AlertController } from "@ionic/angular";
 import { WeekService } from "@services/week.service";
-
-const days = {
-    mondayLunch: 0,
-    mondayDinner: 1,
-    tuesdayLunch: 2,
-    tuesdayDinner: 3,
-    wednesdayLunch: 4,
-    wednesdayDinner: 5,
-    thursdayLunch: 6,
-    thursdayDinner: 7,
-    fridayLunch: 8,
-    fridayDinner: 9,
-    saturdayLunch: 10,
-    saturdayDinner: 11,
-    sundayLunch: 12,
-    sundayDinner: 13
-};
+import { ConfirmationAlertService } from "@services/confirmation-alert.service";
 
 @Component({
     selector: 'app-week-page',
@@ -59,7 +43,8 @@ export class WeekPageComponent {
         private router: Router,
         private route: ActivatedRoute,
         private alertController: AlertController,
-        private cdr: ChangeDetectorRef
+        private cdr: ChangeDetectorRef,
+        private confirmationService: ConfirmationAlertService
     ) {
         this.meals = this.weekService.meals$.getValue();
         this.changeTodayMeal();
@@ -172,34 +157,13 @@ export class WeekPageComponent {
     }
 
     refreshWiggleEffect(i: number) {
-        console.log("refreshing thy shit", i);
         this.isDeleting = i;
         this.cdr.detectChanges();
     }
 
     async pressEnded(i: number) {
         if (this.isDeleting === i) {
-            const alert = await this.alertController.create({
-                header: 'Confirmation',
-                cssClass: 'confirmation-modal',
-                message: 'Supprimer le repas de ' + this.getDay(i) + ' ?',
-                buttons: [
-                    {
-                        text: 'Annuler',
-                        role: 'cancel',
-                        cssClass: 'cancel'
-                    }, {
-                        cssClass: 'confirmation',
-                        text: 'Okay',
-                        handler: () => {
-                            this.weekService.deleteMeal(i);
-                        }
-                    }
-                ]
-            });
-
-            await alert.present();
-
+            await this.confirmationService.confirm("Supprimer le repas de " + this.getDay(i) + " ?", () => this.weekService.deleteMeal(i));
             this.isDeleting = undefined;
         }
     }

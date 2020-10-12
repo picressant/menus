@@ -11,9 +11,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
-import static org.springframework.web.bind.annotation.RequestMethod.POST;
-
 @RestController
 @RequestMapping("/ingredient")
 @PreAuthorize("hasRole('ROLE_ADMIN')")
@@ -25,12 +22,17 @@ public class IngredientController {
     @Autowired
     private UnitService unitService;
 
-    @RequestMapping(method = POST)
+    @PostMapping
+    public Ingredient addIngredient(@RequestBody Ingredient ingredient) {
+        return this.ingredientService.addIngredient(ingredient);
+    }
+
+    @PutMapping
     public Ingredient saveIngredient(@RequestBody Ingredient ingredient) {
         return this.ingredientService.saveIngredient(ingredient);
     }
 
-    @RequestMapping(value = "/{id}", method = DELETE)
+    @DeleteMapping(value = "/{id}")
     public HttpStatus deleteIngredient(@PathVariable("id") String id) {
         this.ingredientService.deleteIngredient(id);
         return HttpStatus.OK;

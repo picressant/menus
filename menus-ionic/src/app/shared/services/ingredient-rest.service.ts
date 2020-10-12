@@ -7,36 +7,42 @@ import { Pageable } from "@models/pager/pageable.model";
 import { Pager } from "@models/pager/pager.model";
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class IngredientRestService {
 
-  constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient) {
+    }
 
-  getIngredients(pager: Pager = null): Observable<Pageable<Ingredient>> {
-    return this.http.post<Pageable<Ingredient>>('ingredient/list', pager);
-  }
+    getIngredients(pager: Pager = null): Observable<Pageable<Ingredient>> {
+        return this.http.post<Pageable<Ingredient>>('ingredient/list', pager);
+    }
 
-  saveIngredient(ingredient: Ingredient): Observable<Ingredient> {
-    return this.http.post<Ingredient>('ingredient', ingredient);
-  }
+    saveIngredient(ingredient: Ingredient): Observable<Ingredient> {
+        return this.http.put<Ingredient>('ingredient', ingredient);
+    }
 
-  deleteIngredient(ingredient: Ingredient): Observable<void> {
-    return this.http.delete<void>('ingredient/' + ingredient.id);
-  }
+    addIngredient(ingredient: Ingredient): Observable<Ingredient> {
+        return this.http.post<Ingredient>('ingredient', ingredient);
+    }
 
-  getUnits(pager: Pager): Observable<Pageable<Unit>> {
-    return this.http.post<Pageable<Unit>>('ingredient/unit/list', pager);
-  }
+    deleteIngredient(ingredient: Ingredient): Observable<void> {
+        return this.http.delete<void>('ingredient/' + ingredient.id);
+    }
 
-  saveUnit(unit: Unit): Observable<Unit> {
-    if (unit.id)
-      return this.http.put<Unit>('ingredient/unit', unit);
-    else
-      return this.http.post<Unit>('ingredient/unit', unit);
-  }
+    getUnits(pager: Pager): Observable<Pageable<Unit>> {
+        return this.http.post<Pageable<Unit>>('ingredient/unit/list', pager);
+    }
 
-  deleteUnit(unit: Unit): Observable<void> {
-    return this.http.delete<void>('ingredient/unit/' + unit.id);
-  }
+    saveUnit(unit: Unit): Observable<Unit> {
+        return this.http.put<Unit>('ingredient/unit', unit);
+    }
+
+    addUnit(unit: Unit): Observable<Unit> {
+        return this.http.post<Unit>('ingredient/unit', unit);
+    }
+
+    deleteUnit(unit: Unit): Observable<void> {
+        return this.http.delete<void>('ingredient/unit/' + unit.id);
+    }
 }

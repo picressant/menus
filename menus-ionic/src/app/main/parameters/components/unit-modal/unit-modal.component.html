@@ -1,0 +1,25 @@
+<ion-header translucent>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="/main/parameters" (click)="forceCloseModal()"></ion-back-button>
+        </ion-buttons>
+        <ion-title>Unité</ion-title>
+        <ion-buttons slot="end">
+            <ion-button (click)="closeModal()" [disabled]="form.invalid" [color]="form.invalid ? 'danger' : ''">Sauver</ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+    <div id="container" [formGroup]="form">
+        <ion-item>
+            <ion-label position="floating">Nom</ion-label>
+            <ion-input formControlName="name"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label position="floating">Symbole</ion-label>
+            <ion-input formControlName="symbol"></ion-input>
+        </ion-item>
+    </div>
+</ion-content>
