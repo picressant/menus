@@ -7,7 +7,12 @@
 
 
 <ion-list>
-  <ion-item *ngFor="let ingredient of ingredients" (click)="clickIngredient(ingredient)">
+  <ion-item *ngFor="let ingredient of ingredients; let i = index" (click)="clickIngredient(ingredient)"
+            appLongPress
+            [class.is-deleting]="deleteIndex === i"
+            (longPressStarted)="refreshWiggle(i)"
+            (longPressCanceled)="refreshWiggle(-1)"
+            (longPressed)="deleteIngredient(ingredient)">
     <ion-label slot="start">{{ingredient.name}}</ion-label>
     <ion-label slot="end" class="no-mr-left">{{ingredient.unit.name}}</ion-label>
   </ion-item>

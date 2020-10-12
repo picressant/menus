@@ -1,9 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { Ingredient } from "@models/ingredient.model";
 import { Pager } from "@models/pager/pager.model";
 import { Pageable } from "@models/pager/pageable.model";
 import { IonInfiniteScroll } from "@ionic/angular";
 import { IngredientRestService } from "@services/ingredient-rest.service";
+import { removeFromArray } from "../../../helpers/remove-array-element.function";
+import { ConfirmationAlertService } from "@services/confirmation-alert.service";
 
 @Component({
     selector: 'app-ingredient-list',
@@ -25,8 +27,15 @@ export class IngredientListComponent implements OnInit {
     @Output()
     ingredientSelected: EventEmitter<Ingredient> = new EventEmitter<Ingredient>();
 
+    @Input()
+    canDelete: boolean = false;
+
+    deleteIndex: number = -1;
+
     constructor(
-        private ingredientRest: IngredientRestService
+        private ingredientRest: IngredientRestService,
+        private confirmationService: ConfirmationAlertService,
+        private cdr: ChangeDetectorRef
     ) {
         this.pagerIngredients = new Pager(20);
     }
@@ -78,5 +87,22 @@ export class IngredientListComponent implements OnInit {
         this.pagerIngredients.page = 0;
         this.ingredients = [];
         this.loadIngredients(event);
+    }
+
+    deleteIngredient(ingredient: Ingredient) {
+        if (this.canDelete) {
+            this.confirmationService.confirm("Supprimer cet ingrédient ?", () => {
+                this.ingredientRest.deleteIngredient(ingredient).subscribe(() => {
+                    removeFromArray(this.ingredients, ingredient)
+                });
+            });
+        }
+    }
+
+    refreshWiggle(i: number) {
+        if (this.canDelete) {
+            this.deleteIndex = i;
+            this.cdr.detectChanges();
+        }
     }
 }
