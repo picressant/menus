@@ -13,6 +13,8 @@ export class AppUpdateService {
         this.updates.available.subscribe(event => {
             this.showAppUpdateAlert();
         });
+
+        this.updates.checkForUpdate();
     }
 
     async showAppUpdateAlert() {
