@@ -1,0 +1,71 @@
+<ion-header [translucent]="true">
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="/main/user" *ngIf="!isFromMenu"></ion-back-button>
+            <ion-menu-button *ngIf="isFromMenu"></ion-menu-button>
+        </ion-buttons>
+        <ion-title>{{title}}</ion-title>
+        <ion-buttons slot="end" *ngIf="!isReadonly">
+            <ion-button (click)="submit()">
+                <ion-icon name="checkmark-sharp" [color]="getSubmitColor()"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="isReadonly">
+    <ion-fab-button (click)="modify()">
+        <ion-icon name="create-outline"></ion-icon>
+    </ion-fab-button>
+</ion-fab>
+
+<ion-content [fullscreen]="true">
+    <div class="file-input-wrapper">
+        <div class="picture c-hand" (click)="file.click()">
+            <img [src]="imgPreviewURL" alt="Profile" height="200" width="200" *ngIf="imgPreviewURL">
+            <menus-loading-img
+                    [styles]="imgStyles"
+                    [src]="'user/' + id + '/avatar' | secure | async"
+                    *ngIf="!imgPreviewURL"></menus-loading-img>
+            <ion-icon name="cloud-upload-outline" class="upload-icon" *ngIf="!isReadonly"></ion-icon>
+        </div>
+        <input type="file" #file (change)="preview(file.files)" [disabled]="this.form.disabled">
+    </div>
+    <div [formGroup]="form" class="form-wrapper">
+
+        <!--        <div class="form-field-wrapper" *appHasRole="'ROLE_ADMIN'">-->
+        <!--            <label>Groupe</label>-->
+        <!--            <menus-group-selector dataError="Obligatoire" formControlName="group"></menus-group-selector>-->
+        <!--        </div>-->
+
+        <ion-item>
+            <ion-label position="floating">Prénom</ion-label>
+            <ion-input formControlName="firstname"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label position="floating">Nom</ion-label>
+            <ion-input formControlName="lastname"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label position="floating">Login</ion-label>
+            <ion-input formControlName="username"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label position="floating" *appHasRole="'ROLE_ADMIN'">googleId</ion-label>
+            <ion-input formControlName="googleId"></ion-input>
+        </ion-item>
+
+        <ion-item *appHasRole="'ROLE_ADMIN'">
+            <ion-label>Rôle</ion-label>
+            <ion-select formControlName="role" interface="action-sheet">
+                <ion-select-option *ngFor="let role of roles"
+                                   [value]="role">{{getRoleStringified(role)}}</ion-select-option>
+            </ion-select>
+        </ion-item>
+
+    </div>
+
+</ion-content>

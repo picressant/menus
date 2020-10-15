@@ -101,3 +101,19 @@ ion-menu.ios ion-list#labels-list ion-list-header {
 ion-item.selected {
   --color: var(--ion-color-secondary);
 }
+
+:host {
+  .user-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+    font-size: 17px;
+
+    ion-avatar {
+      margin-right: 10px;
+      margin-bottom: 6px;
+    }
+  }
+
+}

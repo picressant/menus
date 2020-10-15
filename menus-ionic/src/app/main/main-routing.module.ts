@@ -9,6 +9,8 @@ import { SideListPageComponent } from "./sides/pages/side-list-page/side-list-pa
 import { SideItemPageComponent } from "./sides/pages/side-item-page/side-item-page.component";
 import { ParametersPageComponent } from "./parameters/pages/parameters-page/parameters-page.component";
 import { AdminGuard } from "../shared/guards/admin.guard";
+import { UserItemPageComponent } from "./user/pages/user-item-page/user-item-page.component";
+import { AdminOrSelfGuard } from "../shared/guards/admin-or-self-guard.service";
 
 const routes: Routes = [
     { path: 'recipe', component: RecipeListPageComponent },
@@ -20,6 +22,8 @@ const routes: Routes = [
     { path: 'side/add', component: SideItemPageComponent },
     { path: 'side/:id', component: SideItemPageComponent },
     { path: 'parameters', component: ParametersPageComponent, canActivate: [AdminGuard] },
+    { path: 'user', component: ParametersPageComponent, canActivate: [AdminGuard] },
+    { path: 'user/:id', component: UserItemPageComponent, canActivate: [AdminOrSelfGuard] },
     {
         path: '',
         redirectTo: 'recipe',

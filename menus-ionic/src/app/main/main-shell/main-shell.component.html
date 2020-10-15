@@ -12,7 +12,8 @@
                 </ion-menu-toggle>
                 <ng-container *appHasRole="'ROLE_ADMIN'">
                     <ion-menu-toggle auto-hide="false" *ngFor="let p of adminPages; let i = index">
-                        <ion-item (click)="goTo(p, true)" lines="none" detail="false" [class.selected]="selectedIndex == i+appPages.length">
+                        <ion-item (click)="goTo(p, true)" lines="none" detail="false"
+                                  [class.selected]="selectedIndex == i+appPages.length">
                             <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
                             <ion-label>{{ p.title }}</ion-label>
                         </ion-item>
@@ -28,6 +29,15 @@
             </ion-menu-toggle>
 
         </ion-content>
+
+        <ion-menu-toggle>
+            <div class="user-card" (click)="goToUser()">
+                <ion-avatar>
+                    <img [src]="'user/' + me?.id + '/avatar?' + timestamp | secure | async">
+                </ion-avatar>
+                <div class="user-name">{{me?.firstname}} {{me?.lastname}}</div>
+            </div>
+        </ion-menu-toggle>
     </ion-menu>
     <ion-router-outlet id="main-shell-content"></ion-router-outlet>
 </ion-split-pane>

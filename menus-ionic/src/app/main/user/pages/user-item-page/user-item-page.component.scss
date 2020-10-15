@@ -1,0 +1,27 @@
+:host {
+
+  .file-input-wrapper {
+    input {
+      position: absolute;
+      left: -10000px;
+    }
+  }
+
+  .picture {
+    text-align: center;
+    margin-top: 10px;
+    position: relative;
+
+    .upload-icon {
+      position: absolute;
+      bottom: 5px;
+      left: calc(50% + 76px);
+    }
+
+    &:hover {
+      .upload-icon {
+        transform: scale(1.3);
+      }
+    }
+  }
+}

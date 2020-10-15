@@ -11,6 +11,7 @@ import { WeekModule } from "./week/week.module";
 import { SidesModule } from "./sides/sides.module";
 import { SharedModule } from "../shared/shared.module";
 import { ParametersModule } from "./parameters/parameters.module";
+import { UserModule } from "./user/user.module";
 
 
 @NgModule({
@@ -28,6 +29,7 @@ import { ParametersModule } from "./parameters/parameters.module";
         WeekModule,
         SidesModule,
         ParametersModule,
+        UserModule,
         SharedModule
 
     ],
