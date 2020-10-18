@@ -1,0 +1,15 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-title>Crew</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="closeModal(null)">Fermer</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <div id="container">
+    <app-group-list (selected)="closeModal($event)" [loadOnInit]="true"></app-group-list>
+  </div>
+</ion-content>

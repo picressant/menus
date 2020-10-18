@@ -53,9 +53,14 @@
             <ion-input formControlName="username"></ion-input>
         </ion-item>
 
-        <ion-item>
-            <ion-label position="floating" *appHasRole="'ROLE_ADMIN'">googleId</ion-label>
+        <ion-item *appHasRole="'ROLE_ADMIN'">
+            <ion-label position="floating">googleId</ion-label>
             <ion-input formControlName="googleId"></ion-input>
+        </ion-item>
+
+        <ion-item (click)="chooseGroup()">
+            <ion-label position="floating">Crew</ion-label>
+            <ion-input [value]="form.value.group?.name" [disabled]="isReadonly" [readonly]="true"></ion-input>
         </ion-item>
 
         <ion-item *appHasRole="'ROLE_ADMIN'">

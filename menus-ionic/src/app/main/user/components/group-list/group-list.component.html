@@ -1,0 +1,25 @@
+<ion-searchbar (ionChange)="searchGroups($event.detail.value)"
+               inputmode="text"
+               debounce="500"
+               animated="true"
+               slot="start"
+               mode="ios"></ion-searchbar>
+
+
+<ion-list>
+  <ion-item *ngFor="let group of groups; let i = index"
+            (click)="selectGroup(group)"
+            [class.is-deleting]="deleteIndex === i"
+            appLongPress
+            (longPressStarted)="refreshWiggle(i)"
+            (longPressCanceled)="refreshWiggle(-1)"
+            (longPressed)="deleteGroup(group)">
+    <ion-label slot="start">{{group.name}}</ion-label>
+  </ion-item>
+</ion-list>
+
+<ion-infinite-scroll threshold="100px" (ionInfinite)="scrollGroups($event)">
+  <ion-infinite-scroll-content
+          loadingSpinner="bubbles">
+  </ion-infinite-scroll-content>
+</ion-infinite-scroll>
