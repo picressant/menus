@@ -77,9 +77,11 @@ export class UserItemPageComponent extends AbstractItemPage<User> implements OnI
 
     postCreate() {
         if (this.imgPreviewURL != null) {
-            this.userService.storeAvatar(this.id, this.storeCurrentImages[0]).subscribe();
-            this.imgPreviewURL = null;
-            this.storeCurrentImages = null;
+            this.userService.storeAvatar(this.id, this.storeCurrentImages[0]).subscribe(() => {
+                this.timestamp = new Date().getTime().toString();
+                this.imgPreviewURL = null;
+                this.storeCurrentImages = null;
+            });
         }
     }
 

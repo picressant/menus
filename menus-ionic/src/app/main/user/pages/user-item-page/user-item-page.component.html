@@ -25,7 +25,7 @@
             <img [src]="imgPreviewURL" alt="Profile" height="200" width="200" *ngIf="imgPreviewURL">
             <menus-loading-img
                     [styles]="imgStyles"
-                    [src]="'user/' + id + '/avatar' | secure | async"
+                    [src]="'user/' + id + '/avatar?' + timestamp | secure | async"
                     *ngIf="!imgPreviewURL"></menus-loading-img>
             <ion-icon name="cloud-upload-outline" class="upload-icon" *ngIf="!isReadonly"></ion-icon>
         </div>

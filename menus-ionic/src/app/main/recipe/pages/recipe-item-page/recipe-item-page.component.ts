@@ -89,10 +89,11 @@ export class RecipeItemPageComponent extends AbstractItemPage<Recipe> implements
 
     postCreate() {
         if (this.imgPreviewURL != null) {
-            this.recipeRest.storePicture(this.id, this.storeCurrentImages[0]).subscribe();
-            this.timestamp = new Date().getTime().toString();
-            this.imgPreviewURL = null;
-            this.storeCurrentImages = null;
+            this.recipeRest.storePicture(this.id, this.storeCurrentImages[0]).subscribe(() => {
+                this.timestamp = new Date().getTime().toString();
+                this.imgPreviewURL = null;
+                this.storeCurrentImages = null;
+            });
         }
     }
 
