@@ -33,11 +33,6 @@
     </div>
     <div [formGroup]="form" class="form-wrapper">
 
-        <!--        <div class="form-field-wrapper" *appHasRole="'ROLE_ADMIN'">-->
-        <!--            <label>Groupe</label>-->
-        <!--            <menus-group-selector dataError="Obligatoire" formControlName="group"></menus-group-selector>-->
-        <!--        </div>-->
-
         <ion-item>
             <ion-label position="floating">Prénom</ion-label>
             <ion-input formControlName="firstname"></ion-input>
@@ -51,6 +46,11 @@
         <ion-item>
             <ion-label position="floating">Login</ion-label>
             <ion-input formControlName="username"></ion-input>
+        </ion-item>
+
+        <ion-item (click)="resetPassword()">
+            <ion-label position="floating">Password</ion-label>
+            <ion-input type="password" value="**********" [readonly]="true" [disabled]="isReadonly"></ion-input>
         </ion-item>
 
         <ion-item *appHasRole="'ROLE_ADMIN'">

@@ -10,6 +10,7 @@ import { forkJoin, Observable } from "rxjs";
 import { UserRestService } from "@services/user-rest.service";
 import { ModalController } from "@ionic/angular";
 import { GroupSelectorModalComponent } from "../../components/group-selector-modal/group-selector-modal.component";
+import { ResetPasswordModalComponent } from "../../components/reset-password-modal/reset-password-modal.component";
 
 @Component({
     selector: 'app-user-item-page',
@@ -38,11 +39,6 @@ export class UserItemPageComponent extends AbstractItemPage<User> implements OnI
         this.roles = getAllRoles();
     }
 
-    // public resetPassword() {
-    //   const dialogRef = this.dialog.open(ResetPasswordDialogComponent, {
-    //     data: this.form.value
-    //   });
-    // }
     isFromMenu: boolean = true;
 
     timestamp: string;
@@ -151,8 +147,21 @@ export class UserItemPageComponent extends AbstractItemPage<User> implements OnI
 
             const { data } = await modal.onWillDismiss();
             if (data && data.group) {
-              this.form.controls.group.setValue(data.group);
+                this.form.controls.group.setValue(data.group);
             }
+        }
+    }
+
+    async resetPassword() {
+        if (!this.isReadonly) {
+            const modal = await this.modalController.create({
+                component: ResetPasswordModalComponent,
+                componentProps: {
+                    userId: this.id
+                }
+            });
+
+            await modal.present();
         }
     }
 }

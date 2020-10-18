@@ -6,13 +6,15 @@ import { SharedModule } from "../../shared/shared.module";
 import { ReactiveFormsModule } from "@angular/forms";
 import { GroupListComponent } from "./components/group-list/group-list.component";
 import { GroupSelectorModalComponent } from "./components/group-selector-modal/group-selector-modal.component";
+import { ResetPasswordModalComponent } from "./components/reset-password-modal/reset-password-modal.component";
 
 
 @NgModule({
     declarations: [
         UserItemPageComponent,
         GroupListComponent,
-        GroupSelectorModalComponent
+        GroupSelectorModalComponent,
+        ResetPasswordModalComponent
     ],
     imports: [
         CommonModule,
