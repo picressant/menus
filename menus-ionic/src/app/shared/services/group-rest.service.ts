@@ -37,4 +37,8 @@ export class GroupRestService {
   deleteGroup(iID: string): Observable<void> {
     return this.http.delete<void>('group/' + iID);
   }
+
+  getMembers(id: string): Observable<User[]> {
+    return this.http.get<User[]>('group/' + id + '/members');
+  }
 }

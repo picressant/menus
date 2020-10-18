@@ -10,6 +10,7 @@ import { ResetPasswordModalComponent } from "./components/reset-password-modal/r
 import { UserListPageComponent } from "./pages/user-list-page/user-list-page.component";
 import { LayoutModule } from "../layout/layout.module";
 import { UserListComponent } from "./components/user-list/user-list.component";
+import { GroupItemPageComponent } from "./pages/group-item-page/group-item-page.component";
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import { UserListComponent } from "./components/user-list/user-list.component";
         UserItemPageComponent,
         GroupListComponent,
         GroupSelectorModalComponent,
+        GroupItemPageComponent,
         ResetPasswordModalComponent,
         UserListPageComponent,
         UserListComponent
@@ -30,7 +32,8 @@ import { UserListComponent } from "./components/user-list/user-list.component";
     ],
     exports: [
         UserItemPageComponent,
-        UserListPageComponent
+        UserListPageComponent,
+        GroupItemPageComponent
     ]
 })
 export class UserModule {

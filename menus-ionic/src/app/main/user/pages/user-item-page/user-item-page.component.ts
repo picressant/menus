@@ -43,6 +43,15 @@ export class UserItemPageComponent extends AbstractItemPage<User> implements OnI
 
     timestamp: string;
 
+    ngOnInit() {
+        super.ngOnInit();
+
+        this.route.queryParams.subscribe(params => {
+            if (params.isFromList)
+                this.isFromMenu = false;
+        });
+    }
+
     get title() {
         if (this.isAddingMode)
             return "Ajouter un utilisateur";

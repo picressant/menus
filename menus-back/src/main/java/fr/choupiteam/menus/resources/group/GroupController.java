@@ -42,7 +42,7 @@ public class GroupController {
         return this.groupService.getGroupsByPager(pager);
     }
 
-    @GetMapping(value = "/{id}/users")
+    @GetMapping(value = "/{id}/members")
     public List<ApplicationUser> getGroupUsers(@PathVariable String id) {
         return this.groupService.getGroupUsers(id);
     }

@@ -41,12 +41,17 @@ export class UserListPageComponent implements OnInit {
     ngOnInit() {
     }
 
-    onClickGroup(group: Group) {
+    ionViewWillEnter() {
+        this.userListComponent.refresh(null);
+        this.groupListComponent.refresh(null);
+    }
 
+    onClickGroup(group: Group) {
+        this.router.navigate(['main/user/group', group.id]);
     }
 
     onClickUser(user: User) {
-        this.router.navigate(['main/user', user.id]);
+        this.router.navigate(['main/user', user.id], { queryParams: { isFromList: 'true' } });
     }
 
     doRefresh(event: any) {
@@ -57,6 +62,11 @@ export class UserListPageComponent implements OnInit {
     }
 
   onAdd() {
-
+    if (this.selectedTab === this.footerUser.selectedTab) {
+        this.router.navigate(['main/user/add'], { queryParams: { isFromList: 'true' } })
+    }
+    else {
+        this.router.navigate(['main/user/group/add']);
+    }
   }
 }
