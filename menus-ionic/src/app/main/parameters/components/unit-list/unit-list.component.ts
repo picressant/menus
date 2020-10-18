@@ -97,7 +97,7 @@ export class UnitListComponent implements OnInit {
     }
 
     deleteUnit(unit: Unit) {
-        this.confirmationService.confirm("Supprimer cette unité ?", () => {
+        this.confirmationService.confirm("Supprimer l'unité \"" + unit.name + "\" ?", () => {
             this.unitRest.deleteUnit(unit).subscribe(() => {
                 removeFromArray(this.units, unit)
             });

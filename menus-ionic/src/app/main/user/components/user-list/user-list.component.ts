@@ -96,7 +96,7 @@ export class UserListComponent implements OnInit {
     }
 
     deleteUser(user: User) {
-        this.confirmationService.confirm("Supprimer cet utilisateur ?", () => {
+        this.confirmationService.confirm("Supprimer l'utilisateur \"" + user.firstname + " " + user.lastname +  "\" ?", () => {
             this.userRest.deleteUser(user).subscribe(() => {
                 removeFromArray(this.users, user)
             });

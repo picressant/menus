@@ -91,7 +91,7 @@ export class IngredientListComponent implements OnInit {
 
     deleteIngredient(ingredient: Ingredient) {
         if (this.canDelete) {
-            this.confirmationService.confirm("Supprimer cet ingrédient ?", () => {
+            this.confirmationService.confirm("Supprimer l'ingrédient \"" + ingredient.name + "\" ?", () => {
                 this.ingredientRest.deleteIngredient(ingredient).subscribe(() => {
                     removeFromArray(this.ingredients, ingredient)
                 });

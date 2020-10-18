@@ -101,7 +101,7 @@ export class GroupListComponent implements OnInit {
 
     deleteGroup(group: Group) {
         if (this.deleteAuthorized) {
-            this.confirmationService.confirm("Supprimer cette unité ?", () => {
+            this.confirmationService.confirm("Supprimer le groupe \"" + group.name + " \" ?", () => {
                 this.groupRest.deleteGroup(group.id).subscribe(() => {
                     removeFromArray(this.groups, group)
                 });

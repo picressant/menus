@@ -23,7 +23,7 @@ export class ParametersPageComponent implements OnInit {
 
     footerIngredient = {
         name: "Ingrédients",
-        icon: "today-outline",
+        icon: "nutrition-outline",
         selectedTab: "nutrition-ingredient"
     }
 

@@ -80,7 +80,7 @@ export class SideItemPageComponent extends AbstractItemPage<SideDish> {
         const alert = await this.alertController.create({
             header: 'Confirmation',
             cssClass: 'confirmation-modal',
-            message: 'Supprimer cette recette ?',
+            message: 'Supprimer cet accompagnement ?',
             buttons: [
                 {
                     text: 'Annuler',
