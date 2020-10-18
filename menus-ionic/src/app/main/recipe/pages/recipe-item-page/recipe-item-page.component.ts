@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { isNullOrUndefined } from "util";
 import { AbstractItemPage } from "../../../../shared/pages/abstract-item-page";
 import { Recipe } from "@models/recipe.model";
@@ -12,6 +12,8 @@ import { IngredientModalSelectorComponent } from "@components/selectors/ingredie
 import { IngredientQuantity } from "@models/ingredient-quantity.model";
 import { WeekService } from "@services/week.service";
 import { tap } from "rxjs/operators";
+import { removeFromArray } from "../../../../shared/helpers/remove-array-element.function";
+import { ConfirmationAlertService } from "@services/confirmation-alert.service";
 
 @Component({
     selector: 'app-recipe-item-page',
@@ -45,6 +47,7 @@ export class RecipeItemPageComponent extends AbstractItemPage<Recipe> implements
     }
 
     selectedTab = this.footerOverview.selectedTab;
+    isDeleting: number;
 
 
     constructor(private fb: FormBuilder,
@@ -54,7 +57,9 @@ export class RecipeItemPageComponent extends AbstractItemPage<Recipe> implements
                 private router: Router,
                 private modalController: ModalController,
                 private weekService: WeekService,
-                private alertController: AlertController
+                private alertController: AlertController,
+                private cdr: ChangeDetectorRef,
+                private confirmationService: ConfirmationAlertService
     ) {
 
         super(route, toaster, "Recette modifiée avec succès", "Recette ajoutée avec succès");
@@ -203,5 +208,36 @@ export class RecipeItemPageComponent extends AbstractItemPage<Recipe> implements
         });
 
         await alert.present();
+    }
+
+    addStep() {
+        let steps: string[] = this.form.value.steps;
+        if (!steps)
+            steps = [];
+        steps.push("");
+        this.form.controls.steps.setValue(steps);
+    }
+
+    removeStep(step: string) {
+        if (!this.isReadonly) {
+            this.confirmationService.confirm("Supprimer l'étape ?", () => {
+                removeFromArray(this.form.value.steps, step);
+            });
+        }
+    }
+
+    changeStep(event: any, index: number) {
+        this.form.value.steps[index] = event.detail.value;
+    }
+
+    refreshWiggleEffect(i: number) {
+        if (!this.isReadonly) {
+            this.isDeleting = i;
+            this.cdr.detectChanges();
+        }
+    }
+
+    trackByFn(index: any, item: any) {
+        return index;
     }
 }

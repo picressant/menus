@@ -71,7 +71,20 @@
             </ion-item>
         </div>
     </div>
-    <div [hidden]="selectedTab !== footerSteps.selectedTab">Steps</div>
+    <div [hidden]="selectedTab !== footerSteps.selectedTab">
+        <h3 class="ion-margin with-icon">Etapes
+            <ion-icon name="add-outline" *ngIf="!isReadonly" (click)="addStep()"></ion-icon>
+        </h3>
+        <ion-item *ngFor="let step of form.value.steps; let i = index; trackBy:trackByFn"
+                  [class.is-deleting]="isDeleting === i"
+                  appLongPress
+                  (longPressed)="removeStep(step)"
+                  (longPressStarted)="refreshWiggleEffect(i)"
+                  (longPressCanceled)="refreshWiggleEffect(undefined)">
+            <ion-label position="floating">{{i+1}} :</ion-label>
+            <ion-textarea [value]="step" (ionChange)="changeStep($event, i)" [disabled]="isReadonly"></ion-textarea>
+        </ion-item>
+    </div>
     <div [hidden]="selectedTab !== footerIngredients.selectedTab">
         <h3 class="ion-margin with-icon">Ingrédients
             <ion-icon name="add-outline" *ngIf="!isReadonly" (click)="addIngredientQuantity()"></ion-icon>

@@ -10,10 +10,12 @@ export class Recipe extends AbstractData {
   persons: number;
   ingredients: IngredientQuantity[];
   bookReference: string;
+  steps: string[];
 
   constructor() {
     super();
     this.ingredients = [];
+    this.steps = [];
   }
 
   static form(fb: FormBuilder) {
@@ -23,6 +25,7 @@ export class Recipe extends AbstractData {
       cookingTime: [''],
       persons: ['', [Validators.required]],
       ingredients: [[]],
+      steps: [[]],
       bookReference: [null]
     });
 
