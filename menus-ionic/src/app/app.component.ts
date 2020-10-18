@@ -4,6 +4,7 @@ import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Title } from "@angular/platform-browser";
+import { AppUpdateService } from "@services/app-update.service";
 
 @Component({
     selector: 'app-root',
@@ -15,6 +16,7 @@ export class AppComponent {
         private platform: Platform,
         private splashScreen: SplashScreen,
         private statusBar: StatusBar,
+        private appUpdateService: AppUpdateService,
         titleService: Title) {
 
         titleService.setTitle('Food organistator');

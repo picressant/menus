@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { SwUpdate } from '@angular/service-worker';
 import { AlertController } from "@ionic/angular";
+import { environment } from "../../../environments/environment";
 
 @Injectable({
     providedIn: 'root'
@@ -10,11 +11,13 @@ export class AppUpdateService {
         private readonly updates: SwUpdate,
         private alertController: AlertController) {
 
-        this.updates.available.subscribe(event => {
-            this.showAppUpdateAlert();
-        });
+        if (environment.production) {
+            this.updates.available.subscribe(event => {
+                this.showAppUpdateAlert();
+            });
 
-        this.updates.checkForUpdate();
+            this.updates.checkForUpdate();
+        }
     }
 
     async showAppUpdateAlert() {
