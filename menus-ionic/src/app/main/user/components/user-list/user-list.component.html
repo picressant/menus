@@ -1,0 +1,25 @@
+<ion-searchbar (ionChange)="searchUsers($event.detail.value)"
+               inputmode="text"
+               debounce="500"
+               animated="true"
+               slot="start"
+               mode="ios"></ion-searchbar>
+
+
+<ion-list>
+  <ion-item *ngFor="let user of users; let i = index"
+            (click)="selectUser(user)"
+            [class.is-deleting]="deleteIndex === i"
+            appLongPress
+            (longPressStarted)="refreshWiggle(i)"
+            (longPressCanceled)="refreshWiggle(-1)"
+            (longPressed)="deleteUser(user)">
+    <ion-label slot="start">{{user.firstname}} {{user.lastname}}</ion-label>
+  </ion-item>
+</ion-list>
+
+<ion-infinite-scroll threshold="100px" (ionInfinite)="scrollUsers($event)">
+  <ion-infinite-scroll-content
+          loadingSpinner="bubbles">
+  </ion-infinite-scroll-content>
+</ion-infinite-scroll>

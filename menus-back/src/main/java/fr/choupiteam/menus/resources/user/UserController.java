@@ -1,12 +1,14 @@
 package fr.choupiteam.menus.resources.user;
 
 
+import fr.choupiteam.menus.application.pager.model.Pager;
 import fr.choupiteam.menus.application.security.model.ApplicationUser;
 import fr.choupiteam.menus.application.security.model.ChangePasswordData;
 import fr.choupiteam.menus.application.security.model.Role;
 import fr.choupiteam.menus.application.security.service.UserDetailsServiceImpl;
 import fr.choupiteam.menus.infrastructure.repository.ApplicationUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -55,10 +57,10 @@ public class UserController {
         return this.userDetailsService.getAvatar(id);
     }
 
-    @GetMapping(value = "/list")
+    @PostMapping(value = "/list")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public List<ApplicationUser> getUsers() {
-        return this.userDetailsService.getAllUsers();
+    public Page<ApplicationUser> getUsers(@RequestBody Pager pager) {
+        return this.userDetailsService.getUsers(pager);
     }
 
     @GetMapping(value = "/{id}")

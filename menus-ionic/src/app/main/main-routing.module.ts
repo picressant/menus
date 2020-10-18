@@ -11,6 +11,7 @@ import { ParametersPageComponent } from "./parameters/pages/parameters-page/para
 import { AdminGuard } from "../shared/guards/admin.guard";
 import { UserItemPageComponent } from "./user/pages/user-item-page/user-item-page.component";
 import { AdminOrSelfGuard } from "../shared/guards/admin-or-self-guard.service";
+import { UserListPageComponent } from "./user/pages/user-list-page/user-list-page.component";
 
 const routes: Routes = [
     { path: 'recipe', component: RecipeListPageComponent },
@@ -22,7 +23,7 @@ const routes: Routes = [
     { path: 'side/add', component: SideItemPageComponent },
     { path: 'side/:id', component: SideItemPageComponent },
     { path: 'parameters', component: ParametersPageComponent, canActivate: [AdminGuard] },
-    { path: 'user', component: ParametersPageComponent, canActivate: [AdminGuard] },
+    { path: 'user', component: UserListPageComponent, canActivate: [AdminGuard] },
     { path: 'user/:id', component: UserItemPageComponent, canActivate: [AdminOrSelfGuard] },
     {
         path: '',

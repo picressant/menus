@@ -1,5 +1,6 @@
 package fr.choupiteam.menus.application.security.service;
 
+import fr.choupiteam.menus.application.pager.model.Pager;
 import fr.choupiteam.menus.application.security.model.ApplicationUser;
 import fr.choupiteam.menus.infrastructure.repository.ApplicationUserRepository;
 import fr.choupiteam.menus.infrastructure.repository.UserPictureRepository;
@@ -8,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -148,5 +150,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                     this.userPictureRepository.removeForUser(applicationUser.getId());
                     this.applicationUserRepository.delete(applicationUser);
                 });
+    }
+
+    public Page<ApplicationUser> getUsers(Pager pager) {
+        return this.applicationUserRepository.findAllByPager(pager, ApplicationUser.class);
     }
 }

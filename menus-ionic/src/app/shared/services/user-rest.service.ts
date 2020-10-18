@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { User } from "@models/user.model";
+import { Pager } from "@models/pager/pager.model";
+import { Pageable } from "@models/pager/pageable.model";
 
 @Injectable({
     providedIn: 'root'
@@ -11,8 +13,8 @@ export class UserRestService {
     constructor(private http: HttpClient) {
     }
 
-    getUsers(): Observable<User[]> {
-        return this.http.get<User[]>('user/list');
+    getUsers(pager: Pager): Observable<Pageable<User>> {
+        return this.http.post<Pageable<User>>('user/list', pager);
     }
 
     getUser(id: string) {

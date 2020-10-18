@@ -35,6 +35,11 @@ export class MainShellComponent implements OnInit {
             title: 'Paramètres',
             url: 'parameters',
             icon: 'settings'
+        },
+        {
+            title: 'Utilisateurs',
+            url: 'user',
+            icon: 'people'
         }
     ]
 

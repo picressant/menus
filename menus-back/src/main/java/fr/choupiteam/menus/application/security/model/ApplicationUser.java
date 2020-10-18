@@ -3,6 +3,7 @@ package fr.choupiteam.menus.application.security.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import fr.choupiteam.menus.application.group.model.Group;
+import fr.choupiteam.menus.infrastructure.annotation.Searchable;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -19,11 +20,16 @@ public class ApplicationUser implements UserDetails {
 
     @Id
     private String id;
+
+    @Searchable
     private String username;
 
     private String password;
 
+    @Searchable
     private String firstname;
+
+    @Searchable
     private String lastname;
 
     private Role role;

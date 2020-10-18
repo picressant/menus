@@ -1,0 +1,29 @@
+<app-page-header title="Utilisateurs"></app-page-header>
+
+<ion-content [fullscreen]="true">
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="onAdd()">
+        <ion-fab-button>
+            <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+
+    <div id="container">
+        <div [hidden]="selectedTab !== footerUser.selectedTab">
+            <app-user-list (selected)="onClickUser($event)" [loadOnInit]="true"></app-user-list>
+        </div>
+        <div [hidden]="selectedTab !== footerGroup.selectedTab">
+            <app-group-list (selected)="onClickGroup($event)" [deleteAuthorized]="true"
+                            [loadOnInit]="true"></app-group-list>
+        </div>
+    </div>
+</ion-content>
+
+<app-footer-tab
+        selectedTab="{{selectedTab}}"
+        (elementSelect)="selectedTab = $event"
+        [footerElements]="[footerUser, footerGroup]">
+</app-footer-tab>
