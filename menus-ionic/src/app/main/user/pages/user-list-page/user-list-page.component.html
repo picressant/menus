@@ -13,11 +13,10 @@
 
     <div id="container">
         <div [hidden]="selectedTab !== footerUser.selectedTab">
-            <app-user-list (selected)="onClickUser($event)" [loadOnInit]="true"></app-user-list>
+            <app-user-list (selected)="onClickUser($event)"></app-user-list>
         </div>
         <div [hidden]="selectedTab !== footerGroup.selectedTab">
-            <app-group-list (selected)="onClickGroup($event)" [deleteAuthorized]="true"
-                            [loadOnInit]="true"></app-group-list>
+            <app-group-list (selected)="onClickGroup($event)" [deleteAuthorized]="true"></app-group-list>
         </div>
     </div>
 </ion-content>
