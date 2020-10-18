@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { Ingredient } from "@models/ingredient.model";
-import { Pager } from "@models/pager/pager.model";
+import { Direction, Order, Pager } from "@models/pager/pager.model";
 import { Pageable } from "@models/pager/pageable.model";
 import { IonInfiniteScroll } from "@ionic/angular";
 import { IngredientRestService } from "@services/ingredient-rest.service";
@@ -38,6 +38,7 @@ export class IngredientListComponent implements OnInit {
         private cdr: ChangeDetectorRef
     ) {
         this.pagerIngredients = new Pager(20);
+        this.pagerIngredients.orders.push(new Order("name", Direction.ASC));
     }
 
     ngOnInit() {
