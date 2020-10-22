@@ -1,19 +1,21 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Recipe } from "@models/recipe.model";
+import { BookRecipe } from "@models/book-recipe.model";
 
 @Component({
-  selector: 'app-recipe-item-card',
-  templateUrl: './recipe-item-card.component.html',
-  styleUrls: ['./recipe-item-card.component.scss'],
+    selector: 'app-recipe-item-card',
+    templateUrl: './recipe-item-card.component.html',
+    styleUrls: ['./recipe-item-card.component.scss'],
 })
 export class RecipeItemCardComponent implements OnInit {
 
-  @Input()
-  recipe: Recipe;
-  imgStyles: any;
+    @Input()
+    recipe: BookRecipe;
+    imgStyles: any;
 
-  constructor() { }
+    constructor() {
+    }
 
-  ngOnInit() {}
+    ngOnInit() {
+    }
 
 }

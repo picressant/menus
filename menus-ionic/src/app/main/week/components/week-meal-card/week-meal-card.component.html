@@ -18,13 +18,13 @@
             </div>
         </div>
         <div class="menu-info">
-            <div *ngIf="meal.recipe?.preparationTime" class="info-element">
+            <div *ngIf="getRecipeAsBook()?.preparationTime" class="info-element">
                 <ion-icon name="time-outline"></ion-icon>
-                {{meal.recipe?.preparationTime}}
+                {{getRecipeAsBook()?.preparationTime}}
             </div>
-            <div *ngIf="meal.recipe?.cookingTime" class="info-element">
+            <div *ngIf="getRecipeAsBook()?.cookingTime" class="info-element">
                 <ion-icon name="flame-outline"></ion-icon>
-                {{meal.recipe?.cookingTime}}
+                {{getRecipeAsBook()?.cookingTime}}
             </div>
         </div>
     </ng-container>
