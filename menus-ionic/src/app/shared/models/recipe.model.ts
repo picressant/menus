@@ -4,31 +4,22 @@ import { FormBuilder, Validators } from "@angular/forms";
 import { mergeFormGroups } from "../helpers/form.helpers";
 
 export class Recipe extends AbstractData {
-  name: string;
-  preparationTime: number;
-  cookingTime: number;
-  persons: number;
-  ingredients: IngredientQuantity[];
-  bookReference: string;
-  steps: string[];
+    name: string;
+    ingredients: IngredientQuantity[];
+    jacksonType: string;
 
-  constructor() {
-    super();
-    this.ingredients = [];
-    this.steps = [];
-  }
+    constructor() {
+        super();
+        this.ingredients = [];
+    }
 
-  static form(fb: FormBuilder) {
-    const form = fb.group({
-      name: ['', Validators.required],
-      preparationTime: ['', Validators.required],
-      cookingTime: [''],
-      persons: ['', [Validators.required]],
-      ingredients: [[]],
-      steps: [[]],
-      bookReference: [null]
-    });
+    static form(fb: FormBuilder) {
+        const form = fb.group({
+            name: ['', Validators.required],
+            ingredients: [[]],
+            jacksonType: ['recipe', Validators.required]
+        });
 
-    return mergeFormGroups(form, AbstractData.form(fb));
-  }
+        return mergeFormGroups(form, AbstractData.form(fb));
+    }
 }

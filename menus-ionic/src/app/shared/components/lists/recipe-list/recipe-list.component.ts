@@ -78,6 +78,7 @@ export class RecipeListComponent implements OnInit {
     }
 
     onClickRecipe(recipe: Recipe) {
+        console.log(recipe);
         this.clickRecipe.emit(recipe);
     }
 }

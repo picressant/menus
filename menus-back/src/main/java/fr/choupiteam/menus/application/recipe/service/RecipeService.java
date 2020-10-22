@@ -2,6 +2,8 @@ package fr.choupiteam.menus.application.recipe.service;
 
 import fr.choupiteam.menus.application.pager.model.Pager;
 import fr.choupiteam.menus.application.recipe.model.Recipe;
+import fr.choupiteam.menus.application.recipe.model.RecipeListWrapper;
+import fr.choupiteam.menus.application.recipe.model.RecipePageWrapper;
 import fr.choupiteam.menus.application.week.service.WeekService;
 import fr.choupiteam.menus.infrastructure.repository.RecipePictureRepository;
 import fr.choupiteam.menus.infrastructure.repository.RecipeRepository;
@@ -51,7 +53,10 @@ public class RecipeService {
     }
 
     public Page<Recipe> findByPager(Pager pager) {
-        return this.recipeRepository.findAllByPager(pager, Recipe.class);
+        Page<Recipe> page = this.recipeRepository.findAllByPager(pager, Recipe.class);
+        RecipeListWrapper content = new RecipeListWrapper();
+        content.addAll(page.getContent());
+        return new RecipePageWrapper(content, page.getPageable(), page.getTotalElements());
     }
 
     public void storePicture(Recipe recipe, MultipartFile file) {

@@ -14,6 +14,7 @@ import { WeekService } from "@services/week.service";
 import { tap } from "rxjs/operators";
 import { removeFromArray } from "../../../../shared/helpers/remove-array-element.function";
 import { ConfirmationAlertService } from "@services/confirmation-alert.service";
+import { BookRecipe } from "@models/book-recipe.model";
 
 @Component({
     selector: 'app-recipe-item-page',
@@ -63,7 +64,7 @@ export class RecipeItemPageComponent extends AbstractItemPage<Recipe> implements
     ) {
 
         super(route, toaster, "Recette modifiée avec succès", "Recette ajoutée avec succès");
-        this.form = Recipe.form(this.fb);
+        this.form = BookRecipe.form(this.fb);
     }
 
     ngOnInit() {
@@ -116,7 +117,7 @@ export class RecipeItemPageComponent extends AbstractItemPage<Recipe> implements
         }
         else {
             this.save$.subscribe(
-                (recipe: Recipe) => {
+                (recipe: BookRecipe) => {
                     this.resetForm(recipe);
                     this.toaster.info(this.saveToast);
                 }

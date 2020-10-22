@@ -7,6 +7,7 @@ import { WeekSelectRecipeModalComponent } from "../../components/week-select-rec
 import { WeekSelectSideModalComponent } from "../../components/week-select-side-modal/week-select-side-modal.component";
 import { IngredientQuantity } from "@models/ingredient-quantity.model";
 import { Ingredient } from "@models/ingredient.model";
+import { BookRecipe } from "@models/book-recipe.model";
 
 @Component({
     selector: 'app-modify-meal-page',
@@ -68,7 +69,8 @@ export class ModifyMealPageComponent implements OnInit {
 
     buildIngredients() {
         if (this.meal && this.meal.recipe) {
-            const ratio = this.meal.persons / this.meal.recipe.persons;
+            const persons = this.meal.recipe.jacksonType === "bookRecipe" ? (this.meal.recipe as BookRecipe).persons : 1;
+            const ratio = this.meal.persons / persons;
             this.ingredientRecipeMap = new Map<number, number>();
             this.ingredientSideMap = new Map<number, number>();
 
