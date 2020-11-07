@@ -16,7 +16,6 @@ export class IngredientModalComponent {
 
     @Input()
     set ingredient(ingredient: Ingredient) {
-        console.log("reset with", ingredient);
         this.form.reset(ingredient);
     }
 

@@ -36,6 +36,15 @@
       margin-right: 5px;
       font-size: 15px;
 
+      &.free-recipe {
+        flex-direction: row;
+
+        .info-element {
+          align-self: flex-end;
+          padding-bottom: 5px;
+        }
+      }
+
       .info-element {
         display: flex;
         align-items: center;

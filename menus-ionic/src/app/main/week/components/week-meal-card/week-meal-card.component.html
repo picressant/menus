@@ -17,7 +17,7 @@
                 </span>
             </div>
         </div>
-        <div class="menu-info">
+        <div class="menu-info" [class.free-recipe]="isFreeRecipe">
             <div *ngIf="getRecipeAsBook()?.preparationTime" class="info-element">
                 <ion-icon name="time-outline"></ion-icon>
                 {{getRecipeAsBook()?.preparationTime}}
@@ -25,6 +25,9 @@
             <div *ngIf="getRecipeAsBook()?.cookingTime" class="info-element">
                 <ion-icon name="flame-outline"></ion-icon>
                 {{getRecipeAsBook()?.cookingTime}}
+            </div>
+            <div *ngIf="isFreeRecipe" class="info-element">
+                <ion-icon name="brush"></ion-icon>
             </div>
         </div>
     </ng-container>

@@ -11,6 +11,7 @@ export class Recipe extends AbstractData {
     constructor() {
         super();
         this.ingredients = [];
+        this.jacksonType = "recipe";
     }
 
     static form(fb: FormBuilder) {
@@ -21,5 +22,13 @@ export class Recipe extends AbstractData {
         });
 
         return mergeFormGroups(form, AbstractData.form(fb));
+    }
+
+    static isRecipeFree(recipe: Recipe): boolean {
+        return (recipe.jacksonType === "recipe");
+    }
+
+    static isRecipeBook(recipe: Recipe): boolean {
+        return (recipe.jacksonType === "bookRecipe");
     }
 }

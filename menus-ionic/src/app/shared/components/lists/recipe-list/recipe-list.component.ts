@@ -32,6 +32,7 @@ export class RecipeListComponent implements OnInit {
         private recipeRest: RecipeRestService
     ) {
         this.pager = new Pager(10);
+        this.pager.pushFilter("_class", "fr.choupiteam.menus.application.recipe.model.BookRecipe")
         this.pager.orders.push(new Order("name", Direction.ASC));
     }
 
@@ -78,7 +79,6 @@ export class RecipeListComponent implements OnInit {
     }
 
     onClickRecipe(recipe: Recipe) {
-        console.log(recipe);
         this.clickRecipe.emit(recipe);
     }
 }

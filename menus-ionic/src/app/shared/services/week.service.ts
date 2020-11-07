@@ -3,6 +3,8 @@ import { WeekRestService } from "./week-rest.service";
 import { BehaviorSubject } from "rxjs";
 import { WeekMeal } from "@models/week-meal.model";
 import { ToasterService } from "@services/toaster.service";
+import { RecipeRestService } from "@services/recipe-rest.service";
+import { Recipe } from "@models/recipe.model";
 
 const days = {
     mondayLunch: 0,
@@ -25,17 +27,39 @@ const days = {
     providedIn: 'root'
 })
 export class WeekService {
-    private _meals : WeekMeal[] = [];
+    private _meals: WeekMeal[] = [];
     public meals$: BehaviorSubject<WeekMeal[]> = new BehaviorSubject([]);
 
     constructor(
         private weekRestService: WeekRestService,
+        private recipeRestService: RecipeRestService,
         private toaster: ToasterService
     ) {
     }
 
     public updateMeal(meal: WeekMeal, i: number) {
         this._meals[i] = meal;
+        if (meal.recipe && Recipe.isRecipeFree(meal.recipe)) {
+            if (meal.recipe.id === null) {
+                this.recipeRestService.addRecipe(meal.recipe).subscribe(r => {
+                    this._meals[i].recipe = r;
+                    this.pushAndSave();
+                });
+            }
+            else {
+                this.recipeRestService.updateRecipe(meal.recipe).subscribe(r => {
+                    this._meals[i].recipe = r;
+                    this.pushAndSave();
+                });
+            }
+        }
+        else {
+            this.pushAndSave();
+        }
+
+    }
+
+    private pushAndSave() {
         this.meals$.next(this._meals);
         this.saveWeek();
     }

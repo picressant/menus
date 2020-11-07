@@ -2,12 +2,15 @@ import { Component, Input, OnInit } from '@angular/core';
 import { WeekMeal } from "@models/week-meal.model";
 import { ActivatedRoute, Router } from "@angular/router";
 import { WeekService } from "@services/week.service";
-import { ModalController } from "@ionic/angular";
+import { ActionSheetController, AlertController, ModalController } from "@ionic/angular";
 import { WeekSelectRecipeModalComponent } from "../../components/week-select-recipe-modal/week-select-recipe-modal.component";
 import { WeekSelectSideModalComponent } from "../../components/week-select-side-modal/week-select-side-modal.component";
 import { IngredientQuantity } from "@models/ingredient-quantity.model";
 import { Ingredient } from "@models/ingredient.model";
 import { BookRecipe } from "@models/book-recipe.model";
+import { Recipe } from "@models/recipe.model";
+import { IngredientModalSelectorComponent } from "@components/selectors/ingredient-modal-selector/ingredient-modal-selector.component";
+import { RecipeRestService } from "@services/recipe-rest.service";
 
 @Component({
     selector: 'app-modify-meal-page',
@@ -48,7 +51,10 @@ export class ModifyMealPageComponent implements OnInit {
         private route: ActivatedRoute,
         private modalController: ModalController,
         private router: Router,
-        private weekService: WeekService
+        private weekService: WeekService,
+        private actionSheetController: ActionSheetController,
+        private alertController: AlertController,
+        private recipeRestController: RecipeRestService
     ) {
     }
 
@@ -71,11 +77,12 @@ export class ModifyMealPageComponent implements OnInit {
         if (this.meal && this.meal.recipe) {
             const persons = this.meal.recipe.jacksonType === "bookRecipe" ? (this.meal.recipe as BookRecipe).persons : 1;
             const ratio = this.meal.persons / persons;
+            const recipeRatio = Recipe.isRecipeFree(this.meal.recipe) ? 1 : ratio;
             this.ingredientRecipeMap = new Map<number, number>();
             this.ingredientSideMap = new Map<number, number>();
 
             this.meal.recipe.ingredients.forEach(i => {
-                this.addIngredientToMap(i, this.ingredientRecipeMap, ratio);
+                this.addIngredientToMap(i, this.ingredientRecipeMap, recipeRatio);
             });
 
             this.meal.sideDishes.forEach(side => {
@@ -104,9 +111,10 @@ export class ModifyMealPageComponent implements OnInit {
     submit() {
         this.weekService.updateMeal(this.meal, this.mealIndex);
         this.isEditing = false;
+        this.buildIngredients();
     }
 
-    async selectMeal() {
+    async selectBookRecipe() {
         const modal = await this.modalController.create({
             component: WeekSelectRecipeModalComponent,
             componentProps: {
@@ -120,6 +128,10 @@ export class ModifyMealPageComponent implements OnInit {
         if (data.recipe) {
             if (!this.meal)
                 this.meal = new WeekMeal();
+
+            if (this.isMealFreeRecipe) {
+                this.recipeRestController.deleteRecipe(this.meal.recipe.id).subscribe();
+            }
             this.meal.recipe = data.recipe;
             this.buildIngredients();
         }
@@ -154,14 +166,103 @@ export class ModifyMealPageComponent implements OnInit {
         this.buildIngredients();
     }
 
+    get isMealFreeRecipe(): boolean {
+        return (this.meal && this.meal.recipe && Recipe.isRecipeFree(this.meal.recipe));
+    }
+
     clickOnMeal() {
         if (this.isEditing) {
-            this.selectMeal();
+            if (this.isMealFreeRecipe)
+                this.editFreeMeal();
+            else
+                this.selectBookRecipe();
         }
         else {
-            if (this.meal && this.meal.recipe) {
+            if (this.meal && this.meal.recipe && !this.isMealFreeRecipe) {
                 this.router.navigate(["main/recipe", this.meal.recipe.id]);
             }
         }
+    }
+
+    async longPressedMeal() {
+        if (this.isEditing) {
+            const actionSheet = await this.actionSheetController.create({
+                header: 'Recette',
+                buttons: [{
+                    text: 'Choisir une recette',
+                    handler: () => {
+                        this.selectBookRecipe();
+                    }
+                }, {
+                    text: 'Saisie libre',
+                    handler: () => {
+                        this.editFreeMeal();
+                    }
+                }, {
+                    text: 'Cancel',
+                    role: 'cancel'
+                }]
+            });
+            await actionSheet.present();
+        }
+    }
+
+    private async editFreeMeal() {
+        let name = (this.meal && this.meal.recipe) ? this.meal.recipe.name : "";
+        const alert = await this.alertController.create({
+            header: 'Nom de recette',
+            inputs: [
+                {
+                    name: 'recipe',
+                    type: 'text',
+                    value: name
+                }
+            ],
+            buttons: [
+                {
+                    text: 'Annuler',
+                    role: 'cancel',
+                    cssClass: 'secondary',
+                    handler: () => {
+                    }
+                }, {
+                    text: 'Ok',
+                    handler: (alertData) => {
+                        if (!this.meal)
+                            this.meal = new WeekMeal();
+
+                        if (this.meal.recipe && !Recipe.isRecipeFree(this.meal.recipe))
+                            this.meal.recipe = new Recipe();
+
+                        this.meal.recipe.name = alertData.recipe;
+                        this.buildIngredients();
+                    }
+                }]
+        });
+
+        await alert.present();
+    }
+
+    async addIngredientToRecipe() {
+        const modal = await this.modalController.create({
+            component: IngredientModalSelectorComponent,
+            componentProps: {
+                "excludeIds": this.meal.recipe.ingredients.map(iq => iq.ingredient.id)
+            }
+        });
+
+        await modal.present();
+
+        const { data } = await modal.onWillDismiss();
+        if (data.ingredient) {
+            let ingredientQuantity = new IngredientQuantity();
+            ingredientQuantity.ingredient = data.ingredient;
+            ingredientQuantity.quantity = 1;
+            this.meal.recipe.ingredients.push(ingredientQuantity);
+        }
+    }
+
+    deleteIngredientFromFree(ingredientQuantity: IngredientQuantity) {
+        this.meal.recipe.ingredients = this.meal.recipe.ingredients.filter(i => i !== ingredientQuantity);
     }
 }

@@ -12,6 +12,7 @@ export class BookRecipe extends Recipe {
     constructor() {
         super();
         this.steps = [];
+        this.jacksonType = "bookRecipe"
     }
 
     static form(fb: FormBuilder) {

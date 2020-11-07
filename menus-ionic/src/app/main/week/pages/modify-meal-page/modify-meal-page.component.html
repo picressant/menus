@@ -13,7 +13,7 @@
 </ion-header>
 <ion-content [fullscreen]="true">
     <ion-fab vertical="bottom" horizontal="end" slot="fixed"
-             (click)="isEditing = true" *ngIf="!isEditing && selectedTab === footerDetails.selectedTab">
+             (click)="isEditing = true" *ngIf="!isEditing">
         <ion-fab-button>
             <ion-icon name="create-outline"></ion-icon>
         </ion-fab-button>
@@ -27,7 +27,7 @@
             </ion-item>
             <h3 class="ion-margin">Plat</h3>
 
-            <app-week-meal-card [meal]="meal" [showSides]="false" (click)="clickOnMeal()"></app-week-meal-card>
+            <app-week-meal-card [meal]="meal" [showSides]="false" (click)="clickOnMeal()" appLongPress (longPressed)="longPressedMeal()"></app-week-meal-card>
 
             <h3 class="ion-margin with-icon">Accompagnements
                 <ion-icon name="add-outline" *ngIf="isEditing" (click)="addSide()"></ion-icon>
@@ -47,8 +47,10 @@
     </div>
 
     <div [hidden]="selectedTab !== footerIngredients.selectedTab">
-        <h3 class="ion-margin">Plat</h3>
-        <ion-list *ngIf="ingredients">
+        <h3 class="ion-margin with-icon">Plat
+            <ion-icon name="add-outline" *ngIf="isEditing && isMealFreeRecipe" (click)="addIngredientToRecipe()"></ion-icon>
+        </h3>
+        <ion-list *ngIf="ingredients && !(isMealFreeRecipe && this.isEditing)">
             <ion-item *ngFor="let ingredient of ingredientRecipeMap | keyvalue">
                 <ion-label slot="start">
                     {{ingredients[ingredient.key].name}}
@@ -58,6 +60,10 @@
                 </ion-label>
             </ion-item>
         </ion-list>
+        <app-ingredients-quantity-list
+                *ngIf="isMealFreeRecipe && isEditing"
+                [ingredientsQuantity]="this.meal.recipe.ingredients"
+                (delete)="deleteIngredientFromFree($event)"></app-ingredients-quantity-list>
 
         <h3 class="ion-margin">Accompagnements</h3>
         <ion-list *ngIf="ingredients">

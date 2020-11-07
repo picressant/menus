@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { WeekMeal } from "@models/week-meal.model";
 import { BookRecipe } from "@models/book-recipe.model";
+import { Recipe } from "@models/recipe.model";
 
 @Component({
     selector: 'app-week-meal-card',
@@ -23,9 +24,14 @@ export class WeekMealCardComponent implements OnInit {
     }
 
     getRecipeAsBook() {
-        if (this.meal && this.meal.recipe && this.meal.recipe.jacksonType === "bookRecipe")
+        if (this.meal && this.meal.recipe && !Recipe.isRecipeBook(this.meal.recipe))
             return this.meal.recipe as BookRecipe;
         return null;
+    }
+
+
+    get isFreeRecipe(): boolean {
+        return (this.meal && this.meal.recipe && Recipe.isRecipeFree(this.meal.recipe))
     }
 
 }
