@@ -76,7 +76,7 @@
             <ion-icon name="add-outline" *ngIf="!isReadonly" (click)="addStep()"></ion-icon>
         </h3>
         <ion-item *ngFor="let step of form.value.steps; let i = index; trackBy:trackByFn"
-                  [class.is-deleting]="isDeleting === i"
+                  [class.is-shaking]="isDeleting === i"
                   appLongPress
                   (longPressed)="removeStep(step)"
                   (longPressStarted)="refreshWiggleEffect(i)"

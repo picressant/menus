@@ -24,7 +24,7 @@
             <ion-reorder-group (ionItemReorder)="doReorder($event)" disabled="false">
                 <!-- Default reorder icon, end aligned items -->
                 <ion-item *ngFor="let weekMeal of meals; let i = index"
-                          [class.is-deleting]="isDeleting === i" class="week-meal-item">
+                          [class.is-shaking]="isDeleting === i" class="week-meal-item">
                     <div class="meal-wrapper" (click)="gotToMeal(i)"
                          appLongPress
                          (longPressed)="pressEnded(i)"

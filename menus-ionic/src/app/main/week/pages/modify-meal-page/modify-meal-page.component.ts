@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { WeekMeal } from "@models/week-meal.model";
 import { ActivatedRoute, Router } from "@angular/router";
 import { WeekService } from "@services/week.service";
@@ -45,6 +45,7 @@ export class ModifyMealPageComponent implements OnInit {
     ingredientRecipeMap: Map<number, number>;
     ingredientSideMap: Map<number, number>;
     ingredients: Ingredient[] = [];
+    isLongPressed: boolean = false;
 
 
     constructor(
@@ -54,7 +55,8 @@ export class ModifyMealPageComponent implements OnInit {
         private weekService: WeekService,
         private actionSheetController: ActionSheetController,
         private alertController: AlertController,
-        private recipeRestController: RecipeRestService
+        private recipeRestController: RecipeRestService,
+        private cdr: ChangeDetectorRef
     ) {
     }
 
@@ -264,5 +266,10 @@ export class ModifyMealPageComponent implements OnInit {
 
     deleteIngredientFromFree(ingredientQuantity: IngredientQuantity) {
         this.meal.recipe.ingredients = this.meal.recipe.ingredients.filter(i => i !== ingredientQuantity);
+    }
+
+    refreshShaking(shake: boolean) {
+        this.isLongPressed = shake;
+        this.cdr.detectChanges();
     }
 }

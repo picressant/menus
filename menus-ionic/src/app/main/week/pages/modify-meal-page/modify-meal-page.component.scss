@@ -1,0 +1,9 @@
+:host {
+
+  app-week-meal-card {
+    transition: all 0.2s ease-in-out;
+  }
+  .is-pressing {
+    transform: scale(0.8);
+  }
+}

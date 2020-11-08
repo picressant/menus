@@ -27,7 +27,16 @@
             </ion-item>
             <h3 class="ion-margin">Plat</h3>
 
-            <app-week-meal-card [meal]="meal" [showSides]="false" (click)="clickOnMeal()" appLongPress (longPressed)="longPressedMeal()"></app-week-meal-card>
+            <app-week-meal-card
+                    [meal]="meal"
+                    [showSides]="false"
+                    (click)="clickOnMeal()"
+                    appLongPress
+                    (longPressed)="longPressedMeal()"
+                    [class.is-pressing]="isLongPressed"
+                    (longPressStarted)="refreshShaking(true)"
+                    (longPressCanceled)="refreshShaking(false)"
+            ></app-week-meal-card>
 
             <h3 class="ion-margin with-icon">Accompagnements
                 <ion-icon name="add-outline" *ngIf="isEditing" (click)="addSide()"></ion-icon>

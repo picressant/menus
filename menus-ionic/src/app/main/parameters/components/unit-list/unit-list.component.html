@@ -9,7 +9,7 @@
 <ion-list>
   <ion-item *ngFor="let unit of units; let i = index"
             (click)="selectUnit(unit)"
-            [class.is-deleting]="deleteIndex === i"
+            [class.is-shaking]="deleteIndex === i"
             appLongPress
             (longPressStarted)="refreshWiggle(i)"
             (longPressCanceled)="refreshWiggle(-1)"
