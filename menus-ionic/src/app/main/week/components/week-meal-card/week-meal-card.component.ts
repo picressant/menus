@@ -24,7 +24,7 @@ export class WeekMealCardComponent implements OnInit {
     }
 
     getRecipeAsBook() {
-        if (this.meal && this.meal.recipe && !Recipe.isRecipeBook(this.meal.recipe))
+        if (this.meal && this.meal.recipe && Recipe.isRecipeBook(this.meal.recipe))
             return this.meal.recipe as BookRecipe;
         return null;
     }

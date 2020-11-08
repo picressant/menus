@@ -231,7 +231,7 @@ export class ModifyMealPageComponent implements OnInit {
                         if (!this.meal)
                             this.meal = new WeekMeal();
 
-                        if (this.meal.recipe && !Recipe.isRecipeFree(this.meal.recipe))
+                        if ((this.meal.recipe && !Recipe.isRecipeFree(this.meal.recipe)) || !this.meal.recipe)
                             this.meal.recipe = new Recipe();
 
                         this.meal.recipe.name = alertData.recipe;
