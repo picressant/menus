@@ -76,20 +76,22 @@ export class ModifyMealPageComponent implements OnInit {
     }
 
     buildIngredients() {
-        if (this.meal && this.meal.recipe) {
-            const persons = this.meal.recipe.jacksonType === "bookRecipe" ? (this.meal.recipe as BookRecipe).persons : 1;
-            const ratio = this.meal.persons / persons;
-            const recipeRatio = Recipe.isRecipeFree(this.meal.recipe) ? 1 : ratio;
+        if (this.meal) {
             this.ingredientRecipeMap = new Map<number, number>();
             this.ingredientSideMap = new Map<number, number>();
 
-            this.meal.recipe.ingredients.forEach(i => {
-                this.addIngredientToMap(i, this.ingredientRecipeMap, recipeRatio);
-            });
+            if (this.meal.recipe) {
+                const persons = Recipe.isRecipeBook(this.meal.recipe) ? (this.meal.recipe as BookRecipe).persons : 1;
+                const recipeRatio = Recipe.isRecipeFree(this.meal.recipe) ? 1 : this.meal.persons / persons;
+
+                this.meal.recipe.ingredients.forEach(i => {
+                    this.addIngredientToMap(i, this.ingredientRecipeMap, recipeRatio);
+                });
+            }
 
             this.meal.sideDishes.forEach(side => {
                 side.ingredients.forEach(i => {
-                    this.addIngredientToMap(i, this.ingredientSideMap, ratio);
+                    this.addIngredientToMap(i, this.ingredientSideMap, this.meal.persons);
                 });
             });
         }

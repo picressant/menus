@@ -1,7 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { WeekMeal } from "../../../../shared/models/week-meal.model";
-import { Ingredient } from "../../../../shared/models/ingredient.model";
-import { IngredientQuantity } from "../../../../shared/models/ingredient-quantity.model";
+import { WeekMeal } from "@models/week-meal.model";
+import { Ingredient } from "@models/ingredient.model";
+import { IngredientQuantity } from "@models/ingredient-quantity.model";
+import { BookRecipe } from "@models/book-recipe.model";
+import { Recipe } from "@models/recipe.model";
 
 @Component({
     selector: 'app-week-grocery-list',
@@ -26,15 +28,19 @@ export class WeekGroceryListComponent implements OnInit {
 
             meals.forEach(meal => {
                 if (meal !== null) {
+
                     if (meal.recipe) {
+                        const recipePersons = Recipe.isRecipeBook(meal.recipe) ? (meal.recipe as BookRecipe).persons : 1;
+                        const recipeRatio = Recipe.isRecipeFree(meal.recipe) ? 1 : meal.persons / recipePersons;
+
                         meal.recipe.ingredients.forEach(i => {
-                            this.addIngredientToMap(i);
+                            this.addIngredientToMap(i, recipeRatio);
                         });
                     }
 
                     meal.sideDishes.forEach(side => {
                         side.ingredients.forEach(i => {
-                            this.addIngredientToMap(i);
+                            this.addIngredientToMap(i, meal.persons);
                         });
                     });
                 }
@@ -42,7 +48,7 @@ export class WeekGroceryListComponent implements OnInit {
         }
     }
 
-    private addIngredientToMap(ingredientQ: IngredientQuantity) {
+    private addIngredientToMap(ingredientQ: IngredientQuantity, ratio: number) {
         if (this.ingredients.findIndex(i => i.id === ingredientQ.ingredient.id) < 0) {
             this.ingredients.push(ingredientQ.ingredient);
         }
@@ -53,7 +59,7 @@ export class WeekGroceryListComponent implements OnInit {
             this.ingredientMap.set(index, 0);
         }
 
-        this.ingredientMap.set(index, this.ingredientMap.get(index) + ingredientQ.quantity);
+        this.ingredientMap.set(index, this.ingredientMap.get(index) + (ingredientQ.quantity * ratio));
     }
 
 
