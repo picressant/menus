@@ -14,11 +14,11 @@ export class Recipe extends AbstractData {
         this.jacksonType = "recipe";
     }
 
-    static form(fb: FormBuilder) {
+    static form(fb: FormBuilder, jacksonType: string = "recipe") {
         const form = fb.group({
             name: ['', Validators.required],
             ingredients: [[]],
-            jacksonType: ['recipe', Validators.required]
+            jacksonType: [jacksonType, Validators.required]
         });
 
         return mergeFormGroups(form, AbstractData.form(fb));

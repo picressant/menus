@@ -269,7 +269,9 @@ export class ModifyMealPageComponent implements OnInit {
     }
 
     refreshShaking(shake: boolean) {
-        this.isLongPressed = shake;
-        this.cdr.detectChanges();
+        if (this.isEditing) {
+            this.isLongPressed = shake;
+            this.cdr.detectChanges();
+        }
     }
 }

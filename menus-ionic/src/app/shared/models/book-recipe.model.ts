@@ -21,9 +21,9 @@ export class BookRecipe extends Recipe {
             cookingTime: [''],
             persons: ['', [Validators.required]],
             steps: [[]],
-            bookReference: [null]
+            bookReference: [null],
         });
 
-        return mergeFormGroups(form, Recipe.form(fb));
+        return mergeFormGroups(form, Recipe.form(fb, "bookRecipe"));
     }
 }

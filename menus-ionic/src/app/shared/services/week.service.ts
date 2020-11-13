@@ -65,6 +65,9 @@ export class WeekService {
     }
 
     public deleteMeal(i: number) {
+        if (this._meals[i].recipe && Recipe.isRecipeFree(this._meals[i].recipe))
+            this.recipeRestService.deleteRecipe(this._meals[i].recipe.id).subscribe();
+
         this._meals[i].recipe = null;
         this._meals[i].sideDishes = [];
         this._meals[i].persons = 2;
