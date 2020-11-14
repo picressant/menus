@@ -1,5 +1,5 @@
 <ul *ngIf="ingredients">
-  <li *ngFor="let ingredient of ingredientMap | keyvalue">
+  <li *ngFor="let ingredient of ingredientMap | keyvalue: ingredientMapOrder">
     {{ingredients[ingredient.key].name}} --> {{ingredient.value}} {{ingredients[ingredient.key].unit.symbol}}
   </li>
 </ul>

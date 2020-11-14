@@ -87,6 +87,8 @@ export class ModifyMealPageComponent implements OnInit {
                 this.meal.recipe.ingredients.forEach(i => {
                     this.addIngredientToMap(i, this.ingredientRecipeMap, recipeRatio);
                 });
+
+
             }
 
             this.meal.sideDishes.forEach(side => {
@@ -96,6 +98,13 @@ export class ModifyMealPageComponent implements OnInit {
             });
         }
     }
+
+    ingredientMapOrder = (a, b) => {
+        let ingredientA = this.ingredients[a.key];
+        let ingredientB = this.ingredients[b.key];
+
+        return ingredientA.name.toLocaleUpperCase().localeCompare(ingredientB.name.toLocaleUpperCase());
+    };
 
     private addIngredientToMap(ingredientQ: IngredientQuantity, mapI: Map<number, number>, ratio: number) {
         if (this.ingredients.findIndex(i => i.id === ingredientQ.ingredient.id) < 0) {

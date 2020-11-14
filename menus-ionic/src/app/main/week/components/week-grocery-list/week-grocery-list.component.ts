@@ -62,5 +62,12 @@ export class WeekGroceryListComponent implements OnInit {
         this.ingredientMap.set(index, this.ingredientMap.get(index) + (ingredientQ.quantity * ratio));
     }
 
+    ingredientMapOrder = (a, b) => {
+        let ingredientA = this.ingredients[a.key];
+        let ingredientB = this.ingredients[b.key];
+
+        return ingredientA.name.toLocaleUpperCase().localeCompare(ingredientB.name.toLocaleUpperCase());
+    };
+
 
 }

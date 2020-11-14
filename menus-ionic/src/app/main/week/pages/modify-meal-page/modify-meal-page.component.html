@@ -60,7 +60,7 @@
             <ion-icon name="add-outline" *ngIf="isEditing && isMealFreeRecipe" (click)="addIngredientToRecipe()"></ion-icon>
         </h3>
         <ion-list *ngIf="ingredients && !(isMealFreeRecipe && this.isEditing)">
-            <ion-item *ngFor="let ingredient of ingredientRecipeMap | keyvalue">
+            <ion-item *ngFor="let ingredient of ingredientRecipeMap | keyvalue: ingredientMapOrder">
                 <ion-label slot="start">
                     {{ingredients[ingredient.key].name}}
                 </ion-label>
@@ -76,7 +76,7 @@
 
         <h3 class="ion-margin">Accompagnements</h3>
         <ion-list *ngIf="ingredients">
-            <ion-item *ngFor="let ingredient of ingredientSideMap | keyvalue">
+            <ion-item *ngFor="let ingredient of ingredientSideMap | keyvalue: ingredientMapOrder">
                 <ion-label slot="start">
                     {{ingredients[ingredient.key].name}}
                 </ion-label>
