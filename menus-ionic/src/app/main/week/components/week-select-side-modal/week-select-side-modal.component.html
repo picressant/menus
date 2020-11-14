@@ -8,7 +8,5 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-    <div id="container">
-        <app-side-list (selected)="closeModal($event)" [excludeIds]="sidesId" [loadOnInit]="true"></app-side-list>
-    </div>
+    <app-side-list (selected)="closeModal($event)" [excludeIds]="sidesId" [loadOnInit]="true"></app-side-list>
 </ion-content>

@@ -11,14 +11,12 @@
         <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
 
-    <div id="container">
         <div [hidden]="selectedTab !== footerIngredient.selectedTab">
             <app-ingredient-list (ingredientSelected)="onClickIngredient($event)" [canDelete]="true"></app-ingredient-list>
         </div>
         <div [hidden]="selectedTab !== footerUnit.selectedTab">
             <app-unit-list [loadOnInit]="true" (selected)="showUnit($event)"></app-unit-list>
         </div>
-    </div>
 </ion-content>
 
 <app-footer-tab

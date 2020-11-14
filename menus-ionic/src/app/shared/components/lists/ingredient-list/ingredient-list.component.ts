@@ -34,6 +34,9 @@ export class IngredientListComponent implements OnInit, AfterViewChecked {
     searchBar: IonSearchbar;
 
     @Input()
+    focusSearchBar = false;
+
+    @Input()
     excludeIds: string[];
 
     @Output()
@@ -51,6 +54,7 @@ export class IngredientListComponent implements OnInit, AfterViewChecked {
     ) {
         this.pagerIngredients = new Pager(20);
         this.pagerIngredients.orders.push(new Order("name", Direction.ASC));
+        this.pagerIngredients.pushFilter("forRecipe", true);
     }
 
     ngOnInit() {
@@ -58,7 +62,8 @@ export class IngredientListComponent implements OnInit, AfterViewChecked {
     }
 
     ngAfterViewChecked() {
-        this.searchBar.setFocus()
+        if (this.focusSearchBar)
+            this.searchBar.setFocus()
     }
 
 

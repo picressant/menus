@@ -7,15 +7,15 @@
 
 
 <ion-list>
-  <ion-item *ngFor="let user of users; let i = index"
-            (click)="selectUser(user)"
-            [class.is-shaking]="deleteIndex === i"
-            appLongPress
-            (longPressStarted)="refreshWiggle(i)"
-            (longPressCanceled)="refreshWiggle(-1)"
-            (longPressed)="deleteUser(user)">
-    <ion-label slot="start">{{user.firstname}} {{user.lastname}}</ion-label>
-  </ion-item>
+  <ion-item-sliding *ngFor="let user of users; let i = index">
+    <ion-item (click)="selectUser(user)">
+      <ion-label slot="start">{{user.firstname}} {{user.lastname}}</ion-label>
+    </ion-item>
+
+    <ion-item-options side="end">
+      <ion-item-option color="danger" (click)="deleteUser(user)">Supprimer</ion-item-option>
+    </ion-item-options>
+  </ion-item-sliding>
 </ion-list>
 
 <ion-infinite-scroll threshold="100px" (ionInfinite)="scrollUsers($event)">

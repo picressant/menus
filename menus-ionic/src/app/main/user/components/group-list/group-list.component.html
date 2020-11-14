@@ -7,15 +7,15 @@
 
 
 <ion-list>
-  <ion-item *ngFor="let group of groups; let i = index"
-            (click)="selectGroup(group)"
-            [class.is-shaking]="deleteIndex === i"
-            appLongPress
-            (longPressStarted)="refreshWiggle(i)"
-            (longPressCanceled)="refreshWiggle(-1)"
-            (longPressed)="deleteGroup(group)">
-    <ion-label slot="start">{{group.name}}</ion-label>
-  </ion-item>
+  <ion-item-sliding  *ngFor="let group of groups; let i = index">
+    <ion-item (click)="selectGroup(group)">
+      <ion-label slot="start">{{group.name}}</ion-label>
+    </ion-item>
+
+    <ion-item-options side="end">
+      <ion-item-option color="danger" (click)="deleteGroup(group)">Supprimer</ion-item-option>
+    </ion-item-options>
+  </ion-item-sliding>
 </ion-list>
 
 <ion-infinite-scroll threshold="100px" (ionInfinite)="scrollGroups($event)">

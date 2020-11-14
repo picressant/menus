@@ -8,28 +8,22 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-    <div id="container">
+    <div [hidden]="selectedTab !== footerDay.selectedTab">
+        <h2 class="ion-margin lunch-margin">Midi</h2>
+        <app-week-meal-card [meal]="meals[todayLunchIndex]" (click)="goToRecipe(todayLunchIndex)"
+                            [showSides]="true"></app-week-meal-card>
 
-        <div [hidden]="selectedTab !== footerDay.selectedTab">
-            <h2 class="ion-margin lunch-margin">Midi</h2>
-            <app-week-meal-card [meal]="meals[todayLunchIndex]" (click)="goToRecipe(todayLunchIndex)"
-                                [showSides]="true"></app-week-meal-card>
+        <h2 class="ion-margin dinner-margin">Soir</h2>
+        <app-week-meal-card [meal]="meals[todayDinnerIndex]" (click)="goToRecipe(todayDinnerIndex)"
+                            [showSides]="true"></app-week-meal-card>
+    </div>
 
-            <h2 class="ion-margin dinner-margin">Soir</h2>
-            <app-week-meal-card [meal]="meals[todayDinnerIndex]" (click)="goToRecipe(todayDinnerIndex)"
-                                [showSides]="true"></app-week-meal-card>
-        </div>
-
-        <div [hidden]="selectedTab !== footerWeek.selectedTab">
-            <ion-reorder-group (ionItemReorder)="doReorder($event)" disabled="false">
-                <!-- Default reorder icon, end aligned items -->
-                <ion-item *ngFor="let weekMeal of meals; let i = index"
-                          [class.is-shaking]="isDeleting === i" class="week-meal-item">
-                    <div class="meal-wrapper" (click)="gotToMeal(i)"
-                         appLongPress
-                         (longPressed)="pressEnded(i)"
-                         (longPressStarted)="refreshWiggleEffect(i)"
-                         (longPressCanceled)="refreshWiggleEffect(undefined)">
+    <div [hidden]="selectedTab !== footerWeek.selectedTab">
+        <ion-reorder-group (ionItemReorder)="doReorder($event)" disabled="false">
+            <!-- Default reorder icon, end aligned items -->
+            <ion-item-sliding *ngFor="let weekMeal of meals; let i = index">
+                <ion-item class="week-meal-item">
+                    <div class="meal-wrapper" (click)="gotToMeal(i)">
                         <div class="meal-day">{{getDay(i)}}</div>
                         <div class="meal-detail">
                             <div class="meal-recipe">
@@ -45,11 +39,14 @@
                     </div>
                     <ion-reorder slot="end"></ion-reorder>
                 </ion-item>
-            </ion-reorder-group>
-        </div>
-        <div [hidden]="selectedTab !== footerGrocery.selectedTab">
-            <app-week-grocery-list [meals]="meals"></app-week-grocery-list>
-        </div>
+                <ion-item-options side="end">
+                    <ion-item-option color="danger" (click)="deleteWeekMeal(i)">Supprimer</ion-item-option>
+                </ion-item-options>
+            </ion-item-sliding>
+        </ion-reorder-group>
+    </div>
+    <div [hidden]="selectedTab !== footerGrocery.selectedTab">
+        <app-week-grocery-list [meals]="meals"></app-week-grocery-list>
     </div>
 </ion-content>
 

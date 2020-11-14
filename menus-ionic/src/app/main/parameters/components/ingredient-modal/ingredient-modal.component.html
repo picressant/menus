@@ -1,28 +1,27 @@
 <ion-header translucent>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="/main/parameters" (click)="forceCloseModal()"></ion-back-button>
-    </ion-buttons>
-    <ion-title>Ingrédient</ion-title>
-    <ion-buttons slot="end">
-      <ion-button (click)="closeModal()" [disabled]="form.invalid" [color]="form.invalid ? 'danger' : ''">Sauver</ion-button>
-    </ion-buttons>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="/main/parameters" (click)="forceCloseModal()"></ion-back-button>
+        </ion-buttons>
+        <ion-title>Ingrédient</ion-title>
+        <ion-buttons slot="end">
+            <ion-button (click)="closeModal()" [disabled]="form.invalid" [color]="form.invalid ? 'danger' : ''">Sauver
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" [formGroup]="form">
 
-  <div id="container" [formGroup]="form">
     <ion-item>
-      <ion-label position="floating">Nom</ion-label>
-      <ion-input formControlName="name"></ion-input>
+        <ion-label position="floating">Nom</ion-label>
+        <ion-input formControlName="name"></ion-input>
     </ion-item>
 
     <ion-item (click)="onChooseUnit()">
-      <ion-label position="floating">Unité</ion-label>
-      <ion-input [value]="form.controls.unit.value ? form.controls.unit.value?.name + ' (' + form.controls.unit.value?.symbol + ')' : ''"></ion-input>
+        <ion-label position="floating">Unité</ion-label>
+        <ion-input
+                [value]="form.controls.unit.value ? form.controls.unit.value?.name + ' (' + form.controls.unit.value?.symbol + ')' : ''"></ion-input>
     </ion-item>
-
-  </div>
 </ion-content>
 

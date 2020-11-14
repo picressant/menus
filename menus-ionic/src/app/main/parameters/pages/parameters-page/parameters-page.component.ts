@@ -80,7 +80,10 @@ export class ParametersPageComponent implements OnInit {
     }
 
     doRefresh(event: any) {
-        this.unitListComponent.refresh(event);
+        if (this.selectedTab === this.footerUnit.selectedTab)
+            this.unitListComponent.refresh(event);
+        else
+            this.ingredientListComponent.refresh(event);
     }
 
     async showUnit(unit: Unit) {

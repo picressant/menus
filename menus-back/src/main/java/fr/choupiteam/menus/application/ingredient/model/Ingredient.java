@@ -18,6 +18,8 @@ public class Ingredient {
     @DBRef
     private Unit unit;
 
+    private boolean forRecipe;
+
     public String getId() {
         return id;
     }
@@ -40,5 +42,13 @@ public class Ingredient {
 
     public void setUnit(Unit unit) {
         this.unit = unit;
+    }
+
+    public boolean isForRecipe() {
+        return forRecipe;
+    }
+
+    public void setForRecipe(boolean forRecipe) {
+        this.forRecipe = forRecipe;
     }
 }

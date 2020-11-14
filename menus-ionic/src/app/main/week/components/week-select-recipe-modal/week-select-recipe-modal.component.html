@@ -1,14 +1,12 @@
 <ion-header translucent>
-  <ion-toolbar>
-    <ion-title>Choix de la recette</ion-title>
-    <ion-buttons slot="end">
-      <ion-button (click)="closeModal(null)">Close</ion-button>
-    </ion-buttons>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-title>Choix de la recette</ion-title>
+        <ion-buttons slot="end">
+            <ion-button (click)="closeModal(null)">Close</ion-button>
+        </ion-buttons>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <div id="container">
     <app-recipe-list (clickRecipe)="closeModal($event)" [loadOnInit]="true"></app-recipe-list>
-  </div>
 </ion-content>

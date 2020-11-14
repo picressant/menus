@@ -11,13 +11,11 @@
         <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
 
-    <div id="container">
-        <div [hidden]="selectedTab !== footerUser.selectedTab">
-            <app-user-list (selected)="onClickUser($event)"></app-user-list>
-        </div>
-        <div [hidden]="selectedTab !== footerGroup.selectedTab">
-            <app-group-list (selected)="onClickGroup($event)" [deleteAuthorized]="true"></app-group-list>
-        </div>
+    <div [hidden]="selectedTab !== footerUser.selectedTab">
+        <app-user-list (selected)="onClickUser($event)"></app-user-list>
+    </div>
+    <div [hidden]="selectedTab !== footerGroup.selectedTab">
+        <app-group-list (selected)="onClickGroup($event)" [deleteAuthorized]="true"></app-group-list>
     </div>
 </ion-content>
 
