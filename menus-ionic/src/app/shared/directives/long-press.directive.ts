@@ -29,6 +29,7 @@ export class LongPressDirective implements OnInit, OnDestroy {
             onStart: (gestureEv: GestureDetail) => {
                 //gestureEv.event.preventDefault();
                 this.timerStartId = setTimeout(() => {
+                    window.navigator.vibrate(200);
                     this.longPressStarted.emit();
                     this.timerId = setTimeout(() => {
                         this.longPressed.emit(gestureEv.event);

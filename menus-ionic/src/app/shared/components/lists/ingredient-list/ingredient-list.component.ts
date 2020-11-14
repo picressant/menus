@@ -1,8 +1,17 @@
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import {
+    AfterViewChecked,
+    ChangeDetectorRef,
+    Component,
+    EventEmitter,
+    Input,
+    OnInit,
+    Output,
+    ViewChild
+} from '@angular/core';
 import { Ingredient } from "@models/ingredient.model";
 import { Direction, Order, Pager } from "@models/pager/pager.model";
 import { Pageable } from "@models/pager/pageable.model";
-import { IonInfiniteScroll } from "@ionic/angular";
+import { IonInfiniteScroll, IonSearchbar } from "@ionic/angular";
 import { IngredientRestService } from "@services/ingredient-rest.service";
 import { removeFromArray } from "../../../helpers/remove-array-element.function";
 import { ConfirmationAlertService } from "@services/confirmation-alert.service";
@@ -12,7 +21,7 @@ import { ConfirmationAlertService } from "@services/confirmation-alert.service";
     templateUrl: './ingredient-list.component.html',
     styleUrls: ['./ingredient-list.component.scss'],
 })
-export class IngredientListComponent implements OnInit {
+export class IngredientListComponent implements OnInit, AfterViewChecked {
 
     ingredients: Ingredient[] = [];
     private pagerIngredients: Pager;
@@ -20,6 +29,9 @@ export class IngredientListComponent implements OnInit {
 
     @ViewChild(IonInfiniteScroll)
     infiniteScroll: IonInfiniteScroll;
+
+    @ViewChild(IonSearchbar)
+    searchBar: IonSearchbar;
 
     @Input()
     excludeIds: string[];
@@ -43,6 +55,10 @@ export class IngredientListComponent implements OnInit {
 
     ngOnInit() {
         this.loadIngredients(null);
+    }
+
+    ngAfterViewChecked() {
+        this.searchBar.setFocus()
     }
 
 

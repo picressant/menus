@@ -60,5 +60,4 @@ export class IngredientsQuantityListComponent implements OnInit {
   private sortList() {
     this._ingredientsQuantity = this._ingredientsQuantity.sort((a, b) => a.ingredient.name.localeCompare(b.ingredient.name));
   }
-
 }
