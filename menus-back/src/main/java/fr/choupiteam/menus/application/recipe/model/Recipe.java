@@ -8,6 +8,7 @@ import fr.choupiteam.menus.infrastructure.annotation.Searchable;
 import fr.choupiteam.menus.infrastructure.rest.jackson.IngredientMapDeserializer;
 import fr.choupiteam.menus.infrastructure.rest.jackson.IngredientMapSerializer;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.HashMap;
@@ -30,6 +31,7 @@ public class Recipe {
      * Recipe name
      */
     @Searchable
+    @Indexed(unique = true)
     private String name;
 
     /**

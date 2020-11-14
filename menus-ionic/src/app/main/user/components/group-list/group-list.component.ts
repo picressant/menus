@@ -43,8 +43,7 @@ export class GroupListComponent implements OnInit {
 
     constructor(
         private groupRest: GroupRestService,
-        private confirmationService: ConfirmationAlertService,
-        private cdr: ChangeDetectorRef
+        private confirmationService: ConfirmationAlertService
     ) {
         this.pager = new Pager(20);
         this.pager.orders.push(new Order("name", Direction.ASC));
@@ -106,13 +105,6 @@ export class GroupListComponent implements OnInit {
                     removeFromArray(this.groups, group)
                 });
             });
-        }
-    }
-
-    refreshWiggle(i: number) {
-        if (this.deleteAuthorized) {
-            this.deleteIndex = i;
-            this.cdr.detectChanges();
         }
     }
 }

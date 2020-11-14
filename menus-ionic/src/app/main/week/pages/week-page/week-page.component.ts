@@ -43,7 +43,6 @@ export class WeekPageComponent {
         private router: Router,
         private route: ActivatedRoute,
         private alertController: AlertController,
-        private cdr: ChangeDetectorRef,
         private confirmationService: ConfirmationAlertService
     ) {
         this.meals = this.weekService.meals$.getValue();
@@ -154,11 +153,6 @@ export class WeekPageComponent {
     gotToMeal(i: number) {
         this.isDeleting = undefined;
         this.router.navigate(["main/week", i]);
-    }
-
-    refreshWiggleEffect(i: number) {
-        this.isDeleting = i;
-        this.cdr.detectChanges();
     }
 
     async pressEnded(i: number) {

@@ -1,13 +1,4 @@
-import {
-    AfterViewChecked,
-    ChangeDetectorRef,
-    Component,
-    EventEmitter,
-    Input,
-    OnInit,
-    Output,
-    ViewChild
-} from '@angular/core';
+import { AfterViewChecked, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { Ingredient } from "@models/ingredient.model";
 import { Direction, Order, Pager } from "@models/pager/pager.model";
 import { Pageable } from "@models/pager/pageable.model";
@@ -49,8 +40,7 @@ export class IngredientListComponent implements OnInit, AfterViewChecked {
 
     constructor(
         private ingredientRest: IngredientRestService,
-        private confirmationService: ConfirmationAlertService,
-        private cdr: ChangeDetectorRef
+        private confirmationService: ConfirmationAlertService
     ) {
         this.pagerIngredients = new Pager(20);
         this.pagerIngredients.orders.push(new Order("name", Direction.ASC));
@@ -118,13 +108,6 @@ export class IngredientListComponent implements OnInit, AfterViewChecked {
                     removeFromArray(this.ingredients, ingredient)
                 });
             });
-        }
-    }
-
-    refreshWiggle(i: number) {
-        if (this.canDelete) {
-            this.deleteIndex = i;
-            this.cdr.detectChanges();
         }
     }
 }

@@ -23,5 +23,12 @@
         <ion-input
                 [value]="form.controls.unit.value ? form.controls.unit.value?.name + ' (' + form.controls.unit.value?.symbol + ')' : ''"></ion-input>
     </ion-item>
+
+    <ion-item>
+        <ion-label position="floating">Rayon</ion-label>
+        <ion-select placeholder="Rayon" formControlName="shopSection" [compareWith]="compareWith" interface="popover">
+            <ion-select-option *ngFor="let section of shopSections" [value]="section">{{section.name}}</ion-select-option>
+        </ion-select>
+    </ion-item>
 </ion-content>
 

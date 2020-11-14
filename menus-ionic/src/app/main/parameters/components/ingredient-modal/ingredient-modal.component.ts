@@ -1,16 +1,17 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { ModalController } from "@ionic/angular";
 import { Ingredient } from "@models/ingredient.model";
-import { UnitModalComponent } from "../unit-modal/unit-modal.component";
 import { SelectUnitModalComponent } from "../select-unit-modal/select-unit-modal.component";
+import { ShopSectionRestService } from "@services/shop-section-rest.service";
+import { ShopSection } from "@models/shop-section.model";
 
 @Component({
     selector: 'app-ingredient-modal',
     templateUrl: './ingredient-modal.component.html',
     styleUrls: ['./ingredient-modal.component.scss'],
 })
-export class IngredientModalComponent {
+export class IngredientModalComponent implements OnInit {
 
     form: FormGroup
 
@@ -19,10 +20,17 @@ export class IngredientModalComponent {
         this.form.reset(ingredient);
     }
 
+    shopSections: ShopSection[] = [];
+
     constructor(private formBuilder: FormBuilder,
                 private modalController: ModalController,
-                private innerModalController: ModalController) {
+                private innerModalController: ModalController,
+                private shopSectionRest: ShopSectionRestService) {
         this.form = Ingredient.form(this.formBuilder);
+    }
+
+    ngOnInit() {
+        this.shopSectionRest.getAllShopSections().subscribe(sections => this.shopSections = sections);
     }
 
     async onChooseUnit() {
@@ -46,4 +54,8 @@ export class IngredientModalComponent {
         this.modalController.dismiss();
     }
 
+    compareWithFn = (o1, o2) => {
+        return o1 && o2 ? o1.id === o2.id : o1 === o2;
+    };
+    compareWith = this.compareWithFn;
 }

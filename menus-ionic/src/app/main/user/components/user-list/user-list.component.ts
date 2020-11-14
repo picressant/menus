@@ -39,8 +39,7 @@ export class UserListComponent implements OnInit {
 
     constructor(
         private userRest: UserRestService,
-        private confirmationService: ConfirmationAlertService,
-        private cdr: ChangeDetectorRef
+        private confirmationService: ConfirmationAlertService
     ) {
         this.pager = new Pager(20);
         this.pager.orders.push(new Order("name", Direction.ASC));
@@ -101,10 +100,5 @@ export class UserListComponent implements OnInit {
                 removeFromArray(this.users, user)
             });
         });
-    }
-
-    refreshWiggle(i: number) {
-        this.deleteIndex = i;
-        this.cdr.detectChanges();
     }
 }

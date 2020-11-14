@@ -40,8 +40,7 @@ export class UnitListComponent implements OnInit {
 
     constructor(
         private unitRest: IngredientRestService,
-        private confirmationService: ConfirmationAlertService,
-        private cdr: ChangeDetectorRef
+        private confirmationService: ConfirmationAlertService
     ) {
         this.pager = new Pager(20);
         this.pager.orders.push(new Order("name", Direction.ASC));
@@ -102,10 +101,5 @@ export class UnitListComponent implements OnInit {
                 removeFromArray(this.units, unit)
             });
         });
-    }
-
-    refreshWiggle(i: number) {
-        this.deleteIndex = i;
-        this.cdr.detectChanges();
     }
 }
