@@ -14,7 +14,16 @@ export class IngredientsQuantityListComponent implements OnInit {
   isReadonly: boolean;
 
   @Input()
-  ingredientsQuantity: IngredientQuantity[];
+  set ingredientsQuantity(list: IngredientQuantity[]) {
+    this._ingredientsQuantity = list;
+    this.sortList();
+  }
+
+  get ingredientsQuantity(): IngredientQuantity[] {
+    return this._ingredientsQuantity;
+  }
+
+  private _ingredientsQuantity: IngredientQuantity[];
 
   @Output()
   delete = new EventEmitter<IngredientQuantity>();
@@ -46,6 +55,10 @@ export class IngredientsQuantityListComponent implements OnInit {
 
   deleteIngredient(ingredientQuantity: IngredientQuantity) {
     this.delete.emit(ingredientQuantity);
+  }
+
+  private sortList() {
+    this._ingredientsQuantity = this._ingredientsQuantity.sort((a, b) => a.ingredient.name.localeCompare(b.ingredient.name));
   }
 
 }

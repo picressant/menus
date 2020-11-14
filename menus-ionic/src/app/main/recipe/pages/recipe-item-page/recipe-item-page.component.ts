@@ -177,6 +177,8 @@ export class RecipeItemPageComponent extends AbstractItemPage<Recipe> implements
                 ingredientQuantity.ingredient = data.ingredient;
                 ingredientQuantity.quantity = 1;
                 this.form.controls.ingredients.value.push(ingredientQuantity);
+                this.form.controls.ingredients.setValue(this.form.controls.ingredients.value.sort((a, b) => a.ingredient.name.localeCompare(b.ingredient.name)));
+
             }
         }
     }
