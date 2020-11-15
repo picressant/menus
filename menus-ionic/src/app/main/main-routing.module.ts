@@ -8,11 +8,12 @@ import { ModifyMealPageComponent } from "./week/pages/modify-meal-page/modify-me
 import { SideListPageComponent } from "./sides/pages/side-list-page/side-list-page.component";
 import { SideItemPageComponent } from "./sides/pages/side-item-page/side-item-page.component";
 import { ParametersPageComponent } from "./parameters/pages/parameters-page/parameters-page.component";
-import { AdminGuard } from "../shared/guards/admin.guard";
+import { PrivilegeGuard } from "../shared/guards/privilege-guard.service";
 import { UserItemPageComponent } from "./user/pages/user-item-page/user-item-page.component";
-import { AdminOrSelfGuard } from "../shared/guards/admin-or-self-guard.service";
+import { PrivilegeOrSelfGuard } from "../shared/guards/admin-or-self-guard.service";
 import { UserListPageComponent } from "./user/pages/user-list-page/user-list-page.component";
 import { GroupItemPageComponent } from "./user/pages/group-item-page/group-item-page.component";
+import { Privilege } from "@models/privilege.enum";
 
 const routes: Routes = [
     { path: 'recipe', component: RecipeListPageComponent },
@@ -23,12 +24,12 @@ const routes: Routes = [
     { path: 'side', component: SideListPageComponent },
     { path: 'side/add', component: SideItemPageComponent },
     { path: 'side/:id', component: SideItemPageComponent },
-    { path: 'parameters', component: ParametersPageComponent, canActivate: [AdminGuard] },
-    { path: 'user', component: UserListPageComponent, canActivate: [AdminGuard] },
-    { path: 'user/add', component: UserItemPageComponent, canActivate: [AdminGuard] },
-    { path: 'user/:id', component: UserItemPageComponent, canActivate: [AdminOrSelfGuard] },
-    { path: 'user/group/add', component: GroupItemPageComponent, canActivate: [AdminGuard] },
-    { path: 'user/group/:id', component: GroupItemPageComponent, canActivate: [AdminGuard] },
+    { path: 'parameters', component: ParametersPageComponent, canActivate: [PrivilegeGuard], data: {privilege: Privilege.MANAGE_INGREDIENTS} },
+    { path: 'user', component: UserListPageComponent, canActivate: [PrivilegeGuard], data: {privilege: Privilege.MANAGE_USERS} },
+    { path: 'user/add', component: UserItemPageComponent, canActivate: [PrivilegeGuard], data: {privilege: Privilege.MANAGE_USERS} },
+    { path: 'user/:id', component: UserItemPageComponent, canActivate: [PrivilegeOrSelfGuard], data: {privilege: Privilege.MANAGE_USERS} },
+    { path: 'user/group/add', component: GroupItemPageComponent, canActivate: [PrivilegeGuard], data: {privilege: Privilege.MANAGE_USERS} },
+    { path: 'user/group/:id', component: GroupItemPageComponent, canActivate: [PrivilegeGuard], data: {privilege: Privilege.MANAGE_USERS} },
     {
         path: '',
         redirectTo: 'recipe',

@@ -4,7 +4,9 @@ package fr.choupiteam.menus.resources.user;
 import fr.choupiteam.menus.application.pager.model.Pager;
 import fr.choupiteam.menus.application.security.model.ApplicationUser;
 import fr.choupiteam.menus.application.security.model.ChangePasswordData;
+import fr.choupiteam.menus.application.security.model.Privilege;
 import fr.choupiteam.menus.application.security.model.Role;
+import fr.choupiteam.menus.application.security.service.AuthorizationService;
 import fr.choupiteam.menus.application.security.service.UserDetailsServiceImpl;
 import fr.choupiteam.menus.infrastructure.repository.ApplicationUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -30,6 +33,9 @@ public class UserController {
 
     @Autowired
     private UserDetailsServiceImpl userDetailsService;
+
+    @Autowired
+    private AuthorizationService authorizationService;
 
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
@@ -44,7 +50,7 @@ public class UserController {
 
     @RequestMapping(value = "/{id}/avatar", method = RequestMethod.POST)
     public void storeAvatar(@PathVariable String id, @RequestParam("file") MultipartFile file) {
-        this.checkIsAdminOrSelf(id);
+        this.checkIsManagerOrSelf(id);
         ApplicationUser u = this.userDetailsService.getUser(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Utilisateur inconnu"));
 
@@ -53,32 +59,32 @@ public class UserController {
 
     @GetMapping(path = "/{id}/avatar")
     public ResponseEntity getAvatar(@PathVariable String id) {
-        this.checkIsAdminOrSelf(id);
+        this.checkIsManagerOrSelf(id);
         return this.userDetailsService.getAvatar(id);
     }
 
     @PostMapping(value = "/list")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("@authorizationService.can('MANAGE_USERS')")
     public Page<ApplicationUser> getUsers(@RequestBody Pager pager) {
         return this.userDetailsService.getUsers(pager);
     }
 
     @GetMapping(value = "/{id}")
     public ApplicationUser getUser(@PathVariable String id) {
-        this.checkIsAdminOrSelf(id);
+        this.checkIsManagerOrSelf(id);
         return this.userDetailsService.getUser(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Utilisateur inconnu"));
     }
 
     @PutMapping()
     public ApplicationUser saveUser(@RequestBody ApplicationUser user) {
-        this.checkIsAdminOrSelf(user.getId());
+        this.checkIsManagerOrSelf(user.getId());
         return this.userDetailsService.saveUserData(user);
     }
 
     @PutMapping(value = "/{id}/reset-password")
     public void changePassword(@RequestBody ChangePasswordData data, @PathVariable String id) {
-        this.checkIsAdminOrSelf(id);
+        this.checkIsManagerOrSelf(id);
         ApplicationUser user = this.userDetailsService.getUser(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Utilisateur inconnu"));
 
@@ -88,21 +94,29 @@ public class UserController {
 
 
     @PostMapping()
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("@authorizationService.can('MANAGE_USERS')")
     public ApplicationUser createUser(@RequestBody ApplicationUser user) {
         this.userDetailsService.generatePassword(user, user.getUsername());
         return this.userDetailsService.createUser(user);
     }
 
     @DeleteMapping(value = "/{id}")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("@authorizationService.can('MANAGE_USERS')")
     public void deleteUser(@PathVariable String id) {
         this.userDetailsService.deleteUser(id);
     }
 
-    private void checkIsAdminOrSelf(String id) {
+    @PostMapping(value = "/{id}/privileges")
+    public ApplicationUser pushUserPrivileges(@PathVariable String id, @RequestBody List<Privilege> privileges) {
+        ApplicationUser u = this.userDetailsService.getUser(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Utilisateur inconnu"));
+
+        return this.userDetailsService.updatePrivileges(u, privileges);
+    }
+
+    private void checkIsManagerOrSelf(String id) {
         ApplicationUser connectedUser = (ApplicationUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if (!id.equals(connectedUser.getId()) && connectedUser.getRole() != Role.ROLE_ADMIN) {
+        if (!id.equals(connectedUser.getId()) && !authorizationService.can(Privilege.MANAGE_USERS.toString())) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Vous n'êtes pas autorisé à réaliser cette action");
         }
     }

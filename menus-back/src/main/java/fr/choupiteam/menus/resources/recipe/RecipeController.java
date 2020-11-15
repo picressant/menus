@@ -35,7 +35,7 @@ public class RecipeController {
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("@authorizationService.can('DELETE_RECIPE')")
     public void deleteRecipe(@PathVariable String id) {
         this.recipeService.deleteRecipe(id);
     }

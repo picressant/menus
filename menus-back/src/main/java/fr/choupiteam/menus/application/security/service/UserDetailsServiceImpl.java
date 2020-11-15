@@ -2,6 +2,7 @@ package fr.choupiteam.menus.application.security.service;
 
 import fr.choupiteam.menus.application.pager.model.Pager;
 import fr.choupiteam.menus.application.security.model.ApplicationUser;
+import fr.choupiteam.menus.application.security.model.Privilege;
 import fr.choupiteam.menus.infrastructure.repository.ApplicationUserRepository;
 import fr.choupiteam.menus.infrastructure.repository.UserPictureRepository;
 import org.apache.commons.io.IOUtils;
@@ -154,5 +155,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     public Page<ApplicationUser> getUsers(Pager pager) {
         return this.applicationUserRepository.findAllByPager(pager, ApplicationUser.class);
+    }
+
+    public ApplicationUser updatePrivileges(ApplicationUser user, List<Privilege> privileges) {
+        user.setPrivileges(privileges);
+        return this.saveUser(user);
     }
 }

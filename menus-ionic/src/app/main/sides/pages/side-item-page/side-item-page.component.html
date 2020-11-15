@@ -13,15 +13,15 @@
 </ion-header>
 
 <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="isReadonly">
-    <ion-fab-button (click)="modify()" *appHasRole="'ROLE_USER'">
+    <ion-fab-button (click)="modify()" *appHasPrivilege="'!DELETE_SIDE'">
         <ion-icon name="create-outline"></ion-icon>
     </ion-fab-button>
 
-    <ion-fab-button *appHasRole="'ROLE_ADMIN'">
+    <ion-fab-button *appHasPrivilege="'DELETE_SIDE'">
         <ion-icon name="create-outline"></ion-icon>
     </ion-fab-button>
 
-    <ion-fab-list side="top"  *appHasRole="'ROLE_ADMIN'">
+    <ion-fab-list side="top" *appHasPrivilege="'DELETE_SIDE'">
         <ion-fab-button (click)="modify()" color="secondary">
             <ion-icon name="pencil-outline"></ion-icon>
         </ion-fab-button>

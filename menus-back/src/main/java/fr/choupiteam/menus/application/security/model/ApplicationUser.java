@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 
 
 @Document(collection = "user")
@@ -33,6 +34,8 @@ public class ApplicationUser implements UserDetails {
     private String lastname;
 
     private Role role;
+
+    private List<Privilege> privileges;
 
     private String googleId;
 
@@ -141,5 +144,13 @@ public class ApplicationUser implements UserDetails {
 
     public void setGroup(Group group) {
         this.group = group;
+    }
+
+    public List<Privilege> getPrivileges() {
+        return privileges;
+    }
+
+    public void setPrivileges(List<Privilege> privileges) {
+        this.privileges = privileges;
     }
 }

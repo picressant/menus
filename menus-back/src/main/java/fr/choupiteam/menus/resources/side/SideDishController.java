@@ -45,7 +45,7 @@ public class SideDishController {
 
 
     @DeleteMapping(value = "/{id}")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("@authorizationService.can('DELETE_SIDE')")
     public void deleteSide(@PathVariable("id") String id) {
         this.sideDishService.deleteSide(id);
     }

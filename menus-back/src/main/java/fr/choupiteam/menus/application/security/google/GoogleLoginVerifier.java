@@ -27,9 +27,6 @@ public class GoogleLoginVerifier {
                 .setAudience(Collections.singletonList(CLIENT_ID))
                 .build();
 
-
-        System.out.println("validating:" + idTokenString);
-
         GoogleIdToken idToken = null;
         try {
             idToken = verifier.verify(idTokenString);

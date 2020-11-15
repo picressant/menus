@@ -43,4 +43,12 @@ export class UserRestService {
 
         return this.http.post('user/' + userId + '/avatar', formData);
     }
+
+    getPrivileges(): Observable<string[]> {
+        return this.http.get<string[]>('user/privileges');
+    }
+
+    setPrivileges(user: User, privileges: string[]): Observable<User> {
+        return this.http.post<User>(`user/${user.id}/privileges`, privileges);
+    }
 }

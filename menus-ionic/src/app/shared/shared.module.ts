@@ -15,6 +15,7 @@ import { LongPressDirective } from "./directives/long-press.directive";
 import { SideListComponent } from "@components/lists/side-list/side-list.component";
 import { HasRoleDirective } from "./directives/has-role.directive";
 import { IngredientListComponent } from "@components/lists/ingredient-list/ingredient-list.component";
+import { HasPrivilegeDirective } from "./directives/has-privilege.directive";
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { IngredientListComponent } from "@components/lists/ingredient-list/ingre
         IngredientListComponent,
 
         LongPressDirective,
-        HasRoleDirective
+        HasRoleDirective,
+        HasPrivilegeDirective
     ],
     imports: [
         CommonModule,
@@ -50,7 +52,8 @@ import { IngredientListComponent } from "@components/lists/ingredient-list/ingre
         IngredientListComponent,
 
         LongPressDirective,
-        HasRoleDirective
+        HasRoleDirective,
+        HasPrivilegeDirective
     ]
 })
 export class SharedModule {

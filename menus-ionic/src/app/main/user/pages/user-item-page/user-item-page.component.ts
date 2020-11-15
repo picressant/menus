@@ -6,11 +6,12 @@ import { FormBuilder } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { FoodAuthService } from "@services/food-auth.service";
 import { ToasterService } from "@services/toaster.service";
-import { forkJoin, Observable } from "rxjs";
+import { EMPTY, forkJoin, Observable } from "rxjs";
 import { UserRestService } from "@services/user-rest.service";
 import { ModalController } from "@ionic/angular";
 import { GroupSelectorModalComponent } from "../../components/group-selector-modal/group-selector-modal.component";
 import { ResetPasswordModalComponent } from "../../components/reset-password-modal/reset-password-modal.component";
+import { getAllPrivileges, Privilege } from "@models/privilege.enum";
 
 @Component({
     selector: 'app-user-item-page',
@@ -23,6 +24,8 @@ export class UserItemPageComponent extends AbstractItemPage<User> implements OnI
     storeCurrentImages: any;
 
     roles: Role[] = [];
+
+    privileges: string[] = [];
 
     constructor(
         private fb: FormBuilder,
@@ -37,6 +40,7 @@ export class UserItemPageComponent extends AbstractItemPage<User> implements OnI
         this.form = User.form(this.fb);
 
         this.roles = getAllRoles();
+        this.privileges = getAllPrivileges();
     }
 
     isFromMenu: boolean = true;
@@ -75,6 +79,10 @@ export class UserItemPageComponent extends AbstractItemPage<User> implements OnI
         return this.userService.saveUser(this.form.value);
     }
 
+    postPrivileges() {
+        this.userService.setPrivileges(this.form.value, this.privileges).subscribe();
+    }
+
     postCreate() {
         if (this.imgPreviewURL != null) {
             this.userService.storeAvatar(this.id, this.storeCurrentImages[0]).subscribe(() => {
@@ -85,9 +93,9 @@ export class UserItemPageComponent extends AbstractItemPage<User> implements OnI
         }
     }
 
-    _save() {
+    private _saveData() {
         if (this.imgPreviewURL != null) {
-            forkJoin([
+           forkJoin([
                 this.userService.storeAvatar(this.id, this.storeCurrentImages[0]),
                 this.save$
             ]).subscribe(([res, user]) => {
@@ -102,8 +110,7 @@ export class UserItemPageComponent extends AbstractItemPage<User> implements OnI
             });
         }
         else {
-            this.save$.subscribe(
-                (user: User) => {
+            this.save$.subscribe(user => {
                     this.resetForm(user);
 
                     if (this.authService.user.getValue().id === this.id) {
@@ -114,6 +121,13 @@ export class UserItemPageComponent extends AbstractItemPage<User> implements OnI
                 }
             );
         }
+    }
+
+    _save() {
+        if (this.authService.user.getValue().privileges.indexOf(Privilege.MANAGE_USERS))
+            this.userService.setPrivileges(this.form.value, this.form.controls.privileges.value).subscribe(() => this._saveData());
+        else
+            this._saveData();
     }
 
     get imgStyles() {

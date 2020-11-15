@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/ingredient")
-@PreAuthorize("hasRole('ROLE_ADMIN')")
 public class IngredientController {
 
     @Autowired
@@ -23,16 +22,19 @@ public class IngredientController {
     private UnitService unitService;
 
     @PostMapping
+    @PreAuthorize("@authorizationService.can('MANAGE_INGREDIENTS')")
     public Ingredient addIngredient(@RequestBody Ingredient ingredient) {
         return this.ingredientService.addIngredient(ingredient);
     }
 
     @PutMapping
+    @PreAuthorize("@authorizationService.can('MANAGE_INGREDIENTS')")
     public Ingredient saveIngredient(@RequestBody Ingredient ingredient) {
         return this.ingredientService.saveIngredient(ingredient);
     }
 
     @DeleteMapping(value = "/{id}")
+    @PreAuthorize("@authorizationService.can('MANAGE_INGREDIENTS')")
     public HttpStatus deleteIngredient(@PathVariable("id") String id) {
         this.ingredientService.deleteIngredient(id);
         return HttpStatus.OK;
@@ -49,16 +51,19 @@ public class IngredientController {
     }
 
     @PostMapping(value = "/unit")
+    @PreAuthorize("@authorizationService.can('MANAGE_INGREDIENTS')")
     public Unit createUnit(@RequestBody Unit unit) {
         return this.unitService.createUnit(unit);
     }
 
     @PutMapping(value = "/unit")
+    @PreAuthorize("@authorizationService.can('MANAGE_INGREDIENTS')")
     public Unit saveUnit(@RequestBody Unit unit) {
         return this.unitService.saveUnit(unit);
     }
 
     @DeleteMapping(value = "/unit/{id}")
+    @PreAuthorize("@authorizationService.can('MANAGE_INGREDIENTS')")
     public void deleteUnit(@PathVariable("id") String id) {
         this.unitService.deleteUnit(id);
     }

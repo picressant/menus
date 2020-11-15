@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 import { environment } from "../../../environments/environment";
 import { FoodAuthService } from "@services/food-auth.service";
 import { WeekService } from "@services/week.service";
 import { User } from "@models/user.model";
+import { Privilege } from "@models/privilege.enum";
 
 @Component({
     selector: 'app-main-shell',
@@ -34,12 +35,14 @@ export class MainShellComponent implements OnInit {
         {
             title: 'Paramètres',
             url: 'parameters',
-            icon: 'settings'
+            icon: 'settings',
+            privilege: Privilege.MANAGE_INGREDIENTS
         },
         {
             title: 'Utilisateurs',
             url: 'user',
-            icon: 'people'
+            icon: 'people',
+            privilege: Privilege.MANAGE_USERS
         }
     ]
 
@@ -49,11 +52,13 @@ export class MainShellComponent implements OnInit {
     constructor(
         private router: Router,
         private foodAuthService: FoodAuthService,
-        private weekService: WeekService
+        private weekService: WeekService,
+        private cdr: ChangeDetectorRef
     ) {
         this.foodAuthService.user.subscribe(user => {
             this.me = user;
             this.timestamp = new Date().getTime().toString();
+            setTimeout(() => this.cdr.detectChanges(), 200);
         });
         this.me = this.foodAuthService.user.getValue();
     }

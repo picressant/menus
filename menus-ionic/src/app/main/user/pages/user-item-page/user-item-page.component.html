@@ -19,6 +19,7 @@
     </ion-fab-button>
 </ion-fab>
 
+
 <ion-content [fullscreen]="true">
     <div class="file-input-wrapper">
         <div class="picture c-hand" (click)="file.click()">
@@ -53,7 +54,7 @@
             <ion-input type="password" value="**********" [readonly]="true" [disabled]="isReadonly"></ion-input>
         </ion-item>
 
-        <ion-item *appHasRole="'ROLE_ADMIN'">
+        <ion-item *appHasPrivilege="'MANAGE_USERS'">
             <ion-label position="floating">googleId</ion-label>
             <ion-input formControlName="googleId"></ion-input>
         </ion-item>
@@ -63,11 +64,19 @@
             <ion-input [value]="form.value.group?.name" [disabled]="isReadonly" [readonly]="true"></ion-input>
         </ion-item>
 
-        <ion-item *appHasRole="'ROLE_ADMIN'">
+        <ion-item *appHasPrivilege="'MANAGE_USERS'">
             <ion-label>Rôle</ion-label>
             <ion-select formControlName="role" interface="action-sheet">
                 <ion-select-option *ngFor="let role of roles"
                                    [value]="role">{{getRoleStringified(role)}}</ion-select-option>
+            </ion-select>
+        </ion-item>
+
+        <ion-item *appHasPrivilege="'MANAGE_USERS'">
+            <ion-label>Droits</ion-label>
+            <ion-select formControlName="privileges" [multiple]="true">
+                <ion-select-option *ngFor="let privilege of privileges"
+                                   [value]="privilege">{{privilege}}</ion-select-option>
             </ion-select>
         </ion-item>
 
