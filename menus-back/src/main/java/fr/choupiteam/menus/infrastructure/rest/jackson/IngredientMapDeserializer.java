@@ -26,7 +26,7 @@ public class IngredientMapDeserializer extends JsonDeserializer<Map<String, Inte
                 while (!(p.getCurrentName() == null && p.getCurrentToken() == JsonToken.END_OBJECT)) {
                     if (p.getCurrentName() != null && p.getCurrentName().equals("ingredient") && p.getCurrentToken() == JsonToken.START_OBJECT) {
                         while (!(p.getCurrentToken() == JsonToken.END_OBJECT && p.getCurrentName().equals("ingredient"))) {
-                            if (p.getCurrentToken() == JsonToken.START_OBJECT && p.getCurrentName().equals("unit")) {
+                            if (p.getCurrentToken() == JsonToken.START_OBJECT && (p.getCurrentName().equals("unit") || p.getCurrentName().equals("shopSection"))) {
                                 while(p.getCurrentToken() != JsonToken.END_OBJECT)
                                     p.nextToken();
                             }
