@@ -14,6 +14,7 @@ import { PrivilegeOrSelfGuard } from "../shared/guards/admin-or-self-guard.servi
 import { UserListPageComponent } from "./user/pages/user-list-page/user-list-page.component";
 import { GroupItemPageComponent } from "./user/pages/group-item-page/group-item-page.component";
 import { Privilege } from "@models/privilege.enum";
+import { GroceriesListPageComponent } from "./groceries/pages/groceries-list-page/groceries-list-page.component";
 
 const routes: Routes = [
     { path: 'recipe', component: RecipeListPageComponent },
@@ -30,9 +31,10 @@ const routes: Routes = [
     { path: 'user/:id', component: UserItemPageComponent, canActivate: [PrivilegeOrSelfGuard], data: {privilege: Privilege.MANAGE_USERS} },
     { path: 'user/group/add', component: GroupItemPageComponent, canActivate: [PrivilegeGuard], data: {privilege: Privilege.MANAGE_USERS} },
     { path: 'user/group/:id', component: GroupItemPageComponent, canActivate: [PrivilegeGuard], data: {privilege: Privilege.MANAGE_USERS} },
+    { path: 'groceries', component: GroceriesListPageComponent },
     {
         path: '',
-        redirectTo: 'recipe',
+        redirectTo: 'week',
         pathMatch: 'full'
     }
 ];

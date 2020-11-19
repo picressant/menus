@@ -12,6 +12,7 @@ import { SidesModule } from "./sides/sides.module";
 import { SharedModule } from "../shared/shared.module";
 import { ParametersModule } from "./parameters/parameters.module";
 import { UserModule } from "./user/user.module";
+import { GroceriesModule } from "./groceries/groceries.module";
 
 
 @NgModule({
@@ -30,6 +31,7 @@ import { UserModule } from "./user/user.module";
         SidesModule,
         ParametersModule,
         UserModule,
+        GroceriesModule,
         SharedModule
 
     ],

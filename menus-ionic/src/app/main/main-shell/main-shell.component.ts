@@ -15,14 +15,19 @@ export class MainShellComponent implements OnInit {
     public selectedIndex = 0;
     public appPages = [
         {
+            title: 'Semaine',
+            url: 'week',
+            icon: 'calendar'
+        },
+        {
+            title: 'Courses',
+            url: 'groceries',
+            icon: 'cart'
+        },
+        {
             title: 'Recettes',
             url: 'recipe',
             icon: 'restaurant'
-        },
-        {
-            title: 'Planning',
-            url: 'week',
-            icon: 'calendar'
         },
         {
             title: 'Accompagnements',
