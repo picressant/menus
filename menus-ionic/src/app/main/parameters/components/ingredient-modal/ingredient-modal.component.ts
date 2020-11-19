@@ -11,7 +11,7 @@ import { ShopSection } from "@models/shop-section.model";
     templateUrl: './ingredient-modal.component.html',
     styleUrls: ['./ingredient-modal.component.scss'],
 })
-export class IngredientModalComponent implements OnInit {
+export class IngredientModalComponent {
 
     form: FormGroup
 
@@ -20,17 +20,13 @@ export class IngredientModalComponent implements OnInit {
         this.form.reset(ingredient);
     }
 
+    @Input()
     shopSections: ShopSection[] = [];
 
     constructor(private formBuilder: FormBuilder,
                 private modalController: ModalController,
-                private innerModalController: ModalController,
-                private shopSectionRest: ShopSectionRestService) {
+                private innerModalController: ModalController) {
         this.form = Ingredient.form(this.formBuilder);
-    }
-
-    ngOnInit() {
-        this.shopSectionRest.getAllShopSections().subscribe(sections => this.shopSections = sections);
     }
 
     async onChooseUnit() {

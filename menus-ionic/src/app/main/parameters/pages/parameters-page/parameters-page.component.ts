@@ -48,6 +48,8 @@ export class ParametersPageComponent implements OnInit {
 
     selectedTab: string = this.footerIngredient.selectedTab;
 
+    shopSections: ShopSection[] = [];
+
     constructor(
         private ingredientRest: IngredientRestService,
         private shopSectionRest: ShopSectionRestService,
@@ -56,6 +58,11 @@ export class ParametersPageComponent implements OnInit {
     }
 
     ngOnInit() {
+       this.loadShopSections();
+    }
+
+    private loadShopSections() {
+        this.shopSectionRest.getAllShopSections().subscribe(sections => this.shopSections = sections);
     }
 
     async onAdd() {
@@ -69,7 +76,10 @@ export class ParametersPageComponent implements OnInit {
 
     async addIngredient() {
         const modal = await this.modalController.create({
-            component: IngredientModalComponent
+            component: IngredientModalComponent,
+            componentProps: {
+                shopSections: this.shopSections
+            }
         });
 
         await modal.present();
@@ -102,7 +112,11 @@ export class ParametersPageComponent implements OnInit {
 
         const { data } = await modal.onWillDismiss();
         if (data && data.section) {
-            this.shopSectionRest.addShopSection(data.section).subscribe(() => this.shopSectionListComponent.refresh(null));
+            this.shopSectionRest.addShopSection(data.section).subscribe(() => {
+                this.shopSectionListComponent.refresh(null);
+                this.loadShopSections();
+            });
+
         }
     }
 
@@ -136,7 +150,8 @@ export class ParametersPageComponent implements OnInit {
         const modal = await this.modalController.create({
             component: IngredientModalComponent,
             componentProps: {
-                ingredient
+                ingredient,
+                shopSections: this.shopSections
             }
         });
 
@@ -160,7 +175,10 @@ export class ParametersPageComponent implements OnInit {
 
         const { data } = await modal.onWillDismiss();
         if (data && data.section) {
-            this.shopSectionRest.saveShopSection(data.section).subscribe(() => this.shopSectionListComponent.refresh(null));
+            this.shopSectionRest.saveShopSection(data.section).subscribe(() => {
+                this.shopSectionListComponent.refresh(null);
+                this.loadShopSections();
+            });
         }
     }
 }
