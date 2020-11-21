@@ -2,6 +2,7 @@ package fr.choupiteam.menus.resources.ingredient;
 
 import fr.choupiteam.menus.application.ingredient.model.Ingredient;
 import fr.choupiteam.menus.application.ingredient.service.IngredientService;
+import fr.choupiteam.menus.application.pager.model.Filter;
 import fr.choupiteam.menus.application.pager.model.Pager;
 import fr.choupiteam.menus.application.unit.model.Unit;
 import fr.choupiteam.menus.application.unit.service.UnitService;
@@ -10,6 +11,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Collections;
+import java.util.List;
 
 @RestController
 @RequestMapping("/ingredient")

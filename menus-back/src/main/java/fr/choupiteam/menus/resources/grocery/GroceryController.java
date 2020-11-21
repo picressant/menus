@@ -32,7 +32,8 @@ public class GroceryController {
     }
 
     @PutMapping("/{id}")
-    public GroceryItem updateItem(@RequestBody GroceryItem groceryItem) {
+    public GroceryItem updateItem(@RequestBody GroceryItem groceryItem, @AuthenticationPrincipal ApplicationUser user) {
+        groceryItem.setGroup(user.getGroup());
         return this.groceryService.updateItem(groceryItem);
     }
 

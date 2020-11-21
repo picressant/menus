@@ -5,6 +5,8 @@ import { IonicModule } from "@ionic/angular";
 import { SharedModule } from "../../shared/shared.module";
 import { LayoutModule } from "../layout/layout.module";
 import { OptionPopoverComponent } from "./components/option-popover/option-popover.component";
+import { AddGroceriesInputComponent } from "./components/add-groceries-input/add-groceries-input.component";
+import { ReactiveFormsModule } from "@angular/forms";
 
 
 
@@ -12,12 +14,14 @@ import { OptionPopoverComponent } from "./components/option-popover/option-popov
   declarations: [
       GroceriesListPageComponent,
       OptionPopoverComponent,
+      AddGroceriesInputComponent
   ],
     imports: [
         IonicModule,
         SharedModule,
         LayoutModule,
-        CommonModule
+        CommonModule,
+        ReactiveFormsModule
     ],
   exports: [
       GroceriesListPageComponent

@@ -1,0 +1,13 @@
+<div class="suggestions-wrapper">
+    <ion-badge color="secondary" *ngFor="let i of searchingIngredients"
+               (click)="onClickSuggestion(i)">{{i.name}}</ion-badge>
+</div>
+<ion-toolbar>
+    <div class="edit-wrapper" [formGroup]="form">
+        <ion-input type="text" class="ingredient" placeholder="Ajouter..." (ionChange)="onInputChange($event)"
+                   debounce="500" formControlName="name"></ion-input>
+        <ion-input type="number" class="quantity" placeholder="X" formControlName="quantity"></ion-input>
+        <ion-icon name="add-outline" (click)="addElement()" class="submit"
+                  [color]="form.invalid ? 'danger' : 'dark'"></ion-icon>
+    </div>
+</ion-toolbar>

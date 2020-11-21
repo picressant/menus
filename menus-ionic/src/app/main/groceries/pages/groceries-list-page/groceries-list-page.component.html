@@ -1,24 +1,32 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <ion-title>Liste de courses</ion-title>
-    <ion-buttons slot="end">
-      <ion-button (click)="showOptions($event)" *ngIf="!loading">
-        <ion-icon name="ellipsis-vertical-outline"></ion-icon>
-      </ion-button>
-      <ion-spinner *ngIf="loading"></ion-spinner>
-    </ion-buttons>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Liste de courses</ion-title>
+        <ion-buttons slot="end">
+            <ion-button (click)="showOptions($event)" *ngIf="!loading">
+                <ion-icon name="ellipsis-vertical-outline"></ion-icon>
+            </ion-button>
+            <ion-spinner *ngIf="loading"></ion-spinner>
+        </ion-buttons>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ng-container *ngFor="let byShopSection of groceriesMapped | keyvalue">
-  <h3 class="ion-margin">{{getSections(byShopSection.key).name}}</h3>
-  <ion-list >
-    <ion-item *ngFor="let item of byShopSection.value">{{item.ingredient.name}} - {{item.quantity}}</ion-item>
-  </ion-list>
-  </ng-container>
-
+    <ng-container *ngFor="let byShopSection of groceriesMapped | keyvalue">
+        <h3 class="ion-margin">{{getSections(byShopSection.key).name}}</h3>
+        <ion-list>
+            <ng-container *ngFor="let item of byShopSection.value">
+                <ion-item [class.crossed]="item.checked">
+                    <ion-label>{{item.ingredient.name}}
+                        - {{item.quantity}} {{item.ingredient.unit.symbol}}</ion-label>
+                <ion-checkbox slot="end" (ionChange)="onCheckItem($event, item) "color="dark" [checked]="item.checked"></ion-checkbox>
+                </ion-item>
+            </ng-container>
+        </ion-list>
+    </ng-container>
 </ion-content>
+<ion-footer *ngIf="isEditing">
+    <app-add-groceries-input (added)="onAddIngredient($event)"></app-add-groceries-input>
+</ion-footer>

@@ -1,7 +1,7 @@
 <ion-header translucent>
     <ion-toolbar>
         <ion-buttons slot="start">
-            <ion-back-button defaultHref="/main/parameters" (click)="forceCloseModal()"></ion-back-button>
+            <ion-back-button [defaultHref]="fromGrocery ? '/main/groceries' : '/main/parameters'" (click)="forceCloseModal()"></ion-back-button>
         </ion-buttons>
         <ion-title>Ingrédient</ion-title>
         <ion-buttons slot="end">
@@ -20,7 +20,7 @@
 
     <ion-item (click)="onChooseUnit()">
         <ion-label position="floating">Unité</ion-label>
-        <ion-input
+        <ion-input readonly="true"
                 [value]="form.controls.unit.value ? form.controls.unit.value?.name + ' (' + form.controls.unit.value?.symbol + ')' : ''"></ion-input>
     </ion-item>
 
@@ -29,6 +29,11 @@
         <ion-select placeholder="Rayon" formControlName="shopSection" [compareWith]="compareWith" interface="popover">
             <ion-select-option *ngFor="let section of shopSections" [value]="section">{{section.name}}</ion-select-option>
         </ion-select>
+    </ion-item>
+
+    <ion-item *ngIf="fromGrocery">
+        <ion-checkbox formControlName="forRecipe" color="dark" slot="end"></ion-checkbox>
+        <ion-label>Pour les recettes ?</ion-label>
     </ion-item>
 </ion-content>
 

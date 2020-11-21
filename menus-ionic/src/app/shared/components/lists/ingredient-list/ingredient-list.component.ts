@@ -30,6 +30,9 @@ export class IngredientListComponent implements OnInit, AfterViewChecked {
     @Input()
     excludeIds: string[];
 
+    @Input()
+    recipe = true;
+
     @Output()
     ingredientSelected: EventEmitter<Ingredient> = new EventEmitter<Ingredient>();
 
@@ -44,10 +47,10 @@ export class IngredientListComponent implements OnInit, AfterViewChecked {
     ) {
         this.pagerIngredients = new Pager(20);
         this.pagerIngredients.orders.push(new Order("name", Direction.ASC));
-        this.pagerIngredients.pushFilter("forRecipe", true);
     }
 
     ngOnInit() {
+        this.pagerIngredients.pushFilter("forRecipe", this.recipe);
         this.loadIngredients(null);
     }
 

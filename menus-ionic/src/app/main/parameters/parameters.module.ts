@@ -7,8 +7,8 @@ import { LayoutModule } from "../layout/layout.module";
 import { UnitListComponent } from "./components/unit-list/unit-list.component";
 import { UnitModalComponent } from "./components/unit-modal/unit-modal.component";
 import { ReactiveFormsModule } from "@angular/forms";
-import { IngredientModalComponent } from "./components/ingredient-modal/ingredient-modal.component";
-import { SelectUnitModalComponent } from "./components/select-unit-modal/select-unit-modal.component";
+import { IngredientModalComponent } from "../../shared/components/modals/ingredient-modal/ingredient-modal.component";
+import { SelectUnitModalComponent } from "../../shared/components/modals/select-unit-modal/select-unit-modal.component";
 import { ShopSectionListComponent } from "./components/shop-section-list/shop-section-list.component";
 import { ShopSectionModalComponent } from "./components/shop-section-modal/shop-section-modal.component";
 
@@ -17,8 +17,6 @@ import { ShopSectionModalComponent } from "./components/shop-section-modal/shop-
     declarations: [
         ParametersPageComponent,
         UnitListComponent,
-        UnitModalComponent,
-        IngredientModalComponent,
         SelectUnitModalComponent,
         ShopSectionListComponent,
         ShopSectionModalComponent

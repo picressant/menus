@@ -1,9 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { ModalController } from "@ionic/angular";
 import { Ingredient } from "@models/ingredient.model";
 import { SelectUnitModalComponent } from "../select-unit-modal/select-unit-modal.component";
-import { ShopSectionRestService } from "@services/shop-section-rest.service";
 import { ShopSection } from "@models/shop-section.model";
 
 @Component({
@@ -21,7 +20,20 @@ export class IngredientModalComponent {
     }
 
     @Input()
+    set name(name: string) {
+        this.form.controls.name.setValue(name);
+    }
+
+    @Input()
+    set forRecipe(val: boolean) {
+        this.form.controls.forRecipe.setValue(val);
+    }
+
+    @Input()
     shopSections: ShopSection[] = [];
+
+    @Input()
+    fromGrocery = false;
 
     constructor(private formBuilder: FormBuilder,
                 private modalController: ModalController,

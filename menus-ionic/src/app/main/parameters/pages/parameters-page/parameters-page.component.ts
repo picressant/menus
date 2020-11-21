@@ -6,7 +6,7 @@ import { ModalController } from "@ionic/angular";
 import { UnitModalComponent } from "../../components/unit-modal/unit-modal.component";
 import { Ingredient } from "@models/ingredient.model";
 import { IngredientListComponent } from "@components/lists/ingredient-list/ingredient-list.component";
-import { IngredientModalComponent } from "../../components/ingredient-modal/ingredient-modal.component";
+import { IngredientModalComponent } from "../../../../shared/components/modals/ingredient-modal/ingredient-modal.component";
 import { ShopSection } from "@models/shop-section.model";
 import { ShopSectionModalComponent } from "../../components/shop-section-modal/shop-section-modal.component";
 import { ShopSectionListComponent } from "../../components/shop-section-list/shop-section-list.component";
@@ -22,8 +22,11 @@ export class ParametersPageComponent implements OnInit {
     @ViewChild(UnitListComponent)
     private unitListComponent: UnitListComponent;
 
-    @ViewChild(IngredientListComponent)
+    @ViewChild("recipeIngredientList")
     private ingredientListComponent: IngredientListComponent;
+
+    @ViewChild("noRecipeIngredientList")
+    private ingredientNoRecipeListComponent: IngredientListComponent;
 
     @ViewChild(ShopSectionListComponent)
     private shopSectionListComponent: ShopSectionListComponent;
@@ -44,6 +47,12 @@ export class ParametersPageComponent implements OnInit {
         name: "Rayons",
         icon: "file-tray-full-outline",
         selectedTab: "tab-section"
+    }
+
+    footerIngredientNoRecipe = {
+        name: "Produits",
+        icon: "shirt-outline",
+        selectedTab: "item-section"
     }
 
     selectedTab: string = this.footerIngredient.selectedTab;
@@ -69,16 +78,19 @@ export class ParametersPageComponent implements OnInit {
         if (this.selectedTab === this.footerUnit.selectedTab)
             await this.addUnit();
         else if (this.selectedTab === this.footerIngredient.selectedTab)
-            await this.addIngredient();
-        else
+            await this.addIngredient(true);
+        else if (this.selectedTab === this.footerShopSections.selectedTab)
             await this.addSection();
+        else
+            await this.addIngredient(false);
     }
 
-    async addIngredient() {
+    async addIngredient(forRecipe: boolean) {
         const modal = await this.modalController.create({
             component: IngredientModalComponent,
             componentProps: {
-                shopSections: this.shopSections
+                shopSections: this.shopSections,
+                forRecipe: forRecipe
             }
         });
 
@@ -86,7 +98,12 @@ export class ParametersPageComponent implements OnInit {
 
         const { data } = await modal.onWillDismiss();
         if (data && data.ingredient) {
-            this.ingredientRest.addIngredient(data.ingredient).subscribe(() => this.ingredientListComponent.refresh(null));
+            this.ingredientRest.addIngredient(data.ingredient).subscribe(() => {
+                if (this.footerIngredientNoRecipe.selectedTab === this.selectedTab)
+                    this.ingredientNoRecipeListComponent.refresh(null)
+                else
+                    this.ingredientListComponent.refresh(null);
+            });
         }
     }
 
@@ -120,14 +137,15 @@ export class ParametersPageComponent implements OnInit {
         }
     }
 
-
     doRefresh(event: any) {
         if (this.selectedTab === this.footerUnit.selectedTab)
             this.unitListComponent.refresh(event);
         else if (this.selectedTab === this.footerIngredient.selectedTab)
             this.ingredientListComponent.refresh(event);
-        else
+        else if (this.selectedTab === this.footerShopSections.selectedTab)
             this.shopSectionListComponent.refresh(event);
+        else if (this.selectedTab === this.footerIngredientNoRecipe.selectedTab)
+            this.ingredientNoRecipeListComponent.refresh(event);
     }
 
     async showUnit(unit: Unit) {
@@ -159,7 +177,12 @@ export class ParametersPageComponent implements OnInit {
 
         const { data } = await modal.onWillDismiss();
         if (data && data.ingredient) {
-            this.ingredientRest.saveIngredient(data.ingredient).subscribe(() => this.ingredientListComponent.refresh(null));
+            this.ingredientRest.saveIngredient(data.ingredient).subscribe(() => {
+                if (this.footerIngredientNoRecipe.selectedTab === this.selectedTab)
+                    this.ingredientNoRecipeListComponent.refresh(null)
+                else
+                    this.ingredientListComponent.refresh(null);
+            });
         }
     }
 

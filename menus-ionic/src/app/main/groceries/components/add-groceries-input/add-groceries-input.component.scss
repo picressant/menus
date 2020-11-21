@@ -1,0 +1,35 @@
+:host {
+  .edit-wrapper {
+    display: flex;
+    align-items: center;
+
+
+    .ingredient {
+      flex-grow: 1;
+      border: none;
+      outline: none;
+      height: 30px;
+    }
+
+    .quantity {
+      max-width: 30px;
+      border: 1px solid var(--ion-item-border-color, var(--ion-border-color, var(--ion-color-step-150, rgba(0, 0, 0, 0.13))));
+      border-top: none;
+      border-bottom: none;
+    }
+
+    .submit {
+      width: 40px;
+    }
+  }
+
+  .suggestions-wrapper {
+    position: absolute;
+    top: -30px;
+    margin: 0 10px;
+
+    ion-badge {
+      margin-right: 5px;
+    }
+  }
+}
