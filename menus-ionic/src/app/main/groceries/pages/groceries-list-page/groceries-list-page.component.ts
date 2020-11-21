@@ -106,7 +106,7 @@ export class GroceriesListPageComponent implements OnInit {
         }
 
         const list = this.groceriesMapped.get(ingredient.shopSection.id);
-        const index = list.findIndex(i => i.id === ingredient.id);
+        const index = list.findIndex(i => i.ingredient.id === ingredient.id);
 
         if (index < 0) {
             const item = new GroceryItem();
