@@ -1,7 +1,7 @@
 import { Directive, Input, OnDestroy, OnInit, TemplateRef, ViewContainerRef } from '@angular/core';
 import { Subject } from "rxjs";
 import { takeUntil } from "rxjs/operators";
-import { Privilege } from "@models/privilege.enum";
+import { Privilege } from "@models/enums/privilege.enum";
 import { User } from "@models/user.model";
 import { FoodAuthService } from "@services/food-auth.service";
 

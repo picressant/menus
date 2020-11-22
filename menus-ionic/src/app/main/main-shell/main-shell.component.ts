@@ -4,7 +4,7 @@ import { environment } from "../../../environments/environment";
 import { FoodAuthService } from "@services/food-auth.service";
 import { WeekService } from "@services/week.service";
 import { User } from "@models/user.model";
-import { Privilege } from "@models/privilege.enum";
+import { Privilege } from "@models/enums/privilege.enum";
 
 @Component({
     selector: 'app-main-shell',

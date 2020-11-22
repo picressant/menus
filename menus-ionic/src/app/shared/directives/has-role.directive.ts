@@ -2,7 +2,7 @@ import { Directive, Input, OnDestroy, OnInit, TemplateRef, ViewContainerRef } fr
 import { Subject } from "rxjs";
 import { takeUntil } from "rxjs/operators";
 import { FoodAuthService } from "@services/food-auth.service";
-import { Role } from "@models/role.enum";
+import { Role } from "@models/enums/role.enum";
 
 @Directive({
     selector: '[appHasRole]'

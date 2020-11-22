@@ -1,9 +1,9 @@
 import { FormBuilder, Validators } from "@angular/forms";
 import { mergeFormGroups } from "../helpers/form.helpers";
 import { AbstractData } from "./abstract-data.model";
-import { Role } from "./role.enum";
+import { Role } from "./enums/role.enum";
 import { Group } from "./group.model";
-import { Privilege } from "@models/privilege.enum";
+import { Privilege } from "@models/enums/privilege.enum";
 
 export class User extends AbstractData {
   firstname: string;

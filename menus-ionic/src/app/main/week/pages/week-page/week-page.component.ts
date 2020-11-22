@@ -1,9 +1,10 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { WeekMeal } from "@models/week-meal.model";
 import { ActivatedRoute, Router } from "@angular/router";
 import { AlertController } from "@ionic/angular";
 import { WeekService } from "@services/week.service";
 import { ConfirmationAlertService } from "@services/confirmation-alert.service";
+import { getMealDayStringified, MealDay } from "@models/enums/meal-day.enum";
 
 @Component({
     selector: 'app-week-page',
@@ -23,16 +24,11 @@ export class WeekPageComponent {
         selectedTab: "tab-week"
     }
 
-    footerGrocery = {
-        name: "Courses",
-        icon: "checkbox-outline",
-        selectedTab: "tab-grocery"
-    }
-
     selectedTab: string = this.footerDay.selectedTab;
 
     todayLunchIndex: number;
     todayDinnerIndex: number;
+    todayBreakFastIndex: number;
 
 
     meals: WeekMeal[] = [];
@@ -66,42 +62,14 @@ export class WeekPageComponent {
             index = day - 1;
         }
 
-        this.todayLunchIndex = index * 2;
-        this.todayDinnerIndex = index * 2 + 1;
+        this.todayBreakFastIndex = index * 3;
+        this.todayLunchIndex = index * 3 + 1;
+        this.todayDinnerIndex = index * 3 + 2;
 
     }
 
-    getDay(index: number) {
-        switch (index) {
-            case 0:
-                return "Lundi midi";
-            case 1:
-                return "Lundi soir";
-            case 2:
-                return "Mardi midi";
-            case 3:
-                return "Mardi soir";
-            case 4:
-                return "Mercredi midi";
-            case 5:
-                return "Mercredi soir";
-            case 6:
-                return "Jeudi midi";
-            case 7:
-                return "Jeudi soir";
-            case 8:
-                return "Vendredi midi";
-            case 9:
-                return "Vendredi soir";
-            case 10:
-                return "Samedi midi";
-            case 11:
-                return "Samedi soir";
-            case 12:
-                return "Dimanche midi";
-            case 13:
-                return "Dimanche soir";
-        }
+    getDay(mealDay: MealDay) {
+        return getMealDayStringified(mealDay);
     }
 
     clearRecette(index: number) {

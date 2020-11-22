@@ -13,7 +13,7 @@ import { UserItemPageComponent } from "./user/pages/user-item-page/user-item-pag
 import { PrivilegeOrSelfGuard } from "../shared/guards/admin-or-self-guard.service";
 import { UserListPageComponent } from "./user/pages/user-list-page/user-list-page.component";
 import { GroupItemPageComponent } from "./user/pages/group-item-page/group-item-page.component";
-import { Privilege } from "@models/privilege.enum";
+import { Privilege } from "@models/enums/privilege.enum";
 import { GroceriesListPageComponent } from "./groceries/pages/groceries-list-page/groceries-list-page.component";
 
 const routes: Routes = [

@@ -9,11 +9,15 @@
 
 <ion-content [fullscreen]="true">
     <div [hidden]="selectedTab !== footerDay.selectedTab">
-        <h2 class="ion-margin lunch-margin">Midi</h2>
+        <h2 class="ion-margin meal-margin-top">Matin</h2>
+        <app-week-meal-card [meal]="meals[todayBreakFastIndex]" (click)="goToRecipe(todayLunchIndex)"
+                            [showSides]="true"></app-week-meal-card>
+
+        <h2 class="ion-margin meal-margin-top">Midi</h2>
         <app-week-meal-card [meal]="meals[todayLunchIndex]" (click)="goToRecipe(todayLunchIndex)"
                             [showSides]="true"></app-week-meal-card>
 
-        <h2 class="ion-margin dinner-margin">Soir</h2>
+        <h2 class="ion-margin meal-margin-top">Soir</h2>
         <app-week-meal-card [meal]="meals[todayDinnerIndex]" (click)="goToRecipe(todayDinnerIndex)"
                             [showSides]="true"></app-week-meal-card>
     </div>
@@ -24,7 +28,7 @@
             <ion-item-sliding *ngFor="let weekMeal of meals; let i = index">
                 <ion-item class="week-meal-item">
                     <div class="meal-wrapper" (click)="gotToMeal(i)">
-                        <div class="meal-day">{{getDay(i)}}</div>
+                        <div class="meal-day">{{getDay(weekMeal.weekDayIndex)}}</div>
                         <div class="meal-detail">
                             <div class="meal-recipe">
                                 {{weekMeal?.recipe?.name}}
@@ -45,13 +49,10 @@
             </ion-item-sliding>
         </ion-reorder-group>
     </div>
-    <div [hidden]="selectedTab !== footerGrocery.selectedTab">
-        <app-week-grocery-list [meals]="meals"></app-week-grocery-list>
-    </div>
 </ion-content>
 
 <app-footer-tab
         selectedTab="{{selectedTab}}"
         (elementSelect)="selectedTab = $event"
-        [footerElements]="[footerDay, footerWeek, footerGrocery]">
+        [footerElements]="[footerDay, footerWeek]">
 </app-footer-tab>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractItemPage } from "../../../../shared/pages/abstract-item-page";
 import { User } from "@models/user.model";
-import { getAllRoles, getRoleStringified, Role } from "@models/role.enum";
+import { getAllRoles, getRoleStringified, Role } from "@models/enums/role.enum";
 import { FormBuilder } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { FoodAuthService } from "@services/food-auth.service";
@@ -11,7 +11,7 @@ import { UserRestService } from "@services/user-rest.service";
 import { ModalController } from "@ionic/angular";
 import { GroupSelectorModalComponent } from "../../components/group-selector-modal/group-selector-modal.component";
 import { ResetPasswordModalComponent } from "../../components/reset-password-modal/reset-password-modal.component";
-import { getAllPrivileges, Privilege } from "@models/privilege.enum";
+import { getAllPrivileges, Privilege } from "@models/enums/privilege.enum";
 
 @Component({
     selector: 'app-user-item-page',

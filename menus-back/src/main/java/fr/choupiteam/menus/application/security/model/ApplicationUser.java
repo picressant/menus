@@ -3,6 +3,7 @@ package fr.choupiteam.menus.application.security.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import fr.choupiteam.menus.application.group.model.Group;
+import fr.choupiteam.menus.application.week.model.WeekDayEnum;
 import fr.choupiteam.menus.infrastructure.annotation.Searchable;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
@@ -38,6 +39,8 @@ public class ApplicationUser implements UserDetails {
     private List<Privilege> privileges;
 
     private String googleId;
+
+    private List<WeekDayEnum> daysToShow;
 
     @DBRef
     private Group group;
@@ -152,5 +155,13 @@ public class ApplicationUser implements UserDetails {
 
     public void setPrivileges(List<Privilege> privileges) {
         this.privileges = privileges;
+    }
+
+    public List<WeekDayEnum> getDaysToShow() {
+        return daysToShow;
+    }
+
+    public void setDaysToShow(List<WeekDayEnum> daysToShow) {
+        this.daysToShow = daysToShow;
     }
 }
