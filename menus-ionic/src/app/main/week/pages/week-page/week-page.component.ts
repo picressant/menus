@@ -174,9 +174,11 @@ export class WeekPageComponent {
             buttons: [
                 {
                     text: 'Annuler',
-                    role: "cancel"
+                    role: "cancel",
+                    cssClass: "color-medium"
                 }, {
                     text: 'Valider',
+                    cssClass: "color-dark",
                     handler: (alertData) => {
                         user.daysToShow = alertData;
                         this.userService.saveUser(user).subscribe(user => {

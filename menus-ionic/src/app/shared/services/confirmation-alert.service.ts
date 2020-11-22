@@ -20,10 +20,10 @@ export class ConfirmationAlertService {
                 {
                     text: 'Annuler',
                     role: 'cancel',
-                    cssClass: 'cancel'
+                    cssClass: "color-medium"
                 }, {
-                    cssClass: 'confirmation',
                     text: 'Okay',
+                    cssClass: "color-dark",
                     handler: () => {
                         onConfirm();
                     }

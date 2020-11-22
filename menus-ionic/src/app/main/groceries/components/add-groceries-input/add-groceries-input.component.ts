@@ -27,7 +27,6 @@ export class AddGroceriesInputComponent implements OnInit {
     added = new EventEmitter<GroceryItem>();
 
 
-
     constructor(
         private ingredientRest: IngredientRestService,
         private cdr: ChangeDetectorRef,
@@ -79,11 +78,13 @@ export class AddGroceriesInputComponent implements OnInit {
                 buttons: [
                     {
                         text: 'Créer',
+                        cssClass: "color-dark",
                         handler: () => {
                             this.addNewIngredient();
                         }
                     }, {
                         text: 'Valider',
+                        cssClass: "color-dark",
                         handler: (alertData) => {
                             this.emitIngredient(alertData);
                         }
@@ -96,14 +97,16 @@ export class AddGroceriesInputComponent implements OnInit {
     }
 
     private emitIngredient(ingredient: Ingredient) {
-        this.currentItem = new GroceryItem();
-        this.currentItem.ingredient = ingredient;
-        this.currentItem.quantity = this.form.controls.quantity.value;
+        if (ingredient) {
+            this.currentItem = new GroceryItem();
+            this.currentItem.ingredient = ingredient;
+            this.currentItem.quantity = this.form.controls.quantity.value;
 
-        this.added.emit(this.currentItem);
+            this.added.emit(this.currentItem);
 
-        this.currentItem = null;
-        this.form.reset();
+            this.currentItem = null;
+            this.form.reset();
+        }
     }
 
     async addNewIngredient() {
