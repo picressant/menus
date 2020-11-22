@@ -63,7 +63,7 @@ export class FoodAuthService {
             (response) => {
                 this.setToken(response.token);
                 this.dismissLoading();
-                this.router.navigate(['/main/recipe']);
+                this.router.navigate(['/main/week']);
             },
             () => this.dismissLoading()
         );
