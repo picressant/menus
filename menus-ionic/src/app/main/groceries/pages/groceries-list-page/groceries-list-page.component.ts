@@ -6,9 +6,9 @@ import { GroceryItem } from "@models/grocery-item.model";
 import { WeekService } from "@services/week.service";
 import { GroceriesRestService } from "@services/groceries-rest.service";
 import { PopoverController } from "@ionic/angular";
-import { OptionPopoverComponent } from "../../components/option-popover/option-popover.component";
 import { ShopSection } from "@models/shop-section.model";
 import { Ingredient } from "@models/ingredient.model";
+import { OptionPopoverComponent } from "@components/popover/option-popover/option-popover.component";
 
 @Component({
     selector: 'app-groceries-list-page',
@@ -128,10 +128,18 @@ export class GroceriesListPageComponent implements OnInit {
     }
 
     async showOptions(event: any) {
+        const options = [
+            {clickedResult: "RESET", text: "Réinitialiser la liste"},
+            {clickedResult: "EDIT", text: "Éditer la liste"}
+        ];
+
         const popover = await this.popoverController.create({
             component: OptionPopoverComponent,
             event: event,
-            translucent: true
+            translucent: true,
+            componentProps: {
+                options
+            }
         });
         popover.present();
 

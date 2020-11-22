@@ -4,7 +4,6 @@ import { GroceriesListPageComponent } from "./pages/groceries-list-page/grocerie
 import { IonicModule } from "@ionic/angular";
 import { SharedModule } from "../../shared/shared.module";
 import { LayoutModule } from "../layout/layout.module";
-import { OptionPopoverComponent } from "./components/option-popover/option-popover.component";
 import { AddGroceriesInputComponent } from "./components/add-groceries-input/add-groceries-input.component";
 import { ReactiveFormsModule } from "@angular/forms";
 
@@ -13,7 +12,6 @@ import { ReactiveFormsModule } from "@angular/forms";
 @NgModule({
   declarations: [
       GroceriesListPageComponent,
-      OptionPopoverComponent,
       AddGroceriesInputComponent
   ],
     imports: [

@@ -22,8 +22,8 @@ export enum MealDay {
     SUNDAY_DINNER = 20
 }
 
-export function getMealDayStringified(mealDay: MealDay): string {
-    switch (mealDay.valueOf()) {
+export function getMealDayStringified(value: number): string {
+    switch (value) {
         case 0:
             return "Lundi matin";
         case 1:

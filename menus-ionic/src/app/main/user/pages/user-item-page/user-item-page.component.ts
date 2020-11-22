@@ -6,7 +6,7 @@ import { FormBuilder } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { FoodAuthService } from "@services/food-auth.service";
 import { ToasterService } from "@services/toaster.service";
-import { EMPTY, forkJoin, Observable } from "rxjs";
+import { forkJoin, Observable } from "rxjs";
 import { UserRestService } from "@services/user-rest.service";
 import { ModalController } from "@ionic/angular";
 import { GroupSelectorModalComponent } from "../../components/group-selector-modal/group-selector-modal.component";
@@ -95,7 +95,7 @@ export class UserItemPageComponent extends AbstractItemPage<User> implements OnI
 
     private _saveData() {
         if (this.imgPreviewURL != null) {
-           forkJoin([
+            forkJoin([
                 this.userService.storeAvatar(this.id, this.storeCurrentImages[0]),
                 this.save$
             ]).subscribe(([res, user]) => {

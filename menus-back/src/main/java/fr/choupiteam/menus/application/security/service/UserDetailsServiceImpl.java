@@ -3,6 +3,7 @@ package fr.choupiteam.menus.application.security.service;
 import fr.choupiteam.menus.application.pager.model.Pager;
 import fr.choupiteam.menus.application.security.model.ApplicationUser;
 import fr.choupiteam.menus.application.security.model.Privilege;
+import fr.choupiteam.menus.application.week.model.WeekDayEnum;
 import fr.choupiteam.menus.infrastructure.repository.ApplicationUserRepository;
 import fr.choupiteam.menus.infrastructure.repository.UserPictureRepository;
 import org.apache.commons.io.IOUtils;
@@ -25,6 +26,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.PostConstruct;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -142,6 +144,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     }
 
     public ApplicationUser createUser(ApplicationUser user) {
+        user.setDaysToShow(Arrays.asList(WeekDayEnum.values()));
         return this.applicationUserRepository.insert(user);
     }
 

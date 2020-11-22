@@ -18,6 +18,7 @@ import { IngredientListComponent } from "@components/lists/ingredient-list/ingre
 import { HasPrivilegeDirective } from "./directives/has-privilege.directive";
 import { UnitModalComponent } from "../main/parameters/components/unit-modal/unit-modal.component";
 import { IngredientModalComponent } from "@components/modals/ingredient-modal/ingredient-modal.component";
+import { OptionPopoverComponent } from "@components/popover/option-popover/option-popover.component";
 
 
 @NgModule({
@@ -31,6 +32,7 @@ import { IngredientModalComponent } from "@components/modals/ingredient-modal/in
         RecipeItemCardComponent,
         SideListComponent,
         IngredientListComponent,
+        OptionPopoverComponent,
 
         UnitModalComponent,
         IngredientModalComponent,
@@ -56,6 +58,7 @@ import { IngredientModalComponent } from "@components/modals/ingredient-modal/in
         RecipeListComponent,
         SideListComponent,
         IngredientListComponent,
+        OptionPopoverComponent,
 
         UnitModalComponent,
         IngredientModalComponent,

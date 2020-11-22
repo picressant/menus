@@ -4,28 +4,36 @@
             <ion-menu-button></ion-menu-button>
         </ion-buttons>
         <ion-title>Planning</ion-title>
+        <ion-buttons slot="end">
+            <ion-button (click)="showOptions($event)">
+                <ion-icon name="ellipsis-vertical-outline"></ion-icon>
+            </ion-button>
+        </ion-buttons>
     </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
     <div [hidden]="selectedTab !== footerDay.selectedTab">
-        <h2 class="ion-margin meal-margin-top">Matin</h2>
+        <h2 class="ion-margin meal-margin-top" [hidden]="isHidden(todayBreakFastIndex)">Matin</h2>
         <app-week-meal-card [meal]="meals[todayBreakFastIndex]" (click)="goToRecipe(todayLunchIndex)"
-                            [showSides]="true"></app-week-meal-card>
+                            [showSides]="true"
+                            [hidden]="isHidden(todayBreakFastIndex)"></app-week-meal-card>
 
-        <h2 class="ion-margin meal-margin-top">Midi</h2>
+        <h2 class="ion-margin meal-margin-top" [hidden]="isHidden(todayLunchIndex)">Midi</h2>
         <app-week-meal-card [meal]="meals[todayLunchIndex]" (click)="goToRecipe(todayLunchIndex)"
-                            [showSides]="true"></app-week-meal-card>
+                            [showSides]="true"
+                            [hidden]="isHidden(todayLunchIndex)"></app-week-meal-card>
 
-        <h2 class="ion-margin meal-margin-top">Soir</h2>
+        <h2 class="ion-margin meal-margin-top" [hidden]="isHidden(todayDinnerIndex)">Soir</h2>
         <app-week-meal-card [meal]="meals[todayDinnerIndex]" (click)="goToRecipe(todayDinnerIndex)"
-                            [showSides]="true"></app-week-meal-card>
+                            [showSides]="true"
+                            [hidden]="isHidden(todayDinnerIndex)"></app-week-meal-card>
     </div>
 
     <div [hidden]="selectedTab !== footerWeek.selectedTab">
         <ion-reorder-group (ionItemReorder)="doReorder($event)" disabled="false">
             <!-- Default reorder icon, end aligned items -->
-            <ion-item-sliding *ngFor="let weekMeal of meals; let i = index">
+            <ion-item-sliding *ngFor="let weekMeal of meals; let i = index" [hidden]="isHidden(weekMeal.weekDayIndex)">
                 <ion-item class="week-meal-item">
                     <div class="meal-wrapper" (click)="gotToMeal(i)">
                         <div class="meal-day">{{getDay(weekMeal.weekDayIndex)}}</div>
