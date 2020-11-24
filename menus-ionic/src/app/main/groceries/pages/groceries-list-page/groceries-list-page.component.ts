@@ -82,14 +82,6 @@ export class GroceriesListPageComponent implements OnInit {
         this.pushGrocery();
     }
 
-//     ingredientMapOrder = (a, b) => {
-//     let ingredientA = this.ingredients[a.key];
-//     let ingredientB = this.ingredients[b.key];
-//
-//     return ingredientA.name.toLocaleUpperCase().localeCompare(ingredientB.name.toLocaleUpperCase());
-// };
-
-
     public convertToMap(item: GroceryItem) {
         if (!this.groceriesMapped.has(item.ingredient.shopSection.id)) {
             this.shopSections.push(item.ingredient.shopSection);
@@ -172,6 +164,9 @@ export class GroceriesListPageComponent implements OnInit {
             this.groceriesMapped = new Map<String, GroceryItem[]>();
 
             this.groceries.forEach(item => this.convertToMap(item));
+            this.groceriesMapped.forEach((list, key) =>
+                this.groceriesMapped.set(key, list.sort((a, b) =>
+                    a.ingredient.name.toLocaleUpperCase().localeCompare(b.ingredient.name.toLocaleUpperCase()))))
 
             this.endLoading();
         });
