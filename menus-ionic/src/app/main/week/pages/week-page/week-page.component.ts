@@ -52,6 +52,8 @@ export class WeekPageComponent {
         private userService: UserRestService
     ) {
         this.meals = this.weekService.meals$.getValue();
+        this.currentUser = this.authService.user.getValue();
+
         this.changeTodayMeal();
         this._loadMealsToShow();
 
@@ -61,7 +63,6 @@ export class WeekPageComponent {
             this._loadMealsToShow();
         });
 
-        this.currentUser = this.authService.user.getValue();
         this.authService.user.subscribe(u => {
             this.currentUser = u;
             this._loadMealsToShow();

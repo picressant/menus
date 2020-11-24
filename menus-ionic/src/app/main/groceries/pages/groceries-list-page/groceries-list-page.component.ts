@@ -38,13 +38,12 @@ export class GroceriesListPageComponent implements OnInit {
     }
 
     public reload() {
-        this.loading = true;
+        this.startLoading();
         this.groceryRestService.getGroceries().subscribe(items => {
             this.shopSections = [];
             this.groceriesMapped = new Map<String, GroceryItem[]>();
             items.forEach(item => this.convertToMap(item));
-            this.loading = false;
-            this.cdr.detectChanges();
+            this.endLoading();
         });
     }
 
@@ -53,7 +52,7 @@ export class GroceriesListPageComponent implements OnInit {
     }
 
     public resetGroceries() {
-        this.loading = true;
+        this.startLoading();
 
         const meals: WeekMeal[] = this.weekService.meals$.getValue();
         this.groceries = [];
@@ -129,8 +128,8 @@ export class GroceriesListPageComponent implements OnInit {
 
     async showOptions(event: any) {
         const options = [
-            {clickedResult: "RESET", text: "Réinitialiser la liste"},
-            {clickedResult: "EDIT", text: "Éditer la liste"}
+            { clickedResult: "RESET", text: "Réinitialiser la liste" },
+            { clickedResult: "EDIT", text: "Éditer la liste" }
         ];
 
         const popover = await this.popoverController.create({
@@ -155,8 +154,7 @@ export class GroceriesListPageComponent implements OnInit {
     }
 
     onAddIngredient(item: GroceryItem) {
-        this.loading = true;
-        this.cdr.detectChanges();
+        this.startLoading();
 
         this.addToList(item.ingredient, item.quantity, 1);
         this.pushGrocery();
@@ -175,15 +173,24 @@ export class GroceriesListPageComponent implements OnInit {
 
             this.groceries.forEach(item => this.convertToMap(item));
 
-            this.loading = false;
-            this.cdr.detectChanges();
+            this.endLoading();
         });
     }
 
-    onCheckItem(event: any, item: GroceryItem) {
+    private endLoading() {
+        this.loading = false;
+        this.cdr.detectChanges();
+    }
+
+    private startLoading() {
         this.loading = true;
+        this.cdr.detectChanges();
+    }
+
+    onCheckItem(event: any, item: GroceryItem) {
+        this.startLoading();
         item.checked = event.detail.checked;
 
-        this.groceryRestService.updateGroceryItem(item).subscribe(() => this.loading = false);
+        this.groceryRestService.updateGroceryItem(item).subscribe(() => this.endLoading());
     }
 }
