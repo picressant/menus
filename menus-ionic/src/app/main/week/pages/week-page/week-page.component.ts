@@ -135,7 +135,8 @@ export class WeekPageComponent {
 
     async showOptions(event: any) {
         const options = [
-            { clickedResult: "DAYS", text: "Choisir les jours à afficher" }
+            { clickedResult: "DAYS", text: "Choisir les jours à afficher" },
+            { clickedResult: "DELETE", text: "Tout supprimer" }
         ];
 
         const popover = await this.popoverController.create({
@@ -152,6 +153,9 @@ export class WeekPageComponent {
         if (data && data.option) {
             if (data.option === "DAYS") {
                 this.showDaysOptions();
+            }
+            else if (data.option === "DELETE") {
+                this.confirmationService.confirm("Supprimer tous les repas ?", () => this.weekService.deleteAll());
             }
         }
     }

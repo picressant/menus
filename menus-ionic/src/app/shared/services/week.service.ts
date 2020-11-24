@@ -64,13 +64,24 @@ export class WeekService {
         this.saveWeek();
     }
 
+    public deleteAll() {
+        this._meals.forEach((meal, i) => this.resetMeal(i));
+
+        this.meals$.next(this._meals);
+        this.saveWeek();
+    }
+
+    private resetMeal(i: number) {
+        this._meals[i].recipe = null;
+        this._meals[i].sideDishes = [];
+        this._meals[i].persons = 2;
+    }
+
     public deleteMeal(i: number) {
         if (this._meals[i].recipe && Recipe.isRecipeFree(this._meals[i].recipe))
             this.recipeRestService.deleteRecipe(this._meals[i].recipe.id).subscribe();
 
-        this._meals[i].recipe = null;
-        this._meals[i].sideDishes = [];
-        this._meals[i].persons = 2;
+        this.resetMeal(i);
 
         this.meals$.next(this._meals);
         this.saveWeek();
