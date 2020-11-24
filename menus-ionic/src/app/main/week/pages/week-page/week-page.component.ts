@@ -36,7 +36,8 @@ export class WeekPageComponent {
 
 
     meals: WeekMeal[] = [];
-    isDeleting: number = undefined;
+    mealsToShow: WeekMeal[] = [];
+    mealsIndexesShown: MealDay[] = [];
 
     private currentUser: User;
 
@@ -52,14 +53,31 @@ export class WeekPageComponent {
     ) {
         this.meals = this.weekService.meals$.getValue();
         this.changeTodayMeal();
+        this._loadMealsToShow();
 
         this.weekService.meals$.subscribe(m => {
             this.meals = m;
             this.changeTodayMeal();
+            this._loadMealsToShow();
         });
 
         this.currentUser = this.authService.user.getValue();
-        this.authService.user.subscribe(u => this.currentUser = u);
+        this.authService.user.subscribe(u => {
+            this.currentUser = u;
+            this._loadMealsToShow();
+        });
+
+    }
+
+    private _loadMealsToShow() {
+        this.mealsToShow = [];
+        this.mealsIndexesShown = [];
+        this.meals.forEach(meal => {
+            if (!this.isHidden(meal.weekDayIndex)) {
+                this.mealsToShow.push(meal);
+                this.mealsIndexesShown.push(meal.weekDayIndex);
+            }
+        });
     }
 
     changeTodayMeal() {
@@ -85,16 +103,12 @@ export class WeekPageComponent {
     }
 
     isHidden(mealDay: MealDay) {
-        return this.authService.user.getValue().daysToShow.findIndex(m => m.valueOf() === mealDay.valueOf()) === -1;
-    }
-
-    clearRecipe(index: number) {
-        this.weekService.deleteMeal(index);
+        return this.currentUser.daysToShow.findIndex(m => m.valueOf() === mealDay.valueOf()) === -1;
     }
 
     doReorder(event: any) {
-        const itemToMove = this.meals.splice(event.detail.from, 1)[0];
-        this.meals.splice(event.detail.to, 0, itemToMove);
+        const itemToMove = this.mealsToShow.splice(event.detail.from, 1)[0];
+        this.mealsToShow.splice(event.detail.to, 0, itemToMove);
 
         event.detail.complete();
 
@@ -107,24 +121,16 @@ export class WeekPageComponent {
     }
 
     saveWeek() {
-        this.meals.forEach((meal, index) => meal.weekDayIndex = index);
+        this.mealsToShow.forEach((meal, index) => meal.weekDayIndex = this.mealsIndexesShown[index]);
         this.weekService.saveMeals(this.meals);
     }
 
-    async deleteWeekMeal(i: number) {
-        await this.confirmationService.confirm("Supprimer le repas de " + this.getDay(i) + " ?", () => this.weekService.deleteMeal(i));
+    gotToMeal(meal: WeekMeal) {
+        this.router.navigate(["main/week", meal.weekDayIndex.valueOf()]);
     }
 
-    gotToMeal(i: number) {
-        this.isDeleting = undefined;
-        this.router.navigate(["main/week", i]);
-    }
-
-    async pressEnded(i: number) {
-        if (this.isDeleting === i) {
-            await this.confirmationService.confirm("Supprimer le repas de " + this.getDay(i) + " ?", () => this.weekService.deleteMeal(i));
-            this.isDeleting = undefined;
-        }
+    async deleteWeekMeal(meal: WeekMeal) {
+        await this.confirmationService.confirm("Supprimer le repas de " + this.getDay(meal.weekDayIndex.valueOf()) + " ?", () => this.weekService.deleteMeal(meal.weekDayIndex.valueOf()));
     }
 
     async showOptions(event: any) {
@@ -182,8 +188,8 @@ export class WeekPageComponent {
                     handler: (alertData) => {
                         user.daysToShow = alertData;
                         this.userService.saveUser(user).subscribe(user => {
-                           if (this.authService.user.getValue().id === user.id)
-                               this.authService.user.next(user);
+                            if (this.authService.user.getValue().id === user.id)
+                                this.authService.user.next(user);
                         });
                     }
                 }

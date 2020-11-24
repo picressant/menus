@@ -11,6 +11,7 @@ import { BookRecipe } from "@models/book-recipe.model";
 import { Recipe } from "@models/recipe.model";
 import { IngredientModalSelectorComponent } from "@components/selectors/ingredient-modal-selector/ingredient-modal-selector.component";
 import { RecipeRestService } from "@services/recipe-rest.service";
+import { getMealDayStringified } from "@models/enums/meal-day.enum";
 
 @Component({
     selector: 'app-modify-meal-page',
@@ -284,5 +285,10 @@ export class ModifyMealPageComponent implements OnInit {
             this.isLongPressed = shake;
             this.cdr.detectChanges();
         }
+    }
+
+    getDay() {
+        if (this.meal)
+            return getMealDayStringified(this.meal.weekDayIndex);
     }
 }

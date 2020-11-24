@@ -3,7 +3,7 @@
         <ion-buttons slot="start">
             <ion-back-button defaultHref="/main/week"></ion-back-button>
         </ion-buttons>
-        <ion-title>{{ isEditing ? 'Modifier le repas' : 'Repas' }}</ion-title>
+        <ion-title>{{ isEditing ? 'Modifier ' : ' ' + getDay()}}</ion-title>
         <ion-buttons slot="end" *ngIf="isEditing">
             <ion-button (click)="submit()">
                 <ion-icon name="checkmark-sharp"></ion-icon>

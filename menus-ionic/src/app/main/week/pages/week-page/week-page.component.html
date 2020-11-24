@@ -33,9 +33,9 @@
     <div [hidden]="selectedTab !== footerWeek.selectedTab">
         <ion-reorder-group (ionItemReorder)="doReorder($event)" disabled="false">
             <!-- Default reorder icon, end aligned items -->
-            <ion-item-sliding *ngFor="let weekMeal of meals; let i = index" [hidden]="isHidden(weekMeal.weekDayIndex)">
+            <ion-item-sliding *ngFor="let weekMeal of mealsToShow; let i = index">
                 <ion-item class="week-meal-item">
-                    <div class="meal-wrapper" (click)="gotToMeal(i)">
+                    <div class="meal-wrapper" (click)="gotToMeal(weekMeal)">
                         <div class="meal-day">{{getDay(weekMeal.weekDayIndex)}}</div>
                         <div class="meal-detail">
                             <div class="meal-recipe">
@@ -52,7 +52,7 @@
                     <ion-reorder slot="end"></ion-reorder>
                 </ion-item>
                 <ion-item-options side="end">
-                    <ion-item-option color="danger" (click)="deleteWeekMeal(i)">Supprimer</ion-item-option>
+                    <ion-item-option color="danger" (click)="deleteWeekMeal(weekMeal)">Supprimer</ion-item-option>
                 </ion-item-options>
             </ion-item-sliding>
         </ion-reorder-group>
