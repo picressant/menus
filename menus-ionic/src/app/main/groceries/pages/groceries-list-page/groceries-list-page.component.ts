@@ -18,7 +18,6 @@ import { OptionPopoverComponent } from "@components/popover/option-popover/optio
 })
 export class GroceriesListPageComponent implements OnInit {
 
-    groceries: GroceryItem[] = [];
     groceriesMapped: Map<String, GroceryItem[]>;
     loading = false;
     isEditing: boolean = false;
@@ -37,13 +36,15 @@ export class GroceriesListPageComponent implements OnInit {
         this.reload();
     }
 
-    public reload() {
+    public reload(event: any = null) {
         this.startLoading();
         this.groceryRestService.getGroceries().subscribe(items => {
             this.shopSections = [];
             this.groceriesMapped = new Map<String, GroceryItem[]>();
             items.forEach(item => this.convertToMap(item));
             this.endLoading();
+            if (event)
+                event.target.complete();
         });
     }
 
@@ -55,7 +56,7 @@ export class GroceriesListPageComponent implements OnInit {
         this.startLoading();
 
         const meals: WeekMeal[] = this.weekService.meals$.getValue();
-        this.groceries = [];
+
         this.shopSections = [];
         this.groceriesMapped = new Map<String, GroceryItem[]>();
 
@@ -153,17 +154,14 @@ export class GroceriesListPageComponent implements OnInit {
     }
 
     private pushGrocery() {
-        this.groceries = [];
+        let groceries = [];
+        Array.from(this.groceriesMapped.values()).forEach(items => groceries = groceries.concat(items));
 
-        Array.from(this.groceriesMapped.values()).forEach(items => this.groceries = this.groceries.concat(items));
-
-        this.groceryRestService.pushGroceries(this.groceries).subscribe(items => {
-            this.groceries = items;
-
+        this.groceryRestService.pushGroceries(groceries).subscribe(items => {
             this.shopSections = [];
             this.groceriesMapped = new Map<String, GroceryItem[]>();
 
-            this.groceries.forEach(item => this.convertToMap(item));
+            items.forEach(item => this.convertToMap(item));
             this.groceriesMapped.forEach((list, key) =>
                 this.groceriesMapped.set(key, list.sort((a, b) =>
                     a.ingredient.name.toLocaleUpperCase().localeCompare(b.ingredient.name.toLocaleUpperCase()))))
@@ -187,5 +185,9 @@ export class GroceriesListPageComponent implements OnInit {
         item.checked = event.detail.checked;
 
         this.groceryRestService.updateGroceryItem(item).subscribe(() => this.endLoading());
+    }
+
+    doRefresh(event: any) {
+        this.reload(event);
     }
 }
