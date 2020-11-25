@@ -1,4 +1,4 @@
 <ion-avatar>
-  <img [src]="'recipe/' + recipe.id + '/picture' | secure | async" (load)="onImageLoad()" [class.hidden]="!loadedImg">
+  <img [src]="'recipe/' + recipe?.id + '/picture' | secure | async" (load)="onImageLoad()" [class.hidden]="!loadedImg">
   <ion-spinner name="bubbles" *ngIf="!loadedImg"></ion-spinner>
 </ion-avatar>
