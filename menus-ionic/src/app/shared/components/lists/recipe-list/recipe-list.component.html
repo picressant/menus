@@ -8,6 +8,8 @@
 <app-recipe-item-card [recipe]="recipe"  *ngFor="let recipe of recipes" (click)="onClickRecipe(recipe)"
 ></app-recipe-item-card>
 
+<ion-spinner name="bubbles" *ngIf="firstLoading"></ion-spinner>
+
 <ion-infinite-scroll threshold="100px" (ionInfinite)="onScrollDown($event)">
   <ion-infinite-scroll-content
           loadingSpinner="bubbles">
