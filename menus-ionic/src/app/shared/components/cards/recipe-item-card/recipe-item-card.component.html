@@ -1,10 +1,7 @@
 <ion-card>
     <ng-container *ngIf="recipe">
-        <div class="img-wrapper ion-margin">
-            <ion-avatar>
-                <img [src]="'recipe/' + recipe.id + '/picture' | secure | async">
-            </ion-avatar>
-        </div>
+        <app-recipe-card-avatar class="ion-margin" [recipe]="recipe"></app-recipe-card-avatar>
+
         <div class="menu-titles">
             {{recipe.name}}
         </div>

@@ -19,6 +19,7 @@ import { HasPrivilegeDirective } from "./directives/has-privilege.directive";
 import { UnitModalComponent } from "../main/parameters/components/unit-modal/unit-modal.component";
 import { IngredientModalComponent } from "@components/modals/ingredient-modal/ingredient-modal.component";
 import { OptionPopoverComponent } from "@components/popover/option-popover/option-popover.component";
+import { RecipeCardAvatarComponent } from "@components/cards/recipe-card-avatar/recipe-card-avatar.component";
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { OptionPopoverComponent } from "@components/popover/option-popover/optio
 
         LongPressDirective,
         HasRoleDirective,
-        HasPrivilegeDirective
+        HasPrivilegeDirective,
+        RecipeCardAvatarComponent
     ],
     imports: [
         CommonModule,
@@ -65,7 +67,8 @@ import { OptionPopoverComponent } from "@components/popover/option-popover/optio
 
         LongPressDirective,
         HasRoleDirective,
-        HasPrivilegeDirective
+        HasPrivilegeDirective,
+        RecipeCardAvatarComponent
     ]
 })
 export class SharedModule {

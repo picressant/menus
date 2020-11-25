@@ -12,18 +12,15 @@
       flex-grow: 1;
       display: flex;
       flex-direction: column;
-
-      &.no-side {
-        justify-content: center;
-      }
+      justify-content: center;
 
       .menu-meal-title {
-        margin: 10px 0;
         font-size: 22px;
         font-weight: bold;
       }
 
       .menu-sides {
+        margin-top: 10px;
         .side {
           font-style: italic;
           margin-right: 5px;

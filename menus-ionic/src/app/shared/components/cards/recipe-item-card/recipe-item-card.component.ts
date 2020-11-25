@@ -13,10 +13,15 @@ export class RecipeItemCardComponent implements OnInit {
     recipe: BookRecipe;
     imgStyles: any;
 
+    loadedImg = false;
+
     constructor() {
     }
 
     ngOnInit() {
     }
 
+    onImageLoad(event: Event) {
+        this.loadedImg = true;
+    }
 }

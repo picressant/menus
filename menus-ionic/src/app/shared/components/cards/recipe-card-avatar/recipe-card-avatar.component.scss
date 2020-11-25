@@ -1,0 +1,16 @@
+:host {
+
+  ion-avatar {
+    position: relative;
+
+    ion-spinner {
+      position: absolute;
+      right: 14px;
+      top: 18px;
+    }
+  }
+
+  .hidden {
+    display: none;
+  }
+}
