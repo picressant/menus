@@ -1,10 +1,10 @@
-import { ChangeDetectorRef, Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { IngredientRestService } from "@services/ingredient-rest.service";
 import { Pager } from "@models/pager/pager.model";
 import { Ingredient } from "@models/ingredient.model";
 import { GroceryItem } from "@models/grocery-item.model";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { AlertController, ModalController } from "@ionic/angular";
+import { AlertController, IonInput, ModalController } from "@ionic/angular";
 import { IngredientModalComponent } from "@components/modals/ingredient-modal/ingredient-modal.component";
 import { ShopSection } from "@models/shop-section.model";
 import { ShopSectionRestService } from "@services/shop-section-rest.service";
@@ -15,7 +15,6 @@ import { ShopSectionRestService } from "@services/shop-section-rest.service";
     styleUrls: ['./add-groceries-input.component.scss'],
 })
 export class AddGroceriesInputComponent implements OnInit {
-
     private pager: Pager;
     searchingIngredients: Ingredient[] = [];
     shopSections: ShopSection[] = [];
@@ -26,6 +25,9 @@ export class AddGroceriesInputComponent implements OnInit {
     @Output()
     added = new EventEmitter<GroceryItem>();
 
+    @ViewChild("inputQ")
+    private inputQuantity: IonInput;
+
 
     constructor(
         private ingredientRest: IngredientRestService,
@@ -33,7 +35,8 @@ export class AddGroceriesInputComponent implements OnInit {
         private fb: FormBuilder,
         private alertController: AlertController,
         private modalController: ModalController,
-        private shopSectionRest: ShopSectionRestService
+        private shopSectionRest: ShopSectionRestService,
+        private el: ElementRef
     ) {
         this.pager = new Pager(5);
         this.form = fb.group({
@@ -51,9 +54,7 @@ export class AddGroceriesInputComponent implements OnInit {
             return;
 
         if (this.currentItem) {
-            this.added.emit(this.currentItem);
-            this.currentItem = null;
-            this.form.reset();
+            this.emitIngredient(this.currentItem.ingredient);
         }
         else {
             // On indique qu'on a pas saisi un élément connu
@@ -129,7 +130,7 @@ export class AddGroceriesInputComponent implements OnInit {
         }
     }
 
-    onClickSuggestion(ingredient: Ingredient) {
+    async onClickSuggestion(ingredient: Ingredient) {
         this.currentItem = new GroceryItem();
         this.currentItem.ingredient = ingredient;
         this.currentItem.quantity = 1;
@@ -139,6 +140,8 @@ export class AddGroceriesInputComponent implements OnInit {
         this.form.controls.quantity.setValue(1);
 
         this.cdr.detectChanges();
+
+        this.inputQuantity.getInputElement().then(input => input.select());
     }
 
     onInputChange(event: any) {
@@ -150,5 +153,9 @@ export class AddGroceriesInputComponent implements OnInit {
             this.searchingIngredients = pageable.content;
             this.cdr.detectChanges();
         });
+    }
+
+    onClickQuantity() {
+        this.inputQuantity.getInputElement().then(input => input.select());
     }
 }

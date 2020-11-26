@@ -6,7 +6,11 @@
     <div class="edit-wrapper" [formGroup]="form">
         <ion-input type="text" class="ingredient" placeholder="Ajouter..." (ionChange)="onInputChange($event)"
                    debounce="500" formControlName="name"></ion-input>
-        <ion-input type="number" class="quantity" placeholder="X" formControlName="quantity"></ion-input>
+        <ion-input #inputQ
+                   (click)="onClickQuantity()"
+                   type="number"
+                   class="quantity"
+                   placeholder="X" formControlName="quantity" onfocus="this.select();"></ion-input>
         <ion-icon name="add-outline" (click)="addElement()" class="submit"
                   [color]="form.invalid ? 'danger' : 'dark'"></ion-icon>
     </div>
