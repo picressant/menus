@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { isNullOrUndefined } from "util";
 import { AbstractItemPage } from "../../../../shared/pages/abstract-item-page";
 import { Recipe } from "@models/recipe.model";
@@ -15,6 +15,7 @@ import { tap } from "rxjs/operators";
 import { removeFromArray } from "../../../../shared/helpers/remove-array-element.function";
 import { ConfirmationAlertService } from "@services/confirmation-alert.service";
 import { BookRecipe } from "@models/book-recipe.model";
+import { IngredientsQuantityListComponent } from "@components/lists/ingredients-quantity-list/ingredients-quantity-list.component";
 
 @Component({
     selector: 'app-recipe-item-page',
@@ -49,6 +50,9 @@ export class RecipeItemPageComponent extends AbstractItemPage<Recipe> implements
 
     selectedTab = this.footerOverview.selectedTab;
     isDeleting: number;
+
+    @ViewChild(IngredientsQuantityListComponent)
+    private ingredientListComponent: IngredientsQuantityListComponent;
 
 
     constructor(private fb: FormBuilder,
@@ -179,6 +183,7 @@ export class RecipeItemPageComponent extends AbstractItemPage<Recipe> implements
                 this.form.controls.ingredients.value.push(ingredientQuantity);
                 this.form.controls.ingredients.setValue(this.form.controls.ingredients.value.sort((a, b) => a.ingredient.name.localeCompare(b.ingredient.name)));
 
+                setTimeout(() => this.ingredientListComponent.focusQuantity(ingredientQuantity.ingredient), 200);
             }
         }
     }

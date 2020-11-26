@@ -15,7 +15,7 @@
 <ion-content [fullscreen]="true">
     <div [hidden]="selectedTab !== footerDay.selectedTab">
         <h2 class="ion-margin meal-margin-top" [hidden]="isHidden(todayBreakFastIndex)">Matin</h2>
-        <app-week-meal-card [meal]="meals[todayBreakFastIndex]" (click)="goToRecipe(todayLunchIndex)"
+        <app-week-meal-card [meal]="meals[todayBreakFastIndex]" (click)="goToRecipe(todayBreakFastIndex)"
                             [showSides]="true"
                             [hidden]="isHidden(todayBreakFastIndex)"></app-week-meal-card>
 

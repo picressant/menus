@@ -10,7 +10,9 @@
                     type="number"
                     AutoSizeInput
                     [(ngModel)]="ingredientQuantity.quantity"
-                    *ngIf="!isReadonly">
+                    *ngIf="!isReadonly"
+                    onfocus="this.select();"
+                    [id]="'ingredient_' + ingredientQuantity.ingredient.id">
             <ion-label>
                 <span *ngIf="isReadonly"> {{ingredientQuantity.quantity}} </span>
                 {{ingredientQuantity.ingredient.unit.symbol}}</ion-label>

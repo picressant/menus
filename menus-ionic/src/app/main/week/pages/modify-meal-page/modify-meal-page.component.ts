@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { WeekMeal } from "@models/week-meal.model";
 import { ActivatedRoute, Router } from "@angular/router";
 import { WeekService } from "@services/week.service";
@@ -12,6 +12,7 @@ import { Recipe } from "@models/recipe.model";
 import { IngredientModalSelectorComponent } from "@components/selectors/ingredient-modal-selector/ingredient-modal-selector.component";
 import { RecipeRestService } from "@services/recipe-rest.service";
 import { getMealDayStringified } from "@models/enums/meal-day.enum";
+import { IngredientsQuantityListComponent } from "@components/lists/ingredients-quantity-list/ingredients-quantity-list.component";
 
 @Component({
     selector: 'app-modify-meal-page',
@@ -48,6 +49,8 @@ export class ModifyMealPageComponent implements OnInit {
     ingredients: Ingredient[] = [];
     isLongPressed: boolean = false;
 
+    @ViewChild(IngredientsQuantityListComponent)
+    private ingredientsQuantityList: IngredientsQuantityListComponent;
 
     constructor(
         private route: ActivatedRoute,
@@ -273,6 +276,8 @@ export class ModifyMealPageComponent implements OnInit {
             ingredientQuantity.ingredient = data.ingredient;
             ingredientQuantity.quantity = 1;
             this.meal.recipe.ingredients.push(ingredientQuantity);
+
+            setTimeout(() => this.ingredientsQuantityList.focusQuantity(ingredientQuantity.ingredient), 200);
         }
     }
 

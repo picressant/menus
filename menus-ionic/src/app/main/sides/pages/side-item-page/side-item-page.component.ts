@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { AbstractItemPage } from "../../../../shared/pages/abstract-item-page";
 import { Observable } from "rxjs";
 import { FormBuilder } from "@angular/forms";
@@ -12,6 +12,7 @@ import { isNullOrUndefined } from "util";
 import { IngredientQuantity } from "@models/ingredient-quantity.model";
 import { IngredientModalSelectorComponent } from "@components/selectors/ingredient-modal-selector/ingredient-modal-selector.component";
 import { AlertController, ModalController } from "@ionic/angular";
+import { IngredientsQuantityListComponent } from "@components/lists/ingredients-quantity-list/ingredients-quantity-list.component";
 
 @Component({
     selector: 'app-side-item-page',
@@ -19,6 +20,9 @@ import { AlertController, ModalController } from "@ionic/angular";
     styleUrls: ['./side-item-page.component.scss'],
 })
 export class SideItemPageComponent extends AbstractItemPage<SideDish> {
+
+    @ViewChild(IngredientsQuantityListComponent)
+    private ingredientsQuantityList: IngredientsQuantityListComponent;
 
     constructor(private fb: FormBuilder,
                 private sideRest: SideDishRestService,
@@ -73,6 +77,8 @@ export class SideItemPageComponent extends AbstractItemPage<SideDish> {
                 ingredientQuantity.ingredient = data.ingredient;
                 ingredientQuantity.quantity = 1;
                 this.form.controls.ingredients.value.push(ingredientQuantity);
+
+                setTimeout(() => this.ingredientsQuantityList.focusQuantity(ingredientQuantity.ingredient), 200);
             }
         }
     }

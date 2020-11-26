@@ -1,7 +1,8 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { IngredientQuantity } from "@models/ingredient-quantity.model";
 import { IngredientModalSelectorComponent } from "@components/selectors/ingredient-modal-selector/ingredient-modal-selector.component";
 import { ModalController } from "@ionic/angular";
+import { Ingredient } from "@models/ingredient.model";
 
 @Component({
   selector: 'app-ingredients-quantity-list',
@@ -29,7 +30,8 @@ export class IngredientsQuantityListComponent implements OnInit {
   delete = new EventEmitter<IngredientQuantity>();
 
   constructor(
-      private modalController: ModalController
+      private modalController: ModalController,
+      private el: ElementRef
   ) { }
 
   ngOnInit() {}
@@ -59,5 +61,9 @@ export class IngredientsQuantityListComponent implements OnInit {
 
   private sortList() {
     this._ingredientsQuantity = this._ingredientsQuantity.sort((a, b) => a.ingredient.name.localeCompare(b.ingredient.name));
+  }
+
+  focusQuantity(ingredient: Ingredient) {
+    this.el.nativeElement.querySelector("#ingredient_" + ingredient.id).focus();
   }
 }
