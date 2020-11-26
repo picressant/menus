@@ -23,16 +23,12 @@ export class AppUpdateService {
     async showAppUpdateAlert() {
         const alert = await this.alertController.create({
             header: 'Mise à jour',
-            cssClass: 'confirmation-modal',
-            message: 'Une mise à jour est disponible. Recharger la page ?',
+            backdropDismiss: false,
+            message: 'Une mise à jour est disponible, la page doit être rechargée',
             buttons: [
                 {
-                    text: 'Ignorer',
-                    role: 'cancel',
-                    cssClass: 'cancel'
-                }, {
-                    cssClass: 'confirmation',
-                    text: 'Okay',
+                    cssClass: 'color-dark',
+                    text: 'Ok',
                     handler: () => {
                         this.doAppUpdate();
                     }
