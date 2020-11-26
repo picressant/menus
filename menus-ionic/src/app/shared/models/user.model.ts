@@ -25,7 +25,7 @@ export class User extends AbstractData {
       group: [null, Validators.required],
       role: [Role.ROLE_USER, Validators.required],
       privileges: [[]],
-      daysToShow: [[], Validators.required]
+      daysToShow: [[]]
     });
 
     return mergeFormGroups(form, AbstractData.form(fb));
