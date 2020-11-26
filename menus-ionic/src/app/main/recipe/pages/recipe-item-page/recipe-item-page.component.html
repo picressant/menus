@@ -35,12 +35,12 @@
     <div [hidden]="selectedTab !== footerOverview.selectedTab">
         <div class="file-input-wrapper">
             <div class="picture c-hand" (click)="file.click()">
-                <img [src]="imgPreviewURL" alt="Profile" height="200" width="200" *ngIf="imgPreviewURL">
+                <img [src]="imgPreviewURL" alt="Profile" [ngStyle]="imgStyles" *ngIf="imgPreviewURL">
                 <menus-loading-img
                         [styles]="imgStyles"
                         [src]="'recipe/' + id + '/picture?' + timestamp | secure | async"
                         *ngIf="!imgPreviewURL"></menus-loading-img>
-                <ion-icon name="cloud-upload-outline" class="upload-icon" *ngIf="!isReadonly"></ion-icon>
+                <ion-icon name="cloud-upload-outline" class="upload-icon" color="light" *ngIf="!isReadonly"></ion-icon>
             </div>
             <input type="file" #file (change)="preview(file.files)" [disabled]="this.form.disabled">
         </div>
