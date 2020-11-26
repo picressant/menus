@@ -239,11 +239,12 @@ export class ModifyMealPageComponent implements OnInit {
                 {
                     text: 'Annuler',
                     role: 'cancel',
-                    cssClass: 'secondary',
+                    cssClass: 'color-medium',
                     handler: () => {
                     }
                 }, {
                     text: 'Ok',
+                    cssClass: 'color-dark',
                     handler: (alertData) => {
                         if (!this.meal)
                             this.meal = new WeekMeal();

@@ -91,9 +91,9 @@ export class SideItemPageComponent extends AbstractItemPage<SideDish> {
                 {
                     text: 'Annuler',
                     role: 'cancel',
-                    cssClass: 'cancel'
+                    cssClass: 'color-medium'
                 }, {
-                    cssClass: 'confirmation',
+                    cssClass: 'color-dark',
                     text: 'Okay',
                     handler: () => {
                         this.sideRest.deleteSide(this.id).subscribe(() => {

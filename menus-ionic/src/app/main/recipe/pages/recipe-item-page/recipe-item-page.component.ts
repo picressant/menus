@@ -201,9 +201,9 @@ export class RecipeItemPageComponent extends AbstractItemPage<Recipe> implements
                 {
                     text: 'Annuler',
                     role: 'cancel',
-                    cssClass: 'cancel'
+                    cssClass: 'color-medium'
                 }, {
-                    cssClass: 'confirmation',
+                    cssClass: 'color-dark',
                     text: 'Okay',
                     handler: () => {
                         this.recipeRest.deleteRecipe(this.id).subscribe(() => {
