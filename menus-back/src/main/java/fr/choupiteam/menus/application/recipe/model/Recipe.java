@@ -39,7 +39,7 @@ public class Recipe {
      */
     @JsonSerialize(using = IngredientMapSerializer.class)
     @JsonDeserialize(using = IngredientMapDeserializer.class)
-    private Map<String, Integer> ingredients;
+    private Map<String, Float> ingredients;
 
     public Recipe() {
         this.ingredients = new HashMap<>();
@@ -61,11 +61,11 @@ public class Recipe {
         this.name = name;
     }
 
-    public Map<String, Integer> getIngredients() {
+    public Map<String, Float> getIngredients() {
         return ingredients;
     }
 
-    public void setIngredients(Map<String, Integer> ingredients) {
+    public void setIngredients(Map<String, Float> ingredients) {
         this.ingredients = ingredients;
     }
 }

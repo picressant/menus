@@ -10,18 +10,18 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class IngredientMapDeserializer extends JsonDeserializer<Map<String, Integer>> {
+public class IngredientMapDeserializer extends JsonDeserializer<Map<String, Float>> {
     @Override
-    public Map<String, Integer> deserialize(JsonParser p, DeserializationContext ctxt) throws IOException, JsonProcessingException {
+    public Map<String, Float> deserialize(JsonParser p, DeserializationContext ctxt) throws IOException, JsonProcessingException {
 
-        Map<String, Integer> map = new HashMap<>();
+        Map<String, Float> map = new HashMap<>();
 
         while (!(p.getCurrentToken() == JsonToken.END_ARRAY)) {
 
             if (p.getCurrentToken() == JsonToken.START_OBJECT && p.getCurrentName() == null) {
                 //On est dans ingredients
                 String id = "";
-                int quantity = 0;
+                float quantity = 0;
 
                 while (!(p.getCurrentName() == null && p.getCurrentToken() == JsonToken.END_OBJECT)) {
                     if (p.getCurrentName() != null && p.getCurrentName().equals("ingredient") && p.getCurrentToken() == JsonToken.START_OBJECT) {
@@ -42,7 +42,7 @@ public class IngredientMapDeserializer extends JsonDeserializer<Map<String, Inte
 
                     if (p.getCurrentToken().isScalarValue()) {
                         if (p.currentName().equals("quantity")) {
-                            quantity = p.getValueAsInt();
+                            quantity = Float.parseFloat(p.getValueAsString());
                         }
                     }
 
