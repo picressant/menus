@@ -9,6 +9,7 @@ import { PopoverController } from "@ionic/angular";
 import { ShopSection } from "@models/shop-section.model";
 import { Ingredient } from "@models/ingredient.model";
 import { OptionPopoverComponent } from "@components/popover/option-popover/option-popover.component";
+import { ConfirmationAlertService } from "@services/confirmation-alert.service";
 
 @Component({
     selector: 'app-groceries-list-page',
@@ -28,7 +29,8 @@ export class GroceriesListPageComponent implements OnInit {
         private weekService: WeekService,
         private groceryRestService: GroceriesRestService,
         private popoverController: PopoverController,
-        private cdr: ChangeDetectorRef
+        private cdr: ChangeDetectorRef,
+        private confirmationService: ConfirmationAlertService
     ) {
     }
 
@@ -138,7 +140,7 @@ export class GroceriesListPageComponent implements OnInit {
         const { data } = await popover.onWillDismiss();
         if (data && data.option) {
             if (data.option === "RESET")
-                this.resetGroceries();
+                await this.confirmationService.confirm("Voulez-vous réinitialiser la liste de course ?", () => this.resetGroceries());
             else if (data.option === "EDIT") {
                 this.isEditing = !this.isEditing;
                 this.cdr.detectChanges();
