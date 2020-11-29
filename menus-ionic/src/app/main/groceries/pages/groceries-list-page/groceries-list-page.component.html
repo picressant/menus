@@ -23,13 +23,13 @@
         <ion-list lines="full">
             <ion-item-sliding *ngFor="let item of byShopSection.value" [disabled]="!isEditing">
                 <ion-item>
-                    <ion-label  [class.crossed]="item.checked">{{item.ingredient.name}}</ion-label>
+                    <ion-label [class.crossed]="item.checked">{{item.ingredient.name}}</ion-label>
                     <ion-label  [class.crossed]="item.checked">
                         <input class="input-quantity"
                                [readOnly]="!isEditing"
                                type="number"
-                               AutoSizeInput
                                [extraWidth]="5"
+                               autoSizeInput
                                [value]="item.quantity"
                                (change)="onChangeQuantity($event, item)"
                                onfocus="this.select();">

@@ -8,7 +8,8 @@
         <ion-label class="ingredient-quantity">
             <input
                     type="number"
-                    AutoSizeInput
+                    autoSizeInput
+                    [extraWidth]="5"
                     [readOnly]="isReadonly"
                     [(ngModel)]="ingredientQuantity.quantity"
                     onfocus="this.select();"

@@ -36,6 +36,7 @@ export class GroceriesListPageComponent implements OnInit {
         private cdr: ChangeDetectorRef,
         private confirmationService: ConfirmationAlertService
     ) {
+        this.groceriesMapped = new Map<String, GroceryItem[]>();
     }
 
     ngOnInit() {
@@ -46,7 +47,7 @@ export class GroceriesListPageComponent implements OnInit {
         this.startLoading();
         this.groceryRestService.getGroceries().subscribe(items => {
             this.shopSections = [];
-            this.groceriesMapped = new Map<String, GroceryItem[]>();
+            this.groceriesMapped.clear();
             items.forEach(item => this.convertToMap(item));
             if (event)
                 event.target.complete();
@@ -72,7 +73,7 @@ export class GroceriesListPageComponent implements OnInit {
         const meals: WeekMeal[] = this.weekService.meals$.getValue();
 
         this.shopSections = [];
-        this.groceriesMapped = new Map<String, GroceryItem[]>();
+        this.groceriesMapped.clear();
 
         meals.forEach(meal => {
             if (meal !== null) {
@@ -150,7 +151,7 @@ export class GroceriesListPageComponent implements OnInit {
                 options
             }
         });
-        popover.present();
+        await popover.present();
 
         const { data } = await popover.onWillDismiss();
         if (data && data.option) {

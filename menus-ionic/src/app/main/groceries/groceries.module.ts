@@ -9,12 +9,11 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { AutoSizeInputModule } from "ngx-autosize-input";
 
 
-
 @NgModule({
-  declarations: [
-      GroceriesListPageComponent,
-      AddGroceriesInputComponent
-  ],
+    declarations: [
+        GroceriesListPageComponent,
+        AddGroceriesInputComponent
+    ],
     imports: [
         IonicModule,
         SharedModule,
@@ -24,8 +23,9 @@ import { AutoSizeInputModule } from "ngx-autosize-input";
         AutoSizeInputModule,
         FormsModule
     ],
-  exports: [
-      GroceriesListPageComponent
-  ]
+    exports: [
+        GroceriesListPageComponent
+    ]
 })
-export class GroceriesModule { }
+export class GroceriesModule {
+}

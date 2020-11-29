@@ -1,13 +1,14 @@
 :host {
   .crossed {
     position: relative;
+
     &:after {
       content: " ";
       position: absolute;
       top: 50%;
       left: 0;
       z-index: 1;
-      border-bottom: 1px solid var(--ion-color-dark);
+      border-bottom: 1.5px solid var(--ion-color-dark);
       width: 100%;
     }
   }
@@ -29,6 +30,5 @@
       border: none;
       outline: none;
     }
-
   }
 }
