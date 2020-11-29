@@ -6,13 +6,15 @@
     <div class="edit-wrapper" [formGroup]="form">
         <ion-input #inputI type="text" class="ingredient" placeholder="Ajouter..." (ionChange)="onInputChange($event)"
                    debounce="500" formControlName="name"></ion-input>
-        <ion-input #inputQ
-                   AutoSizeInput
+        <ion-label class="quantity-wrapper">
+            <input #inputQ
+                    AutoSizeInput
                    [extraWidth]="20"
-                   (click)="onClickQuantity()"
                    type="number"
                    class="quantity"
-                   placeholder="X" formControlName="quantity" onfocus="this.select();"></ion-input>
+                   placeholder="X" formControlName="quantity" onfocus="this.select();">
+            <div class="color-medium">{{currentItem?.ingredient?.unit.symbol}}</div>
+        </ion-label>
         <ion-icon name="add-outline" (click)="addElement()" class="submit"
                   [color]="form.invalid ? 'danger' : 'dark'"></ion-icon>
     </div>

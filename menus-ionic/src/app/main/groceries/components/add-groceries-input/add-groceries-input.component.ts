@@ -26,7 +26,7 @@ export class AddGroceriesInputComponent implements OnInit {
     added = new EventEmitter<GroceryItem>();
 
     @ViewChild("inputQ")
-    private inputQuantity: IonInput;
+    private inputQuantity: ElementRef;
 
     @ViewChild("inputI")
     private inputIngredient: IonInput;
@@ -140,7 +140,7 @@ export class AddGroceriesInputComponent implements OnInit {
 
         this.cdr.detectChanges();
 
-        this.inputQuantity.getInputElement().then(input => input.select());
+        this.inputQuantity.nativeElement.focus();
     }
 
     onInputChange(event: any) {
@@ -152,10 +152,6 @@ export class AddGroceriesInputComponent implements OnInit {
             this.searchingIngredients = pageable.content;
             this.cdr.detectChanges();
         });
-    }
-
-    onClickQuantity() {
-        this.inputQuantity.getInputElement().then(input => input.select());
     }
 
     focusIngredientInput() {

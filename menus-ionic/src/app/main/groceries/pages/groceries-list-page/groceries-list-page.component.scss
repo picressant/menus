@@ -21,6 +21,10 @@
     border: none;
     font-weight: bold;
 
+    &:read-only {
+      font-weight: normal;
+    }
+
     &:focus {
       border: none;
       outline: none;
