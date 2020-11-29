@@ -1,18 +1,18 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { WeekMeal } from "@models/week-meal.model";
 import { ActivatedRoute, Router } from "@angular/router";
 import { WeekService } from "@services/week.service";
-import { ActionSheetController, AlertController, ModalController } from "@ionic/angular";
+import { ActionSheetController, AlertController, ModalController, PopoverController } from "@ionic/angular";
 import { WeekSelectRecipeModalComponent } from "../../components/week-select-recipe-modal/week-select-recipe-modal.component";
 import { WeekSelectSideModalComponent } from "../../components/week-select-side-modal/week-select-side-modal.component";
 import { IngredientQuantity } from "@models/ingredient-quantity.model";
-import { Ingredient } from "@models/ingredient.model";
 import { BookRecipe } from "@models/book-recipe.model";
 import { Recipe } from "@models/recipe.model";
 import { IngredientModalSelectorComponent } from "@components/selectors/ingredient-modal-selector/ingredient-modal-selector.component";
 import { RecipeRestService } from "@services/recipe-rest.service";
 import { getMealDayStringified } from "@models/enums/meal-day.enum";
 import { IngredientsQuantityListComponent } from "@components/lists/ingredients-quantity-list/ingredients-quantity-list.component";
+import { OptionPopoverComponent } from "@components/popover/option-popover/option-popover.component";
 
 @Component({
     selector: 'app-modify-meal-page',
@@ -47,9 +47,6 @@ export class ModifyMealPageComponent implements OnInit {
     ingredientsRecipe: IngredientQuantity[] = [];
     ingredientsSides: IngredientQuantity[] = [];
 
-    ingredients: Ingredient[] = [];
-    isLongPressed: boolean = false;
-
     @ViewChild("ingredientListRecipe")
     private ingredientsQuantityList: IngredientsQuantityListComponent;
 
@@ -61,7 +58,8 @@ export class ModifyMealPageComponent implements OnInit {
         private actionSheetController: ActionSheetController,
         private alertController: AlertController,
         private recipeRestController: RecipeRestService,
-        private cdr: ChangeDetectorRef
+        private cdr: ChangeDetectorRef,
+        private popoverController: PopoverController
     ) {
     }
 
@@ -192,29 +190,6 @@ export class ModifyMealPageComponent implements OnInit {
         }
     }
 
-    async longPressedMeal() {
-        if (this.isEditing) {
-            const actionSheet = await this.actionSheetController.create({
-                header: 'Recette',
-                buttons: [{
-                    text: 'Choisir une recette',
-                    handler: () => {
-                        this.selectBookRecipe();
-                    }
-                }, {
-                    text: 'Saisie libre',
-                    handler: () => {
-                        this.editFreeMeal();
-                    }
-                }, {
-                    text: 'Cancel',
-                    role: 'cancel'
-                }]
-            });
-            await actionSheet.present();
-        }
-    }
-
     private async editFreeMeal() {
         let name = (this.meal && this.meal.recipe) ? this.meal.recipe.name : "";
         const alert = await this.alertController.create({
@@ -281,15 +256,45 @@ export class ModifyMealPageComponent implements OnInit {
         this.ingredientsRecipe = this.ingredientsRecipe.filter(i => i !== ingredientQuantity);
     }
 
-    refreshShaking(shake: boolean) {
-        if (this.isEditing) {
-            this.isLongPressed = shake;
-            this.cdr.detectChanges();
-        }
-    }
-
     getDay() {
         if (this.meal)
             return getMealDayStringified(this.meal.weekDayIndex);
+    }
+
+    async showOptions(event: any) {
+        const options = [
+            { clickedResult: "RECIPE", text: "Choisir une recette" },
+            { clickedResult: "FREE", text: "Faire une saisie libre" }
+        ];
+
+        if (this.isMealFreeRecipe)
+            options.push({ clickedResult: "TRANSFORM", text: "Transformer en recette" });
+
+        const popover = await this.popoverController.create({
+            component: OptionPopoverComponent,
+            event: event,
+            translucent: true,
+            componentProps: {
+                options
+            }
+        });
+        await popover.present();
+
+        const { data } = await popover.onWillDismiss();
+        if (data && data.option) {
+            if (data.option === "RECIPE")
+                await this.selectBookRecipe();
+            else if (data.option === "FREE") {
+                await this.editFreeMeal();
+            }
+            else if (data.option === "TRANSFORM") {
+                const state = {
+                    recipe: this.meal.recipe,
+                    persons: this.meal.persons,
+                    weekIndex: this.meal.weekDayIndex
+                }
+                this.router.navigate(["main/recipe/add"], { state })
+            }
+        }
     }
 }

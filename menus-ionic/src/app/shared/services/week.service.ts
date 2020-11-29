@@ -5,6 +5,8 @@ import { WeekMeal } from "@models/week-meal.model";
 import { ToasterService } from "@services/toaster.service";
 import { RecipeRestService } from "@services/recipe-rest.service";
 import { Recipe } from "@models/recipe.model";
+import { WeekDay } from "@angular/common";
+import { MealDay } from "@models/enums/meal-day.enum";
 
 const days = {
     mondayLunch: 0,
@@ -56,7 +58,10 @@ export class WeekService {
         else {
             this.pushAndSave();
         }
+    }
 
+    findMealIndex(weekDay: MealDay) {
+        return this._meals.findIndex(value => value.weekDayIndex === weekDay);
     }
 
     private pushAndSave() {

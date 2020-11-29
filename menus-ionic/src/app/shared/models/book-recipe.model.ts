@@ -26,4 +26,6 @@ export class BookRecipe extends Recipe {
 
         return mergeFormGroups(form, Recipe.form(fb, "bookRecipe"));
     }
+
+    static JACKSON_TYPE = "bookRecipe";
 }

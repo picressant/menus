@@ -11,10 +11,12 @@ import { IngredientModalSelectorComponent } from "@components/selectors/ingredie
 import { IngredientQuantity } from "@models/ingredient-quantity.model";
 import { WeekService } from "@services/week.service";
 import { tap } from "rxjs/operators";
-import { removeFromArray } from "../../../../shared/helpers/remove-array-element.function";
+import { removeFromArray } from "@helpers/remove-array-element.function";
 import { ConfirmationAlertService } from "@services/confirmation-alert.service";
 import { BookRecipe } from "@models/book-recipe.model";
 import { IngredientsQuantityListComponent } from "@components/lists/ingredients-quantity-list/ingredients-quantity-list.component";
+import { WeekDay } from "@angular/common";
+import { MealDay } from "@models/enums/meal-day.enum";
 
 @Component({
     selector: 'app-recipe-item-page',
@@ -53,6 +55,7 @@ export class RecipeItemPageComponent extends AbstractItemPage<Recipe> implements
     @ViewChild(IngredientsQuantityListComponent)
     private ingredientListComponent: IngredientsQuantityListComponent;
 
+    private fromWeekMealIndex: MealDay;
 
     constructor(private fb: FormBuilder,
                 private recipeRest: RecipeRestService,
@@ -65,13 +68,23 @@ export class RecipeItemPageComponent extends AbstractItemPage<Recipe> implements
                 private cdr: ChangeDetectorRef,
                 private confirmationService: ConfirmationAlertService
     ) {
-
         super(route, toaster, "Recette modifiée avec succès", "Recette ajoutée avec succès");
         this.form = BookRecipe.form(this.fb);
     }
 
     ngOnInit() {
         super.ngOnInit();
+        const state = this.router.getCurrentNavigation().extras.state;
+        if (state) {
+            this.form.reset(state.recipe);
+            this.form.controls.id.setValue(null);
+            this.form.controls.jacksonType.setValue(BookRecipe.JACKSON_TYPE);
+            this.form.controls.persons.setValue(state.persons);
+            this.fromWeekMealIndex = state.weekIndex;
+        }
+        else {
+            this.fromWeekMealIndex = null;
+        }
     }
 
     get title(): string {
@@ -83,7 +96,18 @@ export class RecipeItemPageComponent extends AbstractItemPage<Recipe> implements
     }
 
     get create$(): Observable<Recipe> {
-        return this.recipeRest.addRecipe(this.form.value);
+        return this.recipeRest.addRecipe(this.form.value).pipe(
+            tap((recipe: BookRecipe) => {
+                if (this.fromWeekMealIndex) {
+
+                    const index = this.weekService.findMealIndex(this.fromWeekMealIndex);
+                    const meal = this.weekService.meals$.getValue()[index];
+                    meal.recipe = recipe;
+                    meal.persons = recipe.persons;
+                    this.weekService.updateMeal(meal, index);
+                }
+            })
+        );
     }
 
     get save$(): Observable<Recipe> {

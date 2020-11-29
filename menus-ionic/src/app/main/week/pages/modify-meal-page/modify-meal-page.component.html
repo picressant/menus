@@ -3,7 +3,12 @@
         <ion-buttons slot="start">
             <ion-back-button defaultHref="/main/week"></ion-back-button>
         </ion-buttons>
-        <ion-title>{{ isEditing ? 'Modifier ' : ' ' + getDay()}}</ion-title>
+        <ion-title>{{getDay()}}</ion-title>
+        <ion-buttons slot="end" *ngIf="isEditing">
+            <ion-button (click)="showOptions($event)">
+                <ion-icon name="ellipsis-vertical-outline"></ion-icon>
+            </ion-button>
+        </ion-buttons>
     </ion-toolbar>
 </ion-header>
 <ion-content [fullscreen]="true">
@@ -33,11 +38,6 @@
                 [meal]="meal"
                 [showSides]="false"
                 (click)="clickOnMeal()"
-                appLongPress
-                (longPressed)="longPressedMeal()"
-                [class.is-pressing]="isLongPressed"
-                (longPressStarted)="refreshShaking(true)"
-                (longPressCanceled)="refreshShaking(false)"
         ></app-week-meal-card>
 
         <h3 class="ion-margin with-icon">Accompagnements

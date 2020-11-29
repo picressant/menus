@@ -1,12 +1,14 @@
 package fr.choupiteam.menus.application.recipe.service;
 
 import fr.choupiteam.menus.application.pager.model.Pager;
+import fr.choupiteam.menus.application.recipe.model.BookRecipe;
 import fr.choupiteam.menus.application.recipe.model.Recipe;
 import fr.choupiteam.menus.application.recipe.model.RecipeListWrapper;
 import fr.choupiteam.menus.application.recipe.model.RecipePageWrapper;
 import fr.choupiteam.menus.application.week.service.WeekService;
 import fr.choupiteam.menus.infrastructure.repository.RecipePictureRepository;
 import fr.choupiteam.menus.infrastructure.repository.RecipeRepository;
+import fr.choupiteam.menus.infrastructure.rest.error.ResponseError;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,6 +20,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.io.IOException;
 import java.util.Optional;
@@ -26,7 +29,6 @@ import java.util.Optional;
 public class RecipeService {
 
     private static final String DEFAULT_RECIPE_PATH = "defaults/default-recipe.png";
-    ;
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
@@ -43,12 +45,19 @@ public class RecipeService {
     }
 
     public Recipe addRecipe(Recipe recipe) {
+        this.checkAlreadyExistByName(recipe.getName());
         return this.recipeRepository.insert(recipe);
     }
 
-    public Recipe saveRecipe(Recipe recipe) {
-        recipe = this.recipeRepository.save(recipe);
+    private void checkAlreadyExistByName(String name) {
+        if (this.recipeRepository.countAllByNameAndClass(name, BookRecipe.class.getName()) > 0) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "Une recette existe déjà avec le nom " + name);
+        }
+    }
 
+    public Recipe saveRecipe(Recipe recipe) {
+        this.checkAlreadyExistByName(recipe.getName());
+        recipe = this.recipeRepository.save(recipe);
         return recipe;
     }
 

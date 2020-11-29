@@ -31,7 +31,6 @@ public class Recipe {
      * Recipe name
      */
     @Searchable
-    @Indexed(unique = true)
     private String name;
 
     /**
