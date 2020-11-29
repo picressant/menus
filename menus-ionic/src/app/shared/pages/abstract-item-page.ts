@@ -2,9 +2,8 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormGroup } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
 import { Observable } from "rxjs";
-import { isNullOrUndefined } from "util";
 import { AbstractData } from "@models/abstract-data.model";
-import { ToasterService } from "../services/toaster.service";
+import { ToasterService } from "@services/toaster.service";
 
 @Component({
     selector: 'base-item-page',
@@ -48,7 +47,7 @@ export abstract class AbstractItemPage<T extends AbstractData> implements OnInit
     }
 
     get isAddingMode() {
-        return isNullOrUndefined(this.id);
+        return (!this.id);
     }
 
     load() {

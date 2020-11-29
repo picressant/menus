@@ -24,6 +24,9 @@
       ],
       "@services/*": [
         "src/app/shared/services/*"
+      ],
+      "@pages/*": [
+        "src/app/shared/pages/*"
       ]
     }
   },

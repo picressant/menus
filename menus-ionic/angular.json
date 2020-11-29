@@ -40,7 +40,10 @@
                 "input": "src/global.scss"
               }
             ],
-            "scripts": []
+            "scripts": [],
+            "allowedCommonJsDependencies": [
+              "hammerjs"
+            ]
           },
           "configurations": {
             "production": {

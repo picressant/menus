@@ -2,11 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { ToasterService } from "@services/toaster.service";
-import { WeekService } from "@services/week.service";
-import { AlertController, ModalController } from "@ionic/angular";
-import { isNullOrUndefined } from "util";
 import { Observable } from "rxjs";
-import { AbstractItemPage } from "../../../../shared/pages/abstract-item-page";
+import { AbstractItemPage } from "@pages/abstract-item-page";
 import { Group } from "@models/group.model";
 import { GroupRestService } from "@services/group-rest.service";
 import { User } from "@models/user.model";
@@ -33,7 +30,7 @@ export class GroupItemPageComponent extends AbstractItemPage<Group> implements O
 
 
     get title(): string {
-        return this.isAddingMode ? "Ajouter un groupe" : isNullOrUndefined(this.data) ? "" : this.data.name;
+        return this.isAddingMode ? "Ajouter un groupe" : (!this.data) ? "" : this.data.name;
     }
 
     get create$(): Observable<Group> {

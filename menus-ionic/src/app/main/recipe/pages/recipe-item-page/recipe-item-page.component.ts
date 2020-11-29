@@ -1,6 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
-import { isNullOrUndefined } from "util";
-import { AbstractItemPage } from "../../../../shared/pages/abstract-item-page";
+import { AbstractItemPage } from "@pages/abstract-item-page";
 import { Recipe } from "@models/recipe.model";
 import { forkJoin, Observable } from "rxjs";
 import { FormBuilder } from "@angular/forms";
@@ -76,7 +75,7 @@ export class RecipeItemPageComponent extends AbstractItemPage<Recipe> implements
     }
 
     get title(): string {
-        return this.isAddingMode ? "Ajouter une recette" : isNullOrUndefined(this.data) ? "" : this.data.name;
+        return this.isAddingMode ? "Ajouter une recette" : (!this.data) ? "" : this.data.name;
     }
 
     get get$(): Observable<Recipe> {

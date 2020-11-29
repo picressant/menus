@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { AbstractItemPage } from "../../../../shared/pages/abstract-item-page";
+import { AbstractItemPage } from "@pages/abstract-item-page";
 import { Observable } from "rxjs";
 import { FormBuilder } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
@@ -8,7 +8,6 @@ import { SideDish } from "@models/sidedish.model";
 import { SideDishRestService } from "@services/sidedish-rest.service";
 import { WeekService } from "@services/week.service";
 import { tap } from "rxjs/operators";
-import { isNullOrUndefined } from "util";
 import { IngredientQuantity } from "@models/ingredient-quantity.model";
 import { IngredientModalSelectorComponent } from "@components/selectors/ingredient-modal-selector/ingredient-modal-selector.component";
 import { AlertController, ModalController } from "@ionic/angular";
@@ -40,7 +39,7 @@ export class SideItemPageComponent extends AbstractItemPage<SideDish> {
 
 
     get title(): string {
-        return this.isAddingMode ? "Ajouter un accompagnement" : isNullOrUndefined(this.data) ? "" : this.data.name;
+        return this.isAddingMode ? "Ajouter un accompagnement" : (!this.data) ? "" : this.data.name;
     }
 
     get create$(): Observable<SideDish> {
@@ -82,6 +81,7 @@ export class SideItemPageComponent extends AbstractItemPage<SideDish> {
             }
         }
     }
+
     async delete() {
         const alert = await this.alertController.create({
             header: 'Confirmation',
