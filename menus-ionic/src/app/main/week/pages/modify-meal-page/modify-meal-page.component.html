@@ -4,11 +4,6 @@
             <ion-back-button defaultHref="/main/week"></ion-back-button>
         </ion-buttons>
         <ion-title>{{ isEditing ? 'Modifier ' : ' ' + getDay()}}</ion-title>
-        <ion-buttons slot="end" *ngIf="isEditing">
-            <ion-button (click)="submit()">
-                <ion-icon name="checkmark-sharp"></ion-icon>
-            </ion-button>
-        </ion-buttons>
     </ion-toolbar>
 </ion-header>
 <ion-content [fullscreen]="true">
@@ -16,6 +11,13 @@
              (click)="isEditing = true" *ngIf="!isEditing">
         <ion-fab-button>
             <ion-icon name="create-outline"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed"
+             (click)="submit()" *ngIf="isEditing">
+        <ion-fab-button>
+            <ion-icon name="checkmark-outline"></ion-icon>
         </ion-fab-button>
     </ion-fab>
 
@@ -50,7 +52,7 @@
                           *ngIf="isEditing"></ion-icon>
             </ion-item>
         </ion-list>
-        <div *ngIf="meal?.sideDishes.length === 0">
+        <div *ngIf="meal?.sideDishes.length === 0" class="ion-margin no-ingredient color-medium">
             Aucun accompagnements
         </div>
     </div>
@@ -60,32 +62,14 @@
             <ion-icon name="add-outline" *ngIf="isEditing && isMealFreeRecipe"
                       (click)="addIngredientToRecipe()"></ion-icon>
         </h3>
-        <ion-list *ngIf="ingredients && !(isMealFreeRecipe && this.isEditing)">
-            <ion-item *ngFor="let ingredient of ingredientRecipeMap | keyvalue: ingredientMapOrder">
-                <ion-label slot="start">
-                    {{ingredients[ingredient.key].name}}
-                </ion-label>
-                <ion-label slot="end">
-                    {{ingredient.value}} {{ingredients[ingredient.key].unit.symbol}}
-                </ion-label>
-            </ion-item>
-        </ion-list>
-        <app-ingredients-quantity-list
-                *ngIf="isMealFreeRecipe && isEditing"
-                [ingredientsQuantity]="this.meal.recipe.ingredients"
+        <app-ingredients-quantity-list #ingredientListRecipe
+                [isReadonly]="!(isMealFreeRecipe && isEditing)"
+                [ingredientsQuantity]="ingredientsRecipe"
                 (delete)="deleteIngredientFromFree($event)"></app-ingredients-quantity-list>
 
-        <h3 class="ion-margin">Accompagnements</h3>
-        <ion-list *ngIf="ingredients">
-            <ion-item *ngFor="let ingredient of ingredientSideMap | keyvalue: ingredientMapOrder">
-                <ion-label slot="start">
-                    {{ingredients[ingredient.key].name}}
-                </ion-label>
-                <ion-label slot="end">
-                    {{ingredient.value}} {{ingredients[ingredient.key].unit.symbol}}
-                </ion-label>
-            </ion-item>
-        </ion-list>
+        <h3 class="ion-margin"  *ngIf="ingredientsSides.length > 0">Accompagnements</h3>
+        <app-ingredients-quantity-list *ngIf="ingredientsSides.length > 0"
+                                       [ingredientsQuantity]="ingredientsSides" [isReadonly]="true"></app-ingredients-quantity-list>
     </div>
 </ion-content>
 

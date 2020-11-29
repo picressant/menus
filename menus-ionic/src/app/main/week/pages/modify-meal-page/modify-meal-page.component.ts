@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { WeekMeal } from "@models/week-meal.model";
 import { ActivatedRoute, Router } from "@angular/router";
 import { WeekService } from "@services/week.service";
@@ -17,7 +17,7 @@ import { IngredientsQuantityListComponent } from "@components/lists/ingredients-
 @Component({
     selector: 'app-modify-meal-page',
     templateUrl: './modify-meal-page.component.html',
-    styleUrls: ['./modify-meal-page.component.scss'],
+    styleUrls: ['./modify-meal-page.component.scss']
 })
 export class ModifyMealPageComponent implements OnInit {
 
@@ -44,12 +44,13 @@ export class ModifyMealPageComponent implements OnInit {
 
     selectedTab = this.footerDetails.selectedTab;
 
-    ingredientRecipeMap: Map<number, number>;
-    ingredientSideMap: Map<number, number>;
+    ingredientsRecipe: IngredientQuantity[] = [];
+    ingredientsSides: IngredientQuantity[] = [];
+
     ingredients: Ingredient[] = [];
     isLongPressed: boolean = false;
 
-    @ViewChild(IngredientsQuantityListComponent)
+    @ViewChild("ingredientListRecipe")
     private ingredientsQuantityList: IngredientsQuantityListComponent;
 
     constructor(
@@ -74,58 +75,48 @@ export class ModifyMealPageComponent implements OnInit {
         });
 
         this.weekService.meals$.subscribe(meals => {
-            this.meal = meals[this.mealIndex];
-            this.buildIngredients();
+            if (!this.meal) {
+                this.meal = meals[this.mealIndex];
+                this.buildIngredients();
+            }
         });
     }
 
     buildIngredients() {
         if (this.meal) {
-            this.ingredientRecipeMap = new Map<number, number>();
-            this.ingredientSideMap = new Map<number, number>();
+            this.ingredientsRecipe = [];
+            this.ingredientsSides = [];
 
             if (this.meal.recipe) {
                 const persons = Recipe.isRecipeBook(this.meal.recipe) ? (this.meal.recipe as BookRecipe).persons : 1;
                 const recipeRatio = Recipe.isRecipeFree(this.meal.recipe) ? 1 : this.meal.persons / persons;
 
                 this.meal.recipe.ingredients.forEach(i => {
-                    this.addIngredientToMap(i, this.ingredientRecipeMap, recipeRatio);
+                    const item = { ...i };
+                    item.quantity = item.quantity * recipeRatio;
+                    this.ingredientsRecipe.push(item);
                 });
-
-
             }
 
             this.meal.sideDishes.forEach(side => {
                 side.ingredients.forEach(i => {
-                    this.addIngredientToMap(i, this.ingredientSideMap, this.meal.persons);
+                    const item = { ...i };
+                    item.quantity = item.quantity * this.meal.persons;
+
+                    const index = this.ingredientsSides.findIndex(ing => ing.ingredient.id === i.ingredient.id);
+                    if (index >= 0)
+                        this.ingredientsSides[index].quantity += item.quantity;
+                    else
+                        this.ingredientsSides.push(item);
                 });
             });
         }
     }
 
-    ingredientMapOrder = (a, b) => {
-        let ingredientA = this.ingredients[a.key];
-        let ingredientB = this.ingredients[b.key];
-
-        return ingredientA.name.toLocaleUpperCase().localeCompare(ingredientB.name.toLocaleUpperCase());
-    };
-
-    private addIngredientToMap(ingredientQ: IngredientQuantity, mapI: Map<number, number>, ratio: number) {
-        if (this.ingredients.findIndex(i => i.id === ingredientQ.ingredient.id) < 0) {
-            this.ingredients.push(ingredientQ.ingredient);
-        }
-
-        const index = this.ingredients.findIndex(i => i.id === ingredientQ.ingredient.id);
-
-        if (!mapI.has(index)) {
-            mapI.set(index, 0);
-        }
-
-        mapI.set(index, mapI.get(index) + (ingredientQ.quantity * ratio));
-    }
-
-
     submit() {
+        if (this.isMealFreeRecipe)
+            this.meal.recipe.ingredients = this.ingredientsRecipe;
+
         this.weekService.updateMeal(this.meal, this.mealIndex);
         this.isEditing = false;
         this.buildIngredients();
@@ -265,7 +256,7 @@ export class ModifyMealPageComponent implements OnInit {
         const modal = await this.modalController.create({
             component: IngredientModalSelectorComponent,
             componentProps: {
-                "excludeIds": this.meal.recipe.ingredients.map(iq => iq.ingredient.id)
+                "excludeIds": this.ingredientsRecipe.map(iq => iq.ingredient.id)
             }
         });
 
@@ -276,14 +267,18 @@ export class ModifyMealPageComponent implements OnInit {
             let ingredientQuantity = new IngredientQuantity();
             ingredientQuantity.ingredient = data.ingredient;
             ingredientQuantity.quantity = 1;
-            this.meal.recipe.ingredients.push(ingredientQuantity);
+            this.ingredientsRecipe.push(ingredientQuantity);
 
-            setTimeout(() => this.ingredientsQuantityList.focusQuantity(ingredientQuantity.ingredient), 200);
+            this.cdr.detectChanges();
+
+            setTimeout(() => {
+                this.ingredientsQuantityList.focusQuantity(ingredientQuantity.ingredient);
+            }, 200);
         }
     }
 
     deleteIngredientFromFree(ingredientQuantity: IngredientQuantity) {
-        this.meal.recipe.ingredients = this.meal.recipe.ingredients.filter(i => i !== ingredientQuantity);
+        this.ingredientsRecipe = this.ingredientsRecipe.filter(i => i !== ingredientQuantity);
     }
 
     refreshShaking(shake: boolean) {

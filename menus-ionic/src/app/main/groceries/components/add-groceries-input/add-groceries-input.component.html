@@ -4,9 +4,11 @@
 </div>
 <ion-toolbar>
     <div class="edit-wrapper" [formGroup]="form">
-        <ion-input type="text" class="ingredient" placeholder="Ajouter..." (ionChange)="onInputChange($event)"
+        <ion-input #inputI type="text" class="ingredient" placeholder="Ajouter..." (ionChange)="onInputChange($event)"
                    debounce="500" formControlName="name"></ion-input>
         <ion-input #inputQ
+                   AutoSizeInput
+                   [extraWidth]="20"
                    (click)="onClickQuantity()"
                    type="number"
                    class="quantity"

@@ -1,5 +1,9 @@
 :host {
 
+  .no-ingredient {
+    font-style: italic;
+  }
+
   app-week-meal-card {
     transition: all 0.2s ease-in-out;
   }

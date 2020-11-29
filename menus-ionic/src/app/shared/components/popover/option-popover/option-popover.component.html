@@ -1,4 +1,7 @@
 <ion-list lines="none">
-  <ion-item *ngFor="let option of options" (click)="onClick(option)">{{option.text}}</ion-item>
+  <ion-item *ngFor="let option of options" (click)="onClick(option)">
+    <ion-icon [name]="option.icon"></ion-icon>
+    <ion-label>{{option.text}}</ion-label>
+  </ion-item>
 </ion-list>
 

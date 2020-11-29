@@ -9,15 +9,13 @@
             <input
                     type="number"
                     AutoSizeInput
+                    [readOnly]="isReadonly"
                     [(ngModel)]="ingredientQuantity.quantity"
-                    *ngIf="!isReadonly"
                     onfocus="this.select();"
                     [id]="'ingredient_' + ingredientQuantity.ingredient.id">
-            <ion-label>
-                <span *ngIf="isReadonly"> {{ingredientQuantity.quantity}} </span>
-                {{ingredientQuantity.ingredient.unit.symbol}}</ion-label>
-            <ion-icon slot="end" name="trash" color="danger" (click)="deleteIngredient(ingredientQuantity)"
-                      *ngIf="!isReadonly"></ion-icon>
+            <span>{{ingredientQuantity.ingredient.unit.symbol}}</span>
         </ion-label>
+        <ion-icon slot="end" name="trash" color="danger" (click)="deleteIngredient(ingredientQuantity)"
+                  *ngIf="!isReadonly"></ion-icon>
     </ion-item>
 </ion-list>

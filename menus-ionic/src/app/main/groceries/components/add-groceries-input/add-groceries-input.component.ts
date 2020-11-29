@@ -28,6 +28,9 @@ export class AddGroceriesInputComponent implements OnInit {
     @ViewChild("inputQ")
     private inputQuantity: IonInput;
 
+    @ViewChild("inputI")
+    private inputIngredient: IonInput;
+
 
     constructor(
         private ingredientRest: IngredientRestService,
@@ -57,10 +60,6 @@ export class AddGroceriesInputComponent implements OnInit {
             this.emitIngredient(this.currentItem.ingredient);
         }
         else {
-            // On indique qu'on a pas saisi un élément connu
-            // On va donc ajouter une modal avec les shop sections et les unitées
-            // Une alerte avant pour dire "Wo, t'es sûr que c'est pas un de cela ?
-
             let inputs = [];
             let selected = true;
             this.searchingIngredients.forEach(i => {
@@ -157,5 +156,9 @@ export class AddGroceriesInputComponent implements OnInit {
 
     onClickQuantity() {
         this.inputQuantity.getInputElement().then(input => input.select());
+    }
+
+    focusIngredientInput() {
+        this.inputIngredient.setFocus();
     }
 }

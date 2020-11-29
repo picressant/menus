@@ -12,7 +12,7 @@
     }
 
     .quantity {
-      max-width: 30px;
+      flex: inherit;
       border: 1px solid var(--ion-item-border-color, var(--ion-border-color, var(--ion-color-step-150, rgba(0, 0, 0, 0.13))));
       border-top: none;
       border-bottom: none;

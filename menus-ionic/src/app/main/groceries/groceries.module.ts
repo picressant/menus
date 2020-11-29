@@ -5,7 +5,8 @@ import { IonicModule } from "@ionic/angular";
 import { SharedModule } from "../../shared/shared.module";
 import { LayoutModule } from "../layout/layout.module";
 import { AddGroceriesInputComponent } from "./components/add-groceries-input/add-groceries-input.component";
-import { ReactiveFormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { AutoSizeInputModule } from "ngx-autosize-input";
 
 
 
@@ -19,7 +20,9 @@ import { ReactiveFormsModule } from "@angular/forms";
         SharedModule,
         LayoutModule,
         CommonModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        AutoSizeInputModule,
+        FormsModule
     ],
   exports: [
       GroceriesListPageComponent

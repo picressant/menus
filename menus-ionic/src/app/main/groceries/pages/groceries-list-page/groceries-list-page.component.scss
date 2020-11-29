@@ -1,5 +1,30 @@
 :host {
   .crossed {
-    text-decoration: line-through;
+    position: relative;
+    &:after {
+      content: " ";
+      position: absolute;
+      top: 50%;
+      left: 0;
+      z-index: 1;
+      border-bottom: 1px solid var(--ion-color-dark);
+      width: 100%;
+    }
+  }
+
+  .hidden-opacity {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .input-quantity {
+    border: none;
+    font-weight: bold;
+
+    &:focus {
+      border: none;
+      outline: none;
+    }
+
   }
 }

@@ -18,16 +18,31 @@
         <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
 
-    <ng-container *ngFor="let byShopSection of groceriesMapped | keyvalue">
-        <h3 class="ion-margin">{{getSections(byShopSection.key).name}}</h3>
-        <ion-list>
-            <ng-container *ngFor="let item of byShopSection.value">
-                <ion-item [class.crossed]="item.checked">
-                    <ion-label>{{item.ingredient.name}}
-                        - {{item.quantity}} {{item.ingredient.unit.symbol}}</ion-label>
-                <ion-checkbox slot="end" (ionChange)="onCheckItem($event, item) "color="dark" [checked]="item.checked"></ion-checkbox>
+    <ng-container *ngFor="let byShopSection of groceriesMapped | keyvalue: sectionMapOrder">
+        <h3 class="ion-margin">{{getSection(byShopSection.key).name}}</h3>
+        <ion-list lines="full">
+            <ion-item-sliding *ngFor="let item of byShopSection.value" [disabled]="!isEditing">
+                <ion-item>
+                    <ion-label  [class.crossed]="item.checked">{{item.ingredient.name}}</ion-label>
+                    <ion-label  [class.crossed]="item.checked">
+                        <input class="input-quantity"
+                               [readOnly]="!isEditing"
+                               type="number"
+                               AutoSizeInput
+                               [extraWidth]="5"
+                               [value]="item.quantity"
+                               (change)="onChangeQuantity($event, item)"
+                               onfocus="this.select();">
+                        <span>{{item.ingredient.unit.symbol}}</span>
+                    </ion-label>
+                    <ion-checkbox slot="end" (ionChange)="onCheckItem(item)" [class.hidden-opacity]="isEditing"
+                                  color="dark"
+                                  [checked]="item.checked"></ion-checkbox>
                 </ion-item>
-            </ng-container>
+                <ion-item-options side="end">
+                    <ion-item-option color="danger" (click)="deleteItem(item)">Supprimer</ion-item-option>
+                </ion-item-options>
+            </ion-item-sliding>
         </ion-list>
     </ng-container>
 </ion-content>

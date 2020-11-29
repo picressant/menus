@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { WeekMeal } from "@models/week-meal.model";
 import { Recipe } from "@models/recipe.model";
 import { BookRecipe } from "@models/book-recipe.model";
@@ -10,6 +10,7 @@ import { ShopSection } from "@models/shop-section.model";
 import { Ingredient } from "@models/ingredient.model";
 import { OptionPopoverComponent } from "@components/popover/option-popover/option-popover.component";
 import { ConfirmationAlertService } from "@services/confirmation-alert.service";
+import { AddGroceriesInputComponent } from "../../components/add-groceries-input/add-groceries-input.component";
 
 @Component({
     selector: 'app-groceries-list-page',
@@ -24,6 +25,9 @@ export class GroceriesListPageComponent implements OnInit {
     isEditing: boolean = false;
 
     shopSections: ShopSection[] = [];
+
+    @ViewChild(AddGroceriesInputComponent)
+    private addGroceryInput: AddGroceriesInputComponent;
 
     constructor(
         private weekService: WeekService,
@@ -44,15 +48,23 @@ export class GroceriesListPageComponent implements OnInit {
             this.shopSections = [];
             this.groceriesMapped = new Map<String, GroceryItem[]>();
             items.forEach(item => this.convertToMap(item));
-            this.endLoading();
             if (event)
                 event.target.complete();
+
+            this.endLoading();
         });
     }
 
-    getSections(id: String) {
+    getSection(id: String) {
         return this.shopSections.find(value => value.id === id);
     }
+
+    sectionMapOrder = (a, b) => {
+        let sectionA = this.getSection(a.key);
+        let sectionB = this.getSection(b.key);
+
+        return sectionA.name.toLocaleUpperCase().localeCompare(sectionB.name.toLocaleUpperCase());
+    };
 
     public resetGroceries() {
         this.startLoading();
@@ -122,10 +134,13 @@ export class GroceriesListPageComponent implements OnInit {
     }
 
     async showOptions(event: any) {
+        const icon = (this.isEditing) ? "checkmark-sharp" : "";
         const options = [
             { clickedResult: "RESET", text: "Réinitialiser la liste" },
-            { clickedResult: "EDIT", text: "Éditer la liste" }
+            { clickedResult: "EDIT", text: "Éditer la liste",  icon: icon }
         ];
+
+        console.log(options);
 
         const popover = await this.popoverController.create({
             component: OptionPopoverComponent,
@@ -153,6 +168,7 @@ export class GroceriesListPageComponent implements OnInit {
 
         this.addToList(item.ingredient, item.quantity, 1);
         this.pushGrocery();
+        this.addGroceryInput.focusIngredientInput();
     }
 
     private pushGrocery() {
@@ -182,14 +198,37 @@ export class GroceriesListPageComponent implements OnInit {
         this.cdr.detectChanges();
     }
 
-    onCheckItem(event: any, item: GroceryItem) {
+    onCheckItem(item: GroceryItem) {
         this.startLoading();
-        item.checked = event.detail.checked;
+        item.checked = !item.checked;
 
         this.groceryRestService.updateGroceryItem(item).subscribe(() => this.endLoading());
     }
 
     doRefresh(event: any) {
         this.reload(event);
+    }
+
+    deleteItem(item: GroceryItem) {
+        this.startLoading();
+        this.groceryRestService.deleteItem(item).subscribe(() => {
+            let listItem = this.groceriesMapped.get(item.ingredient.shopSection.id);
+            const findItem = listItem.indexOf(item);
+            listItem = listItem.splice(findItem, 1);
+            if (listItem.length === 0)
+                this.groceriesMapped.delete(item.ingredient.shopSection.id);
+            else
+                this.groceriesMapped.set(item.ingredient.shopSection.id, listItem);
+
+            this.endLoading();
+        });
+    }
+
+    onChangeQuantity(event: any, item: GroceryItem) {
+        this.startLoading();
+
+        item.quantity = event.target.value;
+
+        this.groceryRestService.updateGroceryItem(item).subscribe(() => this.endLoading());
     }
 }

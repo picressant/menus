@@ -4,11 +4,6 @@
             <ion-back-button defaultHref="/main/side"></ion-back-button>
         </ion-buttons>
         <ion-title>{{title}}</ion-title>
-        <ion-buttons slot="end" *ngIf="!isReadonly">
-            <ion-button (click)="submit()">
-                <ion-icon name="checkmark-sharp" [color]="getSubmitColor()"></ion-icon>
-            </ion-button>
-        </ion-buttons>
     </ion-toolbar>
 </ion-header>
 
@@ -29,6 +24,11 @@
             <ion-icon name="trash-outline"></ion-icon>
         </ion-fab-button>
     </ion-fab-list>
+</ion-fab>
+<ion-fab vertical="bottom" horizontal="end" slot="fixed" >
+    <ion-fab-button (click)="submit()" *ngIf="!isReadonly" [color]="getSubmitColor()">
+        <ion-icon name="checkmark-outline" ></ion-icon>
+    </ion-fab-button>
 </ion-fab>
 <ion-content [fullscreen]="true">
     <div [formGroup]="form" class="form-wrapper">

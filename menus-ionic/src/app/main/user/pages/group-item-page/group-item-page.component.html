@@ -4,17 +4,15 @@
       <ion-back-button defaultHref="/main/user"></ion-back-button>
     </ion-buttons>
     <ion-title>{{title}}</ion-title>
-    <ion-buttons slot="end" *ngIf="!isReadonly">
-      <ion-button (click)="submit()">
-        <ion-icon name="checkmark-sharp" [color]="getSubmitColor()"></ion-icon>
-      </ion-button>
-    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="isReadonly">
-  <ion-fab-button (click)="modify()">
+<ion-fab vertical="bottom" horizontal="end" slot="fixed">
+  <ion-fab-button (click)="modify()" *ngIf="isReadonly">
     <ion-icon name="create-outline"></ion-icon>
+  </ion-fab-button>
+  <ion-fab-button (click)="submit()" *ngIf="!isReadonly" [color]="getSubmitColor()">
+    <ion-icon name="checkmark-outline" ></ion-icon>
   </ion-fab-button>
 </ion-fab>
 
