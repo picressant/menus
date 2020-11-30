@@ -8,7 +8,6 @@ import fr.choupiteam.menus.application.recipe.model.RecipePageWrapper;
 import fr.choupiteam.menus.application.week.service.WeekService;
 import fr.choupiteam.menus.infrastructure.repository.RecipePictureRepository;
 import fr.choupiteam.menus.infrastructure.repository.RecipeRepository;
-import fr.choupiteam.menus.infrastructure.rest.error.ResponseError;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -56,9 +55,16 @@ public class RecipeService {
     }
 
     public Recipe saveRecipe(Recipe recipe) {
-        this.checkAlreadyExistByName(recipe.getName());
-        recipe = this.recipeRepository.save(recipe);
-        return recipe;
+        Optional<Recipe> optInBase = this.getRecipe(recipe.getId());
+        if (optInBase.isPresent()) {
+                if (!optInBase.get().getName().equals(recipe.getName())) {
+                    this.checkAlreadyExistByName(recipe.getName());
+                }
+                return this.recipeRepository.save(recipe);
+        }
+        else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "La recette n'existe pas");
+        }
     }
 
     public Page<Recipe> findByPager(Pager pager) {
