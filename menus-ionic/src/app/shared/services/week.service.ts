@@ -42,7 +42,7 @@ export class WeekService {
     public updateMeal(meal: WeekMeal, i: number) {
         this._meals[i] = meal;
         if (meal.recipe && Recipe.isRecipeFree(meal.recipe)) {
-            if (meal.recipe.id === null) {
+            if (!meal.recipe.id) {
                 this.recipeRestService.addRecipe(meal.recipe).subscribe(r => {
                     this._meals[i].recipe = r;
                     this.pushAndSave();
