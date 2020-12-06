@@ -23,12 +23,13 @@ export class AppUpdateService {
     async showAppUpdateAlert() {
         const alert = await this.alertController.create({
             header: 'Mise à jour',
+            cssClass: 'alertUpdate',
             backdropDismiss: false,
-            message: 'Une mise à jour est disponible, la page doit être rechargée',
+            message: "<img src='assets/img/update.gif'><div>Une mise à jour est disponible, la page doit être rechargée</div>",
             buttons: [
                 {
                     cssClass: 'color-dark',
-                    text: 'Ok',
+                    text: 'Okay',
                     handler: () => {
                         this.doAppUpdate();
                     }
