@@ -21,8 +21,8 @@
     <ng-container *ngFor="let byShopSection of groceriesMapped | keyvalue: sectionMapOrder">
         <h3 class="ion-margin">{{getSection(byShopSection.key).name}}</h3>
         <ion-list lines="full">
-            <ion-item-sliding *ngFor="let item of byShopSection.value" [disabled]="!isEditing">
-                <ion-item>
+            <ion-item-sliding *ngFor="let item of byShopSection.value" #swipper>
+                <ion-item [color]="(item.checked) ? 'light' : ''">
                     <ion-label [class.crossed]="item.checked">{{item.ingredient.name}}</ion-label>
                     <ion-label  [class.crossed]="item.checked">
                         <input class="input-quantity"
@@ -35,10 +35,13 @@
                                onfocus="this.select();">
                         <span>{{item.ingredient.unit.symbol}}</span>
                     </ion-label>
-                    <ion-checkbox slot="end" (ionChange)="onCheckItem(item)" [class.hidden-opacity]="isEditing"
-                                  color="dark"
-                                  [checked]="item.checked"></ion-checkbox>
+                    <ion-icon slot="end" name="checkmark" *ngIf="item.checked"></ion-icon>
                 </ion-item>
+                <ion-item-options side="start" (ionSwipe)="onSwipe(swipper, item)">
+                    <ion-item-option color="secondary" (click)="onSwipe(swipper, item)">
+                        <ion-icon slot="icon-only" name="checkmark" color="primary"></ion-icon>
+                    </ion-item-option>
+                </ion-item-options>
                 <ion-item-options side="end">
                     <ion-item-option color="danger" (click)="deleteItem(item)">Supprimer</ion-item-option>
                 </ion-item-options>

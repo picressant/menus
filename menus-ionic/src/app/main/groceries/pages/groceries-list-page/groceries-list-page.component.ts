@@ -5,7 +5,7 @@ import { BookRecipe } from "@models/book-recipe.model";
 import { GroceryItem } from "@models/grocery-item.model";
 import { WeekService } from "@services/week.service";
 import { GroceriesRestService } from "@services/groceries-rest.service";
-import { PopoverController } from "@ionic/angular";
+import { IonItemSliding, PopoverController } from "@ionic/angular";
 import { ShopSection } from "@models/shop-section.model";
 import { Ingredient } from "@models/ingredient.model";
 import { OptionPopoverComponent } from "@components/popover/option-popover/option-popover.component";
@@ -197,6 +197,11 @@ export class GroceriesListPageComponent implements OnInit {
     private startLoading() {
         this.loading = true;
         this.cdr.detectChanges();
+    }
+
+    onSwipe(swipper: IonItemSliding, item: GroceryItem) {
+        swipper.close();
+        this.onCheckItem(item);
     }
 
     onCheckItem(item: GroceryItem) {
