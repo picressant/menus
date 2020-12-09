@@ -53,6 +53,7 @@ export class MainShellComponent implements OnInit {
 
     me: User;
     timestamp: string;
+    loadedImg: boolean = false;
 
     constructor(
         private router: Router,
@@ -62,6 +63,7 @@ export class MainShellComponent implements OnInit {
     ) {
         this.foodAuthService.user.subscribe(user => {
             this.me = user;
+            this.loadedImg = false;
             this.timestamp = new Date().getTime().toString();
             setTimeout(() => this.cdr.detectChanges(), 200);
         });
@@ -97,5 +99,9 @@ export class MainShellComponent implements OnInit {
 
     goToUser() {
         this.router.navigate(["main/user", this.me.id]);
+    }
+
+    onImageLoad() {
+        this.loadedImg = true;
     }
 }

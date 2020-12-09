@@ -113,6 +113,10 @@ ion-item.selected {
     ion-avatar {
       margin-right: 10px;
       margin-bottom: 6px;
+
+      .hidden {
+        display: none;
+      }
     }
   }
 

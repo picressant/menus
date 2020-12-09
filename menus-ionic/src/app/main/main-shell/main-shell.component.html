@@ -33,7 +33,8 @@
         <ion-menu-toggle>
             <div class="user-card" (click)="goToUser()">
                 <ion-avatar>
-                    <img [src]="'user/' + me?.id + '/avatar?' + timestamp | secure | async">
+                    <img [src]="'user/' + me?.id + '/avatar?' + timestamp | secure | async" (load)="onImageLoad()" [class.hidden]="!loadedImg">
+                    <ion-skeleton-text animated *ngIf="!loadedImg"></ion-skeleton-text>
                 </ion-avatar>
                 <div class="user-name">{{me?.firstname}} {{me?.lastname}}</div>
             </div>
