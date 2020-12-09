@@ -10,7 +10,14 @@ import { Recipe } from "@models/recipe.model";
 export class RecipeCardAvatarComponent implements OnInit {
 
   @Input()
-  recipe: Recipe;
+  set recipe(val: Recipe) {
+    this.innerRecipe = val;
+    this.loadedImg = false;
+    this.timestamp = new Date().getTime().toString();
+  }
+
+  innerRecipe: Recipe;
+  timestamp: string;
 
   loadedImg = false;
 

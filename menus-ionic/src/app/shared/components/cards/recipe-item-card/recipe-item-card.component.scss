@@ -10,6 +10,11 @@
       margin: 10px 0;
       font-size: 22px;
       font-weight: bold;
+
+      ion-skeleton-text {
+        width: 80%;
+        height: 22px;
+      }
     }
 
     .menu-info {

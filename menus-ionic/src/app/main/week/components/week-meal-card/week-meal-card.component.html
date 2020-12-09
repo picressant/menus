@@ -1,6 +1,6 @@
 <ion-card>
     <ng-container *ngIf="meal">
-        <app-recipe-card-avatar class="ion-margin" [recipe]="getRecipeAsBook()"
+        <app-recipe-card-avatar class="ion-margin" [recipe]="meal.recipe"
                                 *ngIf="meal.recipe"></app-recipe-card-avatar>
         <div class="menu-titles" [class.no-side]="meal.sideDishes?.length === 0 || !showSides">
             <div class="menu-meal-title">
@@ -27,8 +27,15 @@
                 <ion-icon name="brush"></ion-icon>
             </div>
         </div>
+        <div *ngIf="!meal?.recipe" class="no-meal-text">
+            Pas de menu
+        </div>
     </ng-container>
-    <div *ngIf="!meal?.recipe" class="no-meal-text">
-        Pas de menu
-    </div>
+    <ng-container *ngIf="!meal">
+        <app-recipe-card-avatar class="ion-margin"></app-recipe-card-avatar>
+        <div class="menu-titles">
+            <ion-skeleton-text animated></ion-skeleton-text>
+        </div>
+        <div class="menu-info"></div>
+    </ng-container>
 </ion-card>

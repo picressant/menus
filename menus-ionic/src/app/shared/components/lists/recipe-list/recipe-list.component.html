@@ -5,13 +5,15 @@
                slot="start"
                mode="ios"></ion-searchbar>
 
-<app-recipe-item-card [recipe]="recipe"  *ngFor="let recipe of recipes" (click)="onClickRecipe(recipe)"
+<app-recipe-item-card [recipe]="recipe" *ngFor="let recipe of recipes" (click)="onClickRecipe(recipe)"
 ></app-recipe-item-card>
 
-<ion-spinner name="bubbles" *ngIf="firstLoading"></ion-spinner>
+<ng-container *ngIf="recipes.length == 0">
+    <app-recipe-item-card *ngFor="let i of fakeRecipes"></app-recipe-item-card>
+</ng-container>
 
 <ion-infinite-scroll threshold="100px" (ionInfinite)="onScrollDown($event)">
-  <ion-infinite-scroll-content
-          loadingSpinner="bubbles">
-  </ion-infinite-scroll-content>
+    <ion-infinite-scroll-content
+            loadingSpinner="bubbles">
+    </ion-infinite-scroll-content>
 </ion-infinite-scroll>

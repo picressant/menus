@@ -20,4 +20,21 @@
             </div>
         </div>
     </ng-container>
+    <ng-container *ngIf="!recipe">
+        <app-recipe-card-avatar class="ion-margin" [recipe]="recipe"></app-recipe-card-avatar>
+        <div class="menu-titles">
+            <ion-skeleton-text animated></ion-skeleton-text>
+        </div>
+        <div class="menu-info">
+            <div class="info-element">
+                <ion-skeleton-text animated></ion-skeleton-text>
+            </div>
+            <div class="info-element">
+                <ion-skeleton-text animated></ion-skeleton-text>
+            </div>
+            <div class="info-element">
+                <ion-skeleton-text animated></ion-skeleton-text>
+            </div>
+        </div>
+    </ng-container>
 </ion-card>

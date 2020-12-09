@@ -13,6 +13,8 @@ import { RecipeRestService } from "@services/recipe-rest.service";
 export class RecipeListComponent implements OnInit {
 
     recipes: Recipe[] = [];
+    fakeRecipes=  new Array<number>(10);
+
     private pager: Pager;
     private currentPageable: Pageable<Recipe>;
 
@@ -21,9 +23,6 @@ export class RecipeListComponent implements OnInit {
 
     @Output()
     clickRecipe = new EventEmitter<Recipe>();
-
-    firstLoading: boolean = false;
-    firstLoadingTimeout: any;
 
     @Input()
     set loadOnInit(load: boolean) {
@@ -45,7 +44,6 @@ export class RecipeListComponent implements OnInit {
     }
 
     refresh(event: any) {
-        this.firstLoadingTimeout = setTimeout(() => this.firstLoading = true, 500);
         this.pager.page = 0;
         this.recipes = [];
         this._loadAndComplete(event);
@@ -56,8 +54,6 @@ export class RecipeListComponent implements OnInit {
             this.recipes = this.recipes.concat(recipes.content);
             this.currentPageable = recipes;
             this.toggleInfiniteScroll();
-            clearTimeout(this.firstLoadingTimeout);
-            this.firstLoading = false;
 
             if (event) {
                 event.target.complete();

@@ -1,4 +1,4 @@
 <ion-avatar>
-  <img [src]="'recipe/' + recipe?.id + '/picture' | secure | async" (load)="onImageLoad()" [class.hidden]="!loadedImg">
-  <ion-spinner name="bubbles" *ngIf="!loadedImg"></ion-spinner>
+  <img [src]="'recipe/' + innerRecipe?.id + '/picture?' + timestamp | secure | async" (load)="onImageLoad()" [class.hidden]="!loadedImg" *ngIf="innerRecipe">
+  <ion-skeleton-text animated *ngIf="!loadedImg"></ion-skeleton-text>
 </ion-avatar>
