@@ -1,6 +1,7 @@
 package fr.choupiteam.menus.infrastructure;
 
 import com.mongodb.MongoClient;
+import com.mongodb.MongoClientURI;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,11 +14,9 @@ import org.springframework.data.mongodb.gridfs.GridFsTemplate;
 @ConfigurationProperties(prefix = "mongo")
 public class MongoConfiguration extends AbstractMongoConfiguration {
 
-    private String host;
-
     private String dbName;
 
-    private int port;
+    private String mongoUri;
 
     @Bean(name = "userpictures")
     public GridFsTemplate gridFsUser() throws Exception {
@@ -31,7 +30,7 @@ public class MongoConfiguration extends AbstractMongoConfiguration {
 
     @Override
     public MongoClient mongoClient() {
-        return new MongoClient(this.getHost(), this.getPort());
+        return new MongoClient(new MongoClientURI(this.getMongoUri()));
     }
 
     @Override
@@ -47,19 +46,11 @@ public class MongoConfiguration extends AbstractMongoConfiguration {
         this.dbName = dbName;
     }
 
-    public String getHost() {
-        return host;
+    public String getMongoUri() {
+        return mongoUri;
     }
 
-    public void setHost(String host) {
-        this.host = host;
-    }
-
-    public int getPort() {
-        return port;
-    }
-
-    public void setPort(int port) {
-        this.port = port;
+    public void setMongoUri(String mongoUri) {
+        this.mongoUri = mongoUri;
     }
 }
