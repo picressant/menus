@@ -1,8 +1,0 @@
-<div class="scroll-wrapper" infinite-scroll (scrolled)="onScrollDown()" [scrollWindow]="false">
-  <menus-table-header (onSearch)="onSearch($event)" (onAdd)="addRecipe()"></menus-table-header>
-
-  <div class="search-results" *ngFor="let recipe of recipes">
-    <menus-recipe-item-card [recipe]="recipe"
-                            (choose)="onSelectRecipe($event)"></menus-recipe-item-card>
-  </div>
-</div>
