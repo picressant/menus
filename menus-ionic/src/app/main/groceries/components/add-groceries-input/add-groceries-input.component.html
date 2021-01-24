@@ -6,14 +6,14 @@
     <div class="edit-wrapper" [formGroup]="form">
         <ion-input #inputI type="text" class="ingredient" placeholder="Ajouter..." (ionChange)="onInputChange($event)"
                    debounce="500" formControlName="name"
-                   autocomplete="nope"></ion-input>
+                   autocomplete="chrome-off"></ion-input>
         <ion-label class="quantity-wrapper">
             <input #inputQ
                    autoSizeInput
                    [extraWidth]="20"
                    type="number"
                    class="quantity"
-                   autocomplete="cc-csc"
+                   autocomplete="chrome-off"
                    placeholder="X" formControlName="quantity" onfocus="this.select();">
             <div class="color-medium">{{currentItem?.ingredient?.unit.symbol}}</div>
         </ion-label>
