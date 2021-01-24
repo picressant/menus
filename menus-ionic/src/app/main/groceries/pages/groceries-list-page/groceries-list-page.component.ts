@@ -141,8 +141,6 @@ export class GroceriesListPageComponent implements OnInit {
             { clickedResult: "EDIT", text: "Éditer la liste",  icon: icon }
         ];
 
-        console.log(options);
-
         const popover = await this.popoverController.create({
             component: OptionPopoverComponent,
             event: event,

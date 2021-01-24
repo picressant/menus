@@ -4,7 +4,7 @@
 </div>
 <ion-toolbar>
     <div class="edit-wrapper" [formGroup]="form">
-        <ion-input #inputI type="text" class="ingredient" placeholder="Ajouter..." (ionChange)="onInputChange($event)"
+        <ion-input #inputI type="search" class="ingredient" placeholder="Ajouter..." (ionChange)="onInputChange($event)"
                    debounce="500" formControlName="name"
                    autocomplete="off"></ion-input>
         <ion-label class="quantity-wrapper">
