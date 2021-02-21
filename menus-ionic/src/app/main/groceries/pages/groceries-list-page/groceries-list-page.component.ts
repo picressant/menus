@@ -203,8 +203,8 @@ export class GroceriesListPageComponent implements OnInit {
     }
 
     onCheckItem(item: GroceryItem) {
-        this.startLoading();
         item.checked = !item.checked;
+        this.startLoading();
 
         this.groceryRestService.updateGroceryItem(item).subscribe(() => this.endLoading());
     }
