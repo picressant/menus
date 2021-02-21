@@ -8,8 +8,12 @@
 <app-recipe-item-card [recipe]="recipe" *ngFor="let recipe of recipes" (click)="onClickRecipe(recipe)"
 ></app-recipe-item-card>
 
-<ng-container *ngIf="recipes.length == 0">
+<ng-container *ngIf="showFakes">
     <app-recipe-item-card *ngFor="let i of fakeRecipes"></app-recipe-item-card>
+</ng-container>
+
+<ng-container *ngIf="!showFakes && recipes.length === 0">
+    <div class="color-medium ion-margin no-recipe">Aucune recette ne correspond à la recherche</div>
 </ng-container>
 
 <ion-infinite-scroll threshold="100px" (ionInfinite)="onScrollDown($event)">

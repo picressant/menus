@@ -14,6 +14,7 @@ export class RecipeListComponent implements OnInit {
 
     recipes: Recipe[] = [];
     fakeRecipes=  new Array<number>(10);
+    showFakes = true;
 
     private pager: Pager;
     private currentPageable: Pageable<Recipe>;
@@ -23,6 +24,7 @@ export class RecipeListComponent implements OnInit {
 
     @Output()
     clickRecipe = new EventEmitter<Recipe>();
+
 
     @Input()
     set loadOnInit(load: boolean) {
@@ -46,6 +48,7 @@ export class RecipeListComponent implements OnInit {
     refresh(event: any) {
         this.pager.page = 0;
         this.recipes = [];
+        this.showFakes = true;
         this._loadAndComplete(event);
     }
 
@@ -54,6 +57,8 @@ export class RecipeListComponent implements OnInit {
             this.recipes = this.recipes.concat(recipes.content);
             this.currentPageable = recipes;
             this.toggleInfiniteScroll();
+
+            this.showFakes = false;
 
             if (event) {
                 event.target.complete();
