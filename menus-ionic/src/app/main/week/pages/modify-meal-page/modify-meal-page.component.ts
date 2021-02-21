@@ -70,6 +70,8 @@ export class ModifyMealPageComponent implements OnInit {
                 this.meal = this.weekService.meals$.getValue()[this.mealIndex];
                 this.buildIngredients();
             }
+
+            this.isEditing = true;
         });
 
         this.weekService.meals$.subscribe(meals => {
@@ -116,8 +118,7 @@ export class ModifyMealPageComponent implements OnInit {
             this.meal.recipe.ingredients = this.ingredientsRecipe;
 
         this.weekService.updateMeal(this.meal, this.mealIndex);
-        this.isEditing = false;
-        this.buildIngredients();
+        this.router.navigate([".."]);
     }
 
     async selectBookRecipe() {
