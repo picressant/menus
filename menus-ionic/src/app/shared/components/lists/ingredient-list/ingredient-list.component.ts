@@ -25,7 +25,7 @@ export class IngredientListComponent implements OnInit, AfterViewChecked {
     searchBar: IonSearchbar;
 
     @Input()
-    focusSearchBar = false;
+    focusSearchBar = true;
 
     @Input()
     excludeIds: string[];
