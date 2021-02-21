@@ -140,6 +140,7 @@ export class ModifyMealPageComponent implements OnInit {
                 this.recipeRestController.deleteRecipe(this.meal.recipe.id).subscribe();
             }
             this.meal.recipe = data.recipe;
+            this.meal.persons = data.recipe.persons;
             this.buildIngredients();
         }
     }
