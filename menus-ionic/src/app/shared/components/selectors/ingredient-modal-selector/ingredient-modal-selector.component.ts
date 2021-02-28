@@ -16,6 +16,9 @@ export class IngredientModalSelectorComponent implements OnInit {
     @Input()
     excludeIds: string[] = [];
 
+    @Input()
+    focusSearchBar: boolean = false;
+
     constructor(
         private modalController: ModalController,
     ) {

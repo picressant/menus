@@ -56,13 +56,14 @@
                       (click)="addIngredientToRecipe()"></ion-icon>
         </h3>
         <app-ingredients-quantity-list #ingredientListRecipe
-                [isReadonly]="!(isMealFreeRecipe && isEditing)"
-                [ingredientsQuantity]="ingredientsRecipe"
-                (delete)="deleteIngredientFromFree($event)"></app-ingredients-quantity-list>
+                                       [isReadonly]="!(isMealFreeRecipe && isEditing)"
+                                       [ingredientsQuantity]="ingredientsRecipe"
+                                       (delete)="deleteIngredientFromFree($event)"></app-ingredients-quantity-list>
 
-        <h3 class="ion-margin"  *ngIf="ingredientsSides.length > 0">Accompagnements</h3>
+        <h3 class="ion-margin" *ngIf="ingredientsSides.length > 0">Accompagnements</h3>
         <app-ingredients-quantity-list *ngIf="ingredientsSides.length > 0"
-                                       [ingredientsQuantity]="ingredientsSides" [isReadonly]="true"></app-ingredients-quantity-list>
+                                       [ingredientsQuantity]="ingredientsSides"
+                                       [isReadonly]="true"></app-ingredients-quantity-list>
     </div>
 </ion-content>
 

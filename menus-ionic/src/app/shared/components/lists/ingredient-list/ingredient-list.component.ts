@@ -25,7 +25,7 @@ export class IngredientListComponent implements OnInit, AfterViewChecked {
     searchBar: IonSearchbar;
 
     @Input()
-    focusSearchBar = true;
+    focusSearchBar = false;
 
     @Input()
     excludeIds: string[];
@@ -40,6 +40,7 @@ export class IngredientListComponent implements OnInit, AfterViewChecked {
     canDelete: boolean = false;
 
     deleteIndex: number = -1;
+    private shouldFocus: boolean;
 
     constructor(
         private ingredientRest: IngredientRestService,
@@ -52,11 +53,15 @@ export class IngredientListComponent implements OnInit, AfterViewChecked {
     ngOnInit() {
         this.pagerIngredients.pushFilter("forRecipe", this.recipe);
         this.loadIngredients(null);
+
+        this.shouldFocus = true;
     }
 
     ngAfterViewChecked() {
-        if (this.focusSearchBar)
-            this.searchBar.setFocus()
+        if (this.focusSearchBar && this.shouldFocus) {
+
+            this.searchBar.setFocus();
+        }
     }
 
 
@@ -95,7 +100,11 @@ export class IngredientListComponent implements OnInit, AfterViewChecked {
     }
 
     clickIngredient(ingredient: Ingredient) {
-        this.ingredientSelected.emit(ingredient);
+        this.searchBar.getInputElement().then(element => {
+            this.shouldFocus = false;
+            element.blur();
+            this.ingredientSelected.emit(ingredient);
+        });
     }
 
     refresh(event: any) {

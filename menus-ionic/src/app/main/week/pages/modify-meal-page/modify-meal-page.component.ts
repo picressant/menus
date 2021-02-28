@@ -233,7 +233,8 @@ export class ModifyMealPageComponent implements OnInit {
         const modal = await this.modalController.create({
             component: IngredientModalSelectorComponent,
             componentProps: {
-                "excludeIds": this.ingredientsRecipe.map(iq => iq.ingredient.id)
+                "excludeIds": this.ingredientsRecipe.map(iq => iq.ingredient.id),
+                "focusSearchBar": true
             }
         });
 

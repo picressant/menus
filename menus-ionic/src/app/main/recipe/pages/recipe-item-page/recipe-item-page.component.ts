@@ -192,7 +192,8 @@ export class RecipeItemPageComponent extends AbstractItemPage<Recipe> implements
             const modal = await this.modalController.create({
                 component: IngredientModalSelectorComponent,
                 componentProps: {
-                    "excludeIds": this.form.controls.ingredients.value.map(iq => iq.ingredient.id)
+                    "excludeIds": this.form.controls.ingredients.value.map(iq => iq.ingredient.id),
+                    "focusSearchBar": true
                 }
             });
 
