@@ -27,11 +27,20 @@
         </ion-item>
         <h3 class="ion-margin">Plat</h3>
 
+        <div class="meal-card-wrapper">
         <app-week-meal-card
                 [meal]="meal"
                 [showSides]="false"
-                (click)="clickOnMeal()"
         ></app-week-meal-card>
+            <div class="meal-buttons">
+                <ion-fab-button color="light" *ngIf="!isMealFreeRecipe" (click)="showMeal()">
+                    <ion-icon name="eye"></ion-icon>
+                </ion-fab-button>
+                <ion-fab-button  color="light" (click)="editMeal()" *ngIf="isEditing">
+                    <ion-icon name="pencil"></ion-icon>
+                </ion-fab-button>
+            </div>
+        </div>
 
         <h3 class="ion-margin with-icon">Accompagnements
             <ion-icon name="add-outline" *ngIf="isEditing" (click)="addSide()"></ion-icon>

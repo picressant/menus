@@ -178,17 +178,16 @@ export class ModifyMealPageComponent implements OnInit {
         return (this.meal && this.meal.recipe && Recipe.isRecipeFree(this.meal.recipe));
     }
 
-    clickOnMeal() {
-        if (this.isEditing) {
-            if (this.isMealFreeRecipe)
-                this.editFreeMeal();
-            else
-                this.selectBookRecipe();
-        }
-        else {
-            if (this.meal && this.meal.recipe && !this.isMealFreeRecipe) {
-                this.router.navigate(["main/recipe", this.meal.recipe.id]);
-            }
+    editMeal() {
+        if (this.isMealFreeRecipe)
+            this.editFreeMeal();
+        else
+            this.selectBookRecipe();
+    }
+
+    showMeal() {
+        if (this.meal && this.meal.recipe && !this.isMealFreeRecipe) {
+            this.router.navigate(["main/recipe", this.meal.recipe.id]);
         }
     }
 
