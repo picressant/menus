@@ -79,7 +79,7 @@ public class PagerService {
                                     this.jacksonObjectMapper.getSerializationConfig())).forEach(namedType -> {
                 for (Field field : namedType.getType().getDeclaredFields()) {
                     if (field.isAnnotationPresent(Searchable.class)) {
-                        regex.add(new Criteria(field.getName()).regex(pager.getSearch(), "i"));
+                        regex.add(new Criteria(field.getName()).regex(this.diacriticSensitiveRegex(pager.getSearch()), "i"));
                     }
                 }
             });
@@ -88,6 +88,15 @@ public class PagerService {
                 criteria.orOperator(regex.toArray(new Criteria[regex.size()]));
             }
         }
+    }
+
+    private String diacriticSensitiveRegex(String search) {
+        search = search.replaceAll("a", "[aáàä]");
+        search = search.replaceAll("e", "[eéëè]");
+        search = search.replaceAll("i", "[iíï]");
+        search = search.replaceAll("o", "[oóöò]");
+        search = search.replaceAll("u", "[uüúù]");
+        return search;
     }
 
     public Query buildQueryFromPager(Pager pager, Class<?> targetClass) {
