@@ -8,5 +8,10 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-    <app-ingredient-list (ingredientSelected)="closeModal($event)" [excludeIds]="excludeIds" [focusSearchBar]="focusSearchBar"></app-ingredient-list>
+    <app-ingredient-list
+            (ingredientSelected)="closeModal($event)"
+            (addIngredient)="addIngredient($event)"
+            [excludeIds]="excludeIds"
+            [focusSearchBar]="focusSearchBar"
+            [canCreate]="canCreateIngredient"></app-ingredient-list>
 </ion-content>

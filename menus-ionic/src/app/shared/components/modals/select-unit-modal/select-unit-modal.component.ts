@@ -9,6 +9,8 @@ import { Unit } from "@models/unit.model";
 })
 export class SelectUnitModalComponent implements OnInit {
 
+  public static modalId: "SelectUnitModalComponent_ID";
+
   constructor(
       private modalController: ModalController
   ) { }
@@ -16,6 +18,6 @@ export class SelectUnitModalComponent implements OnInit {
   ngOnInit() {}
 
   closeModal(unit: Unit) {
-    this.modalController.dismiss({ unit: unit });
+    this.modalController.dismiss({ unit: unit }, null, SelectUnitModalComponent.modalId);
   }
 }

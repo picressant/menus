@@ -231,9 +231,11 @@ export class ModifyMealPageComponent implements OnInit {
     async addIngredientToRecipe() {
         const modal = await this.modalController.create({
             component: IngredientModalSelectorComponent,
+            id: IngredientModalSelectorComponent.modalId,
             componentProps: {
-                "excludeIds": this.ingredientsRecipe.map(iq => iq.ingredient.id),
-                "focusSearchBar": true
+                excludeIds: this.ingredientsRecipe.map(iq => iq.ingredient.id),
+                focusSearchBar: true,
+                canCreateIngredient: true
             }
         });
 

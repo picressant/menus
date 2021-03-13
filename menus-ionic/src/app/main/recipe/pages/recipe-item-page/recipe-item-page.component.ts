@@ -191,9 +191,11 @@ export class RecipeItemPageComponent extends AbstractItemPage<Recipe> implements
         if (!this.isReadonly) {
             const modal = await this.modalController.create({
                 component: IngredientModalSelectorComponent,
+                id: IngredientModalSelectorComponent.modalId,
                 componentProps: {
                     "excludeIds": this.form.controls.ingredients.value.map(iq => iq.ingredient.id),
-                    "focusSearchBar": true
+                    "focusSearchBar": true,
+                    "canCreateIngredient": true
                 }
             });
 

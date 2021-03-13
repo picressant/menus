@@ -4,7 +4,7 @@ import { Direction, Order, Pager } from "@models/pager/pager.model";
 import { Pageable } from "@models/pager/pageable.model";
 import { IonInfiniteScroll, IonSearchbar } from "@ionic/angular";
 import { IngredientRestService } from "@services/ingredient-rest.service";
-import { removeFromArray } from "../../../helpers/remove-array-element.function";
+import { removeFromArray } from "@helpers/remove-array-element.function";
 import { ConfirmationAlertService } from "@services/confirmation-alert.service";
 
 @Component({
@@ -14,33 +14,25 @@ import { ConfirmationAlertService } from "@services/confirmation-alert.service";
 })
 export class IngredientListComponent implements OnInit, AfterViewChecked {
 
-    ingredients: Ingredient[] = [];
+    @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
+    @ViewChild(IonSearchbar) searchBar: IonSearchbar;
+
+    @Input() focusSearchBar = false;
+    @Input() excludeIds: string[];
+    @Input() recipe = true;
+    @Input() canDelete: boolean = false;
+    @Input() canCreate: boolean = false;
+
+    @Output() ingredientSelected: EventEmitter<Ingredient> = new EventEmitter<Ingredient>();
+    @Output() addIngredient: EventEmitter<string> = new EventEmitter<string>();
+
+    public deleteIndex: number = -1;
+    public ingredients: Ingredient[] = [];
+    public loading: boolean = true;
+
+    private shouldFocus: boolean;
     private pagerIngredients: Pager;
     private pageableIngredients: Pageable<Ingredient>;
-
-    @ViewChild(IonInfiniteScroll)
-    infiniteScroll: IonInfiniteScroll;
-
-    @ViewChild(IonSearchbar)
-    searchBar: IonSearchbar;
-
-    @Input()
-    focusSearchBar = false;
-
-    @Input()
-    excludeIds: string[];
-
-    @Input()
-    recipe = true;
-
-    @Output()
-    ingredientSelected: EventEmitter<Ingredient> = new EventEmitter<Ingredient>();
-
-    @Input()
-    canDelete: boolean = false;
-
-    deleteIndex: number = -1;
-    private shouldFocus: boolean;
 
     constructor(
         private ingredientRest: IngredientRestService,
@@ -59,11 +51,9 @@ export class IngredientListComponent implements OnInit, AfterViewChecked {
 
     ngAfterViewChecked() {
         if (this.focusSearchBar && this.shouldFocus) {
-
             this.searchBar.setFocus();
         }
     }
-
 
     searchIngredient(text: string) {
         this.pagerIngredients.page = 0;
@@ -80,19 +70,6 @@ export class IngredientListComponent implements OnInit, AfterViewChecked {
         else {
             event.component.disableInfiniteScroll();
         }
-    }
-
-    private loadIngredients(event) {
-        this.pagerIngredients.excludeIds = this.excludeIds;
-        this.ingredientRest.getIngredients(this.pagerIngredients).subscribe((pageableResult: Pageable<Ingredient>) => {
-            this.ingredients = this.ingredients.concat(pageableResult.content);
-            this.pageableIngredients = pageableResult;
-            this.toggleInfiniteScroll();
-
-            if (event) {
-                event.target.complete();
-            }
-        });
     }
 
     toggleInfiniteScroll() {
@@ -121,5 +98,29 @@ export class IngredientListComponent implements OnInit, AfterViewChecked {
                 });
             });
         }
+    }
+
+    addIngredientClicked() {
+        this.searchBar.getInputElement().then(element => {
+            this.shouldFocus = false;
+            element.blur();
+            this.addIngredient.emit(this.pagerIngredients.search);
+        });
+    }
+
+
+    private loadIngredients(event) {
+        this.loading = true;
+        this.pagerIngredients.excludeIds = this.excludeIds;
+        this.ingredientRest.getIngredients(this.pagerIngredients).subscribe((pageableResult: Pageable<Ingredient>) => {
+            this.ingredients = this.ingredients.concat(pageableResult.content);
+            this.pageableIngredients = pageableResult;
+            this.toggleInfiniteScroll();
+
+            if (event) {
+                event.target.complete();
+            }
+            this.loading = false;
+        });
     }
 }

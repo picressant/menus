@@ -12,7 +12,7 @@ import { ShopSection } from "@models/shop-section.model";
 })
 export class IngredientModalComponent {
 
-    form: FormGroup
+    public static modalId = "IngredientModalComponent_ID";
 
     @Input()
     set ingredient(ingredient: Ingredient) {
@@ -29,21 +29,21 @@ export class IngredientModalComponent {
         this.form.controls.forRecipe.setValue(val);
     }
 
-    @Input()
-    shopSections: ShopSection[] = [];
+    @Input() shopSections: ShopSection[] = [];
+    @Input() fromGrocery = false;
 
-    @Input()
-    fromGrocery = false;
+    public form: FormGroup
 
     constructor(private formBuilder: FormBuilder,
-                private modalController: ModalController,
+                private ingredientModalController: ModalController,
                 private innerModalController: ModalController) {
         this.form = Ingredient.form(this.formBuilder);
     }
 
     async onChooseUnit() {
         const modal = await this.innerModalController.create({
-            component: SelectUnitModalComponent
+            component: SelectUnitModalComponent,
+            id: SelectUnitModalComponent.modalId
         });
 
         await modal.present();
@@ -55,11 +55,11 @@ export class IngredientModalComponent {
     }
 
     closeModal() {
-        this.modalController.dismiss({ ingredient: this.form.value });
+        this.ingredientModalController.dismiss({ ingredient: this.form.value }, null, IngredientModalComponent.modalId);
     }
 
     forceCloseModal() {
-        this.modalController.dismiss();
+        this.ingredientModalController.dismiss(null, null, IngredientModalComponent.modalId);
     }
 
     compareWithFn = (o1, o2) => {

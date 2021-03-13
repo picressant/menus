@@ -13,7 +13,7 @@
 </ng-container>
 
 <ng-container *ngIf="!showFakes && recipes.length === 0">
-    <div class="color-medium ion-margin no-recipe">Aucune recette ne correspond à la recherche</div>
+    <div class="color-medium ion-margin"><i>Aucune recette ne correspond à la recherche</i></div>
 </ng-container>
 
 <ion-infinite-scroll threshold="100px" (ionInfinite)="onScrollDown($event)">

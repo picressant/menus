@@ -63,6 +63,7 @@ export class SideItemPageComponent extends AbstractItemPage<SideDish> {
         if (!this.isReadonly) {
             const modal = await this.modalController.create({
                 component: IngredientModalSelectorComponent,
+                id: IngredientModalSelectorComponent.modalId,
                 componentProps: {
                     "excludeIds": this.form.controls.ingredients.value.map(iq => iq.ingredient.id)
                 }

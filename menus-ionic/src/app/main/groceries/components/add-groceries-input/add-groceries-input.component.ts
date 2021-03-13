@@ -112,6 +112,7 @@ export class AddGroceriesInputComponent implements OnInit {
     async addNewIngredient() {
         const modal = await this.modalController.create({
             component: IngredientModalComponent,
+            id: IngredientModalComponent.modalId,
             componentProps: {
                 shopSections: this.shopSections,
                 name: this.form.controls.name.value,

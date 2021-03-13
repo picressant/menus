@@ -88,6 +88,7 @@ export class ParametersPageComponent implements OnInit {
     async addIngredient(forRecipe: boolean) {
         const modal = await this.modalController.create({
             component: IngredientModalComponent,
+            id: IngredientModalComponent.modalId,
             componentProps: {
                 shopSections: this.shopSections,
                 forRecipe: forRecipe
@@ -167,6 +168,7 @@ export class ParametersPageComponent implements OnInit {
     async onClickIngredient(ingredient: Ingredient) {
         const modal = await this.modalController.create({
             component: IngredientModalComponent,
+            id: IngredientModalComponent.modalId,
             componentProps: {
                 ingredient,
                 shopSections: this.shopSections
