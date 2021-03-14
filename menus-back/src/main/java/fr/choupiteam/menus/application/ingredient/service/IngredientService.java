@@ -40,4 +40,8 @@ public class IngredientService {
     public void deleteIngredient(String id) {
         this.ingredientRepository.deleteById(id);
     }
+
+    public void deleteAll() {
+        this.ingredientRepository.deleteAll();
+    }
 }

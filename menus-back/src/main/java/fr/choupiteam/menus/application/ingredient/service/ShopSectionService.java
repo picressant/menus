@@ -39,4 +39,12 @@ public class ShopSectionService {
     public void deleteShopSection(String id) {
         this.shopSectionRepository.deleteById(id);
     }
+
+    public ShopSection findShopByName(String name) {
+        return this.shopSectionRepository.findByName(name);
+    }
+
+    public void deleteAll() {
+        this.shopSectionRepository.deleteAll();
+    }
 }

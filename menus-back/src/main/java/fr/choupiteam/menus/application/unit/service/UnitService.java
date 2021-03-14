@@ -7,8 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 public class UnitService {
 
@@ -29,5 +27,13 @@ public class UnitService {
 
     public void deleteUnit(String id) {
         this.unitRepository.deleteById(id);
+    }
+
+    public Unit findUnitByName(String name) {
+        return this.unitRepository.findByName(name);
+    }
+
+    public void deleteAll() {
+        this.unitRepository.deleteAll();
     }
 }

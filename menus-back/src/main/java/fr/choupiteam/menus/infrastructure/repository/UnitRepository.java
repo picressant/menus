@@ -7,4 +7,6 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 public interface UnitRepository extends
         MongoRepository<Unit, String>,
         PageableRepository<Unit> {
+
+    Unit findByName(String name);
 }
