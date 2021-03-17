@@ -3,7 +3,7 @@
 
 name: Deploying to food-organisator
 
-on: [push]
+on: [push, workflow_dispatch]
 
 jobs:
   deploy:
