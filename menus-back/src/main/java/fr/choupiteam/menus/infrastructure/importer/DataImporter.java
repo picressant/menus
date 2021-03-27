@@ -51,7 +51,8 @@ public class DataImporter {
 
         new MyCsvReader().read(file, (columns) -> {
             Ingredient ingredient = new Ingredient();
-            ingredient.setName(columns.get(0).trim());
+            String name = columns.get(0).trim().substring(0, 1).toUpperCase() + columns.get(0).trim().substring(1);
+            ingredient.setName(name);
             ingredient.setUnit(this.unitService.findUnitByName(columns.get(1).trim()));
             ingredient.setShopSection(this.shopSectionService.findShopByName(columns.get(2).trim()));
             ingredient.setForRecipe(true);

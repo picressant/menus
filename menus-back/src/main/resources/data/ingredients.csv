@@ -1,1 +1,478 @@
-Abricot,Pièce,Fruits
+abondance,Gramme,Crémerie
+abricot au sirop,Pot,Épicerie sucrée
+abricot sec,Gramme,Épicerie sucrée
+agneau,Gramme,Boucherie
+aiguillette de canard,Gramme,Boucherie
+aiguillette de dinde,Gramme,Boucherie
+aiguillette de poulet,Gramme,Boucherie
+ail,Pièce,Légumes
+ail des ours,Cuillère à café,Légumes
+ail en poudre,Cuillère à café,Légumes
+aile de raie,Gramme,Poissonerie
+aileron de poulet,Pièce,Boucherie
+amandes effilées,Gramme,Épicerie sucrée
+amandes entières,Gramme,Épicerie sucrée
+ananas,Pièce,Fruits
+anchois,Gramme,Poissonerie
+andouillette,Gramme,Boucherie
+anis étoilé,Cuillère à café,Épicerie salée
+armagnac,Millilitre,Boisson
+artichaut,Pièce,Légumes
+asperge blanche,Botte,Légumes
+asperge verte,Botte,Légumes
+aubergine,Pièce,Légumes
+avocat,Pièce,Légumes
+avoine,Gramme,Épicerie sucrée
+bacon,Gramme,Boucherie
+bagel,Pièce,Boulangerie
+baguette,Pièce,Boulangerie
+banane,Pièce,Fruits
+basilic,Botte,Légumes
+basilic citron,Botte,Légumes
+batavia,Pièce,Légumes
+beaufort,Gramme,Crémerie
+betterave,Gramme,Légumes
+beurre,Gramme,Crémerie
+bicarbonate,Cuillère à café,Épicerie sucrée
+bière blonde,Millilitre,Boisson
+bière brune,Millilitre,Boisson
+biscotte,Paquet,Boulangerie
+biscuit à la cuillère,Paquet,Épicerie sucrée
+blanc de dinde,Gramme,Boucherie
+blanc de poireaux,Pièce,Légumes
+blanc de poulet,Gramme,Boucherie
+blé,Gramme,Épicerie salée
+blette,Botte,Légumes
+bleu,Gramme,Crémerie
+Blini,Paquet,Crémerie
+boeuf haché,Gramme,Boucherie
+boudin blanc,Pièce,Boucherie
+boudin noir,Pièce,Boucherie
+boudoir,Paquet,Épicerie sucrée
+bouillon de boeuf,Pièce,Épicerie salée
+bouillon de légumes,Pièce,Épicerie salée
+bouillon de poule,Pièce,Épicerie salée
+bouillon de veau,Pièce,Épicerie salée
+bouillon de volaille,Pièce,Épicerie salée
+boulgour,Gramme,Épicerie salée
+bouquet garni,Botte,Légumes
+boursin,Gramme,Crémerie
+brandade,Gramme,Poissonerie
+Bretzel,Paquet,Apéritif
+brie de meaux,Gramme,Crémerie
+brioche,Sachet,Boulangerie
+brocoli,Pièce,Légumes
+brugnon,Pièce,Fruits
+bûche de chèvre,Pièce,Crémerie
+burrata,Pièce,Crémerie
+butternut,Pièce,Légumes
+cabillaud,Gramme,Poissonerie
+cacao amer,Cuillère à café,Épicerie sucrée
+cacao en poudre,Cuillère à café,Épicerie sucrée
+café,Paquet,Épicerie sucrée
+camembert,Gramme,Crémerie
+cannelle,Cuillère à café,Épicerie salée
+canneloni,Paquet,Épicerie salée
+cantal,Gramme,Crémerie
+câpres,Pot,Épicerie salée
+caramel,Bouteille,Épicerie sucrée
+carotte,Pièce,Légumes
+cassonade,Cuillère à café,Épicerie sucrée
+cassoulet,Pot,Traiteur
+céleri branche,Pièce,Légumes
+céleri-rave,Pièce,Légumes
+cerises,Pièce,Fruits
+cerneau de noix,Gramme,Fruits
+chair à saucisse,Gramme,Boucherie
+champignon de Paris,Gramme,Légumes
+chapelure,Cuillère à soupe,Épicerie salée
+cheddar,Gramme,Crémerie
+cheddar rapé,Gramme,Crémerie
+chèvre frais,Gramme,Crémerie
+chipolata,Pièce,Boucherie
+chips,Paquet,Apéritif
+chips tortilla,Paquet,Apéritif
+chocolat au lait,Gramme,Épicerie sucrée
+chocolat blanc,Gramme,Épicerie sucrée
+chocolat dulcey,Gramme,Épicerie sucrée
+chocolat noir,Gramme,Épicerie sucrée
+chocolat praliné,Gramme,Épicerie sucrée
+chorizo,Gramme,Boucherie
+chou blanc,Pièce,Légumes
+chou chinois,Pièce,Légumes
+chou de bruxelles,Gramme,Légumes
+chou romanesco,Pièce,Légumes
+chou rouge,Pièce,Légumes
+chou vert,Pièce,Légumes
+chou-fleur,Pièce,Légumes
+choucroute,Gramme,Traiteur
+ciabatta,Pièce,Boulangerie
+ciboule,Botte,Légumes
+ciboulette,Botte,Légumes
+cidre,Bouteille,Boisson
+citron,Pièce,Fruits
+citron vert,Pièce,Fruits
+citronnelle,Cuillère à soupe,Légumes
+citrouille,Pièce,Légumes
+clémentine,Pièce,Fruits
+clou de girofle,Pièce,Épicerie salée
+Coca cola 0,Bouteille,Boisson
+coeur d'artichaut,Pot,Épicerie salée
+coeur de palmier,Pot,Épicerie salée
+coleslaw,Gramme,Traiteur
+compote,Pièce,Épicerie sucrée
+comté,Gramme,Crémerie
+concentré de tomates,Cuillère à soupe,Épicerie salée
+concombre,Pièce,Légumes
+confit de canard,Pièce,Traiteur
+confiture d'abricot,Pot,Épicerie sucrée
+Confiture d'orange,Pot,Épicerie sucrée
+confiture de fruits rouges,Pot,Épicerie sucrée
+Confiture de rhubarbe,Pot,Épicerie sucrée
+coppa,Gramme,Boucherie
+coquille saint-jacques,Gramme,Poissonerie
+coriandre,Botte,Légumes
+corn flakes,Paquet,Épicerie sucrée
+cornichon,Pot,Épicerie salée
+coulis d'abricot,Bouteille,Épicerie sucrée
+coulis de fruits rouges,Bouteille,Épicerie sucrée
+coulis de tomate,Bouteille,Épicerie salée
+courge,Pièce,Légumes
+courgette,Pièce,Légumes
+courgette ronde,Pièce,Légumes
+cracker,Paquet,Apéritif
+cream cheese,Gramme,Crémerie
+crème anglaise,Millilitre,Crémerie
+crème chantilly,Bouteille,Crémerie
+crème fleurette,Millilitre,Crémerie
+crème fraîche,Gramme,Crémerie
+crème liquide,Millilitre,Crémerie
+cresson,Botte,Légumes
+crevette grise,Gramme,Poissonerie
+croissant,Pièce,Boulangerie
+crottin de chèvre,Pièce,Crémerie
+croûtons,Sachet,Épicerie salée
+crozet,Gramme,Épicerie salée
+cuisse de canard,Pièce,Boucherie
+cuisse de poulet,Pièce,Boucherie
+cumin,Cuillère à café,Épicerie salée
+curcuma,Cuillère à café,Épicerie salée
+curry,Cuillère à café,Épicerie salée
+danette,Pot,Crémerie
+diot,Pièce,Boucherie
+eau,Litre,Boisson
+eau gazeuse,Litre,Boisson
+échalote,Pièce,Légumes
+edam,Gramme,Crémerie
+emmental,Gramme,Crémerie
+endive,Pièce,Légumes
+épices cajun,Cuillère à café,Épicerie salée
+épices espagnoles,Cuillère à café,Épicerie salée
+épices tandoori,Cuillère à café,Épicerie salée
+épinards frais,Gramme,Légumes
+épinards surgelés,Gramme,Surgelés
+escalope de dinde,Gramme,Boucherie
+escalope de poulet,Gramme,Boucherie
+escalope de veau,Gramme,Boucherie
+estragon,Botte,Légumes
+faisselle,Gramme,Crémerie
+falafel,Pièce,Traiteur
+farfalle,Gramme,Épicerie salée
+farine (T45),Gramme,Épicerie sucrée
+farine (T65),Gramme,Épicerie sucrée
+farine complète,Gramme,Épicerie sucrée
+farine de riz,Gramme,Épicerie sucrée
+farine de sarrasin,Gramme,Épicerie sucrée
+fécule de maïs,Gramme,Épicerie sucrée
+fenouil,Pièce,Légumes
+feta,Gramme,Crémerie
+feuille de brick,Pièce,Traiteur
+figue,Pièce,Fruits
+filet mignon de porc,Gramme,Boucherie
+flageolet,Gramme,Épicerie salée
+Foie gras,Gramme,Traiteur
+fourme d'ambert,Gramme,Crémerie
+fraises,Gramme,Fruits
+framboises,Gramme,Fruits
+framboises surgelées,Gramme,Surgelés
+frite,Gramme,Épicerie sucrée
+fromage blanc,Gramme,Crémerie
+fromage en tranche,Paquet,Crémerie
+fromage fouetté,Pot,Crémerie
+fromage râpé,Gramme,Crémerie
+fruit de la passion,Pièce,Fruits
+galette de sarrasin,Pièce,Traiteur
+garam masala,Gramme,Produits du monde
+gélatine,Gramme,Épicerie sucrée
+gésiers,Gramme,Boucherie
+gingembre,Gramme,Légumes
+gnocchi,Gramme,Traiteur
+gorgonzola,Gramme,Crémerie
+gousses de vanille,Pièce,Épicerie sucrée
+granola,Gramme,Épicerie sucrée
+gressin,Gramme,Apéritif
+gros sel,Gramme,Épicerie salée
+gruyère râpé,Gramme,Crémerie
+guacamole,Pot,Apéritif
+haddock,Gramme,Poissonerie
+haricot blanc à la tomate,Gramme,Épicerie salée
+haricot plat,Gramme,Légumes
+haricots rouges,Gramme,Épicerie salée
+haricots verts,Gramme,Légumes
+harissa,Cuillère à café,Épicerie salée
+herbes de Provence,Cuillère à café,Épicerie salée
+houmous,Pot,Apéritif
+huile d'olive,Millilitre,Épicerie salée
+huile de colza,Millilitre,Épicerie salée
+huile de noisette,Millilitre,Épicerie salée
+huile de pépin de raisin,Millilitre,Épicerie salée
+jalapeno,Pot,Apéritif
+jambon blanc,Tranche,Boucherie
+jambon cru,Tranche,Boucherie
+jeunes pousses,Paquet,Légumes
+jus d'ananas,Millilitre,Boisson
+jus d'oranges,Millilitre,Boisson
+jus de citron,Millilitre,Boisson
+jus de pommes,Millilitre,Boisson
+jus de tomates,Millilitre,Boisson
+ketchup,Pot,Épicerie salée
+kiwi,Pièce,Fruits
+lait,Litre,Crémerie
+lait concentré,Millilitre,Crémerie
+lait de coco,Millilitre,Produits du monde
+laitue,Pièce,Légumes
+lard,Tranche,Boucherie
+lardons,Gramme,Boucherie
+laurier,Gramme,Épicerie salée
+lentilles corail,Gramme,Épicerie salée
+lentilles vertes,Gramme,Épicerie salée
+levure chimique,Sachet,Boulangerie
+levure de boulanger fraîche,Gramme,Boulangerie
+levure de boulanger sèche,Sachet,Boulangerie
+lieu noir,Gramme,Poissonerie
+limande,Pièce,Poissonerie
+litchi,Pièce,Fruits
+mâche,Pièce,Légumes
+Magret de Canard,Pièce,Boucherie
+maïs,Gramme,Épicerie salée
+maquereau,Pièce,Poissonerie
+margarine,Gramme,Crémerie
+mascarpone,Gramme,Crémerie
+mayonnaise,Gramme,Épicerie salée
+melon,Pièce,Fruits
+menthe,Botte,Fruits
+merguez,Pièce,Boucherie
+mesclun,Sachet,Légumes
+miel,Gramme,Épicerie sucrée
+miso,Gramme,Produits du monde
+mont d'or,Pièce,Crémerie
+morbier,Gramme,Crémerie
+moules,Gramme,Poissonerie
+moutarde,Gramme,Épicerie salée
+moutarde à l'ancienne,Gramme,Épicerie salée
+mozzarella,Pièce,Crémerie
+muesli,Gramme,Épicerie sucrée
+muffin complet,Pièce,Boulangerie
+munster,Gramme,Crémerie
+muscade,Gramme,Épicerie salée
+navet,Pièce,Légumes
+nectarine,Pièce,Fruits
+Neufchâtel,Pièce,Crémerie
+noisettes,Gramme,Fruits
+noix de cajou,Gramme,Fruits
+noix de coco rapée,Gramme,Épicerie sucrée
+nouilles chinoises,Gramme,Produits du monde
+nutella,Pot,Épicerie sucrée
+oeuf,Pièce,Crémerie
+oeuf de caille,Pièce,Crémerie
+oignon,Pièce,Légumes
+oignon rouge,Pièce,Légumes
+olives noires,Gramme,Apéritif
+orange,Pièce,Fruits
+origan,Gramme,Épicerie salée
+pain de mie,Tranche,Boulangerie
+pain pita,Pièce,Boulangerie
+pain pour hamburger,Pièce,Boulangerie
+panais,Pièce,Légumes
+pancetta,Tranche,Boucherie
+paprika,Gramme,Épicerie salée
+parmesan,Gramme,Crémerie
+pastèque,Pièce,Fruits
+patate douce,Pièce,Légumes
+pâte brisée,Pièce,Traiteur
+pâte feuilletée,Pièce,Traiteur
+pâte sablée,Pièce,Traiteur
+pâtes,Gramme,Épicerie salée
+pâtes à lasagne,Feuille,Épicerie salée
+paupiette,Pièce,Boucherie
+Pavé de saumon,Pièce,Poissonerie
+pêche,Pièce,Fruits
+persil,Botte,Légumes
+pesto,Gramme,Épicerie salée
+petit beurre,Paquet,Épicerie sucrée
+petit pain suédois,Paquet,Boulangerie
+petit suisse,Pot,Crémerie
+petits pois,Gramme,Légumes
+Philadephia,Gramme,Crémerie
+pignons,Gramme,Épicerie salée
+piment,Gramme,Légumes
+piment d'Espelette,Gramme,Épicerie salée
+piment fort,Gramme,Épicerie salée
+piment vert,Gramme,Légumes
+pintade,Pièce,Boucherie
+piperade,Gramme,Épicerie salée
+pistaches,Gramme,Fruits
+poire,Pièce,Fruits
+poireau,Pièce,Légumes
+pois cassés,Gramme,Épicerie salée
+pois chiches,Gramme,Épicerie salée
+poivre,Gramme,Épicerie salée
+poivron,Pièce,Légumes
+polenta,Gramme,Épicerie salée
+pomelo chinois,Pièce,Fruits
+pomme,Pièce,Fruits
+pomme de terre,Pièce,Légumes
+pomme de terre rouge,Pièce,Légumes
+pop corn,Gramme,Épicerie sucrée
+porc,Gramme,Boucherie
+porto,Litre,Apéritif
+potatoe,Gramme,Surgelés
+potimarron,Pièce,Légumes
+potiron,Pièce,Légumes
+poudre à chili,Gramme,Épicerie salée
+poudre à lever,Sachet,Épicerie sucrée
+poudre d'amandes,Gramme,Épicerie sucrée
+poudre de colombo,Gramme,Épicerie salée
+poudre de noisette,Gramme,Épicerie sucrée
+poulet entier,Pièce,Boucherie
+pousses de soja,Gramme,Légumes
+praliné,Gramme,Épicerie sucrée
+prune,Pièce,Fruits
+pruneau,Gramme,Fruits
+pulpe de tomate,Gramme,Épicerie salée
+purée mousline,Sachet,Épicerie salée
+quatre-épices,Gramme,Épicerie salée
+quetsche,Pièce,Fruits
+quinoa,Gramme,Épicerie salée
+radis,Botte,Légumes
+radis noir,Pièce,Légumes
+raisin blanc,Gramme,Fruits
+raisin noir,Gramme,Fruits
+raisins secs,Gramme,Épicerie sucrée
+ramen,Pièce,Produits du monde
+Ras el Hanout,Gramme,Épicerie salée
+ratatouille,Pot,Épicerie salée
+raviole de Royans,Gramme,Traiteur
+ravioli,Pot,Épicerie salée
+reblochon,Pièce,Crémerie
+rhubarbe,Pièce,Fruits
+rhum,Millilitre,Apéritif
+rice crispies,Paquet,Épicerie sucrée
+ricoré,Pot,Épicerie sucrée
+ricotta,Gramme,Crémerie
+rillettes,Pot,Boucherie
+riz basmati,Gramme,Épicerie salée
+riz gluant,Gramme,Épicerie salée
+riz pour risotto,Gramme,Épicerie salée
+riz rond,Gramme,Épicerie salée
+riz thaï,Gramme,Épicerie salée
+romarin,Gramme,Légumes
+roquefort,Pièce,Crémerie
+roquette,Sachet,Légumes
+rösti,Gramme,Surgelés
+rôti de boeuf,Gramme,Boucherie
+rôti de porc,Gramme,Boucherie
+rouget,Pièce,Poissonerie
+rumsteck,Pièce,Boucherie
+rutabaga,Pièce,Légumes
+sablés,Paquet,Épicerie sucrée
+safran,Gramme,Épicerie salée
+Saint Morêt,Gramme,Crémerie
+saint-marcellin,Pièce,Crémerie
+saint-nectaire,Pièce,Crémerie
+salade,Pièce,Légumes
+salade mélangée,Sachet,Légumes
+salami,Tranche,Boucherie
+sardine,Gramme,Poissonerie
+sarriette,Gramme,Épicerie salée
+sauce Arrabiata,Pot,Épicerie salée
+sauce barbecue,Bouteille,Épicerie salée
+sauce d'huître,Bouteille,Épicerie salée
+sauce HP,Bouteille,Épicerie salée
+sauce nuoc mam,Bouteille,Produits du monde
+sauce salsa,Pot,Produits du monde
+sauce soja,Bouteille,Produits du monde
+sauce Sriracha,Bouteille,Produits du monde
+sauce worcestershire,Bouteille,Produits du monde
+sauce Yakitori,Bouteille,Produits du monde
+saucisse cocktail,Gramme,Boucherie
+saucisse de Francfort,Pièce,Boucherie
+saucisse de morteau,Pièce,Boucherie
+saucisse de Strasbourg,Pièce,Boucherie
+saucisson,Pièce,Boucherie
+saucisson à l'ail,Pièce,Boucherie
+sauge,Gramme,Épicerie salée
+saumon fumé,Tranche,Poissonerie
+savora,Pot,Épicerie salée
+Schweppes,Litre,Boisson
+sel,Gramme,Épicerie salée
+sel de céleri,Gramme,Épicerie salée
+semoule fine,Gramme,Épicerie salée
+semoule moyenne,Gramme,Épicerie salée
+sirop d'érable,Bouteille,Épicerie sucrée
+sirop de canne,Bouteille,Épicerie sucrée
+sirop de menthe,Bouteille,Boisson
+soda,Bouteille,Boisson
+spaghetti,Gramme,Épicerie salée
+spéculoos,Paquet,Épicerie sucrée
+steak,Pièce,Boucherie
+steak haché,Pièce,Boucherie
+sucre,Gramme,Épicerie sucrée
+sucre complet,Gramme,Épicerie sucrée
+sucre de canne,Gramme,Épicerie sucrée
+sucre glace,Gramme,Épicerie sucrée
+sucre roux (cassonade),Gramme,Épicerie sucrée
+sucre vanillé,Sachet,Épicerie sucrée
+surimi,Paquet,Traiteur
+tabasco,Bouteille,Produits du monde
+taboulé,Gramme,Traiteur
+tacos,Pièce,Produits du monde
+tagliatelles fraîches,Gramme,Traiteur
+tahini,Gramme,Produits du monde
+tapenade,Gramme,Apéritif
+tapioca,Gramme,Épicerie salée
+tarama,Gramme,Traiteur
+thé Earl Grey,Gramme,Épicerie salée
+thon,Pièce,Poissonerie
+thon rouge,Gramme,Poissonerie
+thym,Gramme,Épicerie salée
+tofu,Gramme,Traiteur
+tomate,Pièce,Légumes
+tomate concassée,Gramme,Légumes
+tomate séchée,Gramme,Traiteur
+tomates cerise,Gramme,Légumes
+tomates pelées,Gramme,Légumes
+topinambour,Pièce,Légumes
+tortilla chips,Sachet,Apéritif
+travers de porc,Pièce,Boucherie
+truite,Pièce,Poissonerie
+tuc,Sachet,Apéritif
+tzatziki,Pot,Traiteur
+Vache qui rit®,Pièce,Crémerie
+veau,Gramme,Boucherie
+ventrèche,Gramme,Boucherie
+vermicelles,Gramme,Épicerie salée
+vermicelles de riz,Gramme,Produits du monde
+verveine,Sachet,Épicerie sucrée
+viande hachée,Gramme,Boucherie
+vin blanc,Millilitre,Apéritif
+vin rosé,Millilitre,Apéritif
+vin rouge,Millilitre,Apéritif
+vinaigre,Cuillère à soupe,Épicerie salée
+vinaigre balsamique,Cuillère à soupe,Épicerie salée
+wasabi,Gramme,Produits du monde
+wraps,Pièce,Produits du monde
+Xérès,Cuillère à soupe,Épicerie salée
+yaourt de chèvre,Pot,Crémerie
+yaourt nature,Pot,Crémerie
+zeste de citron,Gramme,Fruits
