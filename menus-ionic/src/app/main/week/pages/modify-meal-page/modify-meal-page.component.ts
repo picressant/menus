@@ -13,6 +13,7 @@ import { RecipeRestService } from "@services/recipe-rest.service";
 import { getMealDayStringified } from "@models/enums/meal-day.enum";
 import { IngredientsQuantityListComponent } from "@components/lists/ingredients-quantity-list/ingredients-quantity-list.component";
 import { OptionPopoverComponent } from "@components/popover/option-popover/option-popover.component";
+import { SelectedIngredient } from "@models/selected-ingredient.model";
 
 @Component({
     selector: 'app-modify-meal-page',
@@ -44,8 +45,8 @@ export class ModifyMealPageComponent implements OnInit {
 
     selectedTab = this.footerDetails.selectedTab;
 
-    ingredientsRecipe: IngredientQuantity[] = [];
-    ingredientsSides: IngredientQuantity[] = [];
+    ingredientsRecipe: SelectedIngredient[] = [];
+    ingredientsSides: SelectedIngredient[] = [];
 
     @ViewChild("ingredientListRecipe")
     private ingredientsQuantityList: IngredientsQuantityListComponent;
@@ -91,7 +92,7 @@ export class ModifyMealPageComponent implements OnInit {
                 const persons = Recipe.isRecipeBook(this.meal.recipe) ? (this.meal.recipe as BookRecipe).persons : 1;
                 const recipeRatio = Recipe.isRecipeFree(this.meal.recipe) ? 1 : this.meal.persons / persons;
 
-                this.meal.recipe.ingredients.forEach(i => {
+                this.meal.recipe.selectedIngredients.forEach(i => {
                     const item = { ...i };
                     item.quantity = item.quantity * recipeRatio;
                     this.ingredientsRecipe.push(item);
@@ -99,7 +100,7 @@ export class ModifyMealPageComponent implements OnInit {
             }
 
             this.meal.sideDishes.forEach(side => {
-                side.ingredients.forEach(i => {
+                side.selectedIngredients.forEach(i => {
                     const item = { ...i };
                     item.quantity = item.quantity * this.meal.persons;
 
@@ -115,7 +116,7 @@ export class ModifyMealPageComponent implements OnInit {
 
     submit() {
         if (this.isMealFreeRecipe)
-            this.meal.recipe.ingredients = this.ingredientsRecipe;
+            this.meal.recipe.selectedIngredients = this.ingredientsRecipe;
 
         this.weekService.updateMeal(this.meal, this.mealIndex);
         this.router.navigate([".."]);
@@ -243,15 +244,16 @@ export class ModifyMealPageComponent implements OnInit {
 
         const { data } = await modal.onWillDismiss();
         if (data.ingredient) {
-            let ingredientQuantity = new IngredientQuantity();
-            ingredientQuantity.ingredient = data.ingredient;
-            ingredientQuantity.quantity = 1;
-            this.ingredientsRecipe.push(ingredientQuantity);
+            let selectedIngredient = new SelectedIngredient();
+            selectedIngredient.ingredient = data.ingredient;
+            selectedIngredient.unit = data.ingredient.unit;
+            selectedIngredient.quantity = 1;
+            this.ingredientsRecipe.push(selectedIngredient);
 
             this.cdr.detectChanges();
 
             setTimeout(() => {
-                this.ingredientsQuantityList.focusQuantity(ingredientQuantity.ingredient);
+                this.ingredientsQuantityList.focusQuantity(selectedIngredient.ingredient);
             }, 200);
         }
     }

@@ -8,7 +8,6 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { ToasterService } from "@services/toaster.service";
 import { AlertController, ModalController } from "@ionic/angular";
 import { IngredientModalSelectorComponent } from "@components/selectors/ingredient-modal-selector/ingredient-modal-selector.component";
-import { IngredientQuantity } from "@models/ingredient-quantity.model";
 import { WeekService } from "@services/week.service";
 import { tap } from "rxjs/operators";
 import { removeFromArray } from "@helpers/remove-array-element.function";
