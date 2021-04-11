@@ -20,9 +20,6 @@ public class Ingredient {
     private String name;
 
     @DBRef
-    private Unit unit;
-
-    @DBRef
     private List<Unit> units;
 
     private boolean forRecipe;
@@ -44,14 +41,6 @@ public class Ingredient {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Unit getUnit() {
-        return unit;
-    }
-
-    public void setUnit(Unit unit) {
-        this.unit = unit;
     }
 
     public boolean isForRecipe() {

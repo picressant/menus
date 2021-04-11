@@ -15,7 +15,7 @@
                    class="quantity"
                    autocomplete="off"
                    placeholder="X" formControlName="quantity" onfocus="this.select();">
-            <div class="color-medium">{{currentItem?.ingredient?.unit.symbol}}</div>
+            <div class="color-medium">{{currentItem?.ingredient?.units[0].symbol}}</div>
         </ion-label>
         <ion-icon name="add-outline" (click)="addElement()" class="submit"
                   [color]="form.invalid ? 'danger' : 'dark'"></ion-icon>

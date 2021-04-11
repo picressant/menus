@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
+import java.util.Arrays;
 
 @Service
 public class DataImporter {
@@ -53,7 +54,7 @@ public class DataImporter {
             Ingredient ingredient = new Ingredient();
             String name = columns.get(0).trim().substring(0, 1).toUpperCase() + columns.get(0).trim().substring(1);
             ingredient.setName(name);
-            ingredient.setUnit(this.unitService.findUnitByName(columns.get(1).trim()));
+            ingredient.setUnits(Arrays.asList(this.unitService.findUnitByName(columns.get(1).trim())));
             ingredient.setShopSection(this.shopSectionService.findShopByName(columns.get(2).trim()));
             ingredient.setForRecipe(true);
 

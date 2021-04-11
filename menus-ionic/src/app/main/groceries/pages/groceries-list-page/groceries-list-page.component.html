@@ -33,7 +33,7 @@
                                [value]="item.quantity"
                                (change)="onChangeQuantity($event, item)"
                                onfocus="this.select();">
-                        <span>{{item.ingredient.unit.symbol}}</span>
+                        <span>{{item.ingredient.units[0].symbol}}</span>
                     </ion-label>
                     <ion-icon slot="end" name="checkmark" *ngIf="item.checked"></ion-icon>
                 </ion-item>

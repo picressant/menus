@@ -21,7 +21,7 @@
     <ion-item (click)="onChooseUnit()">
         <ion-label position="floating">Unité</ion-label>
         <ion-input readonly="true"
-                [value]="form.controls.unit.value ? form.controls.unit.value?.name + ' (' + form.controls.unit.value?.symbol + ')' : ''"></ion-input>
+                [value]="form.controls.units.value ? form.controls.units.value[0]?.name + ' (' + form.controls.units.value[0]?.symbol + ')' : ''"></ion-input>
     </ion-item>
 
     <ion-item>
