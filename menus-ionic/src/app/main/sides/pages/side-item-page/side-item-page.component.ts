@@ -65,7 +65,7 @@ export class SideItemPageComponent extends AbstractItemPage<SideDish> {
                 component: IngredientModalSelectorComponent,
                 id: IngredientModalSelectorComponent.modalId,
                 componentProps: {
-                    "excludeIds": this.form.controls.ingredients.value.map(iq => iq.ingredient.id)
+                    "excludeIds": this.form.controls.selectedIngredients.value.map(iq => iq.ingredient.id)
                 }
             });
 

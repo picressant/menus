@@ -192,7 +192,7 @@ export class RecipeItemPageComponent extends AbstractItemPage<Recipe> implements
                 component: IngredientModalSelectorComponent,
                 id: IngredientModalSelectorComponent.modalId,
                 componentProps: {
-                    "excludeIds": this.form.controls.ingredients.value.map(iq => iq.ingredient.id),
+                    "excludeIds": this.form.controls.selectedIngredients.value.map(iq => iq.ingredient.id),
                     "focusSearchBar": true,
                     "canCreateIngredient": true
                 }

@@ -90,7 +90,7 @@ export class SideListComponent implements OnInit {
   }
 
   getIngredients(side: SideDish) {
-    return side.ingredients.map(value => value.ingredient.name).join(", ");
+    return side.selectedIngredients.map(value => value.ingredient.name).join(", ");
   }
 
   selectSide(side: SideDish) {

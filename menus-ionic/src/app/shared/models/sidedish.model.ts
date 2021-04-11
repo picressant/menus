@@ -11,13 +11,11 @@ export class SideDish extends AbstractData {
 
     constructor() {
         super();
-        this.ingredients = [];
     }
 
     static form(fb: FormBuilder) {
         const form = fb.group({
             name: ['', Validators.required],
-            ingredients: [[]],
             selectedIngredients: [[]]
         });
 

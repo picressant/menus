@@ -6,13 +6,11 @@ import { SelectedIngredient } from "@models/selected-ingredient.model";
 
 export class Recipe extends AbstractData {
     name: string;
-    ingredients: IngredientQuantity[];
     selectedIngredients: SelectedIngredient[];
     jacksonType: string;
 
     constructor() {
         super();
-        this.ingredients = [];
         this.selectedIngredients = [];
         this.jacksonType = "recipe";
     }
@@ -20,7 +18,6 @@ export class Recipe extends AbstractData {
     static form(fb: FormBuilder, jacksonType: string = "recipe") {
         const form = fb.group({
             name: ['', Validators.required],
-            ingredients: [[]],
             selectedIngredients: [[]],
             jacksonType: [jacksonType, Validators.required]
         });
