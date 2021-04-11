@@ -1,6 +1,8 @@
 package fr.choupiteam.menus.application;
 
+import fr.choupiteam.menus.application.ingredient.model.SelectedIngredient;
 import fr.choupiteam.menus.application.ingredient.service.IngredientService;
+import fr.choupiteam.menus.application.recipe.model.Recipe;
 import fr.choupiteam.menus.application.recipe.service.RecipeService;
 import fr.choupiteam.menus.application.security.model.ApplicationUser;
 import fr.choupiteam.menus.application.security.model.Privilege;
@@ -8,6 +10,7 @@ import fr.choupiteam.menus.application.security.model.Role;
 import fr.choupiteam.menus.application.security.service.UserDetailsServiceImpl;
 import fr.choupiteam.menus.application.week.service.WeekService;
 import fr.choupiteam.menus.infrastructure.importer.DataImporter;
+import fr.choupiteam.menus.infrastructure.migration.MigrationHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
@@ -33,6 +36,9 @@ public class MenusApplicationStartup implements ApplicationListener<ApplicationR
     @Autowired
     private DataImporter dataImporter;
 
+    @Autowired
+    private MigrationHelper migrationHelper;
+
     @Override
     public void onApplicationEvent(ApplicationReadyEvent applicationReadyEvent) {
         try {
@@ -50,5 +56,9 @@ public class MenusApplicationStartup implements ApplicationListener<ApplicationR
         }
 
         this.dataImporter.run();
+
+        this.migrationHelper.migrateIngredients();
+        this.migrationHelper.migrateRecipe();
+        this.migrationHelper.migrateSideDishes();
     }
 }

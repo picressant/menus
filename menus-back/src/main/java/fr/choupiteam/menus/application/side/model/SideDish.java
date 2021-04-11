@@ -2,12 +2,14 @@ package fr.choupiteam.menus.application.side.model;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import fr.choupiteam.menus.application.ingredient.model.SelectedIngredient;
 import fr.choupiteam.menus.infrastructure.annotation.Searchable;
 import fr.choupiteam.menus.infrastructure.rest.jackson.IngredientMapDeserializer;
 import fr.choupiteam.menus.infrastructure.rest.jackson.IngredientMapSerializer;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.List;
 import java.util.Map;
 
 @Document(collection = "sidedish")
@@ -32,6 +34,8 @@ public class SideDish {
     @JsonDeserialize(using = IngredientMapDeserializer.class)
     private Map<String, Float> ingredients;
 
+    private List<SelectedIngredient> selectedIngredients;
+
     public String getId() {
         return id;
     }
@@ -54,5 +58,13 @@ public class SideDish {
 
     public void setIngredients(Map<String, Float> ingredients) {
         this.ingredients = ingredients;
+    }
+
+    public List<SelectedIngredient> getSelectedIngredients() {
+        return selectedIngredients;
+    }
+
+    public void setSelectedIngredients(List<SelectedIngredient> selectedIngredients) {
+        this.selectedIngredients = selectedIngredients;
     }
 }

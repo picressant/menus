@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -40,5 +41,9 @@ public class SideDishService {
             this.weekService.clearSideFromWeeks(side);
             this.sideDishRepository.deleteById(id);
         });
+    }
+
+    public List<SideDish> getDishes() {
+        return this.sideDishRepository.findAll();
     }
 }

@@ -1,7 +1,7 @@
-<ion-list *ngFor="let ingredientQuantity of ingredientsQuantity; let i = index">
+<ion-list *ngFor="let selectedIngredient of selectedIngredients; let i = index">
     <ion-item>
         <ion-label class="ingredient-label" slot="start" (click)="changeIngredient(i)">
-            <ion-label>{{ingredientQuantity.ingredient.name}}</ion-label>
+            <ion-label>{{selectedIngredient.ingredient.name}}</ion-label>
             <ion-icon slot="start" name="caret-down-outline" *ngIf="!isReadonly"></ion-icon>
         </ion-label>
 
@@ -11,12 +11,12 @@
                     autoSizeInput
                     [extraWidth]="5"
                     [readOnly]="isReadonly"
-                    [(ngModel)]="ingredientQuantity.quantity"
+                    [(ngModel)]="selectedIngredient.quantity"
                     onfocus="this.select();"
-                    [id]="'ingredient_' + ingredientQuantity.ingredient.id">
-            <span>{{ingredientQuantity.ingredient.unit.symbol}}</span>
+                    [id]="'ingredient_' + selectedIngredient.ingredient.id">
+            <span>{{selectedIngredient.ingredient.unit.symbol}}</span>
         </ion-label>
-        <ion-icon slot="end" name="trash" color="danger" (click)="deleteIngredient(ingredientQuantity)"
+        <ion-icon slot="end" name="trash" color="danger" (click)="deleteIngredient(selectedIngredient)"
                   *ngIf="!isReadonly"></ion-icon>
     </ion-item>
 </ion-list>

@@ -22,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -41,6 +42,10 @@ public class RecipeService {
 
     public Optional<Recipe> getRecipe(String id) {
         return this.recipeRepository.findById(id);
+    }
+
+    public List<Recipe> getRecipes() {
+        return this.recipeRepository.findAll();
     }
 
     public Recipe addRecipe(Recipe recipe) {

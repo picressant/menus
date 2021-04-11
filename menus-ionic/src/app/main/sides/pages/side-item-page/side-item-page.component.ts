@@ -8,10 +8,10 @@ import { SideDish } from "@models/sidedish.model";
 import { SideDishRestService } from "@services/sidedish-rest.service";
 import { WeekService } from "@services/week.service";
 import { tap } from "rxjs/operators";
-import { IngredientQuantity } from "@models/ingredient-quantity.model";
 import { IngredientModalSelectorComponent } from "@components/selectors/ingredient-modal-selector/ingredient-modal-selector.component";
 import { AlertController, ModalController } from "@ionic/angular";
 import { IngredientsQuantityListComponent } from "@components/lists/ingredients-quantity-list/ingredients-quantity-list.component";
+import { SelectedIngredient } from "@models/selected-ingredient.model";
 
 @Component({
     selector: 'app-side-item-page',
@@ -55,8 +55,8 @@ export class SideItemPageComponent extends AbstractItemPage<SideDish> {
             .pipe(tap(() => this.weekService.getWeekFromApi()));
     }
 
-    onDeleteIngredient(ingredientQuantity: IngredientQuantity) {
-        this.form.controls.ingredients.setValue(this.form.controls.ingredients.value.filter(i => i !== ingredientQuantity));
+    onDeleteIngredient(selectedIngredient: SelectedIngredient) {
+        this.form.controls.selectedIngredients.setValue(this.form.controls.selectedIngredients.value.filter(i => i !== selectedIngredient));
     }
 
     async addIngredient() {
@@ -73,12 +73,13 @@ export class SideItemPageComponent extends AbstractItemPage<SideDish> {
 
             const { data } = await modal.onWillDismiss();
             if (data.ingredient) {
-                let ingredientQuantity = new IngredientQuantity();
-                ingredientQuantity.ingredient = data.ingredient;
-                ingredientQuantity.quantity = 1;
-                this.form.controls.ingredients.value.push(ingredientQuantity);
+                let selectedIngredients = new SelectedIngredient();
+                selectedIngredients.ingredient = data.ingredient;
+                selectedIngredients.unit = data.ingredient.unit;
+                selectedIngredients.quantity = 1;
+                this.form.controls.selectedIngredients.value.push(selectedIngredients);
 
-                setTimeout(() => this.ingredientsQuantityList.focusQuantity(ingredientQuantity.ingredient), 200);
+                setTimeout(() => this.ingredientsQuantityList.focusQuantity(selectedIngredients.ingredient), 200);
             }
         }
     }

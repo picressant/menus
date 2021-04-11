@@ -82,13 +82,13 @@ export class GroceriesListPageComponent implements OnInit {
                     const recipePersons = Recipe.isRecipeBook(meal.recipe) ? (meal.recipe as BookRecipe).persons : 1;
                     const recipeRatio = Recipe.isRecipeFree(meal.recipe) ? 1 : meal.persons / recipePersons;
 
-                    meal.recipe.ingredients.forEach(i => {
+                    meal.recipe.selectedIngredients.forEach(i => {
                         this.addToList(i.ingredient, i.quantity, recipeRatio);
                     });
                 }
 
                 meal.sideDishes.forEach(side => {
-                    side.ingredients.forEach(i => {
+                    side.selectedIngredients.forEach(i => {
                         this.addToList(i.ingredient, i.quantity, meal.persons);
                     });
                 });

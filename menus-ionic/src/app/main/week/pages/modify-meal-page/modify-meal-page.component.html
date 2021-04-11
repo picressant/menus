@@ -66,12 +66,12 @@
         </h3>
         <app-ingredients-quantity-list #ingredientListRecipe
                                        [isReadonly]="!(isMealFreeRecipe && isEditing)"
-                                       [ingredientsQuantity]="ingredientsRecipe"
+                                       [selectedIngredients]="ingredientsRecipe"
                                        (delete)="deleteIngredientFromFree($event)"></app-ingredients-quantity-list>
 
         <h3 class="ion-margin" *ngIf="ingredientsSides.length > 0">Accompagnements</h3>
         <app-ingredients-quantity-list *ngIf="ingredientsSides.length > 0"
-                                       [ingredientsQuantity]="ingredientsSides"
+                                       [selectedIngredients]="ingredientsSides"
                                        [isReadonly]="true"></app-ingredients-quantity-list>
     </div>
 </ion-content>

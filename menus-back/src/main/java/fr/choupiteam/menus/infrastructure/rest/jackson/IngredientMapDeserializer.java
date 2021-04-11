@@ -30,6 +30,10 @@ public class IngredientMapDeserializer extends JsonDeserializer<Map<String, Floa
                                 while(p.getCurrentToken() != JsonToken.END_OBJECT)
                                     p.nextToken();
                             }
+                            else if (p.currentToken() == JsonToken.START_ARRAY && p.getCurrentName().equals("units")) {
+                                while (p.getCurrentToken() != JsonToken.END_ARRAY)
+                                    p.nextToken();
+                            }
                             else if (p.getCurrentToken().isScalarValue()) {
                                 if (p.currentName().equals("id")) {
                                     id = p.getValueAsString();

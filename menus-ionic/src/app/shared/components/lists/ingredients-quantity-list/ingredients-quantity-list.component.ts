@@ -3,6 +3,7 @@ import { IngredientQuantity } from "@models/ingredient-quantity.model";
 import { IngredientModalSelectorComponent } from "@components/selectors/ingredient-modal-selector/ingredient-modal-selector.component";
 import { ModalController } from "@ionic/angular";
 import { Ingredient } from "@models/ingredient.model";
+import { SelectedIngredient } from "@models/selected-ingredient.model";
 
 @Component({
   selector: 'app-ingredients-quantity-list',
@@ -15,19 +16,19 @@ export class IngredientsQuantityListComponent implements OnInit {
   isReadonly: boolean;
 
   @Input()
-  set ingredientsQuantity(list: IngredientQuantity[]) {
-    this._ingredientsQuantity = list;
+  set selectedIngredients(list: SelectedIngredient[]) {
+    this._selectedIngredients = list;
     this.sortList();
   }
 
-  get ingredientsQuantity(): IngredientQuantity[] {
-    return this._ingredientsQuantity;
+  get selectedIngredients(): SelectedIngredient[] {
+    return this._selectedIngredients;
   }
 
-  private _ingredientsQuantity: IngredientQuantity[];
+  private _selectedIngredients: SelectedIngredient[];
 
   @Output()
-  delete = new EventEmitter<IngredientQuantity>();
+  delete = new EventEmitter<SelectedIngredient>();
 
   constructor(
       private modalController: ModalController,
@@ -42,7 +43,7 @@ export class IngredientsQuantityListComponent implements OnInit {
       const modal = await this.modalController.create({
         component: IngredientModalSelectorComponent,
         componentProps: {
-          "excludeIds": this.ingredientsQuantity.map(iq => iq.ingredient.id)
+          "excludeIds": this.selectedIngredients.map(iq => iq.ingredient.id)
         }
       });
 
@@ -50,17 +51,17 @@ export class IngredientsQuantityListComponent implements OnInit {
 
       const { data } = await modal.onWillDismiss();
       if (data.ingredient) {
-        this.ingredientsQuantity[i].ingredient = data.ingredient;
+        this.selectedIngredients[i].ingredient = data.ingredient;
       }
     }
   }
 
-  deleteIngredient(ingredientQuantity: IngredientQuantity) {
-    this.delete.emit(ingredientQuantity);
+  deleteIngredient(selectedIngredient: SelectedIngredient) {
+    this.delete.emit(selectedIngredient);
   }
 
   private sortList() {
-    this._ingredientsQuantity = this._ingredientsQuantity.sort((a, b) => a.ingredient.name.localeCompare(b.ingredient.name));
+    this._selectedIngredients = this._selectedIngredients.sort((a, b) => a.ingredient.name.localeCompare(b.ingredient.name));
   }
 
   focusQuantity(ingredient: Ingredient) {

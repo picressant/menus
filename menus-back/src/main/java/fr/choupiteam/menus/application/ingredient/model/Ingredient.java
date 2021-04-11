@@ -7,6 +7,8 @@ import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.List;
+
 @Document(collection = "ingredient")
 public class Ingredient {
 
@@ -19,6 +21,9 @@ public class Ingredient {
 
     @DBRef
     private Unit unit;
+
+    @DBRef
+    private List<Unit> units;
 
     private boolean forRecipe;
 
@@ -63,5 +68,13 @@ public class Ingredient {
 
     public void setShopSection(ShopSection shopSection) {
         this.shopSection = shopSection;
+    }
+
+    public List<Unit> getUnits() {
+        return units;
+    }
+
+    public void setUnits(List<Unit> units) {
+        this.units = units;
     }
 }

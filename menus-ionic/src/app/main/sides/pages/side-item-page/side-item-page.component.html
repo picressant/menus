@@ -41,6 +41,6 @@
     <h3 class="ion-margin with-icon">Ingrédients
         <ion-icon name="add-outline" *ngIf="!isReadonly" (click)="addIngredient()"></ion-icon>
     </h3>
-    <app-ingredients-quantity-list [ingredientsQuantity]="form.controls.ingredients.value" [isReadonly]="isReadonly"
+    <app-ingredients-quantity-list [selectedIngredients]="form.controls.selectedIngredients.value" [isReadonly]="isReadonly"
                                    (delete)="onDeleteIngredient($event)"></app-ingredients-quantity-list>
 </ion-content>

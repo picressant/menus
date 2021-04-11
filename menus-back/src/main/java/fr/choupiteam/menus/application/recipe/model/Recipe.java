@@ -4,14 +4,15 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import fr.choupiteam.menus.application.ingredient.model.SelectedIngredient;
 import fr.choupiteam.menus.infrastructure.annotation.Searchable;
 import fr.choupiteam.menus.infrastructure.rest.jackson.IngredientMapDeserializer;
 import fr.choupiteam.menus.infrastructure.rest.jackson.IngredientMapSerializer;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Document(collection = "recipe")
@@ -40,6 +41,8 @@ public class Recipe {
     @JsonDeserialize(using = IngredientMapDeserializer.class)
     private Map<String, Float> ingredients;
 
+    private List<SelectedIngredient> selectedIngredients;
+
     public Recipe() {
         this.ingredients = new HashMap<>();
     }
@@ -66,5 +69,13 @@ public class Recipe {
 
     public void setIngredients(Map<String, Float> ingredients) {
         this.ingredients = ingredients;
+    }
+
+    public List<SelectedIngredient> getSelectedIngredients() {
+        return selectedIngredients;
+    }
+
+    public void setSelectedIngredients(List<SelectedIngredient> selectedIngredients) {
+        this.selectedIngredients = selectedIngredients;
     }
 }

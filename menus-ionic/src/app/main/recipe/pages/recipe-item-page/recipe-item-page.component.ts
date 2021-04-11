@@ -15,8 +15,8 @@ import { removeFromArray } from "@helpers/remove-array-element.function";
 import { ConfirmationAlertService } from "@services/confirmation-alert.service";
 import { BookRecipe } from "@models/book-recipe.model";
 import { IngredientsQuantityListComponent } from "@components/lists/ingredients-quantity-list/ingredients-quantity-list.component";
-import { WeekDay } from "@angular/common";
 import { MealDay } from "@models/enums/meal-day.enum";
+import { SelectedIngredient } from "@models/selected-ingredient.model";
 
 @Component({
     selector: 'app-recipe-item-page',
@@ -99,7 +99,6 @@ export class RecipeItemPageComponent extends AbstractItemPage<Recipe> implements
         return this.recipeRest.addRecipe(this.form.value).pipe(
             tap((recipe: BookRecipe) => {
                 if (this.fromWeekMealIndex) {
-
                     const index = this.weekService.findMealIndex(this.fromWeekMealIndex);
                     const meal = this.weekService.meals$.getValue()[index];
                     meal.recipe = recipe;
@@ -187,7 +186,7 @@ export class RecipeItemPageComponent extends AbstractItemPage<Recipe> implements
         };
     }
 
-    async addIngredientQuantity() {
+    async addIngredient() {
         if (!this.isReadonly) {
             const modal = await this.modalController.create({
                 component: IngredientModalSelectorComponent,
@@ -203,19 +202,20 @@ export class RecipeItemPageComponent extends AbstractItemPage<Recipe> implements
 
             const { data } = await modal.onWillDismiss();
             if (data.ingredient) {
-                let ingredientQuantity = new IngredientQuantity();
-                ingredientQuantity.ingredient = data.ingredient;
-                ingredientQuantity.quantity = 1;
-                this.form.controls.ingredients.value.push(ingredientQuantity);
-                this.form.controls.ingredients.setValue(this.form.controls.ingredients.value.sort((a, b) => a.ingredient.name.localeCompare(b.ingredient.name)));
+                let selectedIngredient = new SelectedIngredient();
+                selectedIngredient.ingredient = data.ingredient;
+                selectedIngredient.unit = data.ingredient.unit;
+                selectedIngredient.quantity = 1;
+                this.form.controls.selectedIngredients.value.push(selectedIngredient);
+                this.form.controls.selectedIngredients.setValue(this.form.controls.selectedIngredients.value.sort((a, b) => a.ingredient.name.localeCompare(b.ingredient.name)));
 
-                setTimeout(() => this.ingredientListComponent.focusQuantity(ingredientQuantity.ingredient), 200);
+                setTimeout(() => this.ingredientListComponent.focusQuantity(selectedIngredient.ingredient), 200);
             }
         }
     }
 
-    onDeleteIngredient(ingredientQuantity: IngredientQuantity) {
-        this.form.controls.ingredients.setValue(this.form.controls.ingredients.value.filter(i => i !== ingredientQuantity));
+    onDeleteIngredient(selectedIngredient: SelectedIngredient) {
+        this.form.controls.selectedIngredients.setValue(this.form.controls.selectedIngredients.value.filter(i => i !== selectedIngredient));
     }
 
     async delete() {

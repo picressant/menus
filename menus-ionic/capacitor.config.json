@@ -1,6 +1,6 @@
 {
-  "appId": "io.ionic.starter",
-  "appName": "menus-ionic",
+  "appId": "fr.organisator.food",
+  "appName": "food-organisator",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "www",
@@ -9,5 +9,6 @@
       "launchShowDuration": 0
     }
   },
+  "linuxAndroidStudioPath": "/snap/android-studio/current/android-studio/bin/studio.sh",
   "cordova": {}
 }
