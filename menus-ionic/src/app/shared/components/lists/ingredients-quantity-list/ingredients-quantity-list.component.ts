@@ -1,6 +1,6 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { IngredientModalSelectorComponent } from "@components/selectors/ingredient-modal-selector/ingredient-modal-selector.component";
-import { ModalController } from "@ionic/angular";
+import { AlertController, ModalController } from "@ionic/angular";
 import { Ingredient } from "@models/ingredient.model";
 import { SelectedIngredient } from "@models/selected-ingredient.model";
 
@@ -31,6 +31,7 @@ export class IngredientsQuantityListComponent implements OnInit {
 
     constructor(
         private modalController: ModalController,
+        private alertController: AlertController,
         private el: ElementRef
     ) {
     }
@@ -43,6 +44,7 @@ export class IngredientsQuantityListComponent implements OnInit {
         if (!this.isReadonly) {
             const modal = await this.modalController.create({
                 component: IngredientModalSelectorComponent,
+                id: IngredientModalSelectorComponent.modalId,
                 componentProps: {
                     "excludeIds": this.selectedIngredients.map(iq => iq.ingredient.id)
                 }
@@ -68,4 +70,40 @@ export class IngredientsQuantityListComponent implements OnInit {
     focusQuantity(ingredient: Ingredient) {
         this.el.nativeElement.querySelector("#ingredient_" + ingredient.id).focus();
     }
+
+    async changeUnit(selectedIngredient: SelectedIngredient) {
+        if (selectedIngredient.ingredient.units.length > 1) {
+            let inputs = [];
+            selectedIngredient.ingredient.units.forEach(u => {
+                inputs.push({
+                    name: 'ingredient',
+                    type: 'radio',
+                    label: u.name + ' (' + u.symbol + ')',
+                    value: u,
+                    checked: u.id === selectedIngredient.unit.id
+                });
+            });
+            const alert = await this.alertController.create({
+                header: 'Choisir une unité',
+                inputs: inputs,
+                buttons: [
+                    {
+                        text: 'Annuler',
+                        role: 'cancel',
+                        handler: () => {
+                        }
+                    }, {
+                        text: 'Valider',
+                        cssClass: "color-dark",
+                        handler: (alertData) => {
+                            selectedIngredient.unit = alertData;
+                        }
+                    }
+                ]
+            });
+
+            await alert.present();
+        }
+    }
+
 }

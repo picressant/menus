@@ -14,7 +14,11 @@
                     [(ngModel)]="selectedIngredient.quantity"
                     onfocus="this.select();"
                     [id]="'ingredient_' + selectedIngredient.ingredient.id">
-            <span>{{selectedIngredient.ingredient.units[0].symbol}}</span>
+
+            <span class="unit-span"(click)="changeUnit(selectedIngredient)">
+                <span>{{selectedIngredient.unit.symbol}}</span>
+                <ion-icon slot="start" name="caret-down-outline"
+                          *ngIf="!isReadonly && selectedIngredient.ingredient.units.length > 1"></ion-icon></span>
         </ion-label>
         <ion-icon slot="end" name="trash" color="danger" (click)="deleteIngredient(selectedIngredient)"
                   *ngIf="!isReadonly"></ion-icon>

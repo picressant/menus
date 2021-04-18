@@ -28,4 +28,14 @@
   ion-icon {
     font-size: 22px;
   }
+
+  .unit-span {
+    display: flex;
+    align-items: center;
+
+    ion-icon {
+      margin-left: 2px;
+      font-size: 18px;
+    }
+  }
 }
