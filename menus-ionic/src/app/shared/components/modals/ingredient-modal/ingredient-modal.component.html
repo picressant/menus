@@ -18,12 +18,6 @@
         <ion-input formControlName="name"></ion-input>
     </ion-item>
 
-    <ion-item (click)="onChooseUnit()">
-        <ion-label position="floating">Unité</ion-label>
-        <ion-input readonly="true"
-                [value]="form.controls.units.value ? form.controls.units.value[0]?.name + ' (' + form.controls.units.value[0]?.symbol + ')' : ''"></ion-input>
-    </ion-item>
-
     <ion-item>
         <ion-label position="floating">Rayon</ion-label>
         <ion-select placeholder="Rayon" formControlName="shopSection" [compareWith]="compareWith" interface="popover">
@@ -35,5 +29,17 @@
         <ion-checkbox formControlName="forRecipe" color="dark" slot="end"></ion-checkbox>
         <ion-label>Pour les recettes ?</ion-label>
     </ion-item>
+
+    <h3 class="ion-margin with-icon">Unités
+        <ion-icon name="add-outline" (click)="onChooseUnit()"></ion-icon>
+    </h3>
+    <ion-list *ngIf="form.controls.units.value.length > 0">
+        <ion-item *ngFor="let unit of form.controls.units.value; let i = index">
+            <ion-label>
+                {{unit.name + ' (' + unit.symbol + ')'}}
+            </ion-label>
+            <ion-icon slot="end" name="trash-outline" color="danger" (click)="deleteUnit(i)"></ion-icon>
+        </ion-item>
+    </ion-list>
 </ion-content>
 

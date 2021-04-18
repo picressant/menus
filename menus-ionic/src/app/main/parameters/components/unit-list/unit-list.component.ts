@@ -26,7 +26,7 @@ export class UnitListComponent implements OnInit {
     infiniteScroll: IonInfiniteScroll;
 
     @Input()
-    excludeIds: string[];
+    public excludeIds: string[];
 
     @Input()
     set loadOnInit(load: boolean) {

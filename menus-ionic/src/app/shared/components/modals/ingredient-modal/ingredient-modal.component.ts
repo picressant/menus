@@ -17,6 +17,7 @@ export class IngredientModalComponent {
     @Input()
     set ingredient(ingredient: Ingredient) {
         this.form.reset(ingredient);
+        this.form.controls.units.setValue([...ingredient.units]);
     }
 
     @Input()
@@ -43,14 +44,18 @@ export class IngredientModalComponent {
     async onChooseUnit() {
         const modal = await this.innerModalController.create({
             component: SelectUnitModalComponent,
-            id: SelectUnitModalComponent.modalId
+            id: SelectUnitModalComponent.modalId,
+            componentProps: {
+                excludeIds: this.form.controls.units.value.map(unit => unit.id)
+            }
         });
 
         await modal.present();
 
         const { data } = await modal.onWillDismiss();
         if (data && data.unit) {
-            this.form.controls.units.setValue([data.unit]);
+            this.form.controls.units.value.push(data.unit);
+            this.form.controls.units.setValue([...this.form.controls.units.value]);
         }
     }
 
@@ -66,4 +71,9 @@ export class IngredientModalComponent {
         return o1 && o2 ? o1.id === o2.id : o1 === o2;
     };
     compareWith = this.compareWithFn;
+
+    deleteUnit(i: number) {
+        this.form.controls.units.value.splice(i, 1);
+        this.form.controls.units.setValue([...this.form.controls.units.value]);
+    }
 }
