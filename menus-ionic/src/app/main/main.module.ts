@@ -13,6 +13,7 @@ import { SharedModule } from "../shared/shared.module";
 import { ParametersModule } from "./parameters/parameters.module";
 import { UserModule } from "./user/user.module";
 import { GroceriesModule } from "./groceries/groceries.module";
+import { IngredientsModule } from "./ingredients/ingredients.module";
 
 
 @NgModule({
@@ -32,6 +33,7 @@ import { GroceriesModule } from "./groceries/groceries.module";
         ParametersModule,
         UserModule,
         GroceriesModule,
+        IngredientsModule,
         SharedModule
 
     ],

@@ -38,6 +38,12 @@ export class MainShellComponent implements OnInit {
 
     public adminPages = [
         {
+            title: 'Ingrédients',
+            url: 'ingredients',
+            icon: 'nutrition',
+            privilege: Privilege.MANAGE_INGREDIENTS
+        },
+        {
             title: 'Paramètres',
             url: 'parameters',
             icon: 'settings',

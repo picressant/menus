@@ -11,22 +11,16 @@
         <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
 
-    <div [hidden]="selectedTab !== footerIngredient.selectedTab">
-        <app-ingredient-list (ingredientSelected)="onClickIngredient($event)" [canDelete]="true" #recipeIngredientList></app-ingredient-list>
-    </div>
     <div [hidden]="selectedTab !== footerUnit.selectedTab">
         <app-unit-list [loadOnInit]="true" (selected)="showUnit($event)"></app-unit-list>
     </div>
     <div [hidden]="selectedTab !== footerShopSections.selectedTab">
         <app-shop-section-list [loadOnInit]="true" (selected)="showSection($event)"></app-shop-section-list>
     </div>
-    <div [hidden]="selectedTab !== footerIngredientNoRecipe.selectedTab">
-        <app-ingredient-list (ingredientSelected)="onClickIngredient($event)" [canDelete]="true" [recipe]="false" #noRecipeIngredientList></app-ingredient-list>
-    </div>
 </ion-content>
 
 <app-footer-tab
         selectedTab="{{selectedTab}}"
         (elementSelect)="selectedTab = $event"
-        [footerElements]="[footerIngredient, footerUnit, footerShopSections, footerIngredientNoRecipe]">
+        [footerElements]="[footerUnit, footerShopSections]">
 </app-footer-tab>

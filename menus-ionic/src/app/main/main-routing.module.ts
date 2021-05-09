@@ -15,6 +15,7 @@ import { UserListPageComponent } from "./user/pages/user-list-page/user-list-pag
 import { GroupItemPageComponent } from "./user/pages/group-item-page/group-item-page.component";
 import { Privilege } from "@models/enums/privilege.enum";
 import { GroceriesListPageComponent } from "./groceries/pages/groceries-list-page/groceries-list-page.component";
+import { IngredientsPageComponent } from "./ingredients/pages/ingredients-page/ingredients-page.component";
 
 const routes: Routes = [
     { path: 'recipe', component: RecipeListPageComponent },
@@ -25,6 +26,7 @@ const routes: Routes = [
     { path: 'side', component: SideListPageComponent },
     { path: 'side/add', component: SideItemPageComponent },
     { path: 'side/:id', component: SideItemPageComponent },
+    { path: 'ingredients', component: IngredientsPageComponent, canActivate: [PrivilegeGuard], data: {privilege: Privilege.MANAGE_INGREDIENTS} },
     { path: 'parameters', component: ParametersPageComponent, canActivate: [PrivilegeGuard], data: {privilege: Privilege.MANAGE_INGREDIENTS} },
     { path: 'user', component: UserListPageComponent, canActivate: [PrivilegeGuard], data: {privilege: Privilege.MANAGE_USERS} },
     { path: 'user/add', component: UserItemPageComponent, canActivate: [PrivilegeGuard], data: {privilege: Privilege.MANAGE_USERS} },
