@@ -14,6 +14,9 @@
     <div [hidden]="selectedTab !== footerUnit.selectedTab">
         <app-unit-list [loadOnInit]="true" (selected)="showUnit($event)"></app-unit-list>
     </div>
+    <div [hidden]="selectedTab !== footerConversion.selectedTab">
+        <app-conversion-list [loadOnInit]="true" (selected)="showConversion($event)"></app-conversion-list>
+    </div>
     <div [hidden]="selectedTab !== footerShopSections.selectedTab">
         <app-shop-section-list [loadOnInit]="true" (selected)="showSection($event)"></app-shop-section-list>
     </div>
@@ -22,5 +25,5 @@
 <app-footer-tab
         selectedTab="{{selectedTab}}"
         (elementSelect)="selectedTab = $event"
-        [footerElements]="[footerUnit, footerShopSections]">
+        [footerElements]="[footerUnit, footerConversion, footerShopSections]">
 </app-footer-tab>

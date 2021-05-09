@@ -8,6 +8,9 @@ import { ShopSection } from "@models/shop-section.model";
 import { ShopSectionModalComponent } from "../../components/shop-section-modal/shop-section-modal.component";
 import { ShopSectionListComponent } from "../../components/shop-section-list/shop-section-list.component";
 import { ShopSectionRestService } from "@services/shop-section-rest.service";
+import { ConversionListComponent } from "../../components/conversion-list/conversion-list.component";
+import { ConversionModalComponent } from "../../components/conversion-modal/conversion-modal.component";
+import { ConvertTo } from "@models/convert-to.model";
 
 @Component({
     selector: 'app-paramters-page',
@@ -22,10 +25,19 @@ export class ParametersPageComponent implements OnInit {
     @ViewChild(ShopSectionListComponent)
     private shopSectionListComponent: ShopSectionListComponent;
 
+    @ViewChild(ConversionListComponent)
+    private conversionListComponent: ConversionListComponent;
+
     footerUnit = {
         name: "Unités",
         icon: "flask-outline",
         selectedTab: "tab-unit"
+    }
+
+    footerConversion = {
+        name: "Conversions",
+        icon: "swap-horizontal-outline",
+        selectedTab: "tab-conv"
     }
 
     footerShopSections = {
@@ -58,6 +70,8 @@ export class ParametersPageComponent implements OnInit {
             await this.addUnit();
         else if (this.selectedTab === this.footerShopSections.selectedTab)
             await this.addSection();
+        else if (this.selectedTab === this.footerConversion.selectedTab)
+            await this.addConversion();
     }
 
     async addUnit() {
@@ -90,11 +104,31 @@ export class ParametersPageComponent implements OnInit {
         }
     }
 
+    async addConversion() {
+        const modal = await this.modalController.create({
+            component: ConversionModalComponent,
+            id: ConversionModalComponent.modalId
+        });
+
+        await modal.present();
+
+        const { data } = await modal.onWillDismiss();
+        if (data && data.conversion) {
+            this.ingredientRest.addConversion(data.conversion).subscribe(() => {
+                this.conversionListComponent.refresh(null);
+            });
+
+        }
+    }
+
+
     doRefresh(event: any) {
         if (this.selectedTab === this.footerUnit.selectedTab)
             this.unitListComponent.refresh(event);
         else if (this.selectedTab === this.footerShopSections.selectedTab)
             this.shopSectionListComponent.refresh(event);
+        else if (this.selectedTab === this.footerConversion.selectedTab)
+            this.conversionListComponent.refresh(event);
     }
 
     async showUnit(unit: Unit) {
@@ -129,6 +163,25 @@ export class ParametersPageComponent implements OnInit {
             this.shopSectionRest.saveShopSection(data.section).subscribe(() => {
                 this.shopSectionListComponent.refresh(null);
                 this.loadShopSections();
+            });
+        }
+    }
+
+    async showConversion(convertTo: ConvertTo) {
+        const modal = await this.modalController.create({
+            component: ConversionModalComponent,
+            id: ConversionModalComponent.modalId,
+            componentProps: {
+                "conversion": convertTo
+            }
+        });
+
+        await modal.present();
+
+        const { data } = await modal.onWillDismiss();
+        if (data && data.conversion) {
+            this.ingredientRest.saveConversion(data.conversion).subscribe(() => {
+                this.conversionListComponent.refresh(null);
             });
         }
     }

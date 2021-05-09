@@ -4,6 +4,7 @@ import fr.choupiteam.menus.application.ingredient.model.Ingredient;
 import fr.choupiteam.menus.application.ingredient.service.IngredientService;
 import fr.choupiteam.menus.application.pager.model.Filter;
 import fr.choupiteam.menus.application.pager.model.Pager;
+import fr.choupiteam.menus.application.unit.model.ConvertTo;
 import fr.choupiteam.menus.application.unit.model.Unit;
 import fr.choupiteam.menus.application.unit.service.UnitService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,4 +72,28 @@ public class IngredientController {
     public void deleteUnit(@PathVariable("id") String id) {
         this.unitService.deleteUnit(id);
     }
+
+    @PostMapping(value = "/unit/conversion")
+    @PreAuthorize("@authorizationService.can('MANAGE_INGREDIENTS')")
+    public ConvertTo createConversion(@RequestBody ConvertTo convertTo) {
+        return this.unitService.createConversion(convertTo);
+    }
+
+    @PutMapping(value = "/unit/conversion")
+    @PreAuthorize("@authorizationService.can('MANAGE_INGREDIENTS')")
+    public ConvertTo updateConversion(@RequestBody ConvertTo convertTo) {
+        return this.unitService.saveConversion(convertTo);
+    }
+
+    @GetMapping(value = "/unit/conversion")
+    public List<ConvertTo> getAllConversions() {
+        return this.unitService.getAllConversions();
+    }
+
+    @DeleteMapping(value = "/unit/conversion/{id}")
+    @PreAuthorize("@authorizationService.can('MANAGE_INGREDIENTS')")
+    public void deleteConversion(@PathVariable("id") String id) {
+        this.unitService.deleteConversion(id);
+    }
+
 }

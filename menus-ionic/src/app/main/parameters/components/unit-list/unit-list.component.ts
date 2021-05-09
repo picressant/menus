@@ -1,10 +1,10 @@
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { Direction, Order, Pager } from "@models/pager/pager.model";
 import { Pageable } from "@models/pager/pageable.model";
 import { IonInfiniteScroll } from "@ionic/angular";
 import { Unit } from "@models/unit.model";
 import { IngredientRestService } from "@services/ingredient-rest.service";
-import { removeFromArray } from "../../../../shared/helpers/remove-array-element.function";
+import { removeFromArray } from "@helpers/remove-array-element.function";
 import { ConfirmationAlertService } from "@services/confirmation-alert.service";
 
 @Component({

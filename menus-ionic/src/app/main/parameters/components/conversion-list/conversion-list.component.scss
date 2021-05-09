@@ -1,0 +1,21 @@
+ion-label {
+  display: flex!important;
+
+  .unit-from {
+    flex: 1;
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  .unit-to {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .factor {
+    flex: 1;
+    display: flex;
+    justify-content: space-around;
+  }
+}

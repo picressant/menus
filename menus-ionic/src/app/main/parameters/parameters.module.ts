@@ -9,6 +9,8 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { SelectUnitModalComponent } from "@components/modals/select-unit-modal/select-unit-modal.component";
 import { ShopSectionListComponent } from "./components/shop-section-list/shop-section-list.component";
 import { ShopSectionModalComponent } from "./components/shop-section-modal/shop-section-modal.component";
+import { ConversionListComponent } from "./components/conversion-list/conversion-list.component";
+import { ConversionModalComponent } from "./components/conversion-modal/conversion-modal.component";
 
 
 @NgModule({
@@ -17,7 +19,9 @@ import { ShopSectionModalComponent } from "./components/shop-section-modal/shop-
         UnitListComponent,
         SelectUnitModalComponent,
         ShopSectionListComponent,
-        ShopSectionModalComponent
+        ShopSectionModalComponent,
+        ConversionListComponent,
+        ConversionModalComponent
     ],
     imports: [
         CommonModule,

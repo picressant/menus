@@ -1,0 +1,31 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/main/parameters" (click)="forceCloseModal()"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Rayon</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="closeModal()" [disabled]="form.invalid" [color]="form.invalid ? 'danger' : ''">Sauver
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" [formGroup]="form">
+  <ion-item (click)="onChooseUnitA()">
+    <ion-label position="floating">Unité A</ion-label>
+    <ion-input readonly="true"
+               [value]="form.controls.unitFrom.value ? form.controls.unitFrom.value?.name + ' (' + form.controls.unitFrom.value?.symbol + ')' : ''"></ion-input>
+  </ion-item>
+
+  <ion-item (click)="onChooseUnitB()">
+    <ion-label position="floating">Unité B</ion-label>
+    <ion-input readonly="true"
+               [value]="form.controls.unitTo.value ? form.controls.unitTo.value?.name + ' (' + form.controls.unitTo.value?.symbol + ')' : ''"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Facteur</ion-label>
+    <ion-input formControlName="factor"></ion-input>
+  </ion-item>
+</ion-content>

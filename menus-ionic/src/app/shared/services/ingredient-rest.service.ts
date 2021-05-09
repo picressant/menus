@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Ingredient } from '@models/ingredient.model';
 import { Observable } from 'rxjs';
 import { Unit } from '@models/unit.model';
 import { Pageable } from "@models/pager/pageable.model";
 import { Pager } from "@models/pager/pager.model";
+import { ConvertTo } from "@models/convert-to.model";
 
 @Injectable({
     providedIn: 'root'
@@ -44,5 +45,21 @@ export class IngredientRestService {
 
     deleteUnit(unit: Unit): Observable<void> {
         return this.http.delete<void>('ingredient/unit/' + unit.id);
+    }
+
+    deleteConversion(convertTo: ConvertTo): Observable<void> {
+        return this.http.delete<void>('ingredient/unit/conversion/' + convertTo.id);
+    }
+
+    getAllConversion(): Observable<ConvertTo[]> {
+        return this.http.get<ConvertTo[]>('ingredient/unit/conversion')
+    }
+
+    addConversion(convertTo: ConvertTo): Observable<ConvertTo> {
+        return this.http.post<ConvertTo>('ingredient/unit/conversion', convertTo);
+    }
+
+    saveConversion(convertTo: ConvertTo): Observable<ConvertTo> {
+        return this.http.put<ConvertTo>('ingredient/unit/conversion', convertTo);
     }
 }
