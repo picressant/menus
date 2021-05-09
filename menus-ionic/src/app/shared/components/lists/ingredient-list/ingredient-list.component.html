@@ -11,7 +11,7 @@
     <ion-item-sliding *ngFor="let ingredient of ingredients; let i = index">
         <ion-item (click)="clickIngredient(ingredient)">
             <ion-label slot="start">{{ingredient.name}}</ion-label>
-            <ion-label slot="end" class="no-mr-left">{{ingredient.units[0]?.name}}</ion-label>
+            <ion-label slot="end" class="no-mr-left">{{ingredient.units[ingredient.starredUnitIndex]?.name}}</ion-label>
         </ion-item>
 
         <ion-item-options side="end" *ngIf="canDelete">

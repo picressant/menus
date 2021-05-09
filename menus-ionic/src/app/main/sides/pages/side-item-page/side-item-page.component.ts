@@ -75,7 +75,7 @@ export class SideItemPageComponent extends AbstractItemPage<SideDish> {
             if (data.ingredient) {
                 let selectedIngredients = new SelectedIngredient();
                 selectedIngredients.ingredient = data.ingredient;
-                selectedIngredients.unit = data.ingredient.unit;
+                selectedIngredients.unit = data.ingredient.units[data.ingredient.starredUnitIndex];
                 selectedIngredients.quantity = 1;
                 this.form.controls.selectedIngredients.value.push(selectedIngredients);
 

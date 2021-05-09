@@ -22,6 +22,8 @@ public class Ingredient {
     @DBRef
     private List<Unit> units;
 
+    private int starredUnitIndex = 0;
+
     private boolean forRecipe;
 
     @DBRef
@@ -65,5 +67,13 @@ public class Ingredient {
 
     public void setUnits(List<Unit> units) {
         this.units = units;
+    }
+
+    public int getStarredUnitIndex() {
+        return starredUnitIndex;
+    }
+
+    public void setStarredUnitIndex(int starredUnitIndex) {
+        this.starredUnitIndex = starredUnitIndex;
     }
 }

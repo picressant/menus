@@ -246,7 +246,7 @@ export class ModifyMealPageComponent implements OnInit {
         if (data.ingredient) {
             let selectedIngredient = new SelectedIngredient();
             selectedIngredient.ingredient = data.ingredient;
-            selectedIngredient.unit = data.ingredient.units[0];
+            selectedIngredient.unit = data.ingredient.units[data.ingredient.starredUnitIndex];
             selectedIngredient.quantity = 1;
             this.ingredientsRecipe.push(selectedIngredient);
 

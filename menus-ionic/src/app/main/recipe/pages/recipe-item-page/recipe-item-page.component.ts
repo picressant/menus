@@ -203,7 +203,7 @@ export class RecipeItemPageComponent extends AbstractItemPage<Recipe> implements
             if (data.ingredient) {
                 let selectedIngredient = new SelectedIngredient();
                 selectedIngredient.ingredient = data.ingredient;
-                selectedIngredient.unit = data.ingredient.units[0];
+                selectedIngredient.unit = data.ingredient.units[data.ingredient.starredUnitIndex];
                 selectedIngredient.quantity = 1;
                 this.form.controls.selectedIngredients.value.push(selectedIngredient);
                 this.form.controls.selectedIngredients.setValue(this.form.controls.selectedIngredients.value.sort((a, b) => a.ingredient.name.localeCompare(b.ingredient.name)));

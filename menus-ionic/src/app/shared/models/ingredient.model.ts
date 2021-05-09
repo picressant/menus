@@ -8,14 +8,16 @@ export class Ingredient extends AbstractData {
     name: string;
     units: Unit[];
     forRecipe: boolean;
-    shopSection: ShopSection
+    shopSection: ShopSection;
+    starredUnitIndex: number;
 
     static form(fb: FormBuilder) {
         const form = fb.group({
             name: ['', Validators.required],
             units: [[], Validators.required],
             forRecipe: [true, Validators.required],
-            shopSection: [null, Validators.required]
+            shopSection: [null, Validators.required],
+            starredUnitIndex: [null, Validators.required]
         });
 
         return mergeFormGroups(form, AbstractData.form(fb));
