@@ -54,6 +54,8 @@ export class IngredientModalComponent {
 
         const { data } = await modal.onWillDismiss();
         if (data && data.unit) {
+            if (this.form.controls.units.value.length === 0)
+                this.form.controls.starredUnitIndex.setValue(0);
             this.form.controls.units.value.push(data.unit);
             this.form.controls.units.setValue([...this.form.controls.units.value]);
         }
