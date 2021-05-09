@@ -72,7 +72,7 @@ export class IngredientsQuantityListComponent implements OnInit {
     }
 
     async changeUnit(selectedIngredient: SelectedIngredient) {
-        if (selectedIngredient.ingredient.units.length > 1) {
+        if (selectedIngredient.ingredient.units.length > 1 && !this.isReadonly) {
             let inputs = [];
             selectedIngredient.ingredient.units.forEach(u => {
                 inputs.push({

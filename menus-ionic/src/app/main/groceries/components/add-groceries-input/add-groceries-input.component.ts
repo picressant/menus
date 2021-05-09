@@ -100,6 +100,7 @@ export class AddGroceriesInputComponent implements OnInit {
         if (ingredient) {
             this.currentItem = new GroceryItem();
             this.currentItem.ingredient = ingredient;
+            this.currentItem.unit = ingredient.units[0];
             this.currentItem.quantity = this.form.controls.quantity.value;
 
             this.added.emit(this.currentItem);

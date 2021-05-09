@@ -11,6 +11,7 @@ import { Ingredient } from "@models/ingredient.model";
 import { OptionPopoverComponent } from "@components/popover/option-popover/option-popover.component";
 import { ConfirmationAlertService } from "@services/confirmation-alert.service";
 import { AddGroceriesInputComponent } from "../../components/add-groceries-input/add-groceries-input.component";
+import { Unit } from "@models/unit.model";
 
 @Component({
     selector: 'app-groceries-list-page',
@@ -83,13 +84,13 @@ export class GroceriesListPageComponent implements OnInit {
                     const recipeRatio = Recipe.isRecipeFree(meal.recipe) ? 1 : meal.persons / recipePersons;
 
                     meal.recipe.selectedIngredients.forEach(i => {
-                        this.addToList(i.ingredient, i.quantity, recipeRatio);
+                        this.addToList(i.ingredient, i.unit, i.quantity, recipeRatio);
                     });
                 }
 
                 meal.sideDishes.forEach(side => {
                     side.selectedIngredients.forEach(i => {
-                        this.addToList(i.ingredient, i.quantity, meal.persons);
+                        this.addToList(i.ingredient, i.unit, i.quantity, meal.persons);
                     });
                 });
             }
@@ -108,7 +109,7 @@ export class GroceriesListPageComponent implements OnInit {
         list.push(item);
     }
 
-    public addToList(ingredient: Ingredient, quantity: number, ratio: number): GroceryItem {
+    public addToList(ingredient: Ingredient, unit: Unit, quantity: number, ratio: number): GroceryItem {
 
         if (!this.groceriesMapped.has(ingredient.shopSection.id)) {
             this.shopSections.push(ingredient.shopSection);
@@ -116,13 +117,14 @@ export class GroceriesListPageComponent implements OnInit {
         }
 
         const list = this.groceriesMapped.get(ingredient.shopSection.id);
-        const index = list.findIndex(i => i.ingredient.id === ingredient.id);
+        const index = list.findIndex(i => i.ingredient.id === ingredient.id && i.unit.id === unit.id);
 
         if (index < 0) {
             const item = new GroceryItem();
             item.ingredient = ingredient;
             item.checked = false;
             item.quantity = quantity * ratio;
+            item.unit = unit;
             list.push(item);
             return item;
         }
@@ -165,7 +167,7 @@ export class GroceriesListPageComponent implements OnInit {
     onAddIngredient(item: GroceryItem) {
         this.startLoading();
 
-        this.addToList(item.ingredient, item.quantity, 1);
+        this.addToList(item.ingredient, item.unit, item.quantity, 1);
         this.pushGrocery();
         this.addGroceryInput.focusIngredientInput();
     }
