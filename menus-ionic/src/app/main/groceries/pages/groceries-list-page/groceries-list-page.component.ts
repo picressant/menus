@@ -12,6 +12,8 @@ import { OptionPopoverComponent } from "@components/popover/option-popover/optio
 import { ConfirmationAlertService } from "@services/confirmation-alert.service";
 import { AddGroceriesInputComponent } from "../../components/add-groceries-input/add-groceries-input.component";
 import { Unit } from "@models/unit.model";
+import { IngredientRestService } from "@services/ingredient-rest.service";
+import { ConvertTo } from "@models/convert-to.model";
 
 @Component({
     selector: 'app-groceries-list-page',
@@ -26,6 +28,7 @@ export class GroceriesListPageComponent implements OnInit {
     isEditing: boolean = false;
 
     shopSections: ShopSection[] = [];
+    conversions: ConvertTo[] = [];
 
     @ViewChild(AddGroceriesInputComponent)
     private addGroceryInput: AddGroceriesInputComponent;
@@ -33,6 +36,7 @@ export class GroceriesListPageComponent implements OnInit {
     constructor(
         private weekService: WeekService,
         private groceryRestService: GroceriesRestService,
+        private ingredientRestService: IngredientRestService,
         private popoverController: PopoverController,
         private cdr: ChangeDetectorRef,
         private confirmationService: ConfirmationAlertService
@@ -46,14 +50,18 @@ export class GroceriesListPageComponent implements OnInit {
 
     public reload(event: any = null) {
         this.startLoading();
-        this.groceryRestService.getGroceries().subscribe(items => {
-            this.shopSections = [];
-            this.groceriesMapped.clear();
-            items.forEach(item => this.convertToMap(item));
-            if (event)
-                event.target.complete();
+        this.ingredientRestService.getAllConversion().subscribe(conv => {
+            this.conversions = conv;
 
-            this.endLoading();
+            this.groceryRestService.getGroceries().subscribe(items => {
+                this.shopSections = [];
+                this.groceriesMapped.clear();
+                items.forEach(item => this.convertToMap(item));
+                if (event)
+                    event.target.complete();
+
+                this.endLoading();
+            });
         });
     }
 
@@ -116,20 +124,37 @@ export class GroceriesListPageComponent implements OnInit {
             this.groceriesMapped.set(ingredient.shopSection.id, []);
         }
 
+        let chosenUnit = unit;
+        let quantityFactored = quantity;
+        const starredUnit = ingredient.units[ingredient.starredUnitIndex];
+        if (unit.id != starredUnit.id) {
+            // On recherche une conversion
+            const index = this.conversions.findIndex(conv => (conv.unitFrom.id === unit.id && conv.unitTo.id === starredUnit.id) || (conv.unitTo.id === unit.id && conv.unitFrom.id === starredUnit.id));
+
+            if (index >= 0) {
+                const convertTo = this.conversions[index];
+                chosenUnit = ingredient.units[ingredient.starredUnitIndex];
+                if (convertTo.unitFrom.id === unit.id)
+                    quantityFactored = quantity * convertTo.factor;
+                else
+                    quantityFactored = quantity / convertTo.factor;
+            }
+        }
+
         const list = this.groceriesMapped.get(ingredient.shopSection.id);
-        const index = list.findIndex(i => i.ingredient.id === ingredient.id && i.unit.id === unit.id);
+        const index = list.findIndex(i => i.ingredient.id === ingredient.id && i.unit.id === chosenUnit.id);
 
         if (index < 0) {
             const item = new GroceryItem();
             item.ingredient = ingredient;
             item.checked = false;
-            item.quantity = quantity * ratio;
-            item.unit = unit;
+            item.quantity = quantityFactored * ratio;
+            item.unit = chosenUnit;
             list.push(item);
             return item;
         }
         else {
-            list[index].quantity = list[index].quantity + (quantity * ratio);
+            list[index].quantity = list[index].quantity + (quantityFactored * ratio);
             return list[index];
         }
 
@@ -140,7 +165,7 @@ export class GroceriesListPageComponent implements OnInit {
         const icon = (this.isEditing) ? "checkmark-sharp" : "";
         const options = [
             { clickedResult: "RESET", text: "Réinitialiser la liste" },
-            { clickedResult: "EDIT", text: "Éditer la liste",  icon: icon }
+            { clickedResult: "EDIT", text: "Éditer la liste", icon: icon }
         ];
 
         const popover = await this.popoverController.create({
