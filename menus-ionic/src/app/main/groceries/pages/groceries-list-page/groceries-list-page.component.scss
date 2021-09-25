@@ -35,4 +35,10 @@
       outline: none;
     }
   }
+
+  ion-footer {
+    &:before {
+      display: none;
+    }
+  }
 }

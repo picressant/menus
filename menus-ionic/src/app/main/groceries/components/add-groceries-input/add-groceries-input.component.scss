@@ -1,53 +1,56 @@
 :host {
-  .edit-wrapper {
-    display: flex;
-    align-items: center;
 
+  ion-toolbar {
+    border-top: 1px solid var(--ion-item-border-color, var(--ion-border-color, var(--ion-color-step-150, rgba(0, 0, 0, 0.13))));
 
-    .ingredient {
-      flex-grow: 1;
-      border: none;
-      outline: none;
-      height: 30px;
-    }
-
-    .quantity-wrapper {
-      flex: inherit;
-      border: 1px solid var(--ion-item-border-color, var(--ion-border-color, var(--ion-color-step-150, rgba(0, 0, 0, 0.13))));
-      border-top: none;
-      border-bottom: none;
-      height: 40px;
-      position: relative;
+    .edit-wrapper {
       display: flex;
+      align-items: center;
 
-      .quantity {
+
+      .ingredient {
+        flex-grow: 1;
         border: none;
-        text-align: center;
+        outline: none;
+        height: 30px;
+      }
 
-        &:focus {
+      .quantity-wrapper {
+        flex: inherit;
+        border: 1px solid var(--ion-item-border-color, var(--ion-border-color, var(--ion-color-step-150, rgba(0, 0, 0, 0.13))));
+        border-top: none;
+        border-bottom: none;
+        height: 40px;
+        position: relative;
+        display: flex;
+
+        .quantity {
           border: none;
-          outline: none;
+          text-align: center;
+
+          &:focus {
+            border: none;
+            outline: none;
+          }
+        }
+
+        div {
+          position: absolute;
+          width: 100%;
+          text-align: center;
+          bottom: 0;
+          font-size: 11px;
         }
       }
 
-      div {
-        position: absolute;
-        width: 100%;
-        text-align: center;
-        bottom: 0;
-        font-size: 11px;
+      .submit {
+        width: 40px;
+        font-size: 24px;
       }
-    }
-
-    .submit {
-      width: 40px;
-      font-size: 24px;
     }
   }
 
   .suggestions-wrapper {
-    position: absolute;
-    top: -30px;
     margin: 0 10px;
 
     ion-badge {
