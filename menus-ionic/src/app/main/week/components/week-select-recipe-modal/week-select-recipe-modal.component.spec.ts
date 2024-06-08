@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
 import { WeekSelectRecipeModalComponent } from './week-select-recipe-modal.component';
@@ -7,7 +7,7 @@ describe('WeekSelectRecipeModalComponent', () => {
   let component: WeekSelectRecipeModalComponent;
   let fixture: ComponentFixture<WeekSelectRecipeModalComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ WeekSelectRecipeModalComponent ],
       imports: [IonicModule.forRoot()]
