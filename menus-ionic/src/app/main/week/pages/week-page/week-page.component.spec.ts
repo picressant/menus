@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
 import { WeekPageComponent } from './week-page.component';
@@ -7,7 +7,7 @@ describe('WeekPageComponent', () => {
   let component: WeekPageComponent;
   let fixture: ComponentFixture<WeekPageComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ WeekPageComponent ],
       imports: [IonicModule.forRoot()]

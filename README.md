@@ -17,6 +17,9 @@ Java 8 with spring boot
 
 To build : ```mvn clean install```. Generates a war to be deploy.
 
+To start db:
+docker run --name mongodb -d -p 27017:27017 mongodb/mongodb-community-server:latest
+
 ## DevOps
 
 Backend is hosted by tomcat 9

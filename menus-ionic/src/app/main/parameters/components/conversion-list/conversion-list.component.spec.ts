@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
 import { ConversionListComponent } from './conversion-list.component';
@@ -7,7 +7,7 @@ describe('ConversionListComponent', () => {
   let component: ConversionListComponent;
   let fixture: ComponentFixture<ConversionListComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ ConversionListComponent ],
       imports: [IonicModule.forRoot()]

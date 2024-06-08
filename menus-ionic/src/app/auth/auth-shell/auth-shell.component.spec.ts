@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
 import { AuthShellComponent } from './auth-shell.component';
@@ -7,7 +7,7 @@ describe('AuthShellComponent', () => {
   let component: AuthShellComponent;
   let fixture: ComponentFixture<AuthShellComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ AuthShellComponent ],
       imports: [IonicModule.forRoot()]

@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
 import { GroupSelectorModalComponent } from './group-selector-modal.component';
@@ -7,7 +7,7 @@ describe('GroupSelectorModalComponent', () => {
   let component: GroupSelectorModalComponent;
   let fixture: ComponentFixture<GroupSelectorModalComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ GroupSelectorModalComponent ],
       imports: [IonicModule.forRoot()]
