@@ -1,5 +1,5 @@
 import { AbstractData } from '@models/abstract-data.model';
-import { FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { mergeFormGroups } from '@helpers/form.helpers';
 import { SelectedIngredient } from '@models/selected-ingredient.model';
 
@@ -11,7 +11,7 @@ export class SideDish extends AbstractData {
         super();
     }
 
-    static form(fb: FormBuilder) {
+    static form(fb: UntypedFormBuilder) {
         const form = fb.group({
             name: ['', Validators.required],
             selectedIngredients: [[]]

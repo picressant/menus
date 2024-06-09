@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractItemPage } from '../../../../shared/pages/abstract-item-page';
 import { User } from '@models/user.model';
 import { getAllRoles, getRoleStringified, Role } from '@models/enums/role.enum';
-import { FormBuilder } from '@angular/forms';
+import { UntypedFormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FoodAuthService } from '@services/food-auth.service';
 import { ToasterService } from '@services/toaster.service';
@@ -28,7 +28,7 @@ export class UserItemPageComponent extends AbstractItemPage<User> implements OnI
     privileges: string[] = [];
 
     constructor(
-        private fb: FormBuilder,
+        private fb: UntypedFormBuilder,
         private route: ActivatedRoute,
         private userService: UserRestService,
         private authService: FoodAuthService,

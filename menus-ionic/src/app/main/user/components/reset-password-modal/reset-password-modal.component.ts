@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { UserRestService } from '@services/user-rest.service';
 import { ToasterService } from '@services/toaster.service';
-import { FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
 
 @Component({
@@ -11,7 +11,7 @@ import { ModalController } from '@ionic/angular';
 })
 export class ResetPasswordModalComponent implements OnInit {
 
-    form: FormGroup;
+    form: UntypedFormGroup;
 
     @Input()
     private userId: string;
@@ -20,7 +20,7 @@ export class ResetPasswordModalComponent implements OnInit {
     }
 
     constructor(
-        private formBuilder: FormBuilder,
+        private formBuilder: UntypedFormBuilder,
         private toaster: ToasterService,
         private userService: UserRestService,
         private modalController: ModalController
@@ -41,7 +41,7 @@ export class ResetPasswordModalComponent implements OnInit {
     }
 
     private _isSameAsNewPassword(): ValidatorFn {
-        return (group: FormGroup): ValidationErrors => {
+        return (group: UntypedFormGroup): ValidationErrors => {
             const { password, confirmation } = group.controls;
             if (password.value !== confirmation.value) {
                 confirmation.setErrors({ mismatch: true });

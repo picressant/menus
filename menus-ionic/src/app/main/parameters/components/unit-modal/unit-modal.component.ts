@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { Unit } from '@models/unit.model';
 import { ModalController } from '@ionic/angular';
 
@@ -10,14 +10,14 @@ import { ModalController } from '@ionic/angular';
 })
 export class UnitModalComponent implements OnInit {
 
-    form: FormGroup;
+    form: UntypedFormGroup;
 
     @Input()
     set unit(unit: Unit) {
         this.form.reset(unit);
     }
 
-    constructor(private formBuilder: FormBuilder,
+    constructor(private formBuilder: UntypedFormBuilder,
                 private modalController: ModalController) {
         this.form = Unit.form(this.formBuilder);
     }

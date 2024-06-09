@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
 import { ShopSection } from '@models/shop-section.model';
 
@@ -10,14 +10,14 @@ import { ShopSection } from '@models/shop-section.model';
 })
 export class ShopSectionModalComponent implements OnInit {
 
-    form: FormGroup;
+    form: UntypedFormGroup;
 
     @Input()
     set section(section: ShopSection) {
         this.form.reset(section);
     }
 
-    constructor(private formBuilder: FormBuilder,
+    constructor(private formBuilder: UntypedFormBuilder,
                 private modalController: ModalController) {
         this.form = ShopSection.form(this.formBuilder);
     }

@@ -1,5 +1,5 @@
 import { AbstractData } from './abstract-data.model';
-import { FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { mergeFormGroups } from '@helpers/form.helpers';
 import { SelectedIngredient } from '@models/selected-ingredient.model';
 
@@ -14,7 +14,7 @@ export class Recipe extends AbstractData {
         this.jacksonType = 'recipe';
     }
 
-    static form(fb: FormBuilder, jacksonType: string = 'recipe') {
+    static form(fb: UntypedFormBuilder, jacksonType: string = 'recipe') {
         const form = fb.group({
             name: ['', Validators.required],
             selectedIngredients: [[]],
