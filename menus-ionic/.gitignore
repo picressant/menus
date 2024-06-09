@@ -33,3 +33,4 @@ npm-debug.log*
 /menus-ionic.iml
 
 package-lock.json
+.angular
