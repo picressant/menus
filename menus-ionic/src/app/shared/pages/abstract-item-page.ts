@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AbstractData } from '@models/abstract-data.model';
@@ -12,7 +12,7 @@ import { ToasterService } from '@services/toaster.service';
 export abstract class AbstractItemPage<T extends AbstractData> implements OnInit {
 
     id: string = null;
-    form: FormGroup;
+    form: UntypedFormGroup;
     isReadonly = true;
     data: T = null;
 

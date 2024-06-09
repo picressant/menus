@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
 import { ConvertTo } from '@models/convert-to.model';
 import { SelectUnitModalComponent } from '@components/modals/select-unit-modal/select-unit-modal.component';
@@ -16,7 +16,7 @@ export class ConversionModalComponent implements OnInit {
         this.form.reset(convertTo);
     }
 
-    constructor(private formBuilder: FormBuilder,
+    constructor(private formBuilder: UntypedFormBuilder,
                 private modalController: ModalController,
                 private innerModalController: ModalController) {
         this.form = ConvertTo.form(this.formBuilder);
@@ -24,7 +24,7 @@ export class ConversionModalComponent implements OnInit {
 
     public static modalId = 'ConversionModalComponent_ID';
 
-    form: FormGroup;
+    form: UntypedFormGroup;
 
     ngOnInit() {
     }

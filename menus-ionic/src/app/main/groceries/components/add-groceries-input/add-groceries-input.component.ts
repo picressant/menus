@@ -3,7 +3,7 @@ import { IngredientRestService } from '@services/ingredient-rest.service';
 import { Pager } from '@models/pager/pager.model';
 import { Ingredient } from '@models/ingredient.model';
 import { GroceryItem } from '@models/grocery-item.model';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { AlertController, IonInput, ModalController } from '@ionic/angular';
 import { IngredientModalComponent } from '@components/modals/ingredient-modal/ingredient-modal.component';
 import { ShopSection } from '@models/shop-section.model';
@@ -20,7 +20,7 @@ export class AddGroceriesInputComponent implements OnInit {
     shopSections: ShopSection[] = [];
 
     currentItem: GroceryItem;
-    form: FormGroup;
+    form: UntypedFormGroup;
 
     @Output()
     added = new EventEmitter<GroceryItem>();
@@ -35,7 +35,7 @@ export class AddGroceriesInputComponent implements OnInit {
     constructor(
         private ingredientRest: IngredientRestService,
         private cdr: ChangeDetectorRef,
-        private fb: FormBuilder,
+        private fb: UntypedFormBuilder,
         private alertController: AlertController,
         private modalController: ModalController,
         private shopSectionRest: ShopSectionRestService,

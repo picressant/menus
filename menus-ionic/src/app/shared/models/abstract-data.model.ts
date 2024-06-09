@@ -1,9 +1,9 @@
-import { FormBuilder } from '@angular/forms';
+import { UntypedFormBuilder } from '@angular/forms';
 
 export class AbstractData {
   id: string;
 
-  static form(fb: FormBuilder) {
+  static form(fb: UntypedFormBuilder) {
     return fb.group({
       id: [null]
     });

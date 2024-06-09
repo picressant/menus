@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { UntypedFormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToasterService } from '@services/toaster.service';
 import { Observable } from 'rxjs';
@@ -18,7 +18,7 @@ export class GroupItemPageComponent extends AbstractItemPage<Group> implements O
 
     members: User[] = [];
 
-    constructor(private fb: FormBuilder,
+    constructor(private fb: UntypedFormBuilder,
                 private groupRest: GroupRestService,
                 private router: Router,
                 private route: ActivatedRoute,

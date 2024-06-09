@@ -1,4 +1,4 @@
-import { FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { mergeFormGroups } from '../helpers/form.helpers';
 import { AbstractData } from './abstract-data.model';
 import { Role } from './enums/role.enum';
@@ -16,7 +16,7 @@ export class User extends AbstractData {
   group: Group;
   daysToShow: MealDay[];
 
-  static form(fb: FormBuilder) {
+  static form(fb: UntypedFormBuilder) {
     const form = fb.group({
       firstname: [null, Validators.required],
       lastname: [null, Validators.required],

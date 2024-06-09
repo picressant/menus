@@ -1,4 +1,4 @@
-import { FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { mergeFormGroups } from '../helpers/form.helpers';
 import { Recipe } from '@models/recipe.model';
 
@@ -17,7 +17,7 @@ export class BookRecipe extends Recipe {
     bookReference: string;
     steps: string[];
 
-    static form(fb: FormBuilder) {
+    static form(fb: UntypedFormBuilder) {
         const form = fb.group({
             preparationTime: ['', Validators.required],
             cookingTime: [''],

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { FoodAuthService } from '../../shared/services/food-auth.service';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { FoodAuthService } from '@services/food-auth.service';
 import { environment } from '../../../environments/environment';
 
 @Component({
@@ -10,10 +10,10 @@ import { environment } from '../../../environments/environment';
 })
 export class LoginComponent implements OnInit {
 
-  form: FormGroup;
+  form: UntypedFormGroup;
 
   constructor(
-      private builder: FormBuilder,
+      private builder: UntypedFormBuilder,
       private authService: FoodAuthService) {
     this.form = this.builder.group({
       username: ['', Validators.required],

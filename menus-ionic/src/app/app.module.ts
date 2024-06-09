@@ -21,14 +21,12 @@ import { IonicGestureConfig } from './shared/config/ionic-gesture.config';
 
 @NgModule({
     declarations: [AppComponent],
-    entryComponents: [],
     imports: [
         BrowserModule,
         IonicModule.forRoot(),
         AppRoutingModule,
         SocialLoginModule,
         HttpClientModule,
-
         MainModule,
         AuthModule,
         ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })

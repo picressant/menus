@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { AbstractItemPage } from '@pages/abstract-item-page';
 import { Recipe } from '@models/recipe.model';
 import { forkJoin, Observable } from 'rxjs';
-import { FormBuilder } from '@angular/forms';
+import { UntypedFormBuilder } from '@angular/forms';
 import { RecipeRestService } from '@services/recipe-rest.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToasterService } from '@services/toaster.service';
@@ -56,7 +56,7 @@ export class RecipeItemPageComponent extends AbstractItemPage<Recipe> implements
 
     private fromWeekMealIndex: MealDay;
 
-    constructor(private fb: FormBuilder,
+    constructor(private fb: UntypedFormBuilder,
                 private recipeRest: RecipeRestService,
                 private route: ActivatedRoute,
                 private toaster: ToasterService,

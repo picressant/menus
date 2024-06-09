@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { AbstractItemPage } from '@pages/abstract-item-page';
 import { Observable } from 'rxjs';
-import { FormBuilder } from '@angular/forms';
+import { UntypedFormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToasterService } from '@services/toaster.service';
 import { SideDish } from '@models/sidedish.model';
@@ -23,7 +23,7 @@ export class SideItemPageComponent extends AbstractItemPage<SideDish> {
     @ViewChild(IngredientsQuantityListComponent)
     private ingredientsQuantityList: IngredientsQuantityListComponent;
 
-    constructor(private fb: FormBuilder,
+    constructor(private fb: UntypedFormBuilder,
                 private sideRest: SideDishRestService,
                 private router: Router,
                 private route: ActivatedRoute,
