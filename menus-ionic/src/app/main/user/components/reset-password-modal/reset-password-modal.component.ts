@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { UserRestService } from "@services/user-rest.service";
-import { ToasterService } from "@services/toaster.service";
-import { FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from "@angular/forms";
-import { ModalController } from "@ionic/angular";
+import { UserRestService } from '@services/user-rest.service';
+import { ToasterService } from '@services/toaster.service';
+import { FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { ModalController } from '@ionic/angular';
 
 @Component({
     selector: 'app-reset-password-modal',
@@ -35,7 +35,7 @@ export class ResetPasswordModalComponent implements OnInit {
 
     onSubmit() {
         this.userService.resetPassword(this.userId, this.form.value).subscribe(() => {
-            this.toaster.info("Mot de passe modifié");
+            this.toaster.info('Mot de passe modifié');
             this.closeModal();
         });
     }

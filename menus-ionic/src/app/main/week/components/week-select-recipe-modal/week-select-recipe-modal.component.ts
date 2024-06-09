@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from "@ionic/angular";
-import { Recipe } from "@models/recipe.model";
+import { ModalController } from '@ionic/angular';
+import { Recipe } from '@models/recipe.model';
 
 @Component({
     selector: 'app-week-select-recipe-modal',

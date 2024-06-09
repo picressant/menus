@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { SwUpdate } from '@angular/service-worker';
-import { AlertController } from "@ionic/angular";
-import { environment } from "../../../environments/environment";
+import { AlertController } from '@ionic/angular';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
     providedIn: 'root'
@@ -25,7 +25,7 @@ export class AppUpdateService {
             header: 'Mise à jour',
             cssClass: 'alertUpdate',
             backdropDismiss: false,
-            message: "<img src='assets/img/update.gif'><div>Une mise à jour est disponible, la page doit être rechargée</div>",
+            message: '<img src=\'assets/img/update.gif\'><div>Une mise à jour est disponible, la page doit être rechargée</div>',
             buttons: [
                 {
                     cssClass: 'color-dark',

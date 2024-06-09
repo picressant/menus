@@ -1,7 +1,7 @@
-import { AbstractData } from "./abstract-data.model";
-import { FormBuilder, Validators } from "@angular/forms";
-import { mergeFormGroups } from "@helpers/form.helpers";
-import { SelectedIngredient } from "@models/selected-ingredient.model";
+import { AbstractData } from './abstract-data.model';
+import { FormBuilder, Validators } from '@angular/forms';
+import { mergeFormGroups } from '@helpers/form.helpers';
+import { SelectedIngredient } from '@models/selected-ingredient.model';
 
 export class Recipe extends AbstractData {
     name: string;
@@ -11,10 +11,10 @@ export class Recipe extends AbstractData {
     constructor() {
         super();
         this.selectedIngredients = [];
-        this.jacksonType = "recipe";
+        this.jacksonType = 'recipe';
     }
 
-    static form(fb: FormBuilder, jacksonType: string = "recipe") {
+    static form(fb: FormBuilder, jacksonType: string = 'recipe') {
         const form = fb.group({
             name: ['', Validators.required],
             selectedIngredients: [[]],
@@ -25,10 +25,10 @@ export class Recipe extends AbstractData {
     }
 
     static isRecipeFree(recipe: Recipe): boolean {
-        return (recipe.jacksonType === "recipe");
+        return (recipe.jacksonType === 'recipe');
     }
 
     static isRecipeBook(recipe: Recipe): boolean {
-        return (recipe.jacksonType === "bookRecipe");
+        return (recipe.jacksonType === 'bookRecipe');
     }
 }

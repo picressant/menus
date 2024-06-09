@@ -10,7 +10,7 @@ import { FoodAuthService } from 'src/app/shared/services/food-auth.service';
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
     constructor(private authService: FoodAuthService,
-        private router: Router) { }
+                private router: Router) { }
 
     intercept(req: HttpRequest<any>, next: HttpHandler):
         Observable<HttpEvent<any>> {

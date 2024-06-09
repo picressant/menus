@@ -1,8 +1,8 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { SideDish } from "@models/sidedish.model";
-import { Pager } from "@models/pager/pager.model";
-import { Pageable } from "@models/pager/pageable.model";
-import { IonInfiniteScroll, ModalController } from "@ionic/angular";
+import { SideDish } from '@models/sidedish.model';
+import { Pager } from '@models/pager/pager.model';
+import { Pageable } from '@models/pager/pageable.model';
+import { IonInfiniteScroll, ModalController } from '@ionic/angular';
 
 @Component({
     selector: 'app-week-select-side-modal',
@@ -23,7 +23,7 @@ export class WeekSelectSideModalComponent implements OnInit {
 
     closeModal(side: SideDish) {
         this.modalController.dismiss({
-            'side': side
+            side
         });
     }
 }

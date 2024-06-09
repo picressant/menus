@@ -1,6 +1,6 @@
 import { createGesture, Gesture, GestureDetail } from '@ionic/core';
 import { Directive, ElementRef, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
-import { environment } from "../../../environments/environment";
+import { environment } from '../../../environments/environment';
 
 @Directive({
     selector: '[appLongPress]'
@@ -27,7 +27,7 @@ export class LongPressDirective implements OnInit, OnDestroy {
             threshold: 0,
             canStart: () => true,
             onStart: (gestureEv: GestureDetail) => {
-                //gestureEv.event.preventDefault();
+                // gestureEv.event.preventDefault();
                 this.timerStartId = setTimeout(() => {
                     window.navigator.vibrate(200);
                     this.longPressStarted.emit();

@@ -1,9 +1,9 @@
 import { Directive, Input, OnDestroy, OnInit, TemplateRef, ViewContainerRef } from '@angular/core';
-import { Subject } from "rxjs";
-import { takeUntil } from "rxjs/operators";
-import { Privilege } from "@models/enums/privilege.enum";
-import { User } from "@models/user.model";
-import { FoodAuthService } from "@services/food-auth.service";
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { Privilege } from '@models/enums/privilege.enum';
+import { User } from '@models/user.model';
+import { FoodAuthService } from '@services/food-auth.service';
 
 @Directive({
   selector: '[appHasPrivilege]'
@@ -19,7 +19,7 @@ export class HasPrivilegeDirective implements OnInit, OnDestroy {
   constructor(
     private viewContainerRef: ViewContainerRef,
     private templateRef: TemplateRef<any>,
-    private authService : FoodAuthService
+    private authService: FoodAuthService
   ) {
   }
 
@@ -32,10 +32,12 @@ export class HasPrivilegeDirective implements OnInit, OnDestroy {
       }
       else {
         let can = false;
-        if (this.appHasPrivilege.startsWith("!"))
+        if (this.appHasPrivilege.startsWith('!')) {
           can = (user.privileges.indexOf(Privilege[this.appHasPrivilege.toString().substring(1)]) < 0);
-        else
+        }
+        else {
           can = (user.privileges.indexOf(this.appHasPrivilege) >= 0);
+        }
 
         if (can) {
           if (!this.isVisible) {

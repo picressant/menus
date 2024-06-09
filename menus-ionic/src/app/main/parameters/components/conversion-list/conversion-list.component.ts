@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { removeFromArray } from "@helpers/remove-array-element.function";
-import { ConvertTo } from "@models/convert-to.model";
-import { ConfirmationAlertService } from "@services/confirmation-alert.service";
-import { IngredientRestService } from "@services/ingredient-rest.service";
+import { removeFromArray } from '@helpers/remove-array-element.function';
+import { ConvertTo } from '@models/convert-to.model';
+import { ConfirmationAlertService } from '@services/confirmation-alert.service';
+import { IngredientRestService } from '@services/ingredient-rest.service';
 
 @Component({
     selector: 'app-conversion-list',
@@ -26,9 +26,9 @@ export class ConversionListComponent implements OnInit {
     }
 
     deleteConversion(convertTo: ConvertTo) {
-        this.confirmationService.confirm("Supprimer la conversion ?", () => {
+        this.confirmationService.confirm('Supprimer la conversion ?', () => {
             this.unitRest.deleteConversion(convertTo).subscribe(() => {
-                removeFromArray(this.conversions, convertTo)
+                removeFromArray(this.conversions, convertTo);
             });
         });
     }
@@ -39,8 +39,9 @@ export class ConversionListComponent implements OnInit {
 
     @Input()
     set loadOnInit(load: boolean) {
-        if (load)
+        if (load) {
             this.refresh(null);
+        }
     }
 
 

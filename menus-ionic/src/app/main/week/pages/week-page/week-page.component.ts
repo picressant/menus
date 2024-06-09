@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
-import { WeekMeal } from "@models/week-meal.model";
-import { ActivatedRoute, Router } from "@angular/router";
-import { AlertController, PopoverController } from "@ionic/angular";
-import { WeekService } from "@services/week.service";
-import { ConfirmationAlertService } from "@services/confirmation-alert.service";
-import { getMealDayStringified, MealDay } from "@models/enums/meal-day.enum";
-import { OptionPopoverComponent } from "@components/popover/option-popover/option-popover.component";
-import { FoodAuthService } from "@services/food-auth.service";
-import { UserRestService } from "@services/user-rest.service";
-import { User } from "@models/user.model";
+import { WeekMeal } from '@models/week-meal.model';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AlertController, PopoverController } from '@ionic/angular';
+import { WeekService } from '@services/week.service';
+import { ConfirmationAlertService } from '@services/confirmation-alert.service';
+import { getMealDayStringified, MealDay } from '@models/enums/meal-day.enum';
+import { OptionPopoverComponent } from '@components/popover/option-popover/option-popover.component';
+import { FoodAuthService } from '@services/food-auth.service';
+import { UserRestService } from '@services/user-rest.service';
+import { User } from '@models/user.model';
 
 @Component({
     selector: 'app-week-page',
@@ -17,16 +17,16 @@ import { User } from "@models/user.model";
 })
 export class WeekPageComponent {
     footerDay = {
-        name: "Aujourd'hui",
-        icon: "today-outline",
-        selectedTab: "tab-day"
-    }
+        name: 'Aujourd\'hui',
+        icon: 'today-outline',
+        selectedTab: 'tab-day'
+    };
 
     footerWeek = {
-        name: "Semaine",
-        icon: "calendar-outline",
-        selectedTab: "tab-week"
-    }
+        name: 'Semaine',
+        icon: 'calendar-outline',
+        selectedTab: 'tab-week'
+    };
 
     selectedTab: string = this.footerDay.selectedTab;
 
@@ -83,7 +83,7 @@ export class WeekPageComponent {
 
     changeTodayMeal() {
         const currentDate = new Date();
-        let day = currentDate.getDay();
+        const day = currentDate.getDay();
         let index = 0;
 
         if (day === 0) {
@@ -117,7 +117,7 @@ export class WeekPageComponent {
     }
 
     goToRecipe(index: number) {
-        this.router.navigate(["main/week", index]);
+        this.router.navigate(['main/week', index]);
 
     }
 
@@ -127,22 +127,22 @@ export class WeekPageComponent {
     }
 
     gotToMeal(meal: WeekMeal) {
-        this.router.navigate(["main/week", meal.weekDayIndex.valueOf()]);
+        this.router.navigate(['main/week', meal.weekDayIndex.valueOf()]);
     }
 
     async deleteWeekMeal(meal: WeekMeal) {
-        await this.confirmationService.confirm("Supprimer le repas de " + this.getDay(meal.weekDayIndex.valueOf()) + " ?", () => this.weekService.deleteMeal(meal.weekDayIndex.valueOf()));
+        await this.confirmationService.confirm('Supprimer le repas de ' + this.getDay(meal.weekDayIndex.valueOf()) + ' ?', () => this.weekService.deleteMeal(meal.weekDayIndex.valueOf()));
     }
 
     async showOptions(event: any) {
         const options = [
-            { clickedResult: "DAYS", text: "Choisir les jours à afficher" },
-            { clickedResult: "DELETE", text: "Tout supprimer" }
+            { clickedResult: 'DAYS', text: 'Choisir les jours à afficher' },
+            { clickedResult: 'DELETE', text: 'Tout supprimer' }
         ];
 
         const popover = await this.popoverController.create({
             component: OptionPopoverComponent,
-            event: event,
+            event,
             translucent: true,
             componentProps: {
                 options
@@ -152,20 +152,21 @@ export class WeekPageComponent {
 
         const { data } = await popover.onWillDismiss();
         if (data && data.option) {
-            if (data.option === "DAYS") {
+            if (data.option === 'DAYS') {
                 this.showDaysOptions();
             }
-            else if (data.option === "DELETE") {
-                this.confirmationService.confirm("Supprimer tous les repas ?", () => this.weekService.deleteAll());
+            else if (data.option === 'DELETE') {
+                this.confirmationService.confirm('Supprimer tous les repas ?', () => this.weekService.deleteAll());
             }
         }
     }
 
     async showDaysOptions() {
         const user = this.authService.user.getValue();
-        if (!user.daysToShow)
+        if (!user.daysToShow) {
             user.daysToShow = [];
-        const allDays = Object.keys(MealDay).filter(k => typeof MealDay[k as any] === "number").map(k => MealDay[k as any]);
+        }
+        const allDays = Object.keys(MealDay).filter(k => typeof MealDay[k as any] === 'number').map(k => MealDay[k as any]);
         const inputs = [];
 
         allDays.forEach(val => {
@@ -181,20 +182,21 @@ export class WeekPageComponent {
 
         const alert = await this.alertController.create({
             header: 'Choisir les jours à afficher',
-            inputs: inputs,
+            inputs,
             buttons: [
                 {
                     text: 'Annuler',
-                    role: "cancel",
-                    cssClass: "color-medium"
+                    role: 'cancel',
+                    cssClass: 'color-medium'
                 }, {
                     text: 'Valider',
-                    cssClass: "color-dark",
+                    cssClass: 'color-dark',
                     handler: (alertData) => {
                         user.daysToShow = alertData;
                         this.userService.saveUser(user).subscribe(user => {
-                            if (this.authService.user.getValue().id === user.id)
+                            if (this.authService.user.getValue().id === user.id) {
                                 this.authService.user.next(user);
+                            }
                         });
                     }
                 }

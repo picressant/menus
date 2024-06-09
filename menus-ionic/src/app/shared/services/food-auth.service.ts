@@ -3,8 +3,8 @@ import { User } from '@models/user.model';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
-import { GoogleLoginProvider, SocialAuthService, SocialUser } from "angularx-social-login";
-import { LoadingController } from "@ionic/angular";
+import { GoogleLoginProvider, SocialAuthService, SocialUser } from 'angularx-social-login';
+import { LoadingController } from '@ionic/angular';
 
 @Injectable({
     providedIn: 'root'
@@ -32,7 +32,7 @@ export class FoodAuthService {
                 });
             }
             else {
-                this.dismissLoading()
+                this.dismissLoading();
             }
         });
     }
@@ -47,7 +47,7 @@ export class FoodAuthService {
     async presentLoading() {
         this.loading = await this.loadingController.create({
             translucent: true,
-            mode: "ios"
+            mode: 'ios'
         });
         await this.loading.present();
     }
@@ -72,9 +72,9 @@ export class FoodAuthService {
     logout() {
         this.user.next(null);
         this.socialUser = null;
-        this.setToken("");
+        this.setToken('');
         this.authService.signOut().finally(() => {
-            this.router.navigate(['/auth/login'])
+            this.router.navigate(['/auth/login']);
         });
     }
 

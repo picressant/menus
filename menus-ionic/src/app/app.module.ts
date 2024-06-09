@@ -8,15 +8,15 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from "angularx-social-login";
-import { environment } from "../environments/environment";
-import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
-import { RestInterceptor } from "./shared/interceptors/rest.interceptor";
-import { ErrorInterceptor } from "./shared/interceptors/error.interceptor";
-import { MainModule } from "./main/main.module";
-import { AuthModule } from "./auth/auth.module";
+import { GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from 'angularx-social-login';
+import { environment } from '../environments/environment';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { RestInterceptor } from './shared/interceptors/rest.interceptor';
+import { ErrorInterceptor } from './shared/interceptors/error.interceptor';
+import { MainModule } from './main/main.module';
+import { AuthModule } from './auth/auth.module';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { IonicGestureConfig } from "./shared/config/ionic-gesture.config";
+import { IonicGestureConfig } from './shared/config/ionic-gesture.config';
 
 
 @NgModule({

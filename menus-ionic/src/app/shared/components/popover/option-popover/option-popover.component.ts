@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { OptionPopoverData } from "@components/popover/option-popover/option-popover-data.model";
-import { PopoverController } from "@ionic/angular";
+import { OptionPopoverData } from '@components/popover/option-popover/option-popover-data.model';
+import { PopoverController } from '@ionic/angular';
 
 @Component({
   selector: 'app-option-popover',

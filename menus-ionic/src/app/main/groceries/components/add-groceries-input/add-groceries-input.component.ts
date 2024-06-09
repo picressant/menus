@@ -1,13 +1,13 @@
 import { ChangeDetectorRef, Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
-import { IngredientRestService } from "@services/ingredient-rest.service";
-import { Pager } from "@models/pager/pager.model";
-import { Ingredient } from "@models/ingredient.model";
-import { GroceryItem } from "@models/grocery-item.model";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { AlertController, IonInput, ModalController } from "@ionic/angular";
-import { IngredientModalComponent } from "@components/modals/ingredient-modal/ingredient-modal.component";
-import { ShopSection } from "@models/shop-section.model";
-import { ShopSectionRestService } from "@services/shop-section-rest.service";
+import { IngredientRestService } from '@services/ingredient-rest.service';
+import { Pager } from '@models/pager/pager.model';
+import { Ingredient } from '@models/ingredient.model';
+import { GroceryItem } from '@models/grocery-item.model';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AlertController, IonInput, ModalController } from '@ionic/angular';
+import { IngredientModalComponent } from '@components/modals/ingredient-modal/ingredient-modal.component';
+import { ShopSection } from '@models/shop-section.model';
+import { ShopSectionRestService } from '@services/shop-section-rest.service';
 
 @Component({
     selector: 'app-add-groceries-input',
@@ -25,10 +25,10 @@ export class AddGroceriesInputComponent implements OnInit {
     @Output()
     added = new EventEmitter<GroceryItem>();
 
-    @ViewChild("inputQ")
+    @ViewChild('inputQ')
     private inputQuantity: ElementRef;
 
-    @ViewChild("inputI")
+    @ViewChild('inputI')
     private inputIngredient: IonInput;
 
 
@@ -53,14 +53,15 @@ export class AddGroceriesInputComponent implements OnInit {
     }
 
     async addElement() {
-        if (this.form.invalid)
+        if (this.form.invalid) {
             return;
+        }
 
         if (this.currentItem) {
             this.emitIngredient(this.currentItem.ingredient);
         }
         else {
-            let inputs = [];
+            const inputs = [];
             let selected = true;
             this.searchingIngredients.forEach(i => {
                 inputs.push({
@@ -74,17 +75,17 @@ export class AddGroceriesInputComponent implements OnInit {
             });
             const alert = await this.alertController.create({
                 header: 'Choisir un élément',
-                inputs: inputs,
+                inputs,
                 buttons: [
                     {
                         text: 'Créer',
-                        cssClass: "color-dark",
+                        cssClass: 'color-dark',
                         handler: () => {
                             this.addNewIngredient();
                         }
                     }, {
                         text: 'Valider',
-                        cssClass: "color-dark",
+                        cssClass: 'color-dark',
                         handler: (alertData) => {
                             this.emitIngredient(alertData);
                         }
@@ -146,8 +147,9 @@ export class AddGroceriesInputComponent implements OnInit {
     }
 
     onInputChange(event: any) {
-        if ((this.currentItem && this.currentItem.ingredient.name === event.detail.value) || !event.detail.value)
+        if ((this.currentItem && this.currentItem.ingredient.name === event.detail.value) || !event.detail.value) {
             return;
+        }
 
         this.pager.search = event.detail.value;
         this.ingredientRest.getIngredients(this.pager).subscribe(pageable => {

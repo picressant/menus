@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Recipe } from "@models/recipe.model";
-import { RecipeRestService } from "@services/recipe-rest.service";
-import { Router } from "@angular/router";
-import { RecipeListComponent } from "@components/lists/recipe-list/recipe-list.component";
+import { Recipe } from '@models/recipe.model';
+import { RecipeRestService } from '@services/recipe-rest.service';
+import { Router } from '@angular/router';
+import { RecipeListComponent } from '@components/lists/recipe-list/recipe-list.component';
 
 @Component({
     selector: 'app-recipe-list-page',
@@ -29,11 +29,11 @@ export class RecipeListPageComponent implements OnInit {
     }
 
     onAdd() {
-        this.router.navigate(["main/recipe/add"]);
+        this.router.navigate(['main/recipe/add']);
     }
 
     goToRecipe(recipe: Recipe) {
-        this.router.navigate(["main/recipe", recipe.id]);
+        this.router.navigate(['main/recipe', recipe.id]);
     }
 
     doRefresh(event: any) {

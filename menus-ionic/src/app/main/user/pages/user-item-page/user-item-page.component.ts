@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractItemPage } from "../../../../shared/pages/abstract-item-page";
-import { User } from "@models/user.model";
-import { getAllRoles, getRoleStringified, Role } from "@models/enums/role.enum";
-import { FormBuilder } from "@angular/forms";
-import { ActivatedRoute, Router } from "@angular/router";
-import { FoodAuthService } from "@services/food-auth.service";
-import { ToasterService } from "@services/toaster.service";
-import { forkJoin, Observable } from "rxjs";
-import { UserRestService } from "@services/user-rest.service";
-import { ModalController } from "@ionic/angular";
-import { GroupSelectorModalComponent } from "../../components/group-selector-modal/group-selector-modal.component";
-import { ResetPasswordModalComponent } from "../../components/reset-password-modal/reset-password-modal.component";
-import { getAllPrivileges, Privilege } from "@models/enums/privilege.enum";
+import { AbstractItemPage } from '../../../../shared/pages/abstract-item-page';
+import { User } from '@models/user.model';
+import { getAllRoles, getRoleStringified, Role } from '@models/enums/role.enum';
+import { FormBuilder } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { FoodAuthService } from '@services/food-auth.service';
+import { ToasterService } from '@services/toaster.service';
+import { forkJoin, Observable } from 'rxjs';
+import { UserRestService } from '@services/user-rest.service';
+import { ModalController } from '@ionic/angular';
+import { GroupSelectorModalComponent } from '../../components/group-selector-modal/group-selector-modal.component';
+import { ResetPasswordModalComponent } from '../../components/reset-password-modal/reset-password-modal.component';
+import { getAllPrivileges, Privilege } from '@models/enums/privilege.enum';
 
 @Component({
     selector: 'app-user-item-page',
@@ -43,7 +43,7 @@ export class UserItemPageComponent extends AbstractItemPage<User> implements OnI
         this.privileges = getAllPrivileges();
     }
 
-    isFromMenu: boolean = true;
+    isFromMenu = true;
 
     timestamp: string;
 
@@ -51,16 +51,19 @@ export class UserItemPageComponent extends AbstractItemPage<User> implements OnI
         super.ngOnInit();
 
         this.route.queryParams.subscribe(params => {
-            if (params.isFromList)
+            if (params.isFromList) {
                 this.isFromMenu = false;
+            }
         });
     }
 
     get title() {
-        if (this.isAddingMode)
-            return "Ajouter un utilisateur";
-        else
-            return this.form.value.firstname + " " + this.form.value.lastname;
+        if (this.isAddingMode) {
+            return 'Ajouter un utilisateur';
+        }
+        else {
+            return this.form.value.firstname + ' ' + this.form.value.lastname;
+        }
     }
 
     get create$(): Observable<User> {
@@ -72,7 +75,7 @@ export class UserItemPageComponent extends AbstractItemPage<User> implements OnI
     }
 
     onCancelAdd() {
-        this.router.navigate(['/main/user'])
+        this.router.navigate(['/main/user']);
     }
 
     get save$(): Observable<User> {
@@ -124,10 +127,12 @@ export class UserItemPageComponent extends AbstractItemPage<User> implements OnI
     }
 
     _save() {
-        if (this.authService.user.getValue().privileges.indexOf(Privilege.MANAGE_USERS))
+        if (this.authService.user.getValue().privileges.indexOf(Privilege.MANAGE_USERS)) {
             this.userService.setPrivileges(this.form.value, this.form.controls.privileges.value).subscribe(() => this._saveData());
-        else
+        }
+        else {
             this._saveData();
+        }
     }
 
     get imgStyles() {

@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from "@angular/forms";
-import { ActivatedRoute, Router } from "@angular/router";
-import { ToasterService } from "@services/toaster.service";
-import { Observable } from "rxjs";
-import { AbstractItemPage } from "@pages/abstract-item-page";
-import { Group } from "@models/group.model";
-import { GroupRestService } from "@services/group-rest.service";
-import { User } from "@models/user.model";
-import { tap } from "rxjs/operators";
+import { FormBuilder } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ToasterService } from '@services/toaster.service';
+import { Observable } from 'rxjs';
+import { AbstractItemPage } from '@pages/abstract-item-page';
+import { Group } from '@models/group.model';
+import { GroupRestService } from '@services/group-rest.service';
+import { User } from '@models/user.model';
+import { tap } from 'rxjs/operators';
 
 @Component({
     selector: 'app-group-item-page',
@@ -24,13 +24,13 @@ export class GroupItemPageComponent extends AbstractItemPage<Group> implements O
                 private route: ActivatedRoute,
                 private toaster: ToasterService,
     ) {
-        super(route, toaster, "Crew modifié avec succès", "Crew ajouté avec succès");
+        super(route, toaster, 'Crew modifié avec succès', 'Crew ajouté avec succès');
         this.form = Group.form(this.fb);
     }
 
 
     get title(): string {
-        return this.isAddingMode ? "Ajouter un groupe" : (!this.data) ? "" : this.data.name;
+        return this.isAddingMode ? 'Ajouter un groupe' : (!this.data) ? '' : this.data.name;
     }
 
     get create$(): Observable<Group> {

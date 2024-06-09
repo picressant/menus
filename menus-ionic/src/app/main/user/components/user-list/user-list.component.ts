@@ -1,11 +1,11 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { Direction, Order, Pager } from "@models/pager/pager.model";
-import { Pageable } from "@models/pager/pageable.model";
-import { IonInfiniteScroll } from "@ionic/angular";
-import { ConfirmationAlertService } from "@services/confirmation-alert.service";
-import { removeFromArray } from "../../../../shared/helpers/remove-array-element.function";
-import { User } from "@models/user.model";
-import { UserRestService } from "@services/user-rest.service";
+import { Direction, Order, Pager } from '@models/pager/pager.model';
+import { Pageable } from '@models/pager/pageable.model';
+import { IonInfiniteScroll } from '@ionic/angular';
+import { ConfirmationAlertService } from '@services/confirmation-alert.service';
+import { removeFromArray } from '../../../../shared/helpers/remove-array-element.function';
+import { User } from '@models/user.model';
+import { UserRestService } from '@services/user-rest.service';
 
 @Component({
     selector: 'app-user-list',
@@ -29,25 +29,27 @@ export class UserListComponent implements OnInit {
 
     @Input()
     set loadOnInit(load: boolean) {
-        if (load)
+        if (load) {
             this.refresh(null);
+        }
     }
 
-    _loadOnInit: boolean = false;
+    _loadOnInit = false;
 
-    deleteIndex: number = -1;
+    deleteIndex = -1;
 
     constructor(
         private userRest: UserRestService,
         private confirmationService: ConfirmationAlertService
     ) {
         this.pager = new Pager(20);
-        this.pager.orders.push(new Order("name", Direction.ASC));
+        this.pager.orders.push(new Order('name', Direction.ASC));
     }
 
     ngOnInit() {
-        if (this._loadOnInit)
+        if (this._loadOnInit) {
             this.refresh(null);
+        }
     }
 
     refresh(event: any) {
@@ -87,7 +89,7 @@ export class UserListComponent implements OnInit {
     }
 
     toggleInfiniteScroll() {
-        this.infiniteScroll.disabled = (this.pager.page >= this.pageableUser.totalPages)
+        this.infiniteScroll.disabled = (this.pager.page >= this.pageableUser.totalPages);
     }
 
     selectUser(user: User) {
@@ -95,9 +97,9 @@ export class UserListComponent implements OnInit {
     }
 
     deleteUser(user: User) {
-        this.confirmationService.confirm("Supprimer l'utilisateur \"" + user.firstname + " " + user.lastname +  "\" ?", () => {
+        this.confirmationService.confirm('Supprimer l\'utilisateur "' + user.firstname + ' ' + user.lastname +  '" ?', () => {
             this.userRest.deleteUser(user).subscribe(() => {
-                removeFromArray(this.users, user)
+                removeFromArray(this.users, user);
             });
         });
     }

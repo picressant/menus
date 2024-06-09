@@ -3,9 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { Ingredient } from '@models/ingredient.model';
 import { Observable } from 'rxjs';
 import { Unit } from '@models/unit.model';
-import { Pageable } from "@models/pager/pageable.model";
-import { Pager } from "@models/pager/pager.model";
-import { ShopSection } from "@models/shop-section.model";
+import { Pageable } from '@models/pager/pageable.model';
+import { Pager } from '@models/pager/pager.model';
+import { ShopSection } from '@models/shop-section.model';
 
 @Injectable({
     providedIn: 'root'

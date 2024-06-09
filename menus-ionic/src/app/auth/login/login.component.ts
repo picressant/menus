@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { FoodAuthService } from "../../shared/services/food-auth.service";
-import { environment } from "../../../environments/environment";
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FoodAuthService } from '../../shared/services/food-auth.service';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +10,7 @@ import { environment } from "../../../environments/environment";
 })
 export class LoginComponent implements OnInit {
 
-  form : FormGroup;
+  form: FormGroup;
 
   constructor(
       private builder: FormBuilder,

@@ -1,11 +1,11 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { ModalController } from "@ionic/angular";
-import { Ingredient } from "@models/ingredient.model";
-import { IngredientListComponent } from "@components/lists/ingredient-list/ingredient-list.component";
-import { IngredientModalComponent } from "@components/modals/ingredient-modal/ingredient-modal.component";
-import { IngredientRestService } from "@services/ingredient-rest.service";
-import { ShopSectionRestService } from "@services/shop-section-rest.service";
-import { ShopSection } from "@models/shop-section.model";
+import { ModalController } from '@ionic/angular';
+import { Ingredient } from '@models/ingredient.model';
+import { IngredientListComponent } from '@components/lists/ingredient-list/ingredient-list.component';
+import { IngredientModalComponent } from '@components/modals/ingredient-modal/ingredient-modal.component';
+import { IngredientRestService } from '@services/ingredient-rest.service';
+import { ShopSectionRestService } from '@services/shop-section-rest.service';
+import { ShopSection } from '@models/shop-section.model';
 
 @Component({
     selector: 'app-ingredient-modal-selector',
@@ -14,13 +14,13 @@ import { ShopSection } from "@models/shop-section.model";
 })
 export class IngredientModalSelectorComponent implements OnInit {
 
-    public static modalId = "IngredientModalSelectorComponent_ID";
+    public static modalId = 'IngredientModalSelectorComponent_ID';
 
     @ViewChild(IngredientListComponent) private ingredientList: IngredientListComponent;
 
     @Input() excludeIds: string[] = [];
-    @Input() focusSearchBar: boolean = false;
-    @Input() canCreateIngredient: boolean = false;
+    @Input() focusSearchBar = false;
+    @Input() canCreateIngredient = false;
 
     private shopSections: ShopSection[];
 
@@ -38,7 +38,7 @@ export class IngredientModalSelectorComponent implements OnInit {
 
     closeModal(ingredient: Ingredient) {
         this.ingredientListModalController.dismiss({
-            'ingredient': ingredient
+            ingredient
         }, null, IngredientModalSelectorComponent.modalId);
     }
 
@@ -48,7 +48,7 @@ export class IngredientModalSelectorComponent implements OnInit {
             id: IngredientModalComponent.modalId,
             componentProps: {
                 shopSections: this.shopSections,
-                name: name,
+                name,
                 fromGrocery: false
             }
         });

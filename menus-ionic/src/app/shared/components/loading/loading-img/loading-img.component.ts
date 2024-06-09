@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { SafeUrl } from "@angular/platform-browser";
+import { SafeUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'menus-loading-img',
@@ -8,7 +8,7 @@ import { SafeUrl } from "@angular/platform-browser";
 })
 export class LoadingImgComponent implements OnInit {
 
-  loading: boolean = true;
+  loading = true;
 
   @Input()
   src: SafeUrl;
@@ -17,7 +17,7 @@ export class LoadingImgComponent implements OnInit {
   styles: any;
 
   @Input()
-  diameter: number = 100;
+  diameter = 100;
 
   constructor() { }
 

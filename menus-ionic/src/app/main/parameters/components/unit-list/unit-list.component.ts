@@ -1,11 +1,11 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { Direction, Order, Pager } from "@models/pager/pager.model";
-import { Pageable } from "@models/pager/pageable.model";
-import { IonInfiniteScroll } from "@ionic/angular";
-import { Unit } from "@models/unit.model";
-import { IngredientRestService } from "@services/ingredient-rest.service";
-import { removeFromArray } from "@helpers/remove-array-element.function";
-import { ConfirmationAlertService } from "@services/confirmation-alert.service";
+import { Direction, Order, Pager } from '@models/pager/pager.model';
+import { Pageable } from '@models/pager/pageable.model';
+import { IonInfiniteScroll } from '@ionic/angular';
+import { Unit } from '@models/unit.model';
+import { IngredientRestService } from '@services/ingredient-rest.service';
+import { removeFromArray } from '@helpers/remove-array-element.function';
+import { ConfirmationAlertService } from '@services/confirmation-alert.service';
 
 @Component({
     selector: 'app-unit-list',
@@ -30,25 +30,27 @@ export class UnitListComponent implements OnInit {
 
     @Input()
     set loadOnInit(load: boolean) {
-        if (load)
+        if (load) {
             this.refresh(null);
+        }
     }
 
-    _loadOnInit: boolean = false;
+    _loadOnInit = false;
 
-    deleteIndex: number = -1;
+    deleteIndex = -1;
 
     constructor(
         private unitRest: IngredientRestService,
         private confirmationService: ConfirmationAlertService
     ) {
         this.pager = new Pager(20);
-        this.pager.orders.push(new Order("name", Direction.ASC));
+        this.pager.orders.push(new Order('name', Direction.ASC));
     }
 
     ngOnInit() {
-        if (this._loadOnInit)
+        if (this._loadOnInit) {
             this.refresh(null);
+        }
     }
 
     refresh(event: any) {
@@ -88,7 +90,7 @@ export class UnitListComponent implements OnInit {
     }
 
     toggleInfiniteScroll() {
-        this.infiniteScroll.disabled = (this.pager.page >= this.pageableUnits.totalPages)
+        this.infiniteScroll.disabled = (this.pager.page >= this.pageableUnits.totalPages);
     }
 
     selectUnit(unit: Unit) {
@@ -96,9 +98,9 @@ export class UnitListComponent implements OnInit {
     }
 
     deleteUnit(unit: Unit) {
-        this.confirmationService.confirm("Supprimer l'unité \"" + unit.name + "\" ?", () => {
+        this.confirmationService.confirm('Supprimer l\'unité "' + unit.name + '" ?', () => {
             this.unitRest.deleteUnit(unit).subscribe(() => {
-                removeFromArray(this.units, unit)
+                removeFromArray(this.units, unit);
             });
         });
     }

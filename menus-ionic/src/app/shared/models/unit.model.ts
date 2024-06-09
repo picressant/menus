@@ -1,6 +1,6 @@
-import { AbstractData } from "@models/abstract-data.model";
-import { FormBuilder, Validators } from "@angular/forms";
-import { mergeFormGroups } from "../helpers/form.helpers";
+import { AbstractData } from '@models/abstract-data.model';
+import { FormBuilder, Validators } from '@angular/forms';
+import { mergeFormGroups } from '../helpers/form.helpers';
 
 export class Unit extends AbstractData {
     name: string;

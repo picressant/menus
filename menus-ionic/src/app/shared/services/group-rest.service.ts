@@ -1,10 +1,10 @@
-import { HttpClient } from "@angular/common/http";
-import { Pager } from "@models/pager/pager.model";
-import { Observable } from "rxjs";
-import { Pageable } from "@models/pager/pageable.model";
-import { Group } from "@models/group.model";
-import { Injectable } from "@angular/core";
-import { User } from "@models/user.model";
+import { HttpClient } from '@angular/common/http';
+import { Pager } from '@models/pager/pager.model';
+import { Observable } from 'rxjs';
+import { Pageable } from '@models/pager/pageable.model';
+import { Group } from '@models/group.model';
+import { Injectable } from '@angular/core';
+import { User } from '@models/user.model';
 
 @Injectable({
   providedIn: 'root'

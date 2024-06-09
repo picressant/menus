@@ -1,19 +1,19 @@
 import { ChangeDetectorRef, Component, Input, OnInit, ViewChild } from '@angular/core';
-import { WeekMeal } from "@models/week-meal.model";
-import { ActivatedRoute, Router } from "@angular/router";
-import { WeekService } from "@services/week.service";
-import { ActionSheetController, AlertController, ModalController, PopoverController } from "@ionic/angular";
-import { WeekSelectRecipeModalComponent } from "../../components/week-select-recipe-modal/week-select-recipe-modal.component";
-import { WeekSelectSideModalComponent } from "../../components/week-select-side-modal/week-select-side-modal.component";
-import { IngredientQuantity } from "@models/ingredient-quantity.model";
-import { BookRecipe } from "@models/book-recipe.model";
-import { Recipe } from "@models/recipe.model";
-import { IngredientModalSelectorComponent } from "@components/selectors/ingredient-modal-selector/ingredient-modal-selector.component";
-import { RecipeRestService } from "@services/recipe-rest.service";
-import { getMealDayStringified } from "@models/enums/meal-day.enum";
-import { IngredientsQuantityListComponent } from "@components/lists/ingredients-quantity-list/ingredients-quantity-list.component";
-import { OptionPopoverComponent } from "@components/popover/option-popover/option-popover.component";
-import { SelectedIngredient } from "@models/selected-ingredient.model";
+import { WeekMeal } from '@models/week-meal.model';
+import { ActivatedRoute, Router } from '@angular/router';
+import { WeekService } from '@services/week.service';
+import { ActionSheetController, AlertController, ModalController, PopoverController } from '@ionic/angular';
+import { WeekSelectRecipeModalComponent } from '../../components/week-select-recipe-modal/week-select-recipe-modal.component';
+import { WeekSelectSideModalComponent } from '../../components/week-select-side-modal/week-select-side-modal.component';
+import { IngredientQuantity } from '@models/ingredient-quantity.model';
+import { BookRecipe } from '@models/book-recipe.model';
+import { Recipe } from '@models/recipe.model';
+import { IngredientModalSelectorComponent } from '@components/selectors/ingredient-modal-selector/ingredient-modal-selector.component';
+import { RecipeRestService } from '@services/recipe-rest.service';
+import { getMealDayStringified } from '@models/enums/meal-day.enum';
+import { IngredientsQuantityListComponent } from '@components/lists/ingredients-quantity-list/ingredients-quantity-list.component';
+import { OptionPopoverComponent } from '@components/popover/option-popover/option-popover.component';
+import { SelectedIngredient } from '@models/selected-ingredient.model';
 
 @Component({
     selector: 'app-modify-meal-page',
@@ -29,26 +29,26 @@ export class ModifyMealPageComponent implements OnInit {
     isEditing = false;
 
     @Input()
-    isEdit: boolean = false;
+    isEdit = false;
 
     footerDetails = {
-        name: "Détails",
-        icon: "list-outline",
-        selectedTab: "tab-details"
-    }
+        name: 'Détails',
+        icon: 'list-outline',
+        selectedTab: 'tab-details'
+    };
 
     footerIngredients = {
-        name: "Ingrédients",
-        icon: "nutrition-outline",
-        selectedTab: "tab-ingredients"
-    }
+        name: 'Ingrédients',
+        icon: 'nutrition-outline',
+        selectedTab: 'tab-ingredients'
+    };
 
     selectedTab = this.footerDetails.selectedTab;
 
     ingredientsRecipe: SelectedIngredient[] = [];
     ingredientsSides: SelectedIngredient[] = [];
 
-    @ViewChild("ingredientListRecipe")
+    @ViewChild('ingredientListRecipe')
     private ingredientsQuantityList: IngredientsQuantityListComponent;
 
     constructor(
@@ -66,7 +66,7 @@ export class ModifyMealPageComponent implements OnInit {
 
     ngOnInit() {
         this.route.params.subscribe(params => {
-            this.mealIndex = params['index'];
+            this.mealIndex = params.index;
             if (this.weekService.meals$.getValue()) {
                 this.meal = this.weekService.meals$.getValue()[this.mealIndex];
                 this.buildIngredients();
@@ -105,21 +105,24 @@ export class ModifyMealPageComponent implements OnInit {
                     item.quantity = item.quantity * this.meal.persons;
 
                     const index = this.ingredientsSides.findIndex(ing => ing.ingredient.id === i.ingredient.id);
-                    if (index >= 0)
+                    if (index >= 0) {
                         this.ingredientsSides[index].quantity += item.quantity;
-                    else
+                    }
+                    else {
                         this.ingredientsSides.push(item);
+                    }
                 });
             });
         }
     }
 
     submit() {
-        if (this.isMealFreeRecipe)
+        if (this.isMealFreeRecipe) {
             this.meal.recipe.selectedIngredients = this.ingredientsRecipe;
+        }
 
         this.weekService.updateMeal(this.meal, this.mealIndex);
-        this.router.navigate([".."]);
+        this.router.navigate(['..']);
     }
 
     async selectBookRecipe() {
@@ -134,8 +137,9 @@ export class ModifyMealPageComponent implements OnInit {
 
         const { data } = await modal.onWillDismiss();
         if (data.recipe) {
-            if (!this.meal)
+            if (!this.meal) {
                 this.meal = new WeekMeal();
+            }
 
             if (this.isMealFreeRecipe) {
                 this.recipeRestController.deleteRecipe(this.meal.recipe.id).subscribe();
@@ -147,8 +151,9 @@ export class ModifyMealPageComponent implements OnInit {
     }
 
     async addSide() {
-        if (!this.meal)
+        if (!this.meal) {
             this.meal = new WeekMeal();
+        }
 
         const sidesId = this.meal.sideDishes.map(value => value.id);
 
@@ -163,8 +168,9 @@ export class ModifyMealPageComponent implements OnInit {
 
         const { data } = await modal.onWillDismiss();
         if (data.side) {
-            if (!this.meal)
+            if (!this.meal) {
                 this.meal = new WeekMeal();
+            }
             this.meal.sideDishes.push(data.side);
             this.buildIngredients();
         }
@@ -180,20 +186,22 @@ export class ModifyMealPageComponent implements OnInit {
     }
 
     editMeal() {
-        if (this.isMealFreeRecipe)
+        if (this.isMealFreeRecipe) {
             this.editFreeMeal();
-        else
+        }
+        else {
             this.selectBookRecipe();
+        }
     }
 
     showMeal() {
         if (this.meal && this.meal.recipe && !this.isMealFreeRecipe) {
-            this.router.navigate(["main/recipe", this.meal.recipe.id]);
+            this.router.navigate(['main/recipe', this.meal.recipe.id]);
         }
     }
 
     private async editFreeMeal() {
-        let name = (this.meal && this.meal.recipe) ? this.meal.recipe.name : "";
+        const name = (this.meal && this.meal.recipe) ? this.meal.recipe.name : '';
         const alert = await this.alertController.create({
             header: 'Nom de recette',
             inputs: [
@@ -214,11 +222,13 @@ export class ModifyMealPageComponent implements OnInit {
                     text: 'Ok',
                     cssClass: 'color-dark',
                     handler: (alertData) => {
-                        if (!this.meal)
+                        if (!this.meal) {
                             this.meal = new WeekMeal();
+                        }
 
-                        if ((this.meal.recipe && !Recipe.isRecipeFree(this.meal.recipe)) || !this.meal.recipe)
+                        if ((this.meal.recipe && !Recipe.isRecipeFree(this.meal.recipe)) || !this.meal.recipe) {
                             this.meal.recipe = new Recipe();
+                        }
 
                         this.meal.recipe.name = alertData.recipe;
                         this.buildIngredients();
@@ -244,7 +254,7 @@ export class ModifyMealPageComponent implements OnInit {
 
         const { data } = await modal.onWillDismiss();
         if (data.ingredient) {
-            let selectedIngredient = new SelectedIngredient();
+            const selectedIngredient = new SelectedIngredient();
             selectedIngredient.ingredient = data.ingredient;
             selectedIngredient.unit = data.ingredient.units[data.ingredient.starredUnitIndex];
             selectedIngredient.quantity = 1;
@@ -263,22 +273,24 @@ export class ModifyMealPageComponent implements OnInit {
     }
 
     getDay() {
-        if (this.meal)
+        if (this.meal) {
             return getMealDayStringified(this.meal.weekDayIndex);
+        }
     }
 
     async showOptions(event: any) {
         const options = [
-            { clickedResult: "RECIPE", text: "Choisir une recette" },
-            { clickedResult: "FREE", text: "Faire une saisie libre" }
+            { clickedResult: 'RECIPE', text: 'Choisir une recette' },
+            { clickedResult: 'FREE', text: 'Faire une saisie libre' }
         ];
 
-        if (this.isMealFreeRecipe)
-            options.push({ clickedResult: "TRANSFORM", text: "Transformer en recette" });
+        if (this.isMealFreeRecipe) {
+            options.push({ clickedResult: 'TRANSFORM', text: 'Transformer en recette' });
+        }
 
         const popover = await this.popoverController.create({
             component: OptionPopoverComponent,
-            event: event,
+            event,
             translucent: true,
             componentProps: {
                 options
@@ -288,18 +300,19 @@ export class ModifyMealPageComponent implements OnInit {
 
         const { data } = await popover.onWillDismiss();
         if (data && data.option) {
-            if (data.option === "RECIPE")
+            if (data.option === 'RECIPE') {
                 await this.selectBookRecipe();
-            else if (data.option === "FREE") {
+            }
+            else if (data.option === 'FREE') {
                 await this.editFreeMeal();
             }
-            else if (data.option === "TRANSFORM") {
+            else if (data.option === 'TRANSFORM') {
                 const state = {
                     recipe: this.meal.recipe,
                     persons: this.meal.persons,
                     weekIndex: this.meal.weekDayIndex
-                }
-                this.router.navigate(["main/recipe/add"], { state })
+                };
+                this.router.navigate(['main/recipe/add'], { state });
             }
         }
     }

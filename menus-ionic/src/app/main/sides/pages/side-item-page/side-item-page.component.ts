@@ -1,17 +1,17 @@
 import { Component, ViewChild } from '@angular/core';
-import { AbstractItemPage } from "@pages/abstract-item-page";
-import { Observable } from "rxjs";
-import { FormBuilder } from "@angular/forms";
-import { ActivatedRoute, Router } from "@angular/router";
-import { ToasterService } from "@services/toaster.service";
-import { SideDish } from "@models/sidedish.model";
-import { SideDishRestService } from "@services/sidedish-rest.service";
-import { WeekService } from "@services/week.service";
-import { tap } from "rxjs/operators";
-import { IngredientModalSelectorComponent } from "@components/selectors/ingredient-modal-selector/ingredient-modal-selector.component";
-import { AlertController, ModalController } from "@ionic/angular";
-import { IngredientsQuantityListComponent } from "@components/lists/ingredients-quantity-list/ingredients-quantity-list.component";
-import { SelectedIngredient } from "@models/selected-ingredient.model";
+import { AbstractItemPage } from '@pages/abstract-item-page';
+import { Observable } from 'rxjs';
+import { FormBuilder } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ToasterService } from '@services/toaster.service';
+import { SideDish } from '@models/sidedish.model';
+import { SideDishRestService } from '@services/sidedish-rest.service';
+import { WeekService } from '@services/week.service';
+import { tap } from 'rxjs/operators';
+import { IngredientModalSelectorComponent } from '@components/selectors/ingredient-modal-selector/ingredient-modal-selector.component';
+import { AlertController, ModalController } from '@ionic/angular';
+import { IngredientsQuantityListComponent } from '@components/lists/ingredients-quantity-list/ingredients-quantity-list.component';
+import { SelectedIngredient } from '@models/selected-ingredient.model';
 
 @Component({
     selector: 'app-side-item-page',
@@ -33,13 +33,13 @@ export class SideItemPageComponent extends AbstractItemPage<SideDish> {
                 private alertController: AlertController
     ) {
 
-        super(route, toaster, "Accompagnement modifié avec succès", "Accompagnement ajouté avec succès");
+        super(route, toaster, 'Accompagnement modifié avec succès', 'Accompagnement ajouté avec succès');
         this.form = SideDish.form(this.fb);
     }
 
 
     get title(): string {
-        return this.isAddingMode ? "Ajouter un accompagnement" : (!this.data) ? "" : this.data.name;
+        return this.isAddingMode ? 'Ajouter un accompagnement' : (!this.data) ? '' : this.data.name;
     }
 
     get create$(): Observable<SideDish> {
@@ -65,7 +65,7 @@ export class SideItemPageComponent extends AbstractItemPage<SideDish> {
                 component: IngredientModalSelectorComponent,
                 id: IngredientModalSelectorComponent.modalId,
                 componentProps: {
-                    "excludeIds": this.form.controls.selectedIngredients.value.map(iq => iq.ingredient.id)
+                    excludeIds: this.form.controls.selectedIngredients.value.map(iq => iq.ingredient.id)
                 }
             });
 
@@ -73,7 +73,7 @@ export class SideItemPageComponent extends AbstractItemPage<SideDish> {
 
             const { data } = await modal.onWillDismiss();
             if (data.ingredient) {
-                let selectedIngredients = new SelectedIngredient();
+                const selectedIngredients = new SelectedIngredient();
                 selectedIngredients.ingredient = data.ingredient;
                 selectedIngredients.unit = data.ingredient.units[data.ingredient.starredUnitIndex];
                 selectedIngredients.quantity = 1;
@@ -100,7 +100,7 @@ export class SideItemPageComponent extends AbstractItemPage<SideDish> {
                     handler: () => {
                         this.sideRest.deleteSide(this.id).subscribe(() => {
                             this.weekService.getWeekFromApi();
-                            this.router.navigate(["/main/side"]);
+                            this.router.navigate(['/main/side']);
                         });
                     }
                 }

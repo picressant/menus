@@ -1,16 +1,16 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { IngredientRestService } from "@services/ingredient-rest.service";
-import { Unit } from "@models/unit.model";
-import { UnitListComponent } from "../../components/unit-list/unit-list.component";
-import { ModalController } from "@ionic/angular";
-import { UnitModalComponent } from "../../components/unit-modal/unit-modal.component";
-import { ShopSection } from "@models/shop-section.model";
-import { ShopSectionModalComponent } from "../../components/shop-section-modal/shop-section-modal.component";
-import { ShopSectionListComponent } from "../../components/shop-section-list/shop-section-list.component";
-import { ShopSectionRestService } from "@services/shop-section-rest.service";
-import { ConversionListComponent } from "../../components/conversion-list/conversion-list.component";
-import { ConversionModalComponent } from "../../components/conversion-modal/conversion-modal.component";
-import { ConvertTo } from "@models/convert-to.model";
+import { IngredientRestService } from '@services/ingredient-rest.service';
+import { Unit } from '@models/unit.model';
+import { UnitListComponent } from '../../components/unit-list/unit-list.component';
+import { ModalController } from '@ionic/angular';
+import { UnitModalComponent } from '../../components/unit-modal/unit-modal.component';
+import { ShopSection } from '@models/shop-section.model';
+import { ShopSectionModalComponent } from '../../components/shop-section-modal/shop-section-modal.component';
+import { ShopSectionListComponent } from '../../components/shop-section-list/shop-section-list.component';
+import { ShopSectionRestService } from '@services/shop-section-rest.service';
+import { ConversionListComponent } from '../../components/conversion-list/conversion-list.component';
+import { ConversionModalComponent } from '../../components/conversion-modal/conversion-modal.component';
+import { ConvertTo } from '@models/convert-to.model';
 
 @Component({
     selector: 'app-paramters-page',
@@ -29,22 +29,22 @@ export class ParametersPageComponent implements OnInit {
     private conversionListComponent: ConversionListComponent;
 
     footerUnit = {
-        name: "Unités",
-        icon: "flask-outline",
-        selectedTab: "tab-unit"
-    }
+        name: 'Unités',
+        icon: 'flask-outline',
+        selectedTab: 'tab-unit'
+    };
 
     footerConversion = {
-        name: "Conversions",
-        icon: "swap-horizontal-outline",
-        selectedTab: "tab-conv"
-    }
+        name: 'Conversions',
+        icon: 'swap-horizontal-outline',
+        selectedTab: 'tab-conv'
+    };
 
     footerShopSections = {
-        name: "Rayons",
-        icon: "file-tray-full-outline",
-        selectedTab: "tab-section"
-    }
+        name: 'Rayons',
+        icon: 'file-tray-full-outline',
+        selectedTab: 'tab-section'
+    };
 
     selectedTab: string = this.footerUnit.selectedTab;
 
@@ -66,12 +66,15 @@ export class ParametersPageComponent implements OnInit {
     }
 
     async onAdd() {
-        if (this.selectedTab === this.footerUnit.selectedTab)
+        if (this.selectedTab === this.footerUnit.selectedTab) {
             await this.addUnit();
-        else if (this.selectedTab === this.footerShopSections.selectedTab)
+        }
+        else if (this.selectedTab === this.footerShopSections.selectedTab) {
             await this.addSection();
-        else if (this.selectedTab === this.footerConversion.selectedTab)
+ }
+        else if (this.selectedTab === this.footerConversion.selectedTab) {
             await this.addConversion();
+ }
     }
 
     async addUnit() {
@@ -123,19 +126,22 @@ export class ParametersPageComponent implements OnInit {
 
 
     doRefresh(event: any) {
-        if (this.selectedTab === this.footerUnit.selectedTab)
+        if (this.selectedTab === this.footerUnit.selectedTab) {
             this.unitListComponent.refresh(event);
-        else if (this.selectedTab === this.footerShopSections.selectedTab)
+        }
+        else if (this.selectedTab === this.footerShopSections.selectedTab) {
             this.shopSectionListComponent.refresh(event);
-        else if (this.selectedTab === this.footerConversion.selectedTab)
+ }
+        else if (this.selectedTab === this.footerConversion.selectedTab) {
             this.conversionListComponent.refresh(event);
+ }
     }
 
     async showUnit(unit: Unit) {
         const modal = await this.modalController.create({
             component: UnitModalComponent,
             componentProps: {
-                "unit": unit
+                unit
             }
         });
 
@@ -152,7 +158,7 @@ export class ParametersPageComponent implements OnInit {
         const modal = await this.modalController.create({
             component: ShopSectionModalComponent,
             componentProps: {
-                "section": section
+                section
             }
         });
 
@@ -172,7 +178,7 @@ export class ParametersPageComponent implements OnInit {
             component: ConversionModalComponent,
             id: ConversionModalComponent.modalId,
             componentProps: {
-                "conversion": convertTo
+                conversion: convertTo
             }
         });
 
