@@ -23,11 +23,9 @@
             -- ou --
         </div>
 
-        <div class="button-wrapper">
-            <ion-button (click)="onLoginGoogle()">
-                <ion-icon slot="start" name="logo-google"></ion-icon>
-                Se connecter avec Google
-            </ion-button>
+        <div class="button-google">
+            <asl-google-signin-button type='standard' size='medium' data-text="signin_with" text="signin_with" shape="rectangular" locale="fr"
+                                      (click)="onLoginGoogle()"></asl-google-signin-button>
         </div>
     </form>
 </ion-content>

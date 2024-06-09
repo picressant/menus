@@ -1,3 +1,4 @@
+import { GoogleSigninButtonModule, SocialLoginModule } from '@abacritt/angularx-social-login';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AuthShellComponent } from './auth-shell/auth-shell.component';
@@ -18,6 +19,7 @@ import { SharedModule } from '../shared/shared.module';
         RouterModule,
         SharedModule,
         ReactiveFormsModule,
+        GoogleSigninButtonModule,
         IonicModule
     ],
     exports: [

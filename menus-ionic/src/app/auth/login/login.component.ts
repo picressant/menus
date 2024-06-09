@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { LoadingController } from '@ionic/angular';
 import { FoodAuthService } from '@services/food-auth.service';
 import { environment } from '../../../environments/environment';
 
@@ -14,6 +15,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
       private builder: UntypedFormBuilder,
+      private loadingController: LoadingController,
       private authService: FoodAuthService) {
     this.form = this.builder.group({
       username: ['', Validators.required],
@@ -30,7 +32,7 @@ export class LoginComponent implements OnInit {
   }
 
   onLoginGoogle() {
-    this.authService.connectWithGoogle();
+    this.authService.presentLoading();
   }
 
   get deployPath(): string {

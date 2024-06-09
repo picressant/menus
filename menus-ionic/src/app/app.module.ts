@@ -8,7 +8,13 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from '@abacritt/angularx-social-login';
+import {
+    GoogleLoginProvider,
+    GoogleSigninButtonDirective,
+    GoogleSigninButtonModule,
+    SocialAuthServiceConfig,
+    SocialLoginModule,
+} from '@abacritt/angularx-social-login';
 import { environment } from '../environments/environment';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { RestInterceptor } from './shared/interceptors/rest.interceptor';
@@ -26,6 +32,7 @@ import { IonicGestureConfig } from './shared/config/ionic-gesture.config';
         IonicModule.forRoot(),
         AppRoutingModule,
         SocialLoginModule,
+        GoogleSigninButtonModule,
         HttpClientModule,
         MainModule,
         AuthModule,
@@ -55,7 +62,10 @@ import { IonicGestureConfig } from './shared/config/ionic-gesture.config';
                         id: GoogleLoginProvider.PROVIDER_ID,
                         provider: new GoogleLoginProvider(environment.googleOAuthId)
                     }
-                ]
+                ],
+                onError: (err: unknown) => {
+                    console.error(err);
+                },
             } as SocialAuthServiceConfig
         }
     ],

@@ -54,19 +54,21 @@ export class FoodAuthService {
 
     connectWithGoogle() {
         this.presentLoading();
-        this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
+
     }
 
     connect(credentials: any) {
-        this.presentLoading();
-        this.http.post<any>('login', credentials).subscribe(
-            (response) => {
-                this.setToken(response.token);
-                this.dismissLoading();
-                this.router.navigate(['/main/week']);
-            },
-            () => this.dismissLoading()
-        );
+        this.presentLoading().then(r => {
+            this.http.post<any>('login', credentials).subscribe(
+                (response) => {
+                    this.setToken(response.token);
+                    this.dismissLoading();
+                    this.router.navigate(['/main/week']);
+                },
+                () => this.dismissLoading()
+            );
+        });
+
     }
 
     logout() {
