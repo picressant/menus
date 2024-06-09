@@ -40,7 +40,7 @@ export class IngredientModalComponent {
     @Input() fromGrocery = false;
 
     public form: FormGroup;
-    compareWith = this.compareWithFn;
+
 
     async onChooseUnit() {
         const modal = await this.innerModalController.create({
@@ -74,6 +74,7 @@ export class IngredientModalComponent {
     compareWithFn = (o1, o2) => {
         return o1 && o2 ? o1.id === o2.id : o1 === o2;
     }
+    compareWith = this.compareWithFn;
 
     deleteUnit(i: number) {
         this.form.controls.units.value.splice(i, 1);
