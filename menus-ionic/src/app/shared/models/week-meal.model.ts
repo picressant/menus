@@ -1,6 +1,6 @@
 import { Recipe } from './recipe.model';
 import { SideDish } from './sidedish.model';
-import { MealDay } from "@models/enums/meal-day.enum";
+import { MealDay } from '@models/enums/meal-day.enum';
 
 export class WeekMeal {
     recipe: Recipe;

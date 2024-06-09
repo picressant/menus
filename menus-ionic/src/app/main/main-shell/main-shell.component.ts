@@ -1,10 +1,10 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { Router } from "@angular/router";
-import { environment } from "../../../environments/environment";
-import { FoodAuthService } from "@services/food-auth.service";
-import { WeekService } from "@services/week.service";
-import { User } from "@models/user.model";
-import { Privilege } from "@models/enums/privilege.enum";
+import { Router } from '@angular/router';
+import { environment } from '../../../environments/environment';
+import { FoodAuthService } from '@services/food-auth.service';
+import { WeekService } from '@services/week.service';
+import { User } from '@models/user.model';
+import { Privilege } from '@models/enums/privilege.enum';
 
 @Component({
     selector: 'app-main-shell',
@@ -55,11 +55,11 @@ export class MainShellComponent implements OnInit {
             icon: 'people',
             privilege: Privilege.MANAGE_USERS
         }
-    ]
+    ];
 
     me: User;
     timestamp: string;
-    loadedImg: boolean = false;
+    loadedImg = false;
 
     constructor(
         private router: Router,
@@ -84,7 +84,7 @@ export class MainShellComponent implements OnInit {
         else {
             this.selectedIndex = this.appPages.findIndex(page => page.url.toLowerCase() === pageToGo.url.toLowerCase());
         }
-        this.router.navigate(["main/" + pageToGo.url]);
+        this.router.navigate(['main/' + pageToGo.url]);
     }
 
     ngOnInit() {
@@ -104,7 +104,7 @@ export class MainShellComponent implements OnInit {
     }
 
     goToUser() {
-        this.router.navigate(["main/user", this.me.id]);
+        this.router.navigate(['main/user', this.me.id]);
     }
 
     onImageLoad() {

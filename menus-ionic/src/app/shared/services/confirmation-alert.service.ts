@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AlertController } from "@ionic/angular";
+import { AlertController } from '@ionic/angular';
 
 @Injectable({
     providedIn: 'root'
@@ -20,10 +20,10 @@ export class ConfirmationAlertService {
                 {
                     text: 'Annuler',
                     role: 'cancel',
-                    cssClass: "color-medium"
+                    cssClass: 'color-medium'
                 }, {
                     text: 'Okay',
-                    cssClass: "color-dark",
+                    cssClass: 'color-dark',
                     handler: () => {
                         onConfirm();
                     }

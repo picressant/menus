@@ -1,8 +1,8 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { IngredientModalSelectorComponent } from "@components/selectors/ingredient-modal-selector/ingredient-modal-selector.component";
-import { AlertController, ModalController } from "@ionic/angular";
-import { Ingredient } from "@models/ingredient.model";
-import { SelectedIngredient } from "@models/selected-ingredient.model";
+import { IngredientModalSelectorComponent } from '@components/selectors/ingredient-modal-selector/ingredient-modal-selector.component';
+import { AlertController, ModalController } from '@ionic/angular';
+import { Ingredient } from '@models/ingredient.model';
+import { SelectedIngredient } from '@models/selected-ingredient.model';
 
 @Component({
     selector: 'app-ingredients-quantity-list',
@@ -46,7 +46,7 @@ export class IngredientsQuantityListComponent implements OnInit {
                 component: IngredientModalSelectorComponent,
                 id: IngredientModalSelectorComponent.modalId,
                 componentProps: {
-                    "excludeIds": this.selectedIngredients.map(iq => iq.ingredient.id)
+                    excludeIds: this.selectedIngredients.map(iq => iq.ingredient.id)
                 }
             });
 
@@ -68,12 +68,12 @@ export class IngredientsQuantityListComponent implements OnInit {
     }
 
     focusQuantity(ingredient: Ingredient) {
-        this.el.nativeElement.querySelector("#ingredient_" + ingredient.id).focus();
+        this.el.nativeElement.querySelector('#ingredient_' + ingredient.id).focus();
     }
 
     async changeUnit(selectedIngredient: SelectedIngredient) {
         if (selectedIngredient.ingredient.units.length > 1 && !this.isReadonly) {
-            let inputs = [];
+            const inputs = [];
             selectedIngredient.ingredient.units.forEach(u => {
                 inputs.push({
                     name: 'ingredient',
@@ -85,7 +85,7 @@ export class IngredientsQuantityListComponent implements OnInit {
             });
             const alert = await this.alertController.create({
                 header: 'Choisir une unité',
-                inputs: inputs,
+                inputs,
                 buttons: [
                     {
                         text: 'Annuler',
@@ -94,7 +94,7 @@ export class IngredientsQuantityListComponent implements OnInit {
                         }
                     }, {
                         text: 'Valider',
-                        cssClass: "color-dark",
+                        cssClass: 'color-dark',
                         handler: (alertData) => {
                             selectedIngredient.unit = alertData;
                         }

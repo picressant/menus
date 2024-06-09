@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ModalController } from "@ionic/angular";
-import { Unit } from "@models/unit.model";
+import { ModalController } from '@ionic/angular';
+import { Unit } from '@models/unit.model';
 
 @Component({
   selector: 'app-select-unit-modal',
@@ -9,7 +9,7 @@ import { Unit } from "@models/unit.model";
 })
 export class SelectUnitModalComponent implements OnInit {
 
-  public static modalId: "SelectUnitModalComponent_ID";
+  public static modalId: 'SelectUnitModalComponent_ID';
 
   @Input()
   public excludeIds: string[];
@@ -22,6 +22,6 @@ export class SelectUnitModalComponent implements OnInit {
   }
 
   closeModal(unit: Unit) {
-    this.modalController.dismiss({ unit: unit }, null, SelectUnitModalComponent.modalId);
+    this.modalController.dismiss({ unit }, null, SelectUnitModalComponent.modalId);
   }
 }

@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from "@angular/forms";
-import { ModalController } from "@ionic/angular";
-import { ShopSection } from "@models/shop-section.model";
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { ModalController } from '@ionic/angular';
+import { ShopSection } from '@models/shop-section.model';
 
 @Component({
     selector: 'app-shop-section-modal',
@@ -10,7 +10,7 @@ import { ShopSection } from "@models/shop-section.model";
 })
 export class ShopSectionModalComponent implements OnInit {
 
-    form: FormGroup
+    form: FormGroup;
 
     @Input()
     set section(section: ShopSection) {

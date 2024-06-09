@@ -1,11 +1,11 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { Direction, Order, Pager } from "@models/pager/pager.model";
-import { Pageable } from "@models/pager/pageable.model";
-import { IonInfiniteScroll } from "@ionic/angular";
-import { ConfirmationAlertService } from "@services/confirmation-alert.service";
-import { removeFromArray } from "../../../../shared/helpers/remove-array-element.function";
-import { ShopSectionRestService } from "@services/shop-section-rest.service";
-import { ShopSection } from "@models/shop-section.model";
+import { Direction, Order, Pager } from '@models/pager/pager.model';
+import { Pageable } from '@models/pager/pageable.model';
+import { IonInfiniteScroll } from '@ionic/angular';
+import { ConfirmationAlertService } from '@services/confirmation-alert.service';
+import { removeFromArray } from '../../../../shared/helpers/remove-array-element.function';
+import { ShopSectionRestService } from '@services/shop-section-rest.service';
+import { ShopSection } from '@models/shop-section.model';
 
 @Component({
     selector: 'app-shop-section-list',
@@ -30,25 +30,27 @@ export class ShopSectionListComponent implements OnInit {
 
     @Input()
     set loadOnInit(load: boolean) {
-        if (load)
+        if (load) {
             this.refresh(null);
+        }
     }
 
-    _loadOnInit: boolean = false;
+    _loadOnInit = false;
 
-    deleteIndex: number = -1;
+    deleteIndex = -1;
 
     constructor(
         private shopSectionRest: ShopSectionRestService,
         private confirmationService: ConfirmationAlertService,
     ) {
         this.pager = new Pager(20);
-        this.pager.orders.push(new Order("name", Direction.ASC));
+        this.pager.orders.push(new Order('name', Direction.ASC));
     }
 
     ngOnInit() {
-        if (this._loadOnInit)
+        if (this._loadOnInit) {
             this.refresh(null);
+        }
     }
 
     refresh(event: any) {
@@ -88,7 +90,7 @@ export class ShopSectionListComponent implements OnInit {
     }
 
     toggleInfiniteScroll() {
-        this.infiniteScroll.disabled = (this.pager.page >= this.pageableUnits.totalPages)
+        this.infiniteScroll.disabled = (this.pager.page >= this.pageableUnits.totalPages);
     }
 
     selectSection(section: ShopSection) {
@@ -96,9 +98,9 @@ export class ShopSectionListComponent implements OnInit {
     }
 
     deleteSection(section: ShopSection) {
-        this.confirmationService.confirm("Supprimer la section \"" + section.name + "\" ?", () => {
+        this.confirmationService.confirm('Supprimer la section "' + section.name + '" ?', () => {
             this.shopSectionRest.deleteShopSection(section).subscribe(() => {
-                removeFromArray(this.sections, section)
+                removeFromArray(this.sections, section);
             });
         });
     }

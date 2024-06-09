@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Group } from "@models/group.model";
-import { UserListComponent } from "../../components/user-list/user-list.component";
-import { GroupListComponent } from "../../components/group-list/group-list.component";
-import { User } from "@models/user.model";
-import { Router } from "@angular/router";
+import { Group } from '@models/group.model';
+import { UserListComponent } from '../../components/user-list/user-list.component';
+import { GroupListComponent } from '../../components/group-list/group-list.component';
+import { User } from '@models/user.model';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-user-list-page',
@@ -20,16 +20,16 @@ export class UserListPageComponent implements OnInit {
 
 
     footerUser = {
-        name: "Utilisateurs",
-        icon: "person-outline",
-        selectedTab: "tab-user"
-    }
+        name: 'Utilisateurs',
+        icon: 'person-outline',
+        selectedTab: 'tab-user'
+    };
 
     footerGroup = {
-        name: "Groupes",
-        icon: "people-outline",
-        selectedTab: "tab-group"
-    }
+        name: 'Groupes',
+        icon: 'people-outline',
+        selectedTab: 'tab-group'
+    };
 
     selectedTab: string = this.footerUser.selectedTab;
 
@@ -55,15 +55,17 @@ export class UserListPageComponent implements OnInit {
     }
 
     doRefresh(event: any) {
-      if (this.selectedTab === this.footerGroup.selectedTab)
+      if (this.selectedTab === this.footerGroup.selectedTab) {
         this.groupListComponent.refresh(event);
-      else
+      }
+      else {
         this.userListComponent.refresh(event);
+      }
     }
 
   onAdd() {
     if (this.selectedTab === this.footerUser.selectedTab) {
-        this.router.navigate(['main/user/add'], { queryParams: { isFromList: 'true' } })
+        this.router.navigate(['main/user/add'], { queryParams: { isFromList: 'true' } });
     }
     else {
         this.router.navigate(['main/user/group/add']);

@@ -1,12 +1,12 @@
-import { Injectable } from "@angular/core";
-import { WeekRestService } from "./week-rest.service";
-import { BehaviorSubject } from "rxjs";
-import { WeekMeal } from "@models/week-meal.model";
-import { ToasterService } from "@services/toaster.service";
-import { RecipeRestService } from "@services/recipe-rest.service";
-import { Recipe } from "@models/recipe.model";
-import { WeekDay } from "@angular/common";
-import { MealDay } from "@models/enums/meal-day.enum";
+import { Injectable } from '@angular/core';
+import { WeekRestService } from './week-rest.service';
+import { BehaviorSubject } from 'rxjs';
+import { WeekMeal } from '@models/week-meal.model';
+import { ToasterService } from '@services/toaster.service';
+import { RecipeRestService } from '@services/recipe-rest.service';
+import { Recipe } from '@models/recipe.model';
+import { WeekDay } from '@angular/common';
+import { MealDay } from '@models/enums/meal-day.enum';
 
 const days = {
     mondayLunch: 0,
@@ -83,8 +83,9 @@ export class WeekService {
     }
 
     public deleteMeal(i: number) {
-        if (this._meals[i].recipe && Recipe.isRecipeFree(this._meals[i].recipe))
+        if (this._meals[i].recipe && Recipe.isRecipeFree(this._meals[i].recipe)) {
             this.recipeRestService.deleteRecipe(this._meals[i].recipe.id).subscribe();
+        }
 
         this.resetMeal(i);
 
@@ -94,7 +95,7 @@ export class WeekService {
 
     private saveWeek() {
         this.weekRestService.setWeek(this._meals).subscribe(w => {
-            this.toaster.info("Semaine sauvegardée");
+            this.toaster.info('Semaine sauvegardée');
             this.loadWeek(w);
         });
     }

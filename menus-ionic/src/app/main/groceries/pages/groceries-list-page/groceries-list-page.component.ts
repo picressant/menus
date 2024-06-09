@@ -1,19 +1,19 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
-import { WeekMeal } from "@models/week-meal.model";
-import { Recipe } from "@models/recipe.model";
-import { BookRecipe } from "@models/book-recipe.model";
-import { GroceryItem } from "@models/grocery-item.model";
-import { WeekService } from "@services/week.service";
-import { GroceriesRestService } from "@services/groceries-rest.service";
-import { IonItemSliding, PopoverController } from "@ionic/angular";
-import { ShopSection } from "@models/shop-section.model";
-import { Ingredient } from "@models/ingredient.model";
-import { OptionPopoverComponent } from "@components/popover/option-popover/option-popover.component";
-import { ConfirmationAlertService } from "@services/confirmation-alert.service";
-import { AddGroceriesInputComponent } from "../../components/add-groceries-input/add-groceries-input.component";
-import { Unit } from "@models/unit.model";
-import { IngredientRestService } from "@services/ingredient-rest.service";
-import { ConvertTo } from "@models/convert-to.model";
+import { WeekMeal } from '@models/week-meal.model';
+import { Recipe } from '@models/recipe.model';
+import { BookRecipe } from '@models/book-recipe.model';
+import { GroceryItem } from '@models/grocery-item.model';
+import { WeekService } from '@services/week.service';
+import { GroceriesRestService } from '@services/groceries-rest.service';
+import { IonItemSliding, PopoverController } from '@ionic/angular';
+import { ShopSection } from '@models/shop-section.model';
+import { Ingredient } from '@models/ingredient.model';
+import { OptionPopoverComponent } from '@components/popover/option-popover/option-popover.component';
+import { ConfirmationAlertService } from '@services/confirmation-alert.service';
+import { AddGroceriesInputComponent } from '../../components/add-groceries-input/add-groceries-input.component';
+import { Unit } from '@models/unit.model';
+import { IngredientRestService } from '@services/ingredient-rest.service';
+import { ConvertTo } from '@models/convert-to.model';
 
 @Component({
     selector: 'app-groceries-list-page',
@@ -25,7 +25,7 @@ export class GroceriesListPageComponent implements OnInit {
 
     groceriesMapped: Map<String, GroceryItem[]>;
     loading = false;
-    isEditing: boolean = false;
+    isEditing = false;
 
     shopSections: ShopSection[] = [];
     conversions: ConvertTo[] = [];
@@ -57,8 +57,9 @@ export class GroceriesListPageComponent implements OnInit {
                 this.shopSections = [];
                 this.groceriesMapped.clear();
                 items.forEach(item => this.convertToMap(item));
-                if (event)
+                if (event) {
                     event.target.complete();
+                }
 
                 this.endLoading();
             });
@@ -70,11 +71,11 @@ export class GroceriesListPageComponent implements OnInit {
     }
 
     sectionMapOrder = (a, b) => {
-        let sectionA = this.getSection(a.key);
-        let sectionB = this.getSection(b.key);
+        const sectionA = this.getSection(a.key);
+        const sectionB = this.getSection(b.key);
 
         return sectionA.name.toLocaleUpperCase().localeCompare(sectionB.name.toLocaleUpperCase());
-    };
+    }
 
     public resetGroceries() {
         this.startLoading();
@@ -134,10 +135,12 @@ export class GroceriesListPageComponent implements OnInit {
             if (index >= 0) {
                 const convertTo = this.conversions[index];
                 chosenUnit = ingredient.units[ingredient.starredUnitIndex];
-                if (convertTo.unitFrom.id === unit.id)
+                if (convertTo.unitFrom.id === unit.id) {
                     quantityFactored = quantity * convertTo.factor;
-                else
+                }
+                else {
                     quantityFactored = quantity / convertTo.factor;
+                }
             }
         }
 
@@ -162,15 +165,15 @@ export class GroceriesListPageComponent implements OnInit {
     }
 
     async showOptions(event: any) {
-        const icon = (this.isEditing) ? "checkmark-sharp" : "";
+        const icon = (this.isEditing) ? 'checkmark-sharp' : '';
         const options = [
-            { clickedResult: "RESET", text: "Réinitialiser la liste" },
-            { clickedResult: "EDIT", text: "Éditer la liste", icon: icon }
+            { clickedResult: 'RESET', text: 'Réinitialiser la liste' },
+            { clickedResult: 'EDIT', text: 'Éditer la liste', icon }
         ];
 
         const popover = await this.popoverController.create({
             component: OptionPopoverComponent,
-            event: event,
+            event,
             translucent: true,
             componentProps: {
                 options
@@ -180,9 +183,10 @@ export class GroceriesListPageComponent implements OnInit {
 
         const { data } = await popover.onWillDismiss();
         if (data && data.option) {
-            if (data.option === "RESET")
-                await this.confirmationService.confirm("Voulez-vous réinitialiser la liste de course ?", () => this.resetGroceries());
-            else if (data.option === "EDIT") {
+            if (data.option === 'RESET') {
+                await this.confirmationService.confirm('Voulez-vous réinitialiser la liste de course ?', () => this.resetGroceries());
+            }
+            else if (data.option === 'EDIT') {
                 this.isEditing = !this.isEditing;
                 this.cdr.detectChanges();
             }
@@ -208,7 +212,7 @@ export class GroceriesListPageComponent implements OnInit {
             items.forEach(item => this.convertToMap(item));
             this.groceriesMapped.forEach((list, key) =>
                 this.groceriesMapped.set(key, list.sort((a, b) =>
-                    a.ingredient.name.toLocaleUpperCase().localeCompare(b.ingredient.name.toLocaleUpperCase()))))
+                    a.ingredient.name.toLocaleUpperCase().localeCompare(b.ingredient.name.toLocaleUpperCase()))));
 
             this.endLoading();
         });
@@ -246,10 +250,12 @@ export class GroceriesListPageComponent implements OnInit {
             let listItem = this.groceriesMapped.get(item.ingredient.shopSection.id);
             const findItem = listItem.indexOf(item);
             listItem = listItem.splice(findItem, 1);
-            if (listItem.length === 0)
+            if (listItem.length === 0) {
                 this.groceriesMapped.delete(item.ingredient.shopSection.id);
-            else
+            }
+            else {
                 this.groceriesMapped.set(item.ingredient.shopSection.id, listItem);
+            }
 
             this.endLoading();
         });

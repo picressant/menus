@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { SideListComponent } from "@components/lists/side-list/side-list.component";
-import { Router } from "@angular/router";
-import { SideDish } from "@models/sidedish.model";
+import { SideListComponent } from '@components/lists/side-list/side-list.component';
+import { Router } from '@angular/router';
+import { SideDish } from '@models/sidedish.model';
 
 @Component({
     selector: 'app-side-list-page',
@@ -31,10 +31,10 @@ export class SideListPageComponent implements OnInit {
     }
 
     onAdd() {
-        this.router.navigate(["main/side/add"]);
+        this.router.navigate(['main/side/add']);
     }
 
     goToSide(sideDish: SideDish) {
-        this.router.navigate(["main/side", sideDish.id]);
+        this.router.navigate(['main/side', sideDish.id]);
     }
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ToasterService } from './toaster.service';
-import { FoodAuthService } from "./food-auth.service";
+import { FoodAuthService } from './food-auth.service';
 
 @Injectable({
     providedIn: 'root'

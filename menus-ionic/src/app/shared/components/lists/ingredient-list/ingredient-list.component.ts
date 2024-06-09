@@ -1,11 +1,11 @@
 import { AfterViewChecked, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { Ingredient } from "@models/ingredient.model";
-import { Direction, Order, Pager } from "@models/pager/pager.model";
-import { Pageable } from "@models/pager/pageable.model";
-import { IonInfiniteScroll, IonSearchbar } from "@ionic/angular";
-import { IngredientRestService } from "@services/ingredient-rest.service";
-import { removeFromArray } from "@helpers/remove-array-element.function";
-import { ConfirmationAlertService } from "@services/confirmation-alert.service";
+import { Ingredient } from '@models/ingredient.model';
+import { Direction, Order, Pager } from '@models/pager/pager.model';
+import { Pageable } from '@models/pager/pageable.model';
+import { IonInfiniteScroll, IonSearchbar } from '@ionic/angular';
+import { IngredientRestService } from '@services/ingredient-rest.service';
+import { removeFromArray } from '@helpers/remove-array-element.function';
+import { ConfirmationAlertService } from '@services/confirmation-alert.service';
 
 @Component({
     selector: 'app-ingredient-list',
@@ -20,15 +20,15 @@ export class IngredientListComponent implements OnInit, AfterViewChecked {
     @Input() focusSearchBar = false;
     @Input() excludeIds: string[];
     @Input() recipe = true;
-    @Input() canDelete: boolean = false;
-    @Input() canCreate: boolean = false;
+    @Input() canDelete = false;
+    @Input() canCreate = false;
 
     @Output() ingredientSelected: EventEmitter<Ingredient> = new EventEmitter<Ingredient>();
     @Output() addIngredient: EventEmitter<string> = new EventEmitter<string>();
 
-    public deleteIndex: number = -1;
+    public deleteIndex = -1;
     public ingredients: Ingredient[] = [];
-    public loading: boolean = true;
+    public loading = true;
 
     private shouldFocus: boolean;
     private pagerIngredients: Pager;
@@ -39,11 +39,11 @@ export class IngredientListComponent implements OnInit, AfterViewChecked {
         private confirmationService: ConfirmationAlertService
     ) {
         this.pagerIngredients = new Pager(20);
-        this.pagerIngredients.orders.push(new Order("name", Direction.ASC));
+        this.pagerIngredients.orders.push(new Order('name', Direction.ASC));
     }
 
     ngOnInit() {
-        this.pagerIngredients.pushFilter("forRecipe", this.recipe);
+        this.pagerIngredients.pushFilter('forRecipe', this.recipe);
         this.loadIngredients(null);
 
         this.shouldFocus = true;
@@ -73,7 +73,7 @@ export class IngredientListComponent implements OnInit, AfterViewChecked {
     }
 
     toggleInfiniteScroll() {
-        this.infiniteScroll.disabled = (this.pagerIngredients.page >= this.pageableIngredients.totalPages)
+        this.infiniteScroll.disabled = (this.pagerIngredients.page >= this.pageableIngredients.totalPages);
     }
 
     clickIngredient(ingredient: Ingredient) {
@@ -92,9 +92,9 @@ export class IngredientListComponent implements OnInit, AfterViewChecked {
 
     deleteIngredient(ingredient: Ingredient) {
         if (this.canDelete) {
-            this.confirmationService.confirm("Supprimer l'ingrédient \"" + ingredient.name + "\" ?", () => {
+            this.confirmationService.confirm('Supprimer l\'ingrédient "' + ingredient.name + '" ?', () => {
                 this.ingredientRest.deleteIngredient(ingredient).subscribe(() => {
-                    removeFromArray(this.ingredients, ingredient)
+                    removeFromArray(this.ingredients, ingredient);
                 });
             });
         }

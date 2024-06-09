@@ -1,4 +1,4 @@
-import { FormBuilder } from "@angular/forms";
+import { FormBuilder } from '@angular/forms';
 
 export class AbstractData {
   id: string;

@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
-import { Observable } from "rxjs";
-import { User } from "@models/user.model";
-import { Pager } from "@models/pager/pager.model";
-import { Pageable } from "@models/pager/pageable.model";
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { User } from '@models/user.model';
+import { Pager } from '@models/pager/pager.model';
+import { Pageable } from '@models/pager/pageable.model';
 
 @Injectable({
     providedIn: 'root'
@@ -22,10 +22,12 @@ export class UserRestService {
     }
 
     saveUser(user: User) {
-        if (user.id)
-            return this.http.put<User>("user", user);
-        else
-            return this.http.post<User>("user", user);
+        if (user.id) {
+            return this.http.put<User>('user', user);
+        }
+        else {
+            return this.http.post<User>('user', user);
+        }
     }
 
     resetPassword(id: string, value: any) {

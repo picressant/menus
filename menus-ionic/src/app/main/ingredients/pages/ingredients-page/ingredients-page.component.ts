@@ -1,11 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { IngredientListComponent } from "@components/lists/ingredient-list/ingredient-list.component";
-import { ShopSection } from "@models/shop-section.model";
-import { IngredientRestService } from "@services/ingredient-rest.service";
-import { ShopSectionRestService } from "@services/shop-section-rest.service";
-import { ModalController } from "@ionic/angular";
-import { IngredientModalComponent } from "@components/modals/ingredient-modal/ingredient-modal.component";
-import { Ingredient } from "@models/ingredient.model";
+import { IngredientListComponent } from '@components/lists/ingredient-list/ingredient-list.component';
+import { ShopSection } from '@models/shop-section.model';
+import { IngredientRestService } from '@services/ingredient-rest.service';
+import { ShopSectionRestService } from '@services/shop-section-rest.service';
+import { ModalController } from '@ionic/angular';
+import { IngredientModalComponent } from '@components/modals/ingredient-modal/ingredient-modal.component';
+import { Ingredient } from '@models/ingredient.model';
 
 @Component({
     selector: 'app-ingredients-page',
@@ -14,23 +14,23 @@ import { Ingredient } from "@models/ingredient.model";
 })
 export class IngredientsPageComponent implements OnInit {
 
-    @ViewChild("recipeIngredientList")
+    @ViewChild('recipeIngredientList')
     private ingredientListComponent: IngredientListComponent;
 
-    @ViewChild("noRecipeIngredientList")
+    @ViewChild('noRecipeIngredientList')
     private ingredientNoRecipeListComponent: IngredientListComponent;
 
     footerIngredient = {
-        name: "Ingrédients",
-        icon: "nutrition-outline",
-        selectedTab: "nutrition-ingredient"
-    }
+        name: 'Ingrédients',
+        icon: 'nutrition-outline',
+        selectedTab: 'nutrition-ingredient'
+    };
 
     footerIngredientNoRecipe = {
-        name: "Produits",
-        icon: "shirt-outline",
-        selectedTab: "item-section"
-    }
+        name: 'Produits',
+        icon: 'shirt-outline',
+        selectedTab: 'item-section'
+    };
 
     selectedTab: string = this.footerIngredient.selectedTab;
 
@@ -52,10 +52,12 @@ export class IngredientsPageComponent implements OnInit {
     }
 
     async onAdd() {
-        if (this.selectedTab === this.footerIngredient.selectedTab)
+        if (this.selectedTab === this.footerIngredient.selectedTab) {
             await this.addIngredient(true);
-        else
+        }
+        else {
             await this.addIngredient(false);
+        }
     }
 
     async addIngredient(forRecipe: boolean) {
@@ -64,7 +66,7 @@ export class IngredientsPageComponent implements OnInit {
             id: IngredientModalComponent.modalId,
             componentProps: {
                 shopSections: this.shopSections,
-                forRecipe: forRecipe
+                forRecipe
             }
         });
 
@@ -73,19 +75,23 @@ export class IngredientsPageComponent implements OnInit {
         const { data } = await modal.onWillDismiss();
         if (data && data.ingredient) {
             this.ingredientRest.addIngredient(data.ingredient).subscribe(() => {
-                if (this.footerIngredientNoRecipe.selectedTab === this.selectedTab)
-                    this.ingredientNoRecipeListComponent.refresh(null)
-                else
+                if (this.footerIngredientNoRecipe.selectedTab === this.selectedTab) {
+                    this.ingredientNoRecipeListComponent.refresh(null);
+                }
+                else {
                     this.ingredientListComponent.refresh(null);
+                }
             });
         }
     }
 
     doRefresh(event: any) {
-        if (this.selectedTab === this.footerIngredient.selectedTab)
+        if (this.selectedTab === this.footerIngredient.selectedTab) {
             this.ingredientListComponent.refresh(event);
-        else if (this.selectedTab === this.footerIngredientNoRecipe.selectedTab)
+        }
+        else if (this.selectedTab === this.footerIngredientNoRecipe.selectedTab) {
             this.ingredientNoRecipeListComponent.refresh(event);
+ }
     }
 
     async onClickIngredient(ingredient: Ingredient) {
@@ -103,10 +109,12 @@ export class IngredientsPageComponent implements OnInit {
         const { data } = await modal.onWillDismiss();
         if (data && data.ingredient) {
             this.ingredientRest.saveIngredient(data.ingredient).subscribe(() => {
-                if (this.footerIngredientNoRecipe.selectedTab === this.selectedTab)
-                    this.ingredientNoRecipeListComponent.refresh(null)
-                else
+                if (this.footerIngredientNoRecipe.selectedTab === this.selectedTab) {
+                    this.ingredientNoRecipeListComponent.refresh(null);
+                }
+                else {
                     this.ingredientListComponent.refresh(null);
+                }
             });
         }
     }

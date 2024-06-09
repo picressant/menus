@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from "@ionic/angular";
-import { Group } from "@models/group.model";
+import { ModalController } from '@ionic/angular';
+import { Group } from '@models/group.model';
 
 @Component({
     selector: 'app-group-selector-modal',

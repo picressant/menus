@@ -1,19 +1,21 @@
-import { FormBuilder, Validators } from "@angular/forms";
-import { mergeFormGroups } from "../helpers/form.helpers";
-import { Recipe } from "@models/recipe.model";
+import { FormBuilder, Validators } from '@angular/forms';
+import { mergeFormGroups } from '../helpers/form.helpers';
+import { Recipe } from '@models/recipe.model';
 
 export class BookRecipe extends Recipe {
+
+    constructor() {
+        super();
+        this.steps = [];
+        this.jacksonType = 'bookRecipe';
+    }
+
+    static JACKSON_TYPE = 'bookRecipe';
     preparationTime: number;
     cookingTime: number;
     persons: number;
     bookReference: string;
     steps: string[];
-
-    constructor() {
-        super();
-        this.steps = [];
-        this.jacksonType = "bookRecipe"
-    }
 
     static form(fb: FormBuilder) {
         const form = fb.group({
@@ -24,8 +26,6 @@ export class BookRecipe extends Recipe {
             bookReference: [null],
         });
 
-        return mergeFormGroups(form, Recipe.form(fb, "bookRecipe"));
+        return mergeFormGroups(form, Recipe.form(fb, 'bookRecipe'));
     }
-
-    static JACKSON_TYPE = "bookRecipe";
 }

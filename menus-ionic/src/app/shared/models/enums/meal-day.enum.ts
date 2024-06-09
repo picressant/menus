@@ -25,46 +25,46 @@ export enum MealDay {
 export function getMealDayStringified(value: number): string {
     switch (value) {
         case 0:
-            return "Lundi matin";
+            return 'Lundi matin';
         case 1:
-            return "Lundi midi";
+            return 'Lundi midi';
         case 2:
-            return "Lundi soir";
+            return 'Lundi soir';
         case 3:
-            return "Mardi matin";
+            return 'Mardi matin';
         case 4:
-            return "Mardi midi";
+            return 'Mardi midi';
         case 5:
-            return "Mardi soir";
+            return 'Mardi soir';
         case 6:
-            return "Mercredi matin";
+            return 'Mercredi matin';
         case 7:
-            return "Mercredi midi";
+            return 'Mercredi midi';
         case 8:
-            return "Mercredi soir";
+            return 'Mercredi soir';
         case 9:
-            return "Jeudi matin";
+            return 'Jeudi matin';
         case 10:
-            return "Jeudi midi";
+            return 'Jeudi midi';
         case 11:
-            return "Jeudi soir";
+            return 'Jeudi soir';
         case 12:
-            return "Vendredi matin";
+            return 'Vendredi matin';
         case 13:
-            return "Vendredi midi";
+            return 'Vendredi midi';
         case 14:
-            return "Vendredi soir";
+            return 'Vendredi soir';
         case 15:
-            return "Samedi matin";
+            return 'Samedi matin';
         case 16:
-            return "Samedi midi";
+            return 'Samedi midi';
         case 17:
-            return "Samedi soir";
+            return 'Samedi soir';
         case 18:
-            return "Dimanche matin";
+            return 'Dimanche matin';
         case 19:
-            return "Dimanche midi";
+            return 'Dimanche midi';
         case 20:
-            return "Dimanche soir";
+            return 'Dimanche soir';
     }
 }

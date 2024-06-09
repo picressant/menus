@@ -1,9 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { Recipe } from "@models/recipe.model";
-import { Direction, Order, Pager } from "@models/pager/pager.model";
-import { Pageable } from "@models/pager/pageable.model";
-import { IonInfiniteScroll } from "@ionic/angular";
-import { RecipeRestService } from "@services/recipe-rest.service";
+import { Recipe } from '@models/recipe.model';
+import { Direction, Order, Pager } from '@models/pager/pager.model';
+import { Pageable } from '@models/pager/pageable.model';
+import { IonInfiniteScroll } from '@ionic/angular';
+import { RecipeRestService } from '@services/recipe-rest.service';
 
 @Component({
     selector: 'app-recipe-list',
@@ -13,7 +13,7 @@ import { RecipeRestService } from "@services/recipe-rest.service";
 export class RecipeListComponent implements OnInit {
 
     recipes: Recipe[] = [];
-    fakeRecipes=  new Array<number>(10);
+    fakeRecipes =  new Array<number>(10);
     showFakes = true;
 
     private pager: Pager;
@@ -28,21 +28,23 @@ export class RecipeListComponent implements OnInit {
 
     @Input()
     set loadOnInit(load: boolean) {
-        if (load)
+        if (load) {
             this.refresh(null);
+        }
     }
 
     constructor(
         private recipeRest: RecipeRestService
     ) {
         this.pager = new Pager(10);
-        this.pager.pushFilter("_class", "fr.choupiteam.menus.application.recipe.model.BookRecipe")
-        this.pager.orders.push(new Order("name", Direction.ASC));
+        this.pager.pushFilter('_class', 'fr.choupiteam.menus.application.recipe.model.BookRecipe');
+        this.pager.orders.push(new Order('name', Direction.ASC));
     }
 
     ngOnInit() {
-        if (this.loadOnInit)
+        if (this.loadOnInit) {
            this.refresh(null);
+        }
     }
 
     refresh(event: any) {
@@ -67,7 +69,7 @@ export class RecipeListComponent implements OnInit {
     }
 
     toggleInfiniteScroll() {
-        this.infiniteScroll.disabled = (this.pager.page >= this.currentPageable.totalPages)
+        this.infiniteScroll.disabled = (this.pager.page >= this.currentPageable.totalPages);
     }
 
     onScrollDown(event) {

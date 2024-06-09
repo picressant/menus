@@ -1,9 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { SideDish } from "@models/sidedish.model";
-import { Direction, Order, Pager } from "@models/pager/pager.model";
-import { Pageable } from "@models/pager/pageable.model";
-import { IonInfiniteScroll } from "@ionic/angular";
-import { SideDishRestService } from "@services/sidedish-rest.service";
+import { SideDish } from '@models/sidedish.model';
+import { Direction, Order, Pager } from '@models/pager/pager.model';
+import { Pageable } from '@models/pager/pageable.model';
+import { IonInfiniteScroll } from '@ionic/angular';
+import { SideDishRestService } from '@services/sidedish-rest.service';
 
 @Component({
   selector: 'app-side-list',
@@ -31,22 +31,24 @@ export class SideListComponent implements OnInit {
 
   @Input()
   set loadOnInit(load: boolean) {
-    if (load)
+    if (load) {
       this.refresh(null);
+    }
   }
 
-  _loadOnInit: boolean = false;
+  _loadOnInit = false;
 
   constructor(
       private sideRest: SideDishRestService
   ) {
     this.pager = new Pager(20);
-    this.pager.orders.push(new Order("name", Direction.ASC));
+    this.pager.orders.push(new Order('name', Direction.ASC));
   }
 
   ngOnInit() {
-    if (this._loadOnInit)
+    if (this._loadOnInit) {
       this.refresh(null);
+    }
   }
 
   refresh(event: any) {
@@ -86,11 +88,11 @@ export class SideListComponent implements OnInit {
   }
 
   toggleInfiniteScroll() {
-    this.infiniteScroll.disabled = (this.pager.page >= this.pageableSides.totalPages)
+    this.infiniteScroll.disabled = (this.pager.page >= this.pageableSides.totalPages);
   }
 
   getIngredients(side: SideDish) {
-    return side.selectedIngredients.map(value => value.ingredient.name).join(", ");
+    return side.selectedIngredients.map(value => value.ingredient.name).join(', ');
   }
 
   selectSide(side: SideDish) {

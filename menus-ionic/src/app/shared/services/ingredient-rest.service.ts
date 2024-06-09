@@ -3,9 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { Ingredient } from '@models/ingredient.model';
 import { Observable } from 'rxjs';
 import { Unit } from '@models/unit.model';
-import { Pageable } from "@models/pager/pageable.model";
-import { Pager } from "@models/pager/pager.model";
-import { ConvertTo } from "@models/convert-to.model";
+import { Pageable } from '@models/pager/pageable.model';
+import { Pager } from '@models/pager/pager.model';
+import { ConvertTo } from '@models/convert-to.model';
 
 @Injectable({
     providedIn: 'root'
@@ -52,7 +52,7 @@ export class IngredientRestService {
     }
 
     getAllConversion(): Observable<ConvertTo[]> {
-        return this.http.get<ConvertTo[]>('ingredient/unit/conversion')
+        return this.http.get<ConvertTo[]>('ingredient/unit/conversion');
     }
 
     addConversion(convertTo: ConvertTo): Observable<ConvertTo> {

@@ -12,7 +12,7 @@ export class RestInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler):
     Observable<HttpEvent<any>> {
-    const lURL = (environment.production) ? location.origin + "/" + environment.restRoot + req.urlWithParams : environment.restRoot + req.urlWithParams;
+    const lURL = (environment.production) ? location.origin + '/' + environment.restRoot + req.urlWithParams : environment.restRoot + req.urlWithParams;
 
     req = req.clone({
       url: lURL

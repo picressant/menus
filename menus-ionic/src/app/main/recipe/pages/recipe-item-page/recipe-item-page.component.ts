@@ -1,21 +1,21 @@
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
-import { AbstractItemPage } from "@pages/abstract-item-page";
-import { Recipe } from "@models/recipe.model";
-import { forkJoin, Observable } from "rxjs";
-import { FormBuilder } from "@angular/forms";
-import { RecipeRestService } from "@services/recipe-rest.service";
-import { ActivatedRoute, Router } from "@angular/router";
-import { ToasterService } from "@services/toaster.service";
-import { AlertController, ModalController } from "@ionic/angular";
-import { IngredientModalSelectorComponent } from "@components/selectors/ingredient-modal-selector/ingredient-modal-selector.component";
-import { WeekService } from "@services/week.service";
-import { tap } from "rxjs/operators";
-import { removeFromArray } from "@helpers/remove-array-element.function";
-import { ConfirmationAlertService } from "@services/confirmation-alert.service";
-import { BookRecipe } from "@models/book-recipe.model";
-import { IngredientsQuantityListComponent } from "@components/lists/ingredients-quantity-list/ingredients-quantity-list.component";
-import { MealDay } from "@models/enums/meal-day.enum";
-import { SelectedIngredient } from "@models/selected-ingredient.model";
+import { AbstractItemPage } from '@pages/abstract-item-page';
+import { Recipe } from '@models/recipe.model';
+import { forkJoin, Observable } from 'rxjs';
+import { FormBuilder } from '@angular/forms';
+import { RecipeRestService } from '@services/recipe-rest.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ToasterService } from '@services/toaster.service';
+import { AlertController, ModalController } from '@ionic/angular';
+import { IngredientModalSelectorComponent } from '@components/selectors/ingredient-modal-selector/ingredient-modal-selector.component';
+import { WeekService } from '@services/week.service';
+import { tap } from 'rxjs/operators';
+import { removeFromArray } from '@helpers/remove-array-element.function';
+import { ConfirmationAlertService } from '@services/confirmation-alert.service';
+import { BookRecipe } from '@models/book-recipe.model';
+import { IngredientsQuantityListComponent } from '@components/lists/ingredients-quantity-list/ingredients-quantity-list.component';
+import { MealDay } from '@models/enums/meal-day.enum';
+import { SelectedIngredient } from '@models/selected-ingredient.model';
 
 @Component({
     selector: 'app-recipe-item-page',
@@ -31,22 +31,22 @@ export class RecipeItemPageComponent extends AbstractItemPage<Recipe> implements
     timestamp: string;
 
     footerOverview = {
-        name: "Résumé",
-        icon: "restaurant-outline",
-        selectedTab: "tab-overview"
-    }
+        name: 'Résumé',
+        icon: 'restaurant-outline',
+        selectedTab: 'tab-overview'
+    };
 
     footerSteps = {
-        name: "Étapes",
-        icon: "list-circle-outline",
-        selectedTab: "tab-steps"
-    }
+        name: 'Étapes',
+        icon: 'list-circle-outline',
+        selectedTab: 'tab-steps'
+    };
 
     footerIngredients = {
-        name: "Ingrédients",
-        icon: "nutrition-outline",
-        selectedTab: "tab-ingredients"
-    }
+        name: 'Ingrédients',
+        icon: 'nutrition-outline',
+        selectedTab: 'tab-ingredients'
+    };
 
     selectedTab = this.footerOverview.selectedTab;
     isDeleting: number;
@@ -67,7 +67,7 @@ export class RecipeItemPageComponent extends AbstractItemPage<Recipe> implements
                 private cdr: ChangeDetectorRef,
                 private confirmationService: ConfirmationAlertService
     ) {
-        super(route, toaster, "Recette modifiée avec succès", "Recette ajoutée avec succès");
+        super(route, toaster, 'Recette modifiée avec succès', 'Recette ajoutée avec succès');
         this.form = BookRecipe.form(this.fb);
     }
 
@@ -87,7 +87,7 @@ export class RecipeItemPageComponent extends AbstractItemPage<Recipe> implements
     }
 
     get title(): string {
-        return this.isAddingMode ? "Ajouter une recette" : (!this.data) ? "" : this.data.name;
+        return this.isAddingMode ? 'Ajouter une recette' : (!this.data) ? '' : this.data.name;
     }
 
     get get$(): Observable<Recipe> {
@@ -191,9 +191,9 @@ export class RecipeItemPageComponent extends AbstractItemPage<Recipe> implements
                 component: IngredientModalSelectorComponent,
                 id: IngredientModalSelectorComponent.modalId,
                 componentProps: {
-                    "excludeIds": this.form.controls.selectedIngredients.value.map(iq => iq.ingredient.id),
-                    "focusSearchBar": true,
-                    "canCreateIngredient": true
+                    excludeIds: this.form.controls.selectedIngredients.value.map(iq => iq.ingredient.id),
+                    focusSearchBar: true,
+                    canCreateIngredient: true
                 }
             });
 
@@ -201,7 +201,7 @@ export class RecipeItemPageComponent extends AbstractItemPage<Recipe> implements
 
             const { data } = await modal.onWillDismiss();
             if (data.ingredient) {
-                let selectedIngredient = new SelectedIngredient();
+                const selectedIngredient = new SelectedIngredient();
                 selectedIngredient.ingredient = data.ingredient;
                 selectedIngredient.unit = data.ingredient.units[data.ingredient.starredUnitIndex];
                 selectedIngredient.quantity = 1;
@@ -233,7 +233,7 @@ export class RecipeItemPageComponent extends AbstractItemPage<Recipe> implements
                     handler: () => {
                         this.recipeRest.deleteRecipe(this.id).subscribe(() => {
                             this.weekService.getWeekFromApi();
-                            this.router.navigate(["/main/recipe"]);
+                            this.router.navigate(['/main/recipe']);
                         });
                     }
                 }
@@ -245,15 +245,16 @@ export class RecipeItemPageComponent extends AbstractItemPage<Recipe> implements
 
     addStep() {
         let steps: string[] = this.form.value.steps;
-        if (!steps)
+        if (!steps) {
             steps = [];
-        steps.push("");
+        }
+        steps.push('');
         this.form.controls.steps.setValue(steps);
     }
 
     removeStep(step: string) {
         if (!this.isReadonly) {
-            this.confirmationService.confirm("Supprimer l'étape ?", () => {
+            this.confirmationService.confirm('Supprimer l\'étape ?', () => {
                 removeFromArray(this.form.value.steps, step);
             });
         }

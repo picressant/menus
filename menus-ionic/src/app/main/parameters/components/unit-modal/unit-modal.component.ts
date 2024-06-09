@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from "@angular/forms";
-import { Unit } from "@models/unit.model";
-import { ModalController } from "@ionic/angular";
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { Unit } from '@models/unit.model';
+import { ModalController } from '@ionic/angular';
 
 @Component({
     selector: 'app-unit-modal',
@@ -10,7 +10,7 @@ import { ModalController } from "@ionic/angular";
 })
 export class UnitModalComponent implements OnInit {
 
-    form: FormGroup
+    form: FormGroup;
 
     @Input()
     set unit(unit: Unit) {

@@ -1,10 +1,10 @@
-import { FormBuilder, Validators } from "@angular/forms";
-import { mergeFormGroups } from "../helpers/form.helpers";
-import { AbstractData } from "./abstract-data.model";
-import { Role } from "./enums/role.enum";
-import { Group } from "./group.model";
-import { Privilege } from "@models/enums/privilege.enum";
-import { MealDay } from "@models/enums/meal-day.enum";
+import { FormBuilder, Validators } from '@angular/forms';
+import { mergeFormGroups } from '../helpers/form.helpers';
+import { AbstractData } from './abstract-data.model';
+import { Role } from './enums/role.enum';
+import { Group } from './group.model';
+import { Privilege } from '@models/enums/privilege.enum';
+import { MealDay } from '@models/enums/meal-day.enum';
 
 export class User extends AbstractData {
   firstname: string;
