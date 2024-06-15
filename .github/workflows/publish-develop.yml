@@ -42,7 +42,7 @@ jobs:
     - name : Set up Node Build front with node
       uses: actions/setup-node@v1
       with:
-        node-version: 14.20.0
+        node-version: 18.20.3
     
     - name : Build front
       working-directory: menus-ionic
