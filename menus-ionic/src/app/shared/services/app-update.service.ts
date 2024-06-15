@@ -4,7 +4,7 @@ import { AlertController } from '@ionic/angular';
 import { environment } from '../../../environments/environment';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class AppUpdateService {
     constructor(
@@ -12,11 +12,11 @@ export class AppUpdateService {
         private alertController: AlertController) {
 
         if (environment.production) {
-            this.updates.available.subscribe(event => {
-                this.showAppUpdateAlert();
+            this.updates.checkForUpdate().then((hasUpdate) => {
+                if (hasUpdate) {
+                    this.showAppUpdateAlert();
+                }
             });
-
-            this.updates.checkForUpdate();
         }
     }
 
@@ -32,9 +32,9 @@ export class AppUpdateService {
                     text: 'Okay',
                     handler: () => {
                         this.doAppUpdate();
-                    }
-                }
-            ]
+                    },
+                },
+            ],
         });
 
         await alert.present();
