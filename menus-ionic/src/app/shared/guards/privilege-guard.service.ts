@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { ActivatedRouteSnapshot, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
 import { FoodAuthService } from '../services/food-auth.service';
 
@@ -8,7 +8,7 @@ import { FoodAuthService } from '../services/food-auth.service';
 @Injectable({
     providedIn: 'root'
 })
-export class PrivilegeGuard implements CanActivate {
+export class PrivilegeGuard  {
 
     constructor(
         private authServiceA: FoodAuthService,

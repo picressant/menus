@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { ActivatedRouteSnapshot, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
 import { FoodAuthService } from '@services/food-auth.service';
 import { PrivilegeGuard } from './privilege-guard.service';
@@ -7,7 +7,7 @@ import { PrivilegeGuard } from './privilege-guard.service';
 @Injectable({
     providedIn: 'root'
 })
-export class PrivilegeOrSelfGuard extends PrivilegeGuard implements CanActivate {
+export class PrivilegeOrSelfGuard extends PrivilegeGuard  {
 
     constructor(
         private authService: FoodAuthService,
